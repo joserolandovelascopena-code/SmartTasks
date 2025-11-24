@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartTasks</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>SmartTasks</h1>
+    </header>
+
+    <main>
+      <section id="task-input">
+        <input type="text" id="newTask" placeholder="Nueva tarea..." />
+        <button id="addBtn">Añadir</button>
+      </section>
+
+      <ul id="taskList"></ul>
+    </main>
+    <button id="toggle-theme">Cambiar tema</button>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/theme.js"></script>
+  </body>
+</html>
