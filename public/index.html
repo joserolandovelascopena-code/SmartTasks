@@ -7,22 +7,49 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
 
   <body>
-    <header>
-      <h1>SmartTasks</h1>
-    </header>
-
-    <main>
-      <section id="task-input">
-        <input type="text" id="newTask" placeholder="Nueva tarea..." />
-        <button id="addBtn">Añadir</button>
-      </section>
-
-      <ul id="taskList"></ul>
-    </main>
-    <button id="toggle-theme">Cambiar tema</button>
+    <div class="container_main">
+      <div class="nav-main">
+        <nav class="nav_main"></nav>
+        <ul></ul>
+      </div>
+      <div class="contenedor">
+        <header class="contenido_main">
+          <h1>SmartTasks</h1>
+          <main>
+            <section id="task-input">
+              <input type="text" id="newTask" placeholder="Nueva tarea..." />
+              <div id="addBtn"><i class="fa-solid fa-square-plus"></i></div>
+            </section>
+          </main>
+        </header>
+        <div class="targetas_info">
+          <button id="toggle-theme">Cambiar tema</button>
+        </div>
+        <div class="List_check">
+          <h3>Actividades por completar</h3>
+          <div id="taskList"></div>
+        </div>
+      </div>
+    </div>
     <script src="assets/js/storage.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/app.js"></script>

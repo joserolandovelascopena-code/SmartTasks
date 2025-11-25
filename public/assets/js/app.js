@@ -44,6 +44,15 @@ const App = {
     Storage.saveTasks(this.tasks);
     UI.renderTasks(this.tasks);
   },
+  toggleCleck(id){
+    this.tasks = this.tasks.map(c => 
+      c.id === id ? { ...c, cleck: !c.cleck} : c
+    );
+
+    Storage.saveTasks(this.tasks);
+    UI.renderTasks(this.tasks);
+
+  },
 
   deleteTask(id) {
     this.tasks = this.tasks.filter(t => t.id !== id);
