@@ -61,7 +61,7 @@ const App = {
     this.tasks = this.tasks.filter(t => t.id !== id);
     Storage.saveTasks(this.tasks);
     UI.renderTasks(this.tasks);
-  }
+  },
 };
 
 App.init();

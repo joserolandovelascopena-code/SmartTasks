@@ -7,6 +7,12 @@ const UI = {
       const li = document.createElement("li");
       li.classList.add("task-item");
 
+      if (task.done) {
+        li.style.background = "linear-gradient(to right, #ff79c3ff, #ff6479ff)";
+       } else {
+        li.style.background = "linear-gradient( to right, #e4fbff, #b4f0ff)";
+      }
+
       // texto + estilo de completada
       li.innerHTML = `
        <input type="checkbox" class="check ${task.done ? "done" : ""}" ${task.done ? "checked" : ""}>
@@ -20,6 +26,7 @@ const UI = {
       // marcar completada
       li.querySelector(".check").addEventListener("click", () =>{
         App.toggleTask(task.id);
+        
       });
 
       li.querySelector(".task-text").addEventListener("click", () => {
@@ -28,9 +35,14 @@ const UI = {
 
       // eliminar tarea
       li.querySelector(".delete-btn").addEventListener("click", () => {
-       
         App.deleteTask(task.id);
+      });
+
+      document.addEventListener("click", () =>{
+        const modalEtidar = document.querySelector(".Editar_targeta");
+        const closeEditar = document.querySelector(".Closeeditar");
         
+
       });
 
       list.appendChild(li);

@@ -11,6 +11,7 @@ body {
   color: var(--color-text);
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
