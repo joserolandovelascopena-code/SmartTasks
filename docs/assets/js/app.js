@@ -4,6 +4,20 @@ const App = {
   init() {
     UI.renderTasks(this.tasks);
 
+    // Inicializar carrusel
+    UI.initCarousel();
+
+    // Eventos de tareas
+    document.getElementById("addBtn").addEventListener("click", () => {
+      this.addTask();
+    });
+
+    document.getElementById("newTask").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        this.addTask();
+      }
+    });
+    
     // Evento CLICK en el botón
     document.getElementById("addBtn").addEventListener("click", () => {
       this.addTask();
