@@ -4,27 +4,85 @@
 
 
 *{
-   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+:root {
+  --color-icons: linear-gradient(60deg, #596fee,#f700ff);
 }
 /*Contenido pricipal INICIO*/
 .container_main{
   display: grid;
-  grid-template-columns: 10% auto;
+  grid-template-columns: 9% auto;
   height: 100%;
   gap: 10px;
 }
 #Titulo_app{
   font-size: 40px;
-  animation: aparecer 0.90s ease-in-out;
-  background: linear-gradient(60deg, #ff8a00, #e52e71);
+  animation: aparecer 0.60s ease-in-out;
+  background: linear-gradient(60deg, #596fee, #eb236c,#ff8a00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/*Menu*/
 .nav-main{
   box-shadow: 0px 0px 8px rgba(199, 199, 199, 0.568); 
   height: 100vh;
-  background-color: #040553;
+  background: linear-gradient(90deg,#f0f0f0, #e8e7ff ) ;
 }
+.nav_menu{
+  padding: 15px 6px 6px 6px;
+}
+.contenedor_menu{
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.funciones_smart{
+  cursor: pointer;
+  text-align: center;
+}
+.funciones_smart h5{
+  margin: 9px 0;
+}
+.funciones_smart i{
+  font-size: 24px;
+  background:  var(--color-icons);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/*Funciones por separado*/
+#Hogar{
+
+}
+#Proyectos{
+
+}
+#Calendario{
+
+}
+#cuenta{
+
+}
+#settings{
+  display: flex;
+  gap: 8px;
+  margin-top: 16rem;
+  background: #d1d3ff;
+  padding: 3px;
+  border-radius: 6px;
+}
+#settings h5{
+  text-align: left;
+  margin-top: 0px;
+  margin-block-end: 0;
+  padding: 0;
+}
+/*===========================================*/
 .contenedor{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -39,7 +97,6 @@
   position: relative;
   
 }
-
 
 /* contenedor relativo para que los absolute dentro funcionen respecto a él */
 .carousel-wrapper {
@@ -468,6 +525,10 @@
   bottom: 0;
   height: 50px;
   width: 100%;
+}
+.contenedor_menu{
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
 }
 
 }
