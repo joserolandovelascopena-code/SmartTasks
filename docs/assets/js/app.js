@@ -3,9 +3,11 @@ const App = {
 
   init() {
     UI.renderTasks(this.tasks);
-
+    UI.renderTarjetas(this.tasks);   // ← NECESARIO
     // Inicializar carrusel
     UI.initCarousel();
+
+
 
     // Evento CLICK en el botón
     document.getElementById("addBtn").addEventListener("click", () => {
@@ -31,6 +33,8 @@ const App = {
       text,
       done: false
     });
+
+
 
     Storage.saveTasks(this.tasks);
     UI.renderTasks(this.tasks);

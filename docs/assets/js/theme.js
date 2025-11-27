@@ -3,7 +3,7 @@ function setTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-// Cargar preferencia guardada
+// Cargar preferencia guardada  
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
   setTheme(savedTheme);
@@ -17,4 +17,14 @@ document.getElementById("toggle-theme").addEventListener("click", () => {
   const current = document.documentElement.getAttribute("data-theme");
   let newTheme = current === "dark" ? "light" : "dark";
   setTheme(newTheme);
+
+  const contenedor = document.querySelector(".info_tarea");
+
+  if (newTheme === "dark") {
+    contenedor.style.boxShadow = "0 0 15px rgb(255, 0, 43)";
+  } else {
+    contenedor.style.boxShadow = "none";
+  }
 });
+
+

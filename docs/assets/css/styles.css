@@ -13,6 +13,13 @@
   height: 100%;
   gap: 10px;
 }
+#Titulo_app{
+  font-size: 40px;
+  animation: aparecer 0.90s ease-in-out;
+  background: linear-gradient(60deg, #ff8a00, #e52e71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .nav-main{
   box-shadow: 0px 0px 8px rgba(199, 199, 199, 0.568); 
   height: 100vh;
@@ -151,7 +158,6 @@
   display: grid;
   grid-template-columns: 2% 92% auto;
   gap: 20px;
-  background: linear-gradient( to right, #e4fbff, #b4f0ff) ;
   padding: 12px;
   font-size: 18px;
   margin-bottom: 8px;
@@ -190,12 +196,12 @@
  padding: 8px;
  border-radius: 8px;
  box-shadow: 0 0 10px gainsboro;
- height: 200px;
  margin-top: 20px;
 }
 .body_tarea{
   display: grid;
   grid-template-columns: auto auto auto auto;
+  gap: 10px;
 }
 .viso_caja_vacia{
   grid-column: 2/ span 2 ;
@@ -203,6 +209,7 @@
   display: grid;
   justify-content: center;
   justify-items: center;
+  text-align: center;
   border-radius: 8px;
   border: 2px dashed rgb(255, 0, 140);
   background-color: #8cc7d41e;
@@ -222,6 +229,37 @@
   color: #020580;
   margin-top: 30px;
 }
+
+/*stylo gobal de targetas*/
+.cont_tarjetas{
+ background: linear-gradient(90deg, #a9f2ff, #a8adff);;
+ height: 220px ;
+ border-radius: 12px;
+ padding: 6px;
+}
+.emoji{
+  width:70px ;
+  height: 70px;
+  border: 2px solid gainsboro;
+  border-radius: 50%;
+  margin-left: 15px;
+  background-color: #020580;
+}
+.editar{
+  background-color: #ffffff;
+  display: flex;
+  gap: 5px;
+  border-radius: 6px;
+}
+.editar i{
+  color: #e52e71;
+  padding: 6px 4px;
+}
+.editar p{
+  margin: 5px;
+}
+/*=================================*/
+
 .delete-btn {
   background: rebeccapurple;
   border: none;
@@ -311,6 +349,18 @@
     transform: scale(1);
   }
 }
+@keyframes aparecer{
+  from{
+    opacity: 0;
+    transform: translateY(-4px);
+    text-shadow: -8px -18px 20px linear-gradient(90deg, #ff8a00, #f7186a);;
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+    text-shadow: 0px 0 0px rgba(105, 90, 205, 0);
+  }
+}
 @keyframes fadeUp{
   from{
     opacity: 0;
@@ -394,10 +444,25 @@
   grid-template-columns: 4% 72% auto;
 
 }
+.info_tarea{
+ grid-column: 1 /span 2;
+ padding: 8px;
+ border-radius: 8px;
+ margin-block-end: 50px;
+
+}
+.body_tarea{
+  display: grid;
+  grid-template-columns: auto ;
+  gap: 10px;
+}
+.viso_caja_vacia{
+    grid-column: 1/ span 1 ;
+}
 
 .nav-main{
   background-color: #fff;
-  box-shadow: 0px  -4px 10px rgba(199, 199, 199, 0.568); 
+  box-shadow: 0px  -4px 2px rgba(199, 199, 199, 0.568); 
   z-index: 14;
   position:fixed;
   bottom: 0;

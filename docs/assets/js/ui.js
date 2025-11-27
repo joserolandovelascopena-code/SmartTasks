@@ -1,16 +1,26 @@
 const UI = {
+
+  hasClickedTask: false,
+
   renderTasks(tasks) {
     const list = document.getElementById("taskList");
+    const articles = document.querySelector(".body_tarea");
+  
     list.innerHTML = "";
+ 
 
     tasks.forEach(task => {
       const li = document.createElement("li");
+    
       li.classList.add("task-item");
+
+
+   
 
       if (task.done) {
         li.style.background = "linear-gradient(to right, #ff79c3ff, #ff6479ff)";
        } else {
-        li.style.background = "linear-gradient( to right, #e4fbff, #b4f0ff)";
+        li.style.background = "linear-gradient( 90deg, #e3fbffff, #52d5fdff)" ;
       }
 
       // texto + estilo de completada
@@ -22,6 +32,8 @@ const UI = {
         <button class="delete-btn">✖</button> 
         <div class="editar_item"></div>
       `;
+
+
 
       // marcar completada
       li.querySelector(".check").addEventListener("click", () =>{
@@ -37,11 +49,15 @@ const UI = {
       li.querySelector(".delete-btn").addEventListener("click", () => {
         App.deleteTask(task.id);
       });
+     li.addEventListener("click", () => {
+      UI.hasClickedTask = true;
+      UI.renderTarjeta(task)
+       });
 
       document.addEventListener("click", () =>{
         const modalEtidar = document.querySelector(".Editar_targeta");
         const closeEditar = document.querySelector(".Closeeditar");
-        
+
 
       });
 
@@ -49,6 +65,46 @@ const UI = {
     });
     
   },
+renderTarjetas(tasks) {
+  // si ya hizo click en una tarea, NO dibujar tarjetas iniciales
+  if (this.hasClickedTask) return;
+
+  const container = document.querySelector(".body_tarea");
+  container.innerHTML = ""; 
+
+  // 1. si no hay tareas -> mensaje vacío
+  if (tasks.length === 0) {
+    container.innerHTML = `
+      <article class="viso_caja_vacia">
+        <div class="caja">
+          <i class="fa-solid fa-calendar"></i>
+        </div>
+        <p>Crea y planifica tus actividades con SmartTasks.</p>
+      </article>
+    `;
+    return;
+  }
+
+  // 2. mostrar solo primeras 3 tarjetas
+  const primerasTres = tasks.slice(0, 4);
+
+  primerasTres.forEach(task => {
+    const tarjeta = document.createElement("article");
+    tarjeta.classList.add("cont_tarjetas");
+
+    tarjeta.innerHTML = `
+      <div class="emoji"></div>
+      <h4 class="nombre_actividad">${task.text}</h4>
+      <div class="editar">
+        <i class="fa-solid fa-pen-to-square editar"></i>
+        <p>Editar la actividad</p>
+      </div>
+    `;
+
+    container.appendChild(tarjeta);
+  });
+},
+
   // dentro de UI:
 initCarousel() {
   this.carousel = document.querySelector(".carousel");
@@ -173,4 +229,3 @@ updateCarousel() {
 }
 
 };
-

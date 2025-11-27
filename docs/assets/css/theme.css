@@ -21,8 +21,11 @@ body {
     --color-primary: #90caf9;
 
     --card-bg: #1e1e1e;
-  }
+  
 }
+
+}
+
 
 /*Modo manual*/
 html[data-theme="dark"] {
