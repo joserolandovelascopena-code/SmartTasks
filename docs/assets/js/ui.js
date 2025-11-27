@@ -4,7 +4,6 @@ const UI = {
 
   renderTasks(tasks) {
     const list = document.getElementById("taskList");
-    const articles = document.querySelector(".body_tarea");
   
     list.innerHTML = "";
  
@@ -53,6 +52,7 @@ const UI = {
       UI.hasClickedTask = true;
       UI.renderTarjeta(task)
        });
+
 
       document.addEventListener("click", () =>{
         const modalEtidar = document.querySelector(".Editar_targeta");
@@ -227,5 +227,4 @@ updateCarousel() {
     });
   }
 }
-
 };

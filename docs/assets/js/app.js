@@ -10,7 +10,7 @@ const App = {
 
 
     // Evento CLICK en el botón
-    document.getElementById("addBtn").addEventListener("click", () => {
+    document.getElementById("Guadar-btn").addEventListener("click", () => {
       this.addTask();
     });
 
@@ -20,6 +20,41 @@ const App = {
         this.addTask();
       }
     });
+
+
+const categoria = document.querySelector(".Categoria");
+const input = document.getElementById("newTask");
+const btnGuardar = document.getElementById("Guadar-btn");
+const btnAbrirCategoria = document.getElementById("addBtn");
+
+// Abrir cuando el input toma foco
+input.addEventListener("focus", () => {
+  categoria.classList.add("active");
+});
+
+// También abrir mientras escribe
+input.addEventListener("keyup", () => {
+  categoria.classList.add("active");
+});
+
+// Abrir con el botón +
+btnAbrirCategoria.addEventListener("click", () => {
+  categoria.classList.toggle("active");
+});
+
+// Cerrar al guardar
+btnGuardar.addEventListener("click", () => {
+  categoria.classList.remove("active");
+});
+
+// Cerrar con Enter
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    categoria.classList.remove("active");
+  }
+});
+
+
   },
 
   addTask() {
@@ -33,7 +68,6 @@ const App = {
       text,
       done: false
     });
-
 
 
     Storage.saveTasks(this.tasks);
