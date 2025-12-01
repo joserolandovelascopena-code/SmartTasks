@@ -17,20 +17,53 @@ const UI = {
    
 
       if (task.done) {
-        li.style.background = "linear-gradient(to right, #ff79c3ff, #ff6479ff)";
+        li.style.background = "linear-gradient(to right, #ff797933, #ff646446)";
        } else {
-        li.style.background = "linear-gradient( 90deg, #e3fbffff, #52d5fdff)" ;
+        li.style.background = "linear-gradient( 90deg, #ffffffff, #ffffffff)" ;
       }
 
+   
       // texto + estilo de completada
-      li.innerHTML = `
-       <input type="checkbox" class="check ${task.done ? "done" : ""}" ${task.done ? "checked" : ""}>
-        <span class="task-text ${task.done ? "done" : ""}">
-          ${task.text}
-        </span> 
-        <button class="delete-btn">✖</button> 
-        <div class="editar_item"></div>
-      `;
+     li.innerHTML = `
+     <input type="checkbox" class="check ${task.done ? "done" : ""}" ${task.done ? "checked" : ""}>
+     <span class="task-text ${task.done ? "done" : ""}">${task.text}</span>
+     <span class="task-cat">${"Categoria: " + task.categoria}   <i class="CateIcons"></i></span>
+     <span class="task-pro">${"Prioridad: " + task.prioridad} </span>
+     <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
+   
+     <div class="editar_item">
+     <section class="Editar_targeta">
+        <div class="cuerpo_modal">
+          <div class="header-editar">
+            <p>Editar</p>
+            <span class="Closeeditar" id="closeeditar">&times;</span>
+          </div>
+          <div class="contenido-editar">
+            <article class="input-editar">
+              <input
+                type="text"
+                class="input editar"
+                placeholder="Edita la actividad"
+              />
+            </article>
+            <article class="Configuracion">
+              <div class="trabajo">s</div>
+              <div class="fitnest"></div>
+              <div class="estudio"></div>
+              <div class="dieta"></div>
+              <div class="marketing"></div>
+              <div class="rutina-diaria"></div>
+            </article>
+            <article class="duracion"></article>
+            <article class="días"></article>
+              
+           <button class="delete-btn">✖</button>
+          </div>
+          <article class="footer-editar"></article>
+        </div>
+      </section></div>
+     `;
+
 
 
 
@@ -48,23 +81,182 @@ const UI = {
       li.querySelector(".delete-btn").addEventListener("click", () => {
         App.deleteTask(task.id);
       });
-     li.addEventListener("click", () => {
-      UI.hasClickedTask = true;
-      UI.renderTarjeta(task)
-       });
-
-
-      document.addEventListener("click", () =>{
-        const modalEtidar = document.querySelector(".Editar_targeta");
-        const closeEditar = document.querySelector(".Closeeditar");
-
-
+      li.addEventListener("click", () => {
+        UI.hasClickedTask = true;
+        UI.renderTarjeta(task)
       });
+
+    // ABRIR MODAL TAREA
+    const contenedorEditar = li.querySelector(".editar_item");
+    const modalEditar = li.querySelector(".Editar_targeta");
+    const closeEditar = li.querySelector(".Closeeditar");
+
+
+     li.querySelector(".openEditar").addEventListener("click", () => {
+     contenedorEditar.classList.add("active");
+     modalEditar.classList.add("active");
+     });
+
+
+     closeEditar.addEventListener("click", (e) => {
+     e.stopPropagation(); 
+     contenedorEditar.classList.remove("active");
+     modalEditar.classList.remove("active");
+     });
+
+    contenedorEditar.addEventListener("click", (e) => {
+     e.stopPropagation(); 
+     contenedorEditar.classList.remove("active");
+     modalEditar.classList.remove("active");
+     });
+
+
+
+      //Estilo Proridad
+        if (task.prioridad === "Ninguna") {
+        li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff )";
+        li.querySelector(".task-pro").style.color = "#a0a0a0ff";
+      }
+
+      if (task.prioridad === "Baja") {
+        li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #3cad40ff, #06a35aff, #3daf55ff )";
+        li.querySelector(".task-pro").style.color = "#ffffffff";
+      }
+
+      if (task.prioridad === "Media") {
+      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #ffd900ff, #ffee00ff, #ffd901ff )";
+      li.querySelector(".task-pro").style.color = "#3b3b3bff";
+      }
+
+      if (task.prioridad === "Alta") {
+
+      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #ff008cff, #ff0040ff, #ff0062ff";
+      li.querySelector(".task-pro").style.color = "#fff";
+      }
+
+      // Iconos Style categoria
+      
+
+     // ---------------- ICONOS POR CATEGORÍA ----------------- //
+
+if (task.categoria === "Trabajo") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#ff00b3ff";
+  icon.style.background = "rgba(0, 0, 0, 1)";
+  icon.classList.add("fa-solid", "fa-briefcase");
+}
+
+if (task.categoria === "Estudio") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#ff0000ff";
+  icon.style.background = "#ffffffff";
+  icon.classList.add("fa-solid", "fa-book");
+}
+
+if (task.categoria === "Dieta") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#01cc4fff";
+  icon.style.background = "#ffffffff";
+  icon.classList.add("fa-solid", "fa-apple-whole");
+}
+
+if (task.categoria === "Marketing") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#0bff03ff";
+  icon.style.background = "#31010181";
+  icon.classList.add("fa-solid", "fa-chart-line");
+}
+
+if (task.categoria === "Rutina diaria") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#01cc4fff";
+  icon.style.background = "#ffffffff";
+  icon.classList.add("fa-solid", "fa-person-running");
+}
+
+if (task.categoria === "Fitness") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#ff9900ff";
+  icon.style.background = "#ffffffff";
+  icon.classList.add("fa-solid", "fa-dumbbell");
+}
+
+if (task.categoria === "Festividades") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#ff08b5ff";
+  icon.style.background = "#0027a8ff";
+  icon.classList.add("fa-solid", "fa-church");
+}
+
+if (task.categoria === "Vacaciones") {
+  const icon = li.querySelector(".CateIcons");
+  icon.style.color = "#5900ffff";
+  icon.style.background = "#fedcffff";
+  icon.classList.add("fa-solid", "fa-umbrella-beach");
+}
+//ii
+
+
+
+
+      
 
       list.appendChild(li);
     });
     
   },
+  renderCategoria() {
+  // Selecciona todas las opciones dentro de tu contenedor real
+  const opciones = document.querySelectorAll(".contenedor_categoria .options");
+
+  opciones.forEach(op => {
+    op.addEventListener("click", () => {
+      // dataset.categoria viene de data-categoria="..." en tu HTML
+      const selected = op.dataset.categoria;
+      App.categoriaSeleccionada = selected;   // guardar la categoría
+      console.log("Categoria seleccionada:", selected);
+
+      // limpiar la clase visual 'selected' de todas las opciones
+      opciones.forEach(x => x.classList.remove("selected"));
+
+      // añadir clase visual a la opción clickeada
+      op.classList.add("selected");
+
+    });
+  });
+},
+renderPrioridad() {
+  document.querySelectorAll(".options-prioridad").forEach(prioridad => {
+    
+    prioridad.addEventListener("click", () => {
+      
+      const selected = prioridad.dataset.prioridad;
+      App.prioridadSeleccionada = selected; // ← guardar
+      console.log("Prioridad seleccionada:", selected);
+
+      // limpiar
+      document.querySelectorAll(".options-prioridad").forEach(p => {
+        p.style.background = "";
+        p.style.color = "";
+      });
+
+      // aplicar estilo a la seleccionada
+      const element = document.querySelector(`[data-prioridad="${selected}"]`);
+      
+      if (selected === "Baja") {
+        element.style.background = "#4caf50"; // verde
+      } else if (selected === "Media") {
+        element.style.background = "#ffc107"; // amarillo
+      } else if (selected === "Alta") {
+        element.style.background = "#f44336"; // rojo
+      }
+
+      element.style.color = "#fff";
+    });
+
+  });
+},
+
 renderTarjetas(tasks) {
   // si ya hizo click en una tarea, NO dibujar tarjetas iniciales
   if (this.hasClickedTask) return;
@@ -85,7 +277,7 @@ renderTarjetas(tasks) {
     return;
   }
 
-  // 2. mostrar solo primeras 3 tarjetas
+  // 2. mostrar solo primeras 4 tarjetas
   const primerasTres = tasks.slice(0, 4);
 
   primerasTres.forEach(task => {
@@ -105,7 +297,6 @@ renderTarjetas(tasks) {
   });
 },
 
-  // dentro de UI:
 initCarousel() {
   this.carousel = document.querySelector(".carousel");
   this.cards = document.querySelectorAll(".card");

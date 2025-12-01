@@ -27,6 +27,15 @@
 
   <body>
     <div class="container_main">
+      <div id="modalCompletado" class="modal">
+        <div class="backgraud-content">
+          <div class="modal-content">
+            <div class="check-anim"></div>
+            <h2 class="titulo-modal">¡Actividad completada!</h2>
+          </div>
+        </div>
+      </div>
+
       <div class="nav-main">
         <nav class="nav_menu">
           <ul class="contenedor_menu">
@@ -53,103 +62,148 @@
           </ul>
         </nav>
       </div>
-      <div class="contenedor">
-        <header class="contenido_main">
+      <div>
+        <section class="Barra_Superior_principal">
           <h1 id="Titulo_app">SmartTasks</h1>
-          <main>
-            <section id="task-input">
-              <input
-                type="text"
-                id="newTask"
-                placeholder="Nueva tarea..."
-                title="Escribe una actividad"
-              />
-              <div title="Agregar nuevas tareas" id="addBtn">
-                <i class="fa-solid fa-square-plus"></i>
-              </div>
-            </section>
-            <section class="main-cont-categoria">
-              <article class="Categoria" title="Categorías">
-                <h4>Categoria</h4>
-                <div class="contenedor_categoria">
-                  <div class="trabajo options">Trabajo💼</div>
-                  <div class="estudio options">Estudio📚📒</div>
-                  <div class="dieta options">Dieta🥗😋</div>
-                  <div class="marketing options">Marketing📈</div>
-                  <div class="rutina-diaria options">Rutina díaria🚴‍♀️</div>
-                  <div class="fitnest options">Fitness🏋️‍♂️</div>
-                  <div class="festividades options">Festividades🎆⛪</div>
-                  <div class="vacaciones options">Vacaciones🏖️🏝️</div>
-                </div>
-                <div class="horaio_día">
-                  <div class="tiempo" id="fecha">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <p>Fecha/Día</p>
-                  </div>
-                  <div class="tiempo" id="hora">
-                    <i class="fa-regular fa-clock"></i>
-                    <p>Tiempo de duracion</p>
-                  </div>
-                </div>
-                <h4>Importancia</h4>
-                <div class="importancia">
-                  <div class="proridad">Baja</div>
-                  <div class="proridad">Media</div>
-                  <div class="proridad">Alta</div>
-                </div>
-                <div class="agregar">
-                  <button id="Guadar-btn" title="Guardar">Guardar Tarea</button>
-                </div>
-              </article>
-            </section>
-          </main>
-        </header>
-        <div class="targetas_info">
-          <div class="carousel">
-            <div class="card">Tarjeta 1</div>
-            <div class="card">Tarjeta 2</div>
-            <div class="card">Tarjeta 3</div>
-            <div class="card">Tarjeta 4</div>
-          </div>
-        </div>
-        <div class="List_check">
-          <button id="toggle-theme">Cambiar tema</button>
-          <h3>Actividades por completar</h3>
-          <div id="taskList"></div>
-        </div>
-        <section class="info_tarea">
-          <div class="body_tarea"></div>
-        </section>
-      </div>
 
-      <section class="Editar_targeta">
-        <div class="cuerpo_modal">
-          <div class="header-editar">
-            <p>Editar</p>
-            <span class="Closeeditar" id="closeeditar">&times;</span>
+          <div class="themes">
+            <i class="fa-solid fa-palette" id="openThemes"></i>
+            <div class="content_theme">
+              <div class="nav_themes">
+                <nav>
+                  <ul>
+                    <li id="Default_light">
+                      <p>Tema Claro</p>
+                      <i class="fa-regular fa-sun"></i>
+                    </li>
+                    <li id="Default_dark">
+                      <p>Tema Oscuro</p>
+                      <i class="fa-regular fa-moon"></i>
+                    </li>
+                    <li id="System_theme">Default System</li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
           </div>
-          <div class="contenido-editar">
-            <article class="input-editar">
-              <input
-                type="text"
-                class="input editar"
-                placeholder="Edita la actividad"
-              />
-            </article>
-            <article class="Configuracion">
-              <div class="trabajo"></div>
-              <div class="fitnest"></div>
-              <div class="estudio"></div>
-              <div class="dieta"></div>
-              <div class="marketing"></div>
-              <div class="rutina-diaria"></div>
-            </article>
-            <article class="duracion"></article>
-            <article class="días"></article>
+          <div class="Settings_System">
+            <i class="fa-solid fa-bars"></i>
+            <div class="nav_System">
+              <nav></nav>
+            </div>
           </div>
-          <article class="footer-editar"></article>
+        </section>
+        <div class="contenedor">
+          <header class="contenido_main">
+            <main>
+              <section id="task-input">
+                <input
+                  type="text"
+                  id="newTask"
+                  placeholder="Nueva tarea..."
+                  title="Escribe una actividad"
+                />
+                <div title="Agregar nuevas tareas" id="addBtn">
+                  <i class="fa-solid fa-square-plus"></i>
+                </div>
+              </section>
+              <section class="main-cont-categoria">
+                <article class="Categoria" title="Categorías">
+                  <h4>Categoria</h4>
+                  <div class="contenedor_categoria">
+                    <div class="trabajo options" data-categoria="Trabajo">
+                      Trabajo💼
+                    </div>
+                    <div class="estudio options" data-categoria="Estudio">
+                      Estudio📚📒
+                    </div>
+                    <div class="dieta options" data-categoria="Dieta">
+                      Dieta🥗😋
+                    </div>
+                    <div class="marketing options" data-categoria="Marketing">
+                      Marketing📈
+                    </div>
+                    <div
+                      class="rutina_diaria options"
+                      data-categoria="Rutina diaria"
+                    >
+                      Rutina díaria🚴‍♀️
+                    </div>
+                    <div class="fitnest options" data-categoria="Fitness">
+                      Fitness🏋️‍♂️
+                    </div>
+                    <div
+                      class="festividades options"
+                      data-categoria="Festividades"
+                    >
+                      Festividades🎆⛪
+                    </div>
+                    <div class="vacaciones options" data-categoria="Vacaciones">
+                      Vacaciones🏖️🏝️
+                    </div>
+                  </div>
+                  <div class="horaio_día">
+                    <div class="tiempo" id="fecha">
+                      <i class="fa-regular fa-calendar-days"></i>
+                      <p>Fecha/Día</p>
+                    </div>
+                    <div class="tiempo" id="hora">
+                      <i class="fa-regular fa-clock"></i>
+                      <p>Tiempo de duracion</p>
+                    </div>
+                  </div>
+                  <h4>Importancia</h4>
+                  <div class="importancia">
+                    <div
+                      class="proridad options-prioridad"
+                      data-prioridad="Baja"
+                      title="Baja"
+                    >
+                      Baja
+                    </div>
+                    <div
+                      class="proridad options-prioridad"
+                      data-prioridad="Media"
+                      title="Normal"
+                    >
+                      Media
+                    </div>
+                    <div
+                      class="proridad options-prioridad"
+                      data-prioridad="Alta"
+                      title="Mayor Importancia"
+                    >
+                      Alta
+                    </div>
+                  </div>
+                  <div class="agregar">
+                    <button id="Guadar-btn" title="Guardar">
+                      Guardar Tarea
+                    </button>
+                  </div>
+                </article>
+              </section>
+            </main>
+          </header>
+
+          <div class="List_check">
+            <h3>Actividades por completar</h3>
+
+            <div id="taskList"></div>
+          </div>
+          <section class="info_tarea">
+            <div class="body_tarea"></div>
+          </section>
         </div>
-      </section>
+      </div>
+      <div class="targetas_info">
+        <div class="carousel">
+          <div class="card">Tarjeta 1</div>
+          <div class="card">Tarjeta 2</div>
+          <div class="card">Tarjeta 3</div>
+          <div class="card">Tarjeta 4</div>
+        </div>
+      </div>
     </div>
 
     <script src="assets/js/storage.js"></script>

@@ -1,30 +1,73 @@
-function setTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
+// Detectar si el sistema está en modo oscuro
+const systemPrefersDark = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+// Aplicar el tema según la selección del usuario
+function applyTheme(theme) {
+  const lightBtn = document.getElementById("Default_light");
+  const darkBtn = document.getElementById("Default_dark");
+  const systemBtn = document.getElementById("System_theme");
+
+  // Reset estilos
+  lightBtn.style.background = "";
+  darkBtn.style.background = "";
+  systemBtn.style.background = "";
+
+  if (theme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    lightBtn.style.background = "#020580";
+    lightBtn.style.color = "#ffffffff";
+    darkBtn.style.color = "";
+    systemBtn.style.color = "";
+  }
+  else if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    darkBtn.style.background = "#020580";
+    darkBtn.style.color = "#ffffffff";
+    lightBtn.style.color = "#000000ff";
+    systemBtn.style.color = "#000000ff";
+  }
+  else if (theme === "system") {
+    document.documentElement.removeAttribute("data-theme");
+    systemBtn.style.background = "#020580";
+    systemBtn.style.color = "#ffffffff";
+    lightBtn.style.color = "";
+    darkBtn.style.color = "";
+
+    // Aplicar según sistema
+    if (systemPrefersDark()) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }
+
+  // Guardar elección
   localStorage.setItem("theme", theme);
 }
 
-// Cargar preferencia guardada  
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-  setTheme(savedTheme);
-} else {
-  // Si no hay preferencia, deja que el sistema decida
-  console.log("Usando tema del sistema");
-}
 
-// Botón de cambio de tema
-document.getElementById("toggle-theme").addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme");
-  let newTheme = current === "dark" ? "light" : "dark";
-  setTheme(newTheme);
+const savedTheme = localStorage.getItem("theme") || "system";
+applyTheme(savedTheme);
 
-  const contenedor = document.querySelector(".info_tarea");
+// Al cambiar el sistema, si el usuario usa "system", actualizar
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", () => {
+    if (localStorage.getItem("theme") === "system") {
+      applyTheme("system");
+    }
+  });
 
-  if (newTheme === "dark") {
-    contenedor.style.boxShadow = "0 0 15px rgb(255, 0, 43)";
-  } else {
-    contenedor.style.boxShadow = "none";
-  }
+
+document.getElementById("Default_light").addEventListener("click", () => {
+  applyTheme("light");
 });
 
+document.getElementById("Default_dark").addEventListener("click", () => {
+  applyTheme("dark");
+});
 
+document.getElementById("System_theme").addEventListener("click", () => {
+  applyTheme("system");
+});
