@@ -1,20 +1,44 @@
+// storage.js
 const Storage = {
-  key: "tasks",
 
-  getTasks() {
-    try {
-      return JSON.parse(localStorage.getItem(this.key)) || [];
-    } catch (e) {
-      console.warn("Error leyendo LocalStorage:", e);
+  async getTasks() {
+    const { data, error } = await supabaseClient
+      .from("tasks")
+      .select("*")
+      .order("id", { ascending: false });
+
+    if (error) {
+      console.error("Error obteniendo tareas:", error);
       return [];
     }
+
+    return data || [];
   },
 
-  saveTasks(tasks) {
-    localStorage.setItem(this.key, JSON.stringify(tasks));
+  async saveTask(task) {
+  const { data, error } = await supabaseClient.from("tasks").insert(task);
+  if (error) {
+    console.error("Error creando tarea:", error);
+    alert("Supabase ERROR: " + error.message);
+  }
+  return data;
+},
+
+  async updateTask(id, fields) {
+    const { error } = await supabaseClient
+      .from("tasks")
+      .update(fields)
+      .eq("id", id);
+
+    if (error) console.error("Error actualizando:", error);
   },
 
-  clearTasks() {
-    localStorage.removeItem(this.key);
+  async deleteTask(id) {
+    const { error } = await supabaseClient
+      .from("tasks")
+      .delete()
+      .eq("id", id);
+
+    if (error) console.error("Error borrando:", error);
   }
 };

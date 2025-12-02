@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear cuenta</title>
+  </head>
+  <body>
+    <h2>Crear cuenta</h2>
+
+    <input id="email" type="email" placeholder="Correo" />
+    <input id="password" type="password" placeholder="Contraseña" />
+    <button id="signupBtn">Registrarme</button>
+
+    <p><a href="login.html">Ya tengo cuenta</a></p>
+
+    <script type="module">
+      import { signup } from "./auth.js";
+
+      document.getElementById("signupBtn").onclick = async () => {
+        try {
+          await signup(email.value, password.value);
+          alert("Revisa tu correo y verifica tu cuenta.");
+          window.location.href = "login.html";
+        } catch (e) {
+          alert(e.message);
+        }
+      };
+    </script>
+  </body>
+</html>

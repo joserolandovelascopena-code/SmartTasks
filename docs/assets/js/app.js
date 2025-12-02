@@ -1,30 +1,44 @@
+// Cuando hay sesión iniciada, empezamos la app.
+supabaseClient.auth.getSession().then(({ data }) => {
+  if (data.session) {
+    document.getElementById("login-screen").style.display = "none";
+    App.init();
+  }
+});
+
+
+
+
 let categoriaSeleccionada = "";
 let prioridadSeleccionada = "";
 const App = {
-  tasks: Storage.getTasks(),
+  tasks: [],
   categoriaSeleccionada: "", 
   prioridadSeleccionada: "",
+  async loadTasks() {
+  this.tasks = await Storage.getTasks();
+},
  
 
-  init() {
-      UI.renderTasks(this.tasks);
-      UI.renderTarjetas(this.tasks);
-      UI.initCarousel();
-      UI.renderCategoria();    
-      UI.renderPrioridad();
+async init() {
+  await this.loadTasks();
 
+  UI.renderTasks(this.tasks);
+  UI.renderTarjetas(this.tasks);
 
-    // Evento CLICK en el botón
-    document.getElementById("Guadar-btn").addEventListener("click", () => {
+  UI.initCarousel();
+  UI.renderCategoria();
+  UI.renderPrioridad();
+  
+  document.getElementById("Guadar-btn").addEventListener("click", () => {
+    this.addTask();
+  });
+
+  document.getElementById("newTask").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
       this.addTask();
-    });
-
-    // Evento ENTER en el input
-    document.getElementById("newTask").addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        this.addTask();
-      }
-    });
+    }
+  });
 
 
 const categoria = document.querySelector(".Categoria");
@@ -61,37 +75,47 @@ input.addEventListener("keypress", (e) => {
       bodycontenedor.style.overflowY = "auto"
   }
 });
+},
 
-
-  },
-
- addTask() {
+async addTask() {
   const input = document.getElementById("newTask");
   const text = input.value.trim();
 
   if (!text) return alert("Escribe una tarea");
 
-  this.tasks.push({
-    id: Date.now(),
-    text,
-    categoria: this.categoriaSeleccionada || "Ninguna", 
-    prioridad: this.prioridadSeleccionada || "Ninguna",
-    done: false
-    
-  });
+  // Obtener usuario
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  if (!sessionData.session) return alert("No hay sesión activa");
 
-  Storage.saveTasks(this.tasks);
+  const user_id = sessionData.session.user.id;
+
+  const nuevaTarea = {
+    text,
+    categoria: this.categoriaSeleccionada || "Ninguna",
+    prioridad: this.prioridadSeleccionada || "Ninguna",
+    done: false,
+    user_id
+  };
+
+
+  await Storage.saveTask(nuevaTarea);
+
+  // Recargar lista
+  await this.loadTasks();
   UI.renderTasks(this.tasks);
 
   input.value = "";
   input.focus();
 },
-  toggleTask(id) {
+
+
+async toggleTask(id) {
+  let newDone = false;
+
   this.tasks = this.tasks.map(t => {
     if (t.id === id) {
-      const newDone = !t.done;
+      newDone = !t.done;
 
-      // si acaba de completarse → mostramos el modal animado
       if (!t.done && newDone) {
         mostrarModalCompletado();
       }
@@ -101,25 +125,39 @@ input.addEventListener("keypress", (e) => {
     return t;
   });
 
-  Storage.saveTasks(this.tasks);
+  await Storage.updateTask(id, { done: newDone });
   UI.renderTasks(this.tasks);
 },
 
-  toggleCleck(id){
-    this.tasks = this.tasks.map(c => 
-      c.id === id ? { ...c, cleck: !c.cleck} : c
-    );
+// Si "cleck" es algo que quieres persistir en la BD, hazlo async también:
+async toggleCleck(id) {
+  this.tasks = this.tasks.map(c => 
+    c.id === id ? { ...c, cleck: !c.cleck } : c
+  );
 
-    Storage.saveTasks(this.tasks);
-    UI.renderTasks(this.tasks);
+  const tarea = this.tasks.find(t => t.id === id);
+  try {
+    // si no guardas cleck en la BD, elimina esta línea
+    await Storage.updateTask(id, { cleck: tarea.cleck, updated_at: new Date().toISOString() });
+  } catch (err) {
+    console.error("Error actualizando cleck en BD:", err);
+  }
 
-  },
+  UI.renderTasks(this.tasks);
+},
 
-  deleteTask(id) {
-    this.tasks = this.tasks.filter(t => t.id !== id);
-    Storage.saveTasks(this.tasks);
-    UI.renderTasks(this.tasks);
-  },
+async deleteTask(id) {
+  // eliminar localmente primero para UX instantánea
+  this.tasks = this.tasks.filter(t => t.id !== id);
+
+  try {
+    await Storage.deleteTask(id); // Storage.deleteTask debe ser async y borrar en Supabase
+  } catch (err) {
+    console.error("Error borrando tarea en BD:", err);
+  }
+
+  UI.renderTasks(this.tasks);
+},
 };
 
 //Completado animacion
@@ -176,6 +214,3 @@ document.addEventListener("click", () =>{
   });
 
 });
-
-
-App.init();

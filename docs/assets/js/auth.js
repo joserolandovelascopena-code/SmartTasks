@@ -1,0 +1,77 @@
+import { supabaseClient } from "./supabase.js";
+
+// ------------------------
+// LOGIN
+// ------------------------
+export async function login(email, password) {
+  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+  if (error) throw error;
+
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user.email_confirmed_at) {
+    await supabaseClient.auth.signOut();
+    throw new Error("Debes verificar tu correo antes de entrar.");
+  }
+}
+
+// ------------------------
+// SIGN UP
+// ------------------------
+export async function signup(email, password) {
+  const { error } = await supabaseClient.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: "https://TU_GITHUB_USERNAME.github.io/TU_REPO/reset-password.html"
+    }
+  });
+
+  if (error) throw error;
+}
+
+// ------------------------
+// LOGOUT
+// ------------------------
+export async function logout() {
+  await supabaseClient.auth.signOut();
+  window.location.href = "./pages/autentication/login.html";
+}
+
+// ------------------------
+// PROTEGER RUTAS
+// ------------------------
+export async function protectRoute() {
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    window.location.href = "./pages/autentication/login.html";
+    return;
+  }
+
+  if (!user.email_confirmed_at) {
+    await supabaseClient.auth.signOut();
+    window.location.href = "./pages/autentication/login.html";
+  }
+}
+
+// ------------------------
+// RECUPERAR CONTRASEÑA
+// ------------------------
+export async function recoverPassword(email) {
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://TU_GITHUB_USERNAME.github.io/TU_REPO/reset-password.html"
+  });
+
+  if (error) throw error;
+}
+
+// ------------------------
+// ACTUALIZAR CONTRASEÑA
+// ------------------------
+export async function updatePassword(newPass) {
+  const { error } = await supabaseClient.auth.updateUser({ password: newPass });
+
+  if (error) throw error;
+}

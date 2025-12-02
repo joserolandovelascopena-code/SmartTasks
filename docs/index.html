@@ -23,6 +23,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
 
   <body>
@@ -206,6 +207,22 @@
       </div>
     </div>
 
+    <!--conexión -->
+
+    <script type="module" src="assets/js/supabase.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
+
+    <script type="module">
+      import { protectRoute, logout } from "assets/js/auth.js";
+
+      await protectRoute();
+
+      // Debes crear este botón en tu HTML si quieres cerrar sesión:
+      // <button id="logoutBtn">Cerrar sesión</button>
+      const btn = document.getElementById("logoutBtn");
+      if (btn) btn.onclick = () => logout();
+    </script>
+    <!--logica del sistema -->
     <script src="assets/js/storage.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/app.js"></script>

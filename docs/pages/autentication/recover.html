@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nueva contraseña</title>
+  </head>
+  <body>
+    <h2>Nueva contraseña</h2>
+
+    <input id="newPass" type="password" placeholder="Nueva contraseña" />
+    <input
+      id="confirmPass"
+      type="password"
+      placeholder="Confirmar contraseña"
+    />
+    <button id="update">Actualizar</button>
+
+    <script type="module">
+      import { updatePassword } from "./auth.js";
+
+      document.getElementById("update").onclick = async () => {
+        if (newPass.value !== confirmPass.value) {
+          alert("Las contraseñas no coinciden");
+          return;
+        }
+
+        try {
+          await updatePassword(newPass.value);
+          alert("Contraseña actualizada");
+          window.location.href = "login.html";
+        } catch (e) {
+          alert(e.message);
+        }
+      };
+    </script>
+  </body>
+</html>
