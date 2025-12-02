@@ -17,18 +17,12 @@
     <button id="update">Actualizar</button>
 
     <script type="module">
-      import { updatePassword } from "./auth.js";
+      import { recoverPassword } from "../../assets/js/auth.js";
 
-      document.getElementById("update").onclick = async () => {
-        if (newPass.value !== confirmPass.value) {
-          alert("Las contraseñas no coinciden");
-          return;
-        }
-
+      document.getElementById("recoverBtn").onclick = async () => {
         try {
-          await updatePassword(newPass.value);
-          alert("Contraseña actualizada");
-          window.location.href = "login.html";
+          await recoverPassword(email.value);
+          alert("Revisa tu correo para continuar.");
         } catch (e) {
           alert(e.message);
         }

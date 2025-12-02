@@ -16,15 +16,15 @@
     <p><a href="recover.html">¿Olvidaste tu contraseña?</a></p>
 
     <script type="module">
-      import { login } from "./auth.js";
+      import { login } from "../../assets/js/auth.js";
 
       document.getElementById("loginBtn").onclick = async () => {
-        const email = email.value;
-        const pass = password.value;
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("password").value;
 
         try {
           await login(email, pass);
-          window.location.href = "index.html";
+          window.location.href = "../../index.html";
         } catch (e) {
           alert(e.message);
         }

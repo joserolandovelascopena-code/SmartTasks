@@ -5,7 +5,6 @@ import { supabaseClient } from "./supabase.js";
 // ------------------------
 export async function login(email, password) {
   const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-
   if (error) throw error;
 
   const { data: { user } } = await supabaseClient.auth.getUser();
@@ -24,7 +23,8 @@ export async function signup(email, password) {
     email,
     password,
     options: {
-      emailRedirectTo: "https://TU_GITHUB_USERNAME.github.io/TU_REPO/reset-password.html"
+      emailRedirectTo:
+        "https://joserolandovelascopena-code.github.io/SmartTasks/docs/pages/autentication/reset-password.html"
     }
   });
 
@@ -36,7 +36,7 @@ export async function signup(email, password) {
 // ------------------------
 export async function logout() {
   await supabaseClient.auth.signOut();
-  window.location.href = "./pages/autentication/login.html";
+  window.location.href = "../../pages/autentication/login.html";
 }
 
 // ------------------------
@@ -46,13 +46,13 @@ export async function protectRoute() {
   const { data: { user } } = await supabaseClient.auth.getUser();
 
   if (!user) {
-    window.location.href = "./pages/autentication/login.html";
+    window.location.href = "../../pages/autentication/login.html";
     return;
   }
 
   if (!user.email_confirmed_at) {
     await supabaseClient.auth.signOut();
-    window.location.href = "./pages/autentication/login.html";
+    window.location.href = "../../pages/autentication/login.html";
   }
 }
 
@@ -61,7 +61,8 @@ export async function protectRoute() {
 // ------------------------
 export async function recoverPassword(email) {
   const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-    redirectTo: "https://TU_GITHUB_USERNAME.github.io/TU_REPO/reset-password.html"
+    redirectTo:
+      "https://joserolandovelascopena-code.github.io/SmartTasks/docs/pages/autentication/reset-password.html"
   });
 
   if (error) throw error;
@@ -72,6 +73,5 @@ export async function recoverPassword(email) {
 // ------------------------
 export async function updatePassword(newPass) {
   const { error } = await supabaseClient.auth.updateUser({ password: newPass });
-
   if (error) throw error;
 }
