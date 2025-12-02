@@ -8,7 +8,6 @@ supabaseClient.auth.getSession().then(({ data }) => {
 
 
 
-
 let categoriaSeleccionada = "";
 let prioridadSeleccionada = "";
 const App = {
