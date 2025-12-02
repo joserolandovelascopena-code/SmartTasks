@@ -188,6 +188,7 @@
           </header>
 
           <div class="List_check">
+            <button id="logoutBtn" title="Cerrar sesión">Cerrar sesión</button>
             <h3>Actividades por completar</h3>
 
             <div id="taskList"></div>
@@ -215,13 +216,12 @@
     <script type="module">
       import { protectRoute, logout } from "./assets/js/auth.js";
 
-      await protectRoute();
+      await protectRoute(); // esto redirige si no hay usuario
 
-      // Debes crear este botón en tu HTML si quieres cerrar sesión:
-      // <button id="logoutBtn">Cerrar sesión</button>
       const btn = document.getElementById("logoutBtn");
       if (btn) btn.onclick = () => logout();
     </script>
+
     <!--logica del sistema -->
     <script src="assets/js/storage.js"></script>
     <script src="assets/js/ui.js"></script>
