@@ -24,7 +24,7 @@ export async function signup(email, password) {
     password,
     options: {
       emailRedirectTo:
-        "https://joserolandovelascopena-code.github.io/SmartTasks/docs/pages/autentication/reset-password.html"
+        "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/reset-password.html"
     }
   });
 
@@ -60,7 +60,7 @@ export async function protectRoute() {
 export async function recoverPassword(email) {
   const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
     redirectTo:
-      "https://joserolandovelascopena-code.github.io/SmartTasks/docs/pages/autentication/reset-password.html"
+      "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/reset-password.html"
   });
 
   if (error) throw error;
