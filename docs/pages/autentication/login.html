@@ -4,17 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión</title>
+    <!--Links style-->
+    <link rel="stylesheet" href="./../../assets/css/login.css" />
+
+    <!--Links fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
-    <h2>Iniciar sesión</h2>
+    <div class="contenedor">
+      <header class="Cuadro_info"><h1>Bienvenido a SmartTansks</h1></header>
+      <main class="login_contenedor">
+        <h2 id="sesion-title">Iniciar sesión</h2>
+        <section class="credenciales">
+          <div class="inputs-layout">
+            <input id="email" type="email" placeholder="Correo" /><i
+              class="fa-regular fa-envelope"
+            ></i>
+            <input id="password" type="password" placeholder="Contraseña" /><i
+              class="fa-regular fa-eye-slash"
+              id="eyePassword"
+            ></i>
+          </div>
+          <button id="loginBtn">Entrar</button>
+        </section>
 
-    <input id="email" type="email" placeholder="Correo" />
-    <input id="password" type="password" placeholder="Contraseña" />
-    <button id="loginBtn">Entrar</button>
-
-    <p><a href="signup.html">Crear cuenta</a></p>
-    <p><a href="recover.html">¿Olvidaste tu contraseña?</a></p>
-
+        <p><a href="signup.html">Crear cuenta</a></p>
+        <p><a href="recover.html">¿Olvidaste tu contraseña?</a></p>
+        <p><a href="#" id="AppSmartTansks">SmartTansks App</a></p>
+      </main>
+    </div>
     <script type="module">
       import { login } from "../../assets/js/auth.js";
 
@@ -29,6 +57,23 @@
           alert(e.message);
         }
       };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const eyePassword = document.getElementById("eyePassword");
+        const inputPass = document.getElementById("password");
+
+        eyePassword.addEventListener("click", () => {
+          if (inputPass.type === "password") {
+            inputPass.type = "text";
+            eyePassword.classList.remove("fa-eye-slash");
+            eyePassword.classList.add("fa-eye");
+          } else {
+            inputPass.type = "password";
+            eyePassword.classList.remove("fa-eye");
+            eyePassword.classList.add("fa-eye-slash");
+          }
+        });
+      });
     </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-// docs/assets/js/supabase.js
+//supabase.js
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
 

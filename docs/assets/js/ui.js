@@ -1,4 +1,7 @@
-const UI = {
+// ui.js
+import { App } from "./app.js";
+
+export const UI = {
 
   hasClickedTask: false,
 

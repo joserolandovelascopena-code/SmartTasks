@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartTasks</title>
+    <link rel="icon" href="assets/icons/icon-512.webp" type="image/webp" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
@@ -207,25 +208,22 @@
         </div>
       </div>
     </div>
-
-    <!--conexión -->
-
     <script type="module" src="assets/js/supabase.js"></script>
-    <script type="module" src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/supabase.js"></script>
+    <script type="module" src="assets/js/storage.js"></script>
+    <script type="module" src="assets/js/ui.js"></script>
+    <script type="module" src="assets/js/app.js"></script>
+    <script type="module" src="assets/js/theme.js"></script>
 
     <script type="module">
+      import { App } from "./assets/js/app.js";
       import { protectRoute, logout } from "./assets/js/auth.js";
 
-      await protectRoute(); // esto redirige si no hay usuario
+      await protectRoute();
+      await App.init();
 
       const btn = document.getElementById("logoutBtn");
       if (btn) btn.onclick = () => logout();
     </script>
-
-    <!--logica del sistema -->
-    <script src="assets/js/storage.js"></script>
-    <script src="assets/js/ui.js"></script>
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/theme.js"></script>
   </body>
 </html>
