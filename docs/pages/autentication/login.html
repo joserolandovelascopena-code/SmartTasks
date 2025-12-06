@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión</title>
+    <link rel="icon" href="../../assets/icons/icon4.png" type="image/png" />
     <!--Links style-->
     <link rel="stylesheet" href="./../../assets/css/login.css" />
 
@@ -22,14 +23,61 @@
   </head>
   <body>
     <div class="contenedor">
-      <header class="Cuadro_info"><h1>Bienvenido a SmartTansks</h1></header>
+      <div class="container_pc">
+        <header class="Cuadro_info">
+          <div class="animation-titulo">
+            <h1>Bienvenido a SmartTasks</h1>
+          </div>
+          <p class="description">
+            Organiza tu día, gestiona tus proyectos y mantén control de tus
+            actividades, todo en solo lugar. Inicia sesion para continuar y
+            accede a tus actividades y proyectos, gestiona tu tiempo
+            eficientemente con SmartTasks.
+          </p>
+          <div class="microcopy">
+            <div class="funciones_descrition letf_box">
+              <div class="cleck"><i class="fa-solid fa-cloud icon"></i></div>
+              <h4>Claud access</h4>
+              <div class="text">
+                <p>Guarda y sincroniza tus tareas en todos tus dispositivos.</p>
+              </div>
+            </div>
+            <div class="funciones_descrition center_box">
+              <div class="cleck">
+                <i class="fa-solid fa-check-to-slot icon2"></i>
+              </div>
+              <h4>Gestiona actividades</h4>
+              <div class="text">
+                <p>
+                  Mantén tus metas claras y organizadas de tu día a día, con un
+                  diseño minimalista y una interfaz facil de usar.
+                </p>
+              </div>
+            </div>
+            <div class="funciones_descrition right_box">
+              <div class="cleck">
+                <i class="fa-solid fa-arrow-right-to-bracket icon3"></i>
+              </div>
+              <h4>Acceso inmedianto</h4>
+              <div class="text">
+                <p>Acceso rápido, seguro y sin complicaciones.</p>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
       <main class="login_contenedor">
-        <h2 id="sesion-title">Iniciar sesión</h2>
+        <div id="header_login">
+          <img src="../../assets/icons/icon-192.webp" alt="Logo SmartTasks" />
+          <h2 id="sesion-title">Iniciar sesión</h2>
+        </div>
         <section class="credenciales">
           <div class="inputs-layout">
+            <label for="email" id="in1">Email</label>
             <input id="email" type="email" placeholder="Correo" /><i
               class="fa-regular fa-envelope"
             ></i>
+            <label for="password">Password</label>
             <input id="password" type="password" placeholder="Contraseña" /><i
               class="fa-regular fa-eye-slash"
               id="eyePassword"
@@ -42,6 +90,52 @@
         <p><a href="recover.html">¿Olvidaste tu contraseña?</a></p>
         <p><a href="#" id="AppSmartTansks">SmartTansks App</a></p>
       </main>
+      <div class="container_movil">
+        <div class="Cuadro_info">
+          <div class="animation-titulo">
+            <h1>Bienvenido a SmartTasks</h1>
+          </div>
+          <p class="description">
+            Organiza tu día, gestiona tus proyectos y mantén control de tus
+            actividades, todo en solo lugar. Inicia sesion para continuar y
+            accede a tus actividades y proyectos, gestiona tu tiempo
+            eficientemente con SmartTasks.
+          </p>
+          <div class="microcopy">
+            <div class="funciones_descrition letf_box">
+              <div class="cleck"><i class="fa-solid fa-cloud icon"></i></div>
+              <h4>Claud access</h4>
+              <div class="text">
+                <p>Guarda y sincroniza tus tareas en todos tus dispositivos.</p>
+              </div>
+            </div>
+            <div class="funciones_descrition center_box">
+              <div class="cleck">
+                <i class="fa-solid fa-check-to-slot icon2"></i>
+              </div>
+              <h4>Gestiona actividades</h4>
+              <div class="text">
+                <p>
+                  Mantén tus metas claras y organizadas de tu día a día, con un
+                  diseño minimalista y una interfaz facil de usar.
+                </p>
+              </div>
+            </div>
+            <div class="funciones_descrition right_box">
+              <div class="cleck">
+                <i class="fa-solid fa-arrow-right-to-bracket icon3"></i>
+              </div>
+              <h4>Acceso inmedianto</h4>
+              <div class="text">
+                <p>Acceso rápido, seguro y sin complicaciones.</p>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <p><a href="#" id="SmartTansks">SmartTansks App 2025</a></p>
+          </footer>
+        </div>
+      </div>
     </div>
     <script type="module">
       import { login } from "../../assets/js/auth.js";
