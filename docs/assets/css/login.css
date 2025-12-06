@@ -273,7 +273,8 @@ body{
     display: block;
 }
 .login_contenedor{
-    height: 680px;
+    padding: 30px 30px;
+    height: 700px;
     border-radius: 0px;
 }
 #header_login{
@@ -301,7 +302,7 @@ body{
   animation: mover 10s ease infinite;
 }
 .inputs-layout{
-    grid-template-columns: 85% auto;
+    grid-template-columns: 88% auto;
 }
 .credenciales{
     margin-block-end:40px;
@@ -339,7 +340,7 @@ body{
 #AppSmartTansks{
     position: absolute;
     bottom: 20px;
-    left: 12vh;
+    left: 20vh;
     text-align: center;
     text-decoration: none;
     color: #363636; 
