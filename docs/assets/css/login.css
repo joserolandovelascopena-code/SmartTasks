@@ -273,7 +273,7 @@ body{
     display: block;
 }
 .login_contenedor{
-    height: 600px;
+    height: 680px;
     border-radius: 0px;
 }
 #header_login{
@@ -339,7 +339,7 @@ body{
 #AppSmartTansks{
     position: absolute;
     bottom: 20px;
-    left: 24vh;
+    left: 12vh;
     text-align: center;
     text-decoration: none;
     color: #363636; 
