@@ -22,11 +22,19 @@
     />
   </head>
   <body>
+    <div class="container_loader">
+      <div class="rederigir_app">
+        <div class="conten_loader">
+          <h3 id="mnj">Cargando...</h3>
+          <div class="loader"><samp></samp><samp></samp><samp></samp></div>
+        </div>
+      </div>
+    </div>
     <div class="contenedor">
       <div class="container_pc">
         <header class="Cuadro_info">
           <div class="animation-titulo">
-            <h1>Bienvenido a SmartTasks</h1>
+            <h1>¡Bienvenido a SmartTasks!</h1>
           </div>
           <p class="description">
             Organiza tu día, gestiona tus proyectos y mantén control de tus
@@ -68,7 +76,6 @@
       </div>
       <main class="login_contenedor">
         <div id="header_login">
-          <img src="../../assets/icons/icon-192.webp" alt="Logo SmartTasks" />
           <h2 id="sesion-title">Iniciar sesión</h2>
         </div>
         <section class="credenciales">
@@ -146,7 +153,13 @@
 
         try {
           await login(email, pass);
-          window.location.href = "../../index.html";
+          document.querySelector(".container_loader").classList.add("show");
+          setTimeout(() => {
+            document.getElementById("mnj").textContent = "Redirigiendo app...";
+          }, 800);
+          setTimeout(() => {
+            window.location.href = "../../index.html";
+          }, 2000);
         } catch (e) {
           alert(e.message);
         }

@@ -10,7 +10,66 @@ body{
     background:#cccfeb;
     background-size: 600% 600%;
 }
+/*Redirigir*/
+.container_loader{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    display: none;
+}
+.container_loader.show{
+   display: block;
+}
+.rederigir_app{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #022f3ae0;
+    backdrop-filter: blur(5px);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    animation: intro 0.4s ease;
+}
+.rederigir_app h3{
+    color: #00ffb3;
+    margin-block-end: 20px;
+}
+.loader{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.loader samp{
+    width: 10px;
+    height: 10px;
+    background-color: #00ffb3;
+    border-radius: 50%;
+    animation: loader 0.7s ease infinite alternate;
+}
+.loader samp:first-child{
+    animation-delay: 0ms;
+}
+.loader samp:nth-child(2){
+    animation-delay: 300ms;
+}
+.loader samp:nth-child(3){
+    animation-delay: 600ms;
+}
 
+@keyframes loader {
+    from{
+        transform: translateY(0);
+        opacity: 0.3;
+
+    }
+    to{
+        opacity: 1;
+        transform: translateY(5px) ;
+    }
+}
+/*====================================*/
 .contenedor{
     padding: 32px 50px;
     display: grid;
@@ -21,7 +80,7 @@ body{
     display: none;
 }
 .Cuadro_info{
-    padding: 40px;
+    padding: 38px;
     background: rgb(0, 44, 94);
     height: 78vh;
     border-top-left-radius:6px ;
@@ -30,20 +89,18 @@ body{
     color: white;
 }
 .Cuadro_info h1{
-   background: linear-gradient(80deg, #00e1ff, #ff0095,#92c5ff);
+   background: linear-gradient(90deg, #00e1ff, #ff0095,#92c5ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 46px;
   background-size: 300% 300%;
-  animation: mover 10s ease infinite;
-}
-.animation-titulo{
-    animation: zoom 0.80s ease-in-out;
+  animation: mover 10s ease infinite,  zoom 0.50s ease-out;
 }
 .description{
     margin-top: 10px;
     font-size: 16px;
     line-height: 1.4;
+    animation: scale_text 0.80s ease-in-out;
 }
 .funciones_descrition h4{
     text-align: center;
@@ -55,7 +112,7 @@ body{
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 14px;
     border-radius: 5px;
 }
 .cleck{
@@ -94,16 +151,28 @@ body{
     height: 200px;
     transition: 0.40s ease-in-out;
     padding: 8px;
+    position: relative;
 }
 .funciones_descrition h4{
     color: #815eff;
 }
-.letf_box:hover, .right_box:hover{
-    transform: scale(1.09);
+
+.letf_box{
+      animation: zoomfade2 1s ease-in ;
+      box-shadow: 0 0 14px blue;  
+}
+.right_box{
+    animation: zoomfade2 1s ease-in ;
+    box-shadow: 0 0 14px blue;  
 }
 .center_box{
     height: 240px;
     margin-top: -20px;
+    animation: zoomfade 0.40s ease-in;
+        box-shadow: 0 0 14px blue;  
+}
+.letf_box:hover, .right_box:hover{
+    transform: scale(1.09);
 }
 .center_box:hover{
     transform: scale(1.09);
@@ -126,10 +195,7 @@ body{
 #header_login{
     display: flex;
     gap: 8px;
-}
- img{
-   width: 50px;
-   height: 50px;
+    justify-content: center;
 }
 .login_contenedor h2{ 
    background: linear-gradient(40deg, #4c00ff, #4123eb,#00e1ff);
@@ -137,11 +203,9 @@ body{
    -webkit-text-fill-color: transparent; 
     padding: 10px 0; 
     font-size: 36px;
-    transform-style: preserve-3d;
+
 }
-#sesion-title{
-     animation: fade-intro 0.40s ease-in-out;
-}
+
 .login_contenedor p{
     text-align: center;
     margin-block-end: 10px;
@@ -165,7 +229,7 @@ body{
 }
 .inputs-layout label{
     grid-column: 1 /span 2;
-    animation: fade 0.40s ease-in-out;
+    animation: fade 0.30s ease-in-out;
     margin-top: 18px;
 }
 #in1{
@@ -178,7 +242,7 @@ body{
     border: 1px solid blue;
     font-size: 15px;
     transition: 0.30s ease-in-out;
-    animation: fade 0.40s ease-in-out;
+
 }
 .inputs-layout input:focus{
   outline: none;
@@ -192,7 +256,7 @@ body{
     color: rgb(255, 255, 255);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    animation: fade 0.40s ease-in-out;
+
 }
 #loginBtn{
     margin-top: 30px;
@@ -223,7 +287,7 @@ body{
 
 @keyframes zoom{
     from{
-        opacity: 0;
+        opacity: 0.5;
         transform: scale(0.90) translateX(10px);
         
     }
@@ -234,30 +298,59 @@ body{
     }
 }
 
-@keyframes fade-intro{
+@keyframes scale_text{
     from{
         opacity: 0;
-        transform: translateY(-20px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fade{
-    from{
-        opacity: 0;
-        transform: translateY(20px);
         
     }
     to{
         opacity: 1;
-        transform: translateY(0);
-      
     }
 }
 
+@keyframes zoomfade{
+    0%{
+        opacity: 0;
+        transform: scale(0.90) ;
+        
+    }
+    100%{
+        opacity: 1;
+        transform:scale(1);
+        
+    }
+}
+@keyframes zoomfade2{
+    0%{
+        opacity: 0;
+        transform: scale(0.90) ;
+    }
+    100%{
+        opacity: 1;
+        transform:scale(1);
+    }
+}
+
+@keyframes reveal {
+    from{
+        opacity: 0; 
+        translate: 0 100px;
+        scale: .90;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+        translate: 0 0;
+    }
+}
+@keyframes intro {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
 
 /*reponsing*/
 @media (max-width: 470px){
@@ -281,17 +374,12 @@ body{
     margin-block-end: 20px;
     justify-content: center;
 }
- img{
-   width: 40px;
-   height: 40px;
-}
 .login_contenedor h2{ 
    background: linear-gradient(40deg, #4c00ff, #4123eb,#ff00b3);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent; 
     padding: 3px 0;
     font-size: 28px;
-    transform-style: preserve-3d;
 }
 .Cuadro_info h1{
    background: linear-gradient(80deg, #00e1ff, #ff0095,#92c5ff);
@@ -326,9 +414,22 @@ body{
     color: #815eff;
 }
 
+.letf_box,.center_box, .right_box
+,.description,.footer{
+    animation: reveal linear both;
+    animation-timeline: view(); 
+    animation-range: entry 20% cover 30%;
+
+}
+.footer{
+    animation: reveal linear both;
+    animation-timeline: view(); 
+    animation-range: entry 1% cover 3%;
+}
+
 .center_box{
     height: 240px;
-    margin-top: -20px;
+    margin-top: 0px;
 }
 
 .text{
@@ -340,7 +441,7 @@ body{
 #AppSmartTansks{
     position: absolute;
     bottom: 20px;
-    left: 20vh;
+    left: 24vh;
     text-align: center;
     text-decoration: none;
     color: #363636; 

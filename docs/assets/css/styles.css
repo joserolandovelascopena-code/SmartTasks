@@ -16,7 +16,7 @@
   gap: 10px;
 }
 #Titulo_app{
-  margin: 0 0 28px 0;
+  margin: 0 0 28px 10px;
   font-size: 30px;
   animation: aparecer 0.60s ease-in-out;
   background: linear-gradient(40deg, #596fee, #eb236c,#ff8a00);
@@ -325,8 +325,13 @@
 }
 .contenedor_categoria{
   display:grid;
-  grid-template-columns: repeat(9, auto);
+  grid-template-columns: repeat(8, auto);
   gap: 5px;
+  max-width: 1200px;
+  overflow-x: auto;
+}
+.contenedor_categoria::-webkit-scrollbar{
+  display: none;
 }
 .options{
   cursor: pointer;
@@ -340,7 +345,7 @@
 }
 .options:hover{
   background-color: #2125ffa1;
-  color: #b5eff7;
+  color: #e0fbff;
   transform: scale(1.03);
 }
 .CateIcons{
@@ -480,18 +485,17 @@
   position: relative;
 }
 
-/* Al pasar el mouse */
 .check:hover {
   border-color: #4a60de;
 }
 
-/* Estilo cuando está marcado */
+
 .check:checked {
   background: #4a59de;
   border-color: #4ad9de;
 }
 
-/* ✔ icono real */
+
 .check:checked::before {
   content: "✔";
   color: white;
@@ -502,6 +506,8 @@
 }
 .info_tarea{
   margin-top: 20px;
+  box-shadow: 0 0 10px gainsboro;
+  padding: 10px;
 }
 
 .body_tarea{
@@ -681,11 +687,14 @@
     opacity: 1;
   }
 }
+@keyframes spin{
+  form{translate: 0;}
+  to{ translate: -100%; }
+}
 @keyframes aparecer{
   from{
     opacity: 0;
     transform: translateY(-4px);
-    text-shadow: -8px -18px 20px linear-gradient(90deg, #ff8a00, #f7186a);;
   }
   to{
     opacity: 1;
@@ -845,7 +854,10 @@
 @media (max-width: 470px){
 .container_main{
   grid-template-columns: auto;
-
+}
+#Titulo_app{
+  margin: 8px 0 28px 10px;
+  font-size: 20px;
 }
 .contenedor{
   gap: 0px;
@@ -856,14 +868,19 @@
   background-color: rgb(255, 217, 0);
   width: auto;
   cursor: pointer;
+  margin-right: 0px;
 }
-
 #task-input input{
   width: 100%;
+  margin-left: 0px;
 }
-
+.Categoria{
+  position: absolute;
+  transition: 0.30s ease-out;
+}
 .contenedor_categoria{
   grid-template-columns: repeat(2, auto);
+  max-width: 100%;
 }
 .Categoria.active{
    height: 480px;
@@ -925,5 +942,33 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 }
+
+.Barra_Superior_principal{
+  grid-template-columns: 79% 12% 4%;
+}
+
+.content_theme{
+  position: relative;
+  display: none;
+  margin-right: 90px;
+}
+.themes i{
+  padding-left: 0px;
+}
+
+.check-anim {
+  width: 80px;
+  height: 80px;
+}
+.check-anim::after {
+  width: 20px;
+  height: 30px;
+  top: 10px;
+  left: 10px;
+}
+/*
+.modal-content {
+  padding: 10px 10px;
+}*/
 
 }

@@ -33,23 +33,23 @@ export async function signup(email, password) {
 
 // ------------------------
 // LOGOUT
-// ------------------------
+//------------------------
 export async function logout() {
   await supabaseClient.auth.signOut();
-  window.location.href = "./pages/autentication/login.html";
+  //window.location.href = "./pages/autentication/login.html";
 }
 
 export async function protectRoute() {
   const { data: { user } } = await supabaseClient.auth.getUser();
 
   if (!user) {
-    window.location.href = "./pages/autentication/login.html";
+    //window.location.href = "./pages/autentication/login.html";
     return;
   }
 
   if (!user.email_confirmed_at) {
     await supabaseClient.auth.signOut();
-    window.location.href = "./pages/autentication/login.html";
+   // window.location.href = "./pages/autentication/login.html";
   }
 }
 
