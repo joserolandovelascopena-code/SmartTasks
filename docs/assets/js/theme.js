@@ -26,7 +26,7 @@ function applyTheme(theme) {
     darkBtn.style.color = "#ffffffff";
     lightBtn.style.color = "#000000ff";
     systemBtn.style.color = "#000000ff";
-    document.querySelector(".nav-main").style.background = "rgba(0, 0, 90, 0.42)"
+    document.querySelector(".nav-main").style.background = "rgba(0, 0, 90, 0.7)"
     document.querySelector(".nav-main").style.boxShadow = "0 0 0 rgba(255, 255, 255, 0)"
   }
   else if (theme === "system") {
