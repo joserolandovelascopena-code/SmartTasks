@@ -11,7 +11,7 @@
 /*Contenido pricipal INICIO*/
 .container_main{
   display: grid;
-  grid-template-columns: 9% auto;
+  grid-template-columns: 14% auto;
   height: 100%;
   gap: 10px;
 }
@@ -118,6 +118,9 @@
 .nav_menu{
   padding: 15px 6px 6px 6px;
 }
+.nav2{
+  display: none;
+}
 .contenedor_menu{
   list-style: none;
   margin: 0;
@@ -129,29 +132,66 @@
 .funciones_smart{
   cursor: pointer;
   text-align: center;
+  transition: 0.2s linear;
+  padding: 4px;
+  border-radius: 5px;
 }
-.funciones_smart h5{
-  margin: 9px 0;
+.funciones_smart:hover {
+  background: #ff004044;
+}
+.funciones_smart p{
+  margin: 0px 0;
 }
 .funciones_smart i{
-  font-size: 24px;
-  background:  var(--color-icons);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 20px;
+  color: rgb(31, 0, 117);
 }
 
 /*Funciones por separado*/
 #Hogar{
-
+  display: flex;
+  gap: 8px;
+}
+.plusAdd{
+  width: 24px;
+  height: 24px;
+  padding-top: 3px;
+  padding-left: 3px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #020580;
+  overflow: hidden;
+}
+#Add:hover{
+    background: #ff004044; 
+}
+#Add{
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  transition: 0.2s linear;
+  padding: 4px;
+  border-radius: 5px;
+}
+#Add p{
+  margin: 0;
+  padding-top: 4px;
+}
+#Add i{
+  color: #00d9ff;
+  font-size: 19px;
 }
 #Proyectos{
-
+  display: flex;
+  gap: 8px;
 }
 #Calendario{
-
+  display: flex;
+  gap: 8px;
 }
 #cuenta{
-
+  display: flex;
+  gap: 8px;
 }
 #settings{
   display: flex;
@@ -160,21 +200,44 @@
   background: #c7c9fa;
   padding: 3px;
   border-radius: 6px;
-}
-#settings h5{
-  text-align: left;
-  margin-top: 0px;
-  margin-block-end: 0;
-  padding: 0;
+  justify-content: center;
 }
 /*===========================================*/
 .contenedor{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   position: relative;
-  padding: 20px;
+  padding: 20px 20px 20px 4px;
   height: 93vh;
   overflow-y: auto;
+}
+
+.subir_tarea{
+  position: fixed;
+  width: 84%;
+  height: 98vh;
+  z-index: 22;
+  display: none;
+  background-color: white;
+}
+.subir_tarea.show{
+  display: block;
+}
+.backgraud-tasks{
+  height: 100%;
+  background-color: white;
+}
+.contenido_main{
+  position: relative;
+  height: 89vh;
+  padding-top: 16px;
+  margin: 10px 0 0 0;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 15% auto;
+  gap: 15px;
 }
 
 .targetas_info{
@@ -231,11 +294,13 @@
 
 
 /* Agregar tareas*/
+.scroll_subir_task{
+  padding: 10px;
+}
 #task-input{
   position: relative;
   display: flex;
-  margin-top: 20px;
-  margin-block-end: 30px;
+  margin-block-end: 20px;
 }
 
 #task-input input{
@@ -243,7 +308,6 @@
   border-top-left-radius: 12px;
   border-end-start-radius: 12px;
   background:rgba(249, 254, 255, 0.788);
-  margin-left: 160px;
   width: 100% ;
   border:  2px solid rgb(113, 194, 226);
   transition:  0.30s ease-in-out;
@@ -256,11 +320,11 @@
   background: linear-gradient(60deg, #596fee, #eb236c,#ff8a00);
   border-top-right-radius: 12px;
   border-end-end-radius: 12px;
-  margin-right: 220px;
   cursor: pointer;
 }
 #taskList{
-  max-height: 580px;
+  height: 436px;
+  max-height: 436px;
   overflow-y: auto;
   padding: 30px;
 }
@@ -300,52 +364,91 @@
   height: 100px;
   margin-block-end: 20px;
 }
-.Categoria.active{
-   height: 600px;
-}
 .Categoria{
-  position: absolute;
-  transition: 0.30s ease-out;
-  width:100% ;
-  height: 90px;
+  transition: 0.6s ease-out;
   box-shadow: 0 0 10px rgba(220, 220, 220, 0.651);
   border-radius: 8px;
   padding: 10px;
   z-index: 20;
-  overflow: hidden;
   background-color: rgb(255, 255, 255);
 }
 .contenedor_categoria .options.selected {
-  background: #2125ffa1;
-  color: #b5eff7;
+  background-color: #020580;
+  color: #f5fdff;
 }
 
 .Categoria h4{
   margin: 0;
 }
+.contenedor_categoria h3{
+  margin: 0 0 10px 0;
+  text-align: center;
+}
 .contenedor_categoria{
+  grid-row: 1 /span 2;
   display:grid;
-  grid-template-columns: repeat(8, auto);
-  gap: 5px;
-  max-width: 1200px;
-  overflow-x: auto;
+  grid-template-columns: repeat(1, auto);
+  gap: 15px;
+  max-height: 530px;
+  overflow-y: auto;
+  padding: 14px;
 }
 .contenedor_categoria::-webkit-scrollbar{
   display: none;
 }
 .options{
   cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 10%;
+  gap: 5px;
   padding: 10px 8px;
-  border-radius: 28px;
+  border-radius: 8px;
   margin-top: 5px;
   color: #818181;
-  border:  2px solid rgb(87, 154, 255);
+  box-shadow: 0 0 6px gainsboro;
   transition: 0.50s ease-in-out;
   font-weight: bold;
+  justify-content: center;
 }
+.options p{
+  margin: 0;
+}
+/*color de icoos categoria barra*/
+.trabajo i{
+  color: #ff00b3ff;
+  font-size: 19px;
+}
+.estudio i{
+  color: rgb(2, 206, 172);
+  font-size: 19px;}
+.dieta i{
+  color: #01cc4fff;
+  font-size: 19px;
+}
+.marketing i{
+  color: rgb(0, 183, 255);
+  font-size: 19px;
+}
+.rutina_diaria i{
+  color: rgb(255, 217, 0);
+  font-size: 19px;
+}
+.fitnest i{
+  color: rgb(195, 0, 255);
+  font-size: 19px;
+}
+.festividades i{
+  color: #ff00b3ff;
+  font-size: 19px;
+}
+.vacaciones i{
+  color: rgb(3, 218, 218);
+  font-size: 19px;
+}
+/*===================================*/
 .options:hover{
-  background-color: #2125ffa1;
-  color: #e0fbff;
+  background-color: #020580;
+  color: #f5fdff;
   transform: scale(1.03);
 }
 .CateIcons{
@@ -447,7 +550,11 @@
   border-radius: 8px;
   grid-column: 1 / span 2;
   box-shadow: 0 0 8px gainsboro;
-
+  opacity: 1;
+  transition: 0.10s ease;
+}
+.List_check.show{
+  opacity: 0;
 }
 .task-item{
   display: grid;
@@ -508,16 +615,20 @@
   margin-top: 20px;
   box-shadow: 0 0 10px gainsboro;
   padding: 10px;
+  opacity: 1;
+  transition: 0.10s ease;
 }
-
+.info_tarea.show{
+  opacity: 0;
+}
 .body_tarea{
   display: grid;
   grid-template-columns: auto auto auto auto;
   gap: 10px;
 }
-.viso_caja_vacia{
+.viso_boxVacia{
   grid-column: 2/ span 2 ;
-  height: 190px;
+  height: 80px;
   display: grid;
   justify-content: center;
   justify-items: center;
@@ -526,13 +637,27 @@
   border: 2px dashed rgb(255, 0, 140);
   background-color: #8cc7d41e;
 }
+.viso_caja_vacia{
+  grid-column: 2/ span 2 ;
+  height: 300px;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  border-radius: 8px;
+  border: 2px dashed rgb(255, 0, 140);
+  background-color: #8cc7d41e;
+}
+.viso_caja_vacia p{
+  transform: translateY(-50px);
+}
 .caja{
   width: 90px;
   height: 90px;
   background: linear-gradient(60deg, #ff8a00, #e52e71);
   cursor: pointer;
   padding: 6px;
-  margin-top: 10px;
+  margin-top: 50px;
   border-radius: 50%;
   text-align: center;
 }
@@ -925,10 +1050,19 @@
   grid-template-columns: auto ;
   gap: 10px;
 }
+.viso_boxVacia{  grid-column: 1 / span 3 ;}
 .viso_caja_vacia{
-    grid-column: 1/ span 1 ;
+  grid-column: 1 / span 3 ;
 }
-
+.nav_menu{
+  padding: 0px 6px 6px 6px;
+}
+.nav0{
+  display: none;
+}
+.nav2{
+  display: block;
+}
 .nav-main{
   background-color: #fff;
   box-shadow: 0px  -4px 2px rgba(199, 199, 199, 0.568); 
@@ -938,9 +1072,60 @@
   height: 50px;
   width: 100%;
 }
+.plusAdd{
+  width: 23px;
+  height: 23px;
+  padding-top: 3px;
+  padding-left: 3px;
+}
+.funciones_smart p{
+  font-size: 13px;
+}
+#Add p{
+  font-size: 13px;
+  padding-top: 0px;
+  text-align: center;}
+#Add i{
+  font-size: 14px;
+
+  margin-left: 10px;
+  padding-top: 5px;
+  padding-left: 6px;
+}
+.funciones_smart i{
+   color: rgb(30, 0, 165);
+}
+#Hogar{
+  display: grid;
+  gap: 2px;
+
+}
+#Add{
+  display: grid;
+  gap: 0px;
+  justify-content: center;
+  margin: 0;
+}
+#Proyectos{
+  display: grid;
+  gap: 0px;
+}
+#Calendario{
+  display: grid;
+  gap: 0px;
+}
+#cuenta{
+  display: grid;
+  gap: 0px;
+}
+#settings{
+  display: grid;
+  gap: 0px;
+}
 .contenedor_menu{
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0px;
+  padding: 0px;
 }
 
 .Barra_Superior_principal{

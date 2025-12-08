@@ -2,7 +2,7 @@
 // app.js
 import { Storage } from "./storage.js";
 import { UI } from "./ui.js";
-import { supabaseClient } from "./supabase.js";   // ← FALTABA ESTO
+import { supabaseClient } from "./supabase.js"; 
 
 export const App = {
   tasks: [],
@@ -39,6 +39,10 @@ export const App = {
     btnAbrirCategoria.addEventListener("click", () => {
       categoria.classList.toggle("active");
       bodycontenedor.style.overflowY = bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
+    });
+
+    btnGuardar.addEventListener("click", () => {
+      document.querySelector(".subir_tarea").classList.remove("show");
     });
 
     btnGuardar.addEventListener("click", () => {
@@ -124,11 +128,11 @@ async toggleCleck(id) {
 },
 
 async deleteTask(id) {
-  // eliminar localmente primero para UX instantánea
+
   this.tasks = this.tasks.filter(t => t.id !== id);
 
   try {
-    await Storage.deleteTask(id); // Storage.deleteTask debe ser async y borrar en Supabase
+    await Storage.deleteTask(id); 
   } catch (err) {
     console.error("Error borrando tarea en BD:", err);
   }
@@ -136,6 +140,22 @@ async deleteTask(id) {
   UI.renderTasks(this.tasks);
 },
 };
+
+//add tasks
+document.addEventListener("DOMContentLoaded", () =>{
+  const openAdd = document.getElementById("Add");
+  const contenAdd = document.querySelector(".subir_tarea");
+  const bodycontenedor = document.querySelector(".contenedor");
+
+  openAdd.addEventListener("click", () =>{
+    contenAdd.classList.toggle("show")
+    bodycontenedor.style.overflowY = bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
+    bodycontenedor.classList.toggle("show")
+    document.querySelector(".List_check").classList.toggle("show")
+    document.querySelector(".info_tarea").classList.toggle("show")
+  });
+});
+
 
 //Completado animacion
 
@@ -148,7 +168,7 @@ function mostrarModalCompletado() {
 
   // Reiniciar animaciones
   anim.style.animation = "none";
-  anim.offsetHeight; // << forzar reflow (truco importante)
+  anim.offsetHeight; 
   anim.style.animation = "";
 
   backgraud_Content.style.animation = "none";
@@ -170,7 +190,7 @@ function mostrarModalCompletado() {
 
 //Themes
 
-document.addEventListener("click", () =>{
+document.addEventListener("DOMContentLoaded", () =>{
   const themes = document.querySelector(".content_theme");
   const animation = document.querySelector(".nav_themes");
   const openThemes = document.getElementById("openThemes");
@@ -191,3 +211,20 @@ document.addEventListener("click", () =>{
   });
 
 });
+
+/*
+function actualizarEstadoConexion() {
+    const mensajeDesconexion = document.getElementById('mensaje-offline'); 
+
+    if (navigator.onLine) {
+        console.log("Conectado a Internet");
+        if (mensajeDesconexion) {
+            mensajeDesconexion.style.display = 'none';
+        }
+    } else {
+        console.log("Desconectado de Internet");
+        if (mensajeDesconexion) {
+            mensajeDesconexion.style.display = 'block'; 
+        }
+    }
+}*/

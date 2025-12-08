@@ -1,8 +1,8 @@
-// Detectar si el sistema está en modo oscuro
+
 const systemPrefersDark = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-// Aplicar el tema según la selección del usuario
+
 function applyTheme(theme) {
   const lightBtn = document.getElementById("Default_light");
   const darkBtn = document.getElementById("Default_dark");
@@ -26,6 +26,8 @@ function applyTheme(theme) {
     darkBtn.style.color = "#ffffffff";
     lightBtn.style.color = "#000000ff";
     systemBtn.style.color = "#000000ff";
+    document.querySelector(".nav-main").style.background = "rgba(0, 0, 90, 0.42)"
+    document.querySelector(".nav-main").style.boxShadow = "0 0 0 rgba(255, 255, 255, 0)"
   }
   else if (theme === "system") {
     document.documentElement.removeAttribute("data-theme");
@@ -34,7 +36,7 @@ function applyTheme(theme) {
     lightBtn.style.color = "";
     darkBtn.style.color = "";
 
-    // Aplicar según sistema
+
     if (systemPrefersDark()) {
       document.documentElement.setAttribute("data-theme", "dark");
     } else {
@@ -42,7 +44,7 @@ function applyTheme(theme) {
     }
   }
 
-  // Guardar elección
+
   localStorage.setItem("theme", theme);
 }
 
@@ -50,7 +52,6 @@ function applyTheme(theme) {
 const savedTheme = localStorage.getItem("theme") || "system";
 applyTheme(savedTheme);
 
-// Al cambiar el sistema, si el usuario usa "system", actualizar
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", () => {

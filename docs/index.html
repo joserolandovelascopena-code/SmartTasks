@@ -43,23 +43,29 @@
           <ul class="contenedor_menu">
             <li class="funciones_smart" id="Hogar">
               <i class="fa-solid fa-house"></i>
-              <h5>Hogar</h5>
+              <p>Hogar</p>
+            </li>
+            <li id="Add">
+              <i class="fa-solid fa-plus plusAdd"></i>
+              <p class="nav0">Agregar tarea</p>
+              <p class="nav2">Agregar</p>
             </li>
             <li class="funciones_smart" id="Proyectos">
               <i class="fa-solid fa-folder"></i>
-              <h5>Proyectos</h5>
+              <p class="nav0">Tus proyectos</p>
+              <p class="nav2">Proyectos</p>
             </li>
             <li class="funciones_smart" id="Calendario">
               <i class="fa-solid fa-calendar-days"></i>
-              <h5>Calendario</h5>
+              <p>Calendario</p>
             </li>
             <li class="funciones_smart" id="cuenta">
               <i class="fa-solid fa-user"></i>
-              <h5>Cuenta</h5>
+              <p>Cuenta</p>
             </li>
             <li class="funciones_smart" id="settings">
               <i class="fa-solid fa-gear"></i>
-              <h5>Settings</h5>
+              <p>Settings</p>
             </li>
           </ul>
         </nav>
@@ -68,8 +74,8 @@
         <section class="Barra_Superior_principal">
           <h1 id="Titulo_app">SmartTasks</h1>
 
-          <div class="themes">
-            <i class="fa-solid fa-palette" id="openThemes"></i>
+          <div class="themes" id="openThemes">
+            <i class="fa-solid fa-palette"></i>
             <div class="content_theme">
               <div class="nav_themes">
                 <nav>
@@ -95,103 +101,115 @@
             </div>
           </div>
         </section>
+
         <div class="contenedor">
-          <header class="contenido_main">
-            <main>
-              <section id="task-input">
-                <input
-                  type="text"
-                  id="newTask"
-                  placeholder="Nueva tarea..."
-                  title="Escribe una actividad"
-                />
-                <div title="Agregar nuevas tareas" id="addBtn">
-                  <i class="fa-solid fa-square-plus"></i>
+          <main class="subir_tarea">
+            <div class="backgraud-tasks">
+              <header class="contenido_main">
+                <div class="contenedor_categoria">
+                  <h3>Categoria</h3>
+                  <div class="trabajo options" data-categoria="Trabajo">
+                    <p>Trabajo</p>
+                    <i class="fa-solid fa-briefcase"></i>
+                  </div>
+                  <div class="estudio options" data-categoria="Estudio">
+                    <p>Estudio</p>
+                    <i class="fa-solid fa-book"></i>
+                  </div>
+                  <div class="dieta options" data-categoria="Dieta">
+                    <p>Dieta</p>
+                    <i class="fa-solid fa-apple-whole"></i>
+                  </div>
+                  <div class="marketing options" data-categoria="Marketing">
+                    <p>Marketing</p>
+                    <i class="fa-solid fa-chart-line"></i>
+                  </div>
+                  <div
+                    class="rutina_diaria options"
+                    data-categoria="Rutina diaria"
+                  >
+                    <p>Rutina díaria</p>
+                    <i class="fa-solid fa-person-running"></i>
+                  </div>
+                  <div class="fitnest options" data-categoria="Fitness">
+                    <p>Fitness</p>
+                    <i class="fa-solid fa-dumbbell"></i>
+                  </div>
+                  <div
+                    class="festividades options"
+                    data-categoria="Festividades"
+                  >
+                    <p>Festividades</p>
+                    <i class="fa-solid fa-church"></i>
+                  </div>
+                  <div class="vacaciones options" data-categoria="Vacaciones">
+                    <p>Vacaciones</p>
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                  </div>
                 </div>
-              </section>
-              <section class="main-cont-categoria">
-                <article class="Categoria" title="Categorías">
-                  <h4>Categoria</h4>
-                  <div class="scroll_spin">
-                    <div class="contenedor_categoria">
-                      <div class="trabajo options" data-categoria="Trabajo">
-                        Trabajo💼
-                      </div>
-                      <div class="estudio options" data-categoria="Estudio">
-                        Estudio📚📒
-                      </div>
-                      <div class="dieta options" data-categoria="Dieta">
-                        Dieta🥗😋
-                      </div>
-                      <div class="marketing options" data-categoria="Marketing">
-                        Marketing📈
-                      </div>
-                      <div
-                        class="rutina_diaria options"
-                        data-categoria="Rutina diaria"
-                      >
-                        Rutina díaria🚴‍♀️
-                      </div>
-                      <div class="fitnest options" data-categoria="Fitness">
-                        Fitness🏋️‍♂️
-                      </div>
-                      <div
-                        class="festividades options"
-                        data-categoria="Festividades"
-                      >
-                        Festividades🎆⛪
-                      </div>
-                      <div
-                        class="vacaciones options"
-                        data-categoria="Vacaciones"
-                      >
-                        Vacaciones🏖️🏝️
-                      </div>
+
+                <main class="scroll_subir_task">
+                  <section id="task-input">
+                    <input
+                      type="text"
+                      id="newTask"
+                      placeholder="Nueva tarea..."
+                      title="Escribe una actividad"
+                    />
+                    <div title="Agregar nuevas tareas" id="addBtn">
+                      <i class="fa-solid fa-square-plus"></i>
                     </div>
-                  </div>
-                  <div class="horaio_día">
-                    <div class="tiempo" id="fecha">
-                      <i class="fa-regular fa-calendar-days"></i>
-                      <p>Fecha/Día</p>
-                    </div>
-                    <div class="tiempo" id="hora">
-                      <i class="fa-regular fa-clock"></i>
-                      <p>Tiempo de duracion</p>
-                    </div>
-                  </div>
-                  <h4>Importancia</h4>
-                  <div class="importancia">
-                    <div
-                      class="proridad options-prioridad"
-                      data-prioridad="Baja"
-                      title="Baja"
-                    >
-                      Baja
-                    </div>
-                    <div
-                      class="proridad options-prioridad"
-                      data-prioridad="Media"
-                      title="Normal"
-                    >
-                      Media
-                    </div>
-                    <div
-                      class="proridad options-prioridad"
-                      data-prioridad="Alta"
-                      title="Mayor Importancia"
-                    >
-                      Alta
-                    </div>
-                  </div>
-                  <div class="agregar">
-                    <button id="Guadar-btn" title="Guardar">
-                      Guardar Tarea
-                    </button>
-                  </div>
-                </article>
-              </section>
-            </main>
-          </header>
+                  </section>
+
+                  <section class="main-cont-categoria">
+                    <article class="Categoria" title="Categorías">
+                      <h4>Establecer un limete</h4>
+
+                      <div class="horaio_día">
+                        <div class="tiempo" id="fecha">
+                          <i class="fa-regular fa-calendar-days"></i>
+                          <p>Fecha/Día</p>
+                        </div>
+                        <div class="tiempo" id="hora">
+                          <i class="fa-regular fa-clock"></i>
+                          <p>Tiempo de duracion</p>
+                        </div>
+                      </div>
+                      <h4>Importancia</h4>
+                      <div class="importancia">
+                        <div
+                          class="proridad options-prioridad"
+                          data-prioridad="Baja"
+                          title="Baja"
+                        >
+                          Baja
+                        </div>
+                        <div
+                          class="proridad options-prioridad"
+                          data-prioridad="Media"
+                          title="Normal"
+                        >
+                          Media
+                        </div>
+                        <div
+                          class="proridad options-prioridad"
+                          data-prioridad="Alta"
+                          title="Mayor Importancia"
+                        >
+                          Alta
+                        </div>
+                      </div>
+                      <div class="agregar">
+                        <button id="Guadar-btn" title="Guardar">
+                          Guardar Tarea
+                        </button>
+                      </div>
+                    </article>
+                  </section>
+                </main>
+              </header>
+            </div>
+          </main>
 
           <div class="List_check">
             <button id="logoutBtn" title="Cerrar sesión">Cerrar sesión</button>

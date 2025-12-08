@@ -128,8 +128,8 @@ export const UI = {
       }
 
       if (task.prioridad === "Media") {
-      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #ffd900ff, #ffee00ff, #ffd901ff )";
-      li.querySelector(".task-pro").style.color = "#3b3b3bff";
+      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #02ebdfff, #0145ffff )";
+      li.querySelector(".task-pro").style.color = "#ffffffff";
       }
 
       if (task.prioridad === "Alta") {
@@ -248,11 +248,11 @@ renderPrioridad() {
       const element = document.querySelector(`[data-prioridad="${selected}"]`);
       
       if (selected === "Baja") {
-        element.style.background = "#4caf50"; // verde
+        element.style.background = "linear-gradient(40deg, #04cf60ff, #03b65cff )";; // verde
       } else if (selected === "Media") {
-        element.style.background = "#ffc107"; // amarillo
+        element.style.background = "linear-gradient(40deg, #02ebdfff, #0145ffff )"; // amarillo
       } else if (selected === "Alta") {
-        element.style.background = "#f44336"; // rojo
+        element.style.background = "linear-gradient(40deg, #ff6565ff, #ff0162ff )";; // rojo
       }
 
       element.style.color = "#fff";
@@ -266,11 +266,19 @@ renderTarjetas(tasks) {
   if (this.hasClickedTask) return;
 
   const container = document.querySelector(".body_tarea");
+  const containerList = document.getElementById("taskList");
   container.innerHTML = ""; 
 
   // 1. si no hay tareas -> mensaje vacío
   if (tasks.length === 0) {
-    container.innerHTML = `
+      container.innerHTML = `
+      <article class="viso_boxVacia">
+        <div class="caja2">
+               <p>No hay actividades aún.</p>
+        </div>
+      </article>
+    `;
+    containerList.innerHTML = `
       <article class="viso_caja_vacia">
         <div class="caja">
           <i class="fa-solid fa-calendar"></i>
