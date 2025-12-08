@@ -558,7 +558,7 @@
 }
 .task-item{
   display: grid;
-  grid-template-columns: 2% 50% 20% auto 2%;
+  grid-template-columns: 54% 21% auto 2%;
   box-shadow: 0 0 10px rgba(204, 204, 204, 0.781);
   gap: 20px;
   transition: 0.90s ease-out;
@@ -572,6 +572,11 @@
 .task-text {
   cursor: pointer;
   flex-grow: 5;
+  padding-top: 3px ;
+}
+.box_tasks_text{
+  display: flex;
+  gap: 8px;
 }
 
 .task-text.done {
@@ -579,7 +584,10 @@
   opacity: 0.6;
   animation: popCkeck2 0.40s ease-in-out;
 }
+.checked{
+  margin-top: 0px;
 
+}
 .check {
   appearance: none;   /* Quita el estilo del sistema */
   -webkit-appearance: none;
@@ -1007,11 +1015,9 @@
   grid-template-columns: repeat(2, auto);
   max-width: 100%;
 }
-.Categoria.active{
-   height: 480px;
-}
+
 .targetas_info{
-  margin-top: 340px;
+  margin-top: 3px;
   grid-column: 1 / span 1;
 }
 .carousel {
@@ -1025,21 +1031,42 @@
   min-width: 220px;
   height: 300px
 }
-
-
 .List_check{
-  padding: 20px;
+  padding: 0px;
   grid-column: 1 / span 2;
-  margin-top: 130px;
-  
+  box-shadow: 0 0 0 rgba(49, 49, 49, 0);
 }
+#taskList{
+  padding: 4px;
+
+}
+/*
 .task-item{
   display: grid;
-  grid-template-columns: 4% 72% auto;
+  grid-template-columns: 2% 50% 20% auto 2%;
+  box-shadow: 0 0 10px rgba(204, 204, 204, 0.781);
+  gap: 20px;
+  transition: 0.90s ease-out;
+  padding: 12px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  margin-block-end: 15px;
+}
+*/
+.task-item{
+  display: grid;
+  grid-template-columns: auto auto 2%;
 
 }
+.box_tasks_text{
+    grid-column: 1 / span 3; 
+}
+
 .info_tarea{
- grid-column: 1 /span 2;
+  display: grid;
+  grid-auto-rows: 50%;
+
  padding: 8px;
  border-radius: 8px;
  margin-block-end: 50px;
@@ -1055,7 +1082,7 @@
   grid-column: 1 / span 3 ;
 }
 .nav_menu{
-  padding: 0px 6px 6px 6px;
+  padding: 4px 6px 6px 6px;
 }
 .nav0{
   display: none;
@@ -1073,26 +1100,26 @@
   width: 100%;
 }
 .plusAdd{
-  width: 26px;
-  height: 26px;
-  padding-top: 3px;
-  padding-left: 3px;
+  width: 28px;
+  height: 28px;
+
 }
 .funciones_smart p{
   font-size: 13px;
 }
-#Add p{
-  font-size: 13px;
-  padding-top: 0px;
-  text-align: center;}
+.funciones_smart h5{
+  margin: 4px 0 0 0;
+}
+#Add h5{
+margin: 4px 0 0 0;}
 #Add i{
-  font-size: 16px;
   margin-left: 10px;
-  padding-top: 5px;
-  padding-left: 6.3px;
+  font-size: 18px;
+  padding-top: 6px;
+  padding-left: 7px;
 }
 .funciones_smart i{
-  font-size: 24px;
+  font-size: 26px;
   color: rgb(30, 0, 165);
 }
 #Hogar{

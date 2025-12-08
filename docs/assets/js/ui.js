@@ -29,8 +29,10 @@ export const UI = {
    
       // texto + estilo de completada
      li.innerHTML = `
+     <div class="box_tasks_text">
      <input type="checkbox" class="check ${task.done ? "done" : ""}" ${task.done ? "checked" : ""}>
      <span class="task-text ${task.done ? "done" : ""}">${task.text}</span>
+     </div>
      <span class="task-cat">${"Categoria: " + task.categoria}   <i class="CateIcons"></i></span>
      <span class="task-pro">${"Prioridad: " + task.prioridad} </span>
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>

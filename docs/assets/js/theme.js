@@ -26,8 +26,16 @@ function applyTheme(theme) {
     darkBtn.style.color = "#ffffffff";
     lightBtn.style.color = "#000000ff";
     systemBtn.style.color = "#000000ff";
-    document.querySelector(".nav-main").style.background = "rgba(0, 0, 90, 0.7)"
-    document.querySelector(".nav-main").style.boxShadow = "0 0 0 rgba(255, 255, 255, 0)"
+    document.querySelector(".nav-main").style.background = "rgba(0, 0, 66, 0.82)"
+    document.querySelector(".nav-main").style.boxShadow = "0 0 0 rgba(26, 2, 46, 0)"
+    const iconsNav = document.querySelectorAll(".funciones_smart i");
+    const icos2 = document.querySelector(".plusAdd");
+    const blueicosNav = "rgba(0, 13, 255, 0.93)";
+    icos2.style.background = blueicosNav;
+    iconsNav.forEach(icos => {
+    icos.style.color = blueicosNav;
+    })
+
   }
   else if (theme === "system") {
     document.documentElement.removeAttribute("data-theme");

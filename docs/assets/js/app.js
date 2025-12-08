@@ -43,6 +43,8 @@ export const App = {
 
     btnGuardar.addEventListener("click", () => {
       document.querySelector(".subir_tarea").classList.remove("show");
+      document.querySelector(".List_check").classList.remove("show");
+      document.querySelector(".info_tarea").classList.remove("show");
     });
 
     btnGuardar.addEventListener("click", () => {
@@ -151,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () =>{
     contenAdd.classList.toggle("show")
     bodycontenedor.style.overflowY = bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
     bodycontenedor.classList.toggle("show")
-    document.querySelector(".List_check").classList.toggle("show")
-    document.querySelector(".info_tarea").classList.toggle("show")
+    document.querySelector(".List_check").classList.toggle("show");
+    document.querySelector(".info_tarea").classList.toggle("show");
   });
 });
 
