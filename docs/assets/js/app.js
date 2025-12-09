@@ -92,25 +92,27 @@ async addTask() {
 
 },
 
-
 async toggleTask(id) {
   let newDone = false;
 
   this.tasks = this.tasks.map(t => {
     if (t.id === id) {
       newDone = !t.done;
-
-      if (!t.done && newDone) {
-        mostrarModalCompletado();
-      }
-
       return { ...t, done: newDone };
     }
+
+    if (!t.done && newDone) {
+      mostrarModalCompletado();
+    }
+
     return t;
   });
 
   await Storage.updateTask(id, { done: newDone });
+
   UI.renderTasks(this.tasks);
+
+  console.log("Toggle ID recibido:", id);
 },
 
 
@@ -157,6 +159,15 @@ document.addEventListener("DOMContentLoaded", () =>{
     document.querySelector(".info_tarea").classList.toggle("show");
   });
 });
+
+document.addEventListener("change", e => {
+  if (e.target.classList.contains("check")) {
+    const id = Number(e.target.dataset.id);
+    App.toggleTask(id);
+  }
+});
+
+
 
 document.addEventListener("DOMContentLoaded", () =>{
   const repeticion_tasks = document.querySelector(".repeticion_tasks");

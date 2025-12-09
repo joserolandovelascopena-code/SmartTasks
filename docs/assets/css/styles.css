@@ -481,8 +481,6 @@
   text-align: center;
   border-bottom: 2px dashed gainsboro;
 }
-
-
 /*Horario*/
 .horaio_día{
   margin-top: 12px;
@@ -679,7 +677,8 @@ cursor: pointer;
   padding-top: 3px ;
 }
 .box_tasks_text{
-  display: flex;
+  display: grid;
+  grid-template-columns: 5% auto;
   gap: 8px;
 }
 
@@ -1101,6 +1100,7 @@ cursor: pointer;
   padding: 16px;
   grid-template-columns: repeat(1, 1fr);
 }
+
 #addBtn{
   background-color: rgb(255, 217, 0);
   width: auto;
@@ -1141,8 +1141,12 @@ cursor: pointer;
   grid-template-columns: 41% 43% 3%;
 }
 .box_tasks_text{
-    grid-column: 1 / span 3; 
+  grid-column: 1 / span 3; 
+  display: grid;
+  grid-template-columns: 7% auto;
+  gap: 8px;
 }
+
 
 .info_tarea{
   display: grid;
@@ -1260,13 +1264,19 @@ margin: 4px 0 0 0;}
   left: 10px;
 }
 /*subir tarea*/
+.backgraud-tasks{
+  height: 100%;
+}
+
 .subir_tarea{
   position: absolute;
   width: 100%;
   height: 100%;
 }
 .contenido_main{
-  height: 100%;
+  max-height: 100%;
+  position: fixed;
+  overflow-y:auto ;
   border: 0px solid gainsboro;
   border-radius: 0px;
   grid-template-columns: auto;
@@ -1276,7 +1286,6 @@ margin: 4px 0 0 0;}
   display:flex;
   gap: 15px;
   max-height: 80px;
-  overflow-x: auto;
   padding: 14px;
 }
 .scroll_subir_task{
@@ -1291,6 +1300,35 @@ margin: 4px 0 0 0;}
   padding: 10px 8px;
   padding-top: 15px;
 }
+
+/*descrition*/
+.title_description{
+  margin-block-end: 6px;
+}
+.descrition_box {
+  grid-template-columns: auto;
+}
+.separar{
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.repetición{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap:10px ;
+}
+.repetición p{
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+}
+
+#openOpiciones{
+padding: 10px;
+width: 100%;
+font-size: 15px;
+}
+
 /*
 .modal-content {
   padding: 10px 10px;

@@ -30,10 +30,10 @@ export const UI = {
       // texto + estilo de completada
      li.innerHTML = `
      <div class="box_tasks_text">
-     <input type="checkbox" class="check ${task.done ? "done" : ""}" ${task.done ? "checked" : ""}>
+     <input type="checkbox"class="check ${task.done ? "done" : ""}"${task.done ? "checked" : ""} data-id="${task.id}">
      <span class="task-text ${task.done ? "done" : ""}">${task.text}</span>
      </div>
-     <span class="task-cat">${ task.categoria}   <i class="CateIcons"></i></span>
+     <span class="task-cat">${task.categoria}   <i class="CateIcons"></i></span>
      <span class="task-pro">${"Prioridad: " + task.prioridad} </span>
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
    
@@ -89,7 +89,7 @@ export const UI = {
       });
       li.addEventListener("click", () => {
         UI.hasClickedTask = true;
-        UI.renderTarjeta(task)
+        UI.renderTarjetas(task)
       });
 
     // ABRIR MODAL TAREA
@@ -264,14 +264,13 @@ renderPrioridad() {
 },
 
 renderTarjetas(tasks) {
-  // si ya hizo click en una tarea, NO dibujar tarjetas iniciales
+
   if (this.hasClickedTask) return;
 
   const container = document.querySelector(".body_tarea");
   const containerList = document.getElementById("taskList");
   container.innerHTML = ""; 
 
-  // 1. si no hay tareas -> mensaje vacío
   if (tasks.length === 0) {
       container.innerHTML = `
       <article class="viso_boxVacia">
@@ -291,7 +290,6 @@ renderTarjetas(tasks) {
     return;
   }
 
-  // 2. mostrar solo primeras 4 tarjetas
   const primerasTres = tasks.slice(0, 4);
 
   primerasTres.forEach(task => {
@@ -332,33 +330,32 @@ initCarousel() {
   this.updateCarousel();
 },
 
-// función que calcula ancho real de "paso" (card + gap)
+
 computeCardSize() {
-  this.cards = document.querySelectorAll(".card"); // refresca NodeList por si cambian
+  this.cards = document.querySelectorAll(".card"); 
   if (!this.cards.length) {
     this.cardSize = 0;
     return;
   }
 
   const first = this.cards[0].getBoundingClientRect();
-  // Si hay al menos 2 tarjetas, usa la distancia entre ellas para incluir gap
+
   if (this.cards.length > 1) {
     const second = this.cards[1].getBoundingClientRect();
-    // distancia entre lefts = gap + width; 
-    // cardSize = second.left - first.left
+ 
     this.cardSize = Math.round(second.left - first.left);
   } else {
-    // si solo hay una, usa su ancho
+
     this.cardSize = Math.round(first.width);
   }
 
-  // por seguridad mínimo 1
+
   if (!this.cardSize || this.cardSize < 1) this.cardSize = Math.round(first.width);
 },
 
 
 bindCarouselEvents() {
-  // proteger si no hay elementos
+
   if (this.next) {
     this.next.addEventListener("click", () => {
       this.index = Math.min(this.index + 1, this.cards.length - 1);

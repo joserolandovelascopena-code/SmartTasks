@@ -3,54 +3,49 @@ import { supabaseClient } from "./supabase.js";
 const Storage = {
 
   // Obtener todas las tareas ordenadas por ID
-  async getTasks() {
-    const { data, error } = await supabaseClient
-      .from("tasks")
-      .select("*")
-      .order("id", { ascending: false });
+async getTasks() {
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  const userId = sessionData?.session?.user?.id;
 
-    if (error) {
-      console.error("Error obteniendo tareas:", error.message);
-      return [];
-    }
+  if (!userId) {
+    console.error("No hay sesión activa");
+    return [];
+  }
 
-    return data ?? [];
-  },
+  const { data, error } = await supabaseClient
+    .from("tasks")
+    .select("*")
+    .eq("user_id", userId)        // ← FILTRAR POR USUARIO
+    .order("id", { ascending: false });
 
-  // Crear nueva tarea
-  async saveTask(task) {
-    const { data, error } = await supabaseClient
-      .from("tasks")
-      .insert(task)
-      .select(); // <-- esto devuelve la tarea creada
+  if (error) {
+    console.error("Error obteniendo tareas:", error.message);
+    return [];
+  }
 
-   if (error) {
-  console.error("Supabase insert ERROR:", error);
-  alert("Supabase ERROR: " + error.message);
-} else {
-  console.log("Tarea insertada:", data);
-}
+  return data ?? [];
+},
 
-
-    return data[0]; // devolvemos la tarea insertada
-  },
-
-  // Actualizar tarea
-  async updateTask(id, fields) {
-    const { data, error } = await supabaseClient
+// storage.js
+async updateTask(id, fields) {
+  try {
+    const resp = await supabaseClient
       .from("tasks")
       .update(fields)
       .eq("id", id)
-      .select(); // <-- para obtener la tarea actualizada
+      .select();
 
-    if (error) {
-      console.error("Error actualizando tarea:", error.message);
+    console.log("updateTask response:", resp); // muestra { data, error, status, statusText, etc. }
+    if (resp.error) {
+      console.error("Error actualizando tarea:", resp.error);
       return null;
     }
-
-    return data?.[0] ?? null;
-  },
-
+    return resp.data?.[0] ?? null;
+  } catch (err) {
+    console.error("Exception en updateTask:", err);
+    return null;
+  }
+},
   // Eliminar tarea
   async deleteTask(id) {
     const { error } = await supabaseClient
