@@ -158,6 +158,14 @@ document.addEventListener("DOMContentLoaded", () =>{
   });
 });
 
+document.addEventListener("DOMContentLoaded", () =>{
+  const repeticion_tasks = document.querySelector(".repeticion_tasks");
+  const openRepeticion = document.getElementById("openOpiciones");
+
+  openRepeticion.addEventListener("click",() =>{
+    repeticion_tasks.classList.toggle("show");
+  });
+});
 
 //Completado animacion
 

@@ -137,7 +137,7 @@
   border-radius: 5px;
 }
 .funciones_smart:hover {
-  background: #ff004044;
+  background: #00aeff44;
 }
 .funciones_smart p{
   margin: 0px 0;
@@ -323,9 +323,7 @@
   cursor: pointer;
 }
 #taskList{
-  height: 436px;
-  max-height: 436px;
-  overflow-y: auto;
+  height: auto;
   padding: 30px;
 }
 #taskList::-webkit-scrollbar{
@@ -368,7 +366,7 @@
   transition: 0.6s ease-out;
   box-shadow: 0 0 10px rgba(220, 220, 220, 0.651);
   border-radius: 8px;
-  padding: 10px;
+  padding: 15px;
   z-index: 20;
   background-color: rgb(255, 255, 255);
 }
@@ -379,6 +377,12 @@
 
 .Categoria h4{
   margin: 0;
+  border: 1px solid gainsboro;
+  width: auto;
+  border-radius: 6px;
+  padding: 5px 5px;
+  color: #069caf;
+
 }
 .contenedor_categoria h3{
   margin: 0 0 10px 0;
@@ -412,6 +416,7 @@
 }
 .options p{
   margin: 0;
+  font-size: 15px;
 }
 /*color de icoos categoria barra*/
 .trabajo i{
@@ -488,7 +493,7 @@
 }
 .tiempo{
   border-radius: 10px;
-  background: #6c80f5;
+   background-color: #020580;
   padding: 10px;
   display: flex;
   gap: 10px;
@@ -528,10 +533,110 @@
   display: grid;
   justify-content: center;
 }
+/*descrition*/
+.title_description{
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  margin-block-end: 6px;
+}
+.title_description p{margin:0px 0;}
+.icoDes{color:#f7186a;}
+.icoRepe{ color:#00be39;}
+.descrition_box{
+  width: 100%;
+  height: 120px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 26px;
+  background: #c7c9fa8c;
+}
+.descrition_box {
+  display: grid;
+  grid-template-columns: auto 46%;
+  gap: 10px;
+  padding: 24px 10px;
+}
+.descrition_box input{
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 6px;
+  border: none;
+}
+.descrition_box input{
+   outline: none;
+}
+.repetición{
+  display: grid;
+  grid-template-columns: 30% auto;
+}
+.repetición p{
+  margin: 0;
+  padding: 4px;
+  border: 2px solid rgb(42, 179, 0);
+  border-bottom: 6px solid  rgb(29, 122, 0);
+  background-color: #00be3941;
+  color: #00af17;
+  font-weight: bold;
+  border-radius: 8px;
+  width: 106px;
+}
+#openOpiciones{
+padding: 8px 50px;
+border-radius: 8px;
+background-color: #5900ff54;
+border: 2px solid #3f02ce;
+border-bottom: 6px solid #26006d;
+color: #290088;
+font-weight: bold;
+transition: 0.5s ease;
+cursor: pointer;
+}
+.conten_repetion{
+  width: 200px;
+  height: 180px;
+  background: white;
+  padding: 15px;
+  border: 1px solid rgba(145, 145, 145, 0.575);
+  box-shadow: 0 0 30px rgb(206, 206, 206);
+  border-radius: 10px;
+  transition: 0.4s ease;
+  overflow: hidden;
+    animation: themeAnimation 0.16s ease-in-out;
+}
+#repet{
+  padding: 8px 8px; color: #474747;
+  font-size: 15px; 
+  transition: 0.1s ease; 
+  border-radius: 6px;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+#repet i{
+  font-size: 16px;}
+#repet p{
+  margin: 0;
+}
+#repet:hover{background: rgba(220, 220, 220, 0.788);}
+.repeticion_tasks{
+  display: none;
+}
 
+.repeticion_tasks.show{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform: translateY(-190px) translateX(113px);
+  z-index: 29;
+  display:block;
+}
+#openOpiciones:hover{
+  scale: 1.02;
+}
 #Guadar-btn{
   padding: 12px 60px;
-  background: linear-gradient(60deg, #596fee, #eb236c,#ff8a00);
+  background-color: #020580;
   border: none;
   border-radius: 10px;
   font-size: 16px;
@@ -542,7 +647,6 @@
 }
 #Guadar-btn:hover{
   transform: scale(1.04);
-
 }
 /*=====================================*/
 .List_check{
@@ -558,7 +662,7 @@
 }
 .task-item{
   display: grid;
-  grid-template-columns: 54% 21% auto 2%;
+  grid-template-columns: 58% 16% auto 2%;
   box-shadow: 0 0 10px rgba(204, 204, 204, 0.781);
   gap: 20px;
   transition: 0.90s ease-out;
@@ -631,7 +735,7 @@
 }
 .body_tarea{
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
 .viso_boxVacia{
@@ -647,7 +751,7 @@
 }
 .viso_caja_vacia{
   grid-column: 2/ span 2 ;
-  height: 300px;
+  height: 380px;
   display: grid;
   justify-content: center;
   justify-items: center;
@@ -657,7 +761,7 @@
   background-color: #8cc7d41e;
 }
 .viso_caja_vacia p{
-  transform: translateY(-50px);
+  transform: translateY(-70px);
 }
 .caja{
   width: 90px;
@@ -665,14 +769,14 @@
   background: linear-gradient(60deg, #ff8a00, #e52e71);
   cursor: pointer;
   padding: 6px;
-  margin-top: 50px;
+  margin-top: 90px;
   border-radius: 50%;
   text-align: center;
 }
 .caja i{
   font-size: 30px;
   color: #020580;
-  margin-top: 30px;
+  margin-top: 26px;
 }
 
 /*stylo gobal de targetas*/
@@ -869,7 +973,7 @@
   position: fixed;
   z-index: 29;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(5, 2, 53, 0.6);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
@@ -969,7 +1073,7 @@
 }
 
 
-/* Título */
+
 .titulo-modal {
   margin-top: 20px;
   padding: 5px;
@@ -1007,14 +1111,6 @@
   width: 100%;
   margin-left: 0px;
 }
-.Categoria{
-  position: absolute;
-  transition: 0.30s ease-out;
-}
-.contenedor_categoria{
-  grid-template-columns: repeat(2, auto);
-  max-width: 100%;
-}
 
 .targetas_info{
   margin-top: 3px;
@@ -1035,29 +1131,14 @@
   padding: 0px;
   grid-column: 1 / span 2;
   box-shadow: 0 0 0 rgba(49, 49, 49, 0);
+
 }
 #taskList{
   padding: 4px;
-
 }
-/*
 .task-item{
   display: grid;
-  grid-template-columns: 2% 50% 20% auto 2%;
-  box-shadow: 0 0 10px rgba(204, 204, 204, 0.781);
-  gap: 20px;
-  transition: 0.90s ease-out;
-  padding: 12px;
-  font-size: 18px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  margin-block-end: 15px;
-}
-*/
-.task-item{
-  display: grid;
-  grid-template-columns: auto auto 2%;
-
+  grid-template-columns: 41% 43% 3%;
 }
 .box_tasks_text{
     grid-column: 1 / span 3; 
@@ -1177,6 +1258,38 @@ margin: 4px 0 0 0;}
   height: 30px;
   top: 10px;
   left: 10px;
+}
+/*subir tarea*/
+.subir_tarea{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.contenido_main{
+  height: 100%;
+  border: 0px solid gainsboro;
+  border-radius: 0px;
+  grid-template-columns: auto;
+}
+.contenedor_categoria{
+  grid-row: 1 /span 1;
+  display:flex;
+  gap: 15px;
+  max-height: 80px;
+  overflow-x: auto;
+  padding: 14px;
+}
+.scroll_subir_task{
+ transform: translateY(-100px);
+}
+.options{
+  flex: 0 0 10rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 10%;
+  gap: 5px;
+  padding: 10px 8px;
+  padding-top: 15px;
 }
 /*
 .modal-content {
