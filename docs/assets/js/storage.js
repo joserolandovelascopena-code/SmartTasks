@@ -25,8 +25,26 @@ async getTasks() {
 
   return data ?? [];
 },
+async saveTask(task) {
+  try {
+    const { data, error } = await supabaseClient
+      .from("tasks")
+      .insert(task)
+      .select();
 
-// storage.js
+    if (error) {
+      console.error("Error guardando tarea:", error);
+      return null;
+    }
+
+    return data?.[0] ?? null;
+
+  } catch (err) {
+    console.error("Exception en saveTask:", err);
+    return null;
+  }
+},
+
 async updateTask(id, fields) {
   try {
     const resp = await supabaseClient

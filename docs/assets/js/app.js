@@ -94,25 +94,24 @@ async addTask() {
 
 async toggleTask(id) {
   let newDone = false;
+  let tareaCambiada = null;
 
   this.tasks = this.tasks.map(t => {
     if (t.id === id) {
       newDone = !t.done;
+      tareaCambiada = !t.done; // Guardamos si se completó
       return { ...t, done: newDone };
     }
-
-    if (!t.done && newDone) {
-      mostrarModalCompletado();
-    }
-
     return t;
   });
 
+  // Mostrar modal SOLO cuando la tarea fue completada (done = true)
+  if (tareaCambiada === true) {
+    mostrarModalCompletado();
+  }
+
   await Storage.updateTask(id, { done: newDone });
-
   UI.renderTasks(this.tasks);
-
-  console.log("Toggle ID recibido:", id);
 },
 
 

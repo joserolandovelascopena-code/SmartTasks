@@ -77,6 +77,10 @@
       <main class="login_contenedor">
         <div id="header_login">
           <h2 id="sesion-title">Iniciar sesión</h2>
+          <p class="signup">
+            ¿No tines cuenta?. <a href="signup.html">Crea una cuenta ahora</a>
+            en SmartTasks, accede y disfruta al máximo de nuestros servicios.
+          </p>
         </div>
         <section class="credenciales">
           <div class="inputs-layout">
@@ -93,8 +97,11 @@
           <button id="loginBtn">Entrar</button>
         </section>
 
-        <p><a href="signup.html">Crear cuenta</a></p>
-        <p><a href="recover.html">¿Olvidaste tu contraseña?</a></p>
+        <p id="resetPassword">
+          Recuperar contraseña <a href="recover.html">Click aquí</a>
+        </p>
+        <p id="msgs"></p>
+        <p id="msgConexion"></p>
         <p><a href="#" id="AppSmartTansks">SmartTansks App</a></p>
       </main>
       <div class="container_movil">
@@ -146,22 +153,33 @@
     </div>
     <script type="module">
       import { login } from "../../assets/js/auth.js";
-
       document.getElementById("loginBtn").onclick = async () => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("password").value;
+        const msgEl = document.getElementById("msgs");
+
+        if (!navigator.onLine) {
+          msgEl.textContent = "No hay conexión a internet";
+          msgEl.classList.toggle("active");
+          return;
+        }
 
         try {
           await login(email, pass);
+
           document.querySelector(".container_loader").classList.add("show");
+          msgEl.classList.remove("active");
+
           setTimeout(() => {
             document.getElementById("mnj").textContent = "Redirigiendo app...";
           }, 800);
+
           setTimeout(() => {
             window.location.href = "../../index.html";
           }, 2000);
         } catch (e) {
-          alert(e.message);
+          msgEl.textContent = e.message;
+          msgEl.classList.add("active");
         }
       };
 

@@ -25,7 +25,7 @@ body{
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: #022f3ae0;
+    background-color: #020c3ae1;
     backdrop-filter: blur(5px);
     display: grid;
     justify-content: center;
@@ -115,6 +115,7 @@ body{
     gap: 14px;
     border-radius: 5px;
 }
+
 .cleck{
     color: #00e1ff;
     font-size: 40px;
@@ -151,25 +152,25 @@ body{
     height: 200px;
     transition: 0.40s ease-in-out;
     padding: 8px;
-    position: relative;
+    position: relative;;
 }
 .funciones_descrition h4{
     color: #815eff;
 }
 
 .letf_box{
-      animation: zoomfade2 1s ease-in ;
+      animation: zoomfade2 1s ease-in;
       box-shadow: 0 0 14px blue;  
 }
 .right_box{
-    animation: zoomfade2 1s ease-in ;
+    animation: zoomfade2 1s ease-in;
     box-shadow: 0 0 14px blue;  
 }
 .center_box{
     height: 240px;
     margin-top: -20px;
     animation: zoomfade 0.40s ease-in;
-        box-shadow: 0 0 14px blue;  
+    box-shadow: 0 0 14px blue;  
 }
 .letf_box:hover, .right_box:hover{
     transform: scale(1.09);
@@ -193,34 +194,52 @@ body{
     position: relative;
 }
 #header_login{
-    display: flex;
-    gap: 8px;
-    justify-content: center;
+    text-align: left;
+}
+.signup{
+    color: #646363;
+}
+.signup a{
+    color: #09035f;
+    font-weight: bold;
+    text-decoration: underline;
 }
 .login_contenedor h2{ 
-   background: linear-gradient(40deg, #4c00ff, #4123eb,#00e1ff);
+   background: linear-gradient(40deg, #1a0153, #0e0158,#012761);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent; 
     padding: 10px 0; 
-    font-size: 36px;
-
+    font-size: 28px;
 }
 
 .login_contenedor p{
-    text-align: center;
     margin-block-end: 10px;
 }
 #AppSmartTansks{
     position: absolute;
     bottom: 20px;
-    left: 40vh;
+    left: 38vh;
     text-align: center;
     text-decoration: none;
     color: #363636; 
 }
-.login_contenedor a{
-     text-decoration: none;
-     color: #363636;
+#msgs{
+    display: none;
+    text-align: center;
+}
+#msgs.active{
+    margin: 50px 0 0 0;
+    color: red;
+    animation: errorlogin 0.1s ease;  
+    display: block;
+}
+.msgConexion{
+    display: none;
+}
+.msgConexion.active{
+    color: #02ca1d;
+    display: block;
+    animation: conexi 0.1s ease;
 }
 .inputs-layout{
     display: grid;
@@ -258,12 +277,23 @@ body{
     border-bottom-right-radius: 5px;
 
 }
+#resetPassword{
+    padding-top: 14px;
+    text-align: center;
+    color: #919090a4;
+    font-weight: bold;
+}
+#resetPassword a{
+    color: #000d53;
+    font-weight: bold;
+    text-decoration: underline;
+}
 #loginBtn{
     margin-top: 30px;
     padding: 10px 8px;
     width: 100%;
     border: none;
-    background: linear-gradient(60deg, #596fee, #eb236c);
+    background: linear-gradient(60deg, #000d53);
     color: white;
     font-weight: bold;
     font-size: 14px;
@@ -351,6 +381,29 @@ body{
         opacity: 1;
     }
 }
+@keyframes conexi{
+    from{
+        scale: 1.02;
+    }
+    to{
+        scale: 1;
+    }
+}
+@keyframes errorlogin{
+    0%{
+        scale: 1.01;
+    }
+    50%{
+        transform: translateX(3px);
+    }
+    75%{
+        transform: translateX(-3px);
+    }
+    100%{
+        transform: translateX(0);
+        scale: 1;
+    }
+}
 
 /*reponsing*/
 @media (max-width: 470px){
@@ -388,6 +441,9 @@ body{
   font-size: 38px;
   background-size: 300% 300%;
   animation: mover 10s ease infinite;
+}
+.Cuadro_info{
+    padding: 28px;
 }
 .inputs-layout{
     grid-template-columns: 88% auto;
@@ -447,8 +503,8 @@ body{
     color: #363636; 
 }
 .footer{
-   margin-top: 70px;
-   margin-left: 68px;
+   margin-top: 50px;
+   margin-left: 78px;
    position: absolute;
    text-align: center;
 }
