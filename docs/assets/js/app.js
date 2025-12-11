@@ -217,8 +217,8 @@ document.addEventListener("DOMContentLoaded", () =>{
   const closeThemes = document.querySelector(".contenedor");
 
   openThemes.addEventListener("click", () =>{
-    themes.classList.toggle("active");
-    animation.classList.toggle("active");
+    themes.classList.add("active");
+    animation.classList.add("active");
   });
 
   setTimeout(() => {
@@ -226,6 +226,7 @@ document.addEventListener("DOMContentLoaded", () =>{
       themes.classList.remove("active");
   });
   }, 1000);
+
   closeThemes.addEventListener("click", () =>{
   animation.classList.remove("active");
   });
