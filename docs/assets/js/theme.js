@@ -69,14 +69,19 @@ window
   });
 
 
-document.getElementById("Default_light").addEventListener("click", () => {
-  applyTheme("light");
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme") || "system";
+    applyTheme(savedTheme);
 
-document.getElementById("Default_dark").addEventListener("click", () => {
-  applyTheme("dark");
-});
+    document.getElementById("Default_light").addEventListener("click", () => {
+      applyTheme("light");
+    });
 
-document.getElementById("System_theme").addEventListener("click", () => {
-  applyTheme("system");
+    document.getElementById("Default_dark").addEventListener("click", () => {
+      applyTheme("dark");
+    });
+
+    document.getElementById("System_theme").addEventListener("click", () => {
+      applyTheme("system");
+    });
 });
