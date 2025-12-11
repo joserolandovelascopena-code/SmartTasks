@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+   font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+
+
 }
 :root {
   --color-icons: linear-gradient(60deg, #596fee,#f700ff);
@@ -11,13 +14,13 @@
 /*Contenido pricipal INICIO*/
 .container_main{
   display: grid;
-  grid-template-columns: 14% auto;
+  grid-template-columns: 16% auto;
   height: 100%;
   gap: 10px;
 }
 #Titulo_app{
-  margin: 0 0 28px 10px;
-  font-size: 30px;
+  margin: 0 0 0px 0px;
+  font-size: 19px;
   animation: aparecer 0.60s ease-in-out;
   background: linear-gradient(40deg, #596fee, #eb236c,#ff8a00);
   -webkit-background-clip: text;
@@ -25,14 +28,107 @@
 }
 /*Barra superior principal*/
 .Barra_Superior_principal{
-  height: 50px;
   box-shadow: 4px 0 10px gainsboro;
   z-index: 28;
-  padding: 6px;
+  padding: 6px 10px;
   position: relative;
   display: grid;
-  grid-template-columns: 80% 12% 4%;
+  grid-template-columns: auto 40%;
 }
+.tasksProyecAll h2{
+  margin: 8px 0 0 0;
+  color: #272626;
+  font-weight: normal;
+}
+
+
+/*Perfil*/
+.add_persons_notificaciones{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  padding-left: 140px;
+}
+.perfil_user{
+  display: grid;
+  grid-template-columns: 18% auto 15%;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 5px;
+  background-color: #ffffff;
+  height: 39px;
+  border-radius: 12px;
+  border: 1px solid gainsboro;
+}
+.name_Users{
+  position: relative;
+  width: 100px;
+  overflow-x: auto;
+}
+.perfil_user h5{margin: 6px 0 0 0 } 
+.foto_perfil img{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid gainsboro;
+  margin: 0;
+}
+.addPersons{
+  padding: 11px 4px;
+  background: rgb(253, 253, 253);
+  border-radius: 12px;
+  border: 1px solid gainsboro;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.addPersons:hover{
+  background-color: #f2f3fa;
+}
+.open_cuentas_family_colaborador i{
+  padding-top: 7px;
+  font-size: 13px;
+}
+.Saludo_noticias{
+  height: 100px;
+  border-radius: 12px;
+  background-color: #5a6afc;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 70% auto;
+  gap: 8px;
+}
+.Saludo_noticias h3{
+  margin: 0;
+  color: white;
+}
+.Saludo_noticias p{
+  margin: 0;
+  font-size: 14px;
+}
+.infor_Tareas_estado{
+  padding: 12px 0;
+}
+.CantTasksAdd{
+  display: flex;
+  gap: 5px;
+  border-radius: 15px;
+  background: white;
+  color: #313131;
+  padding: 4px 8px;
+}
+.CantTasksAdd button{
+  background: transparent;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 0, 106);
+  color: #eb236c;
+  font-weight: bold;
+  height: 40px;
+}
+.CantTasksAdd p{
+  margin: 0;
+}
+/*==================================*/
 .Settings_System{
   position: relative;
   cursor: pointer;
@@ -112,8 +208,13 @@
 /*Menu*/
 .nav-main{
   box-shadow: 0px 0px 8px rgba(199, 199, 199, 0.568); 
-  height: 100vh;
-  background: linear-gradient(40deg,#f0f0f0, #e8e7ff ) ;
+  position: relative;
+  height: 99vh;
+  margin: 4px;
+  border-radius: 8px;
+  color: rgb(172, 171, 171);
+  font-size: 14px;
+  background: linear-gradient(40deg,#090031, #00003d ) ;
 }
 .nav_menu{
   padding: 15px 6px 6px 6px;
@@ -136,21 +237,64 @@
   padding: 4px;
   border-radius: 5px;
 }
+.titu{
+  padding: 3px;
+}
+.titu p{
+margin: 0;
+}
+#appSmat{
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: left;
+  padding: 3px;
+}
 .funciones_smart:hover {
-  background: #00aeff44;
+  background: linear-gradient(60deg,  #1e2ce9,  #1f79ff);
+  color: white;
 }
 .funciones_smart p{
   margin: 0px 0;
 }
 .funciones_smart i{
-  font-size: 20px;
-  color: rgb(31, 0, 117);
+  font-size: 15px;
+  color: rgb(184, 182, 182);
 }
 
 /*Funciones por separado*/
 #Hogar{
   display: flex;
   gap: 8px;
+}
+#searchSmar{
+  margin-top: 0;
+}
+.formSearc{
+  margin: 0;
+  display: grid;
+  grid-template-columns: 5% auto;
+  gap: 14px;
+  padding: 2px 4px;
+  background: #0217da4d;
+  border-radius: 20px;
+}
+#buscador{
+  margin: 5px 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  color: white;
+  border-radius: 6px;
+}
+#buscador::placeholder{
+  color: white;
+}
+#buscador:focus{
+  outline: none;
+}
+.formSearc i{
+  padding-top: 7px;
+  padding-left: 3px;
 }
 .plusAdd{
   width: 24px;
@@ -196,11 +340,25 @@
 #settings{
   display: flex;
   gap: 8px;
-  margin-top: 16rem;
-  background: #c7c9fa;
-  padding: 3px;
+  margin-top: 10rem;
+  background: linear-gradient(60deg, #001aff57);
+  color: white;
+  padding: 5px 3px;
   border-radius: 6px;
   justify-content: center;
+}
+#settings i{color: #ffffff;}
+#logoutBtni{
+  color: rgb(255, 0, 128);}
+#logoutBtn{
+  display: flex;
+  gap: 8px;
+  padding: 3px;
+  color: rgb(255, 0, 149);
+  cursor: pointer;
+}
+#logoutBtn p{
+   margin: 0;
 }
 /*===========================================*/
 .contenedor{

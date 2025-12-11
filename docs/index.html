@@ -16,6 +16,11 @@
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
@@ -41,28 +46,47 @@
       <div class="nav-main">
         <nav class="nav_menu">
           <ul class="contenedor_menu">
+            <li id="appSmat">
+              <h5 id="Titulo_app">SmartTasks</h5>
+            </li>
+            <li id="searchSmar">
+              <form action="/buscar" method="get" class="formSearc">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                  type="search"
+                  id="buscador"
+                  name="search"
+                  placeholder="Buscar..."
+                />
+              </form>
+            </li>
+            <li class="titu">
+              <p class="nav0">Smart opciones</p>
+            </li>
             <li class="funciones_smart" id="Hogar">
               <i class="fa-solid fa-house"></i>
+
               <p class="nav0">Hogar</p>
               <h5 class="nav2">Hogar</h5>
             </li>
             <li id="Add" class="Add">
-              <i class="fa-solid fa-plus plusAdd"></i>
+              <i class="fa-solid fa-circle-plus"></i>
               <p class="nav0">Agregar tarea</p>
               <h5 class="nav2">Agregar</h5>
             </li>
             <li class="funciones_smart" id="Proyectos">
-              <i class="fa-solid fa-folder"></i>
+              <i class="fa-regular fa-folder-open"></i>
+              <i class="fa-regular fa-comment-dots"></i>
               <p class="nav0">Tus proyectos</p>
               <h5 class="nav2">Proyectos</h5>
             </li>
             <li class="funciones_smart" id="Calendario">
-              <i class="fa-solid fa-calendar-days"></i>
+              <i class="fa-regular fa-calendar-days"></i>
               <p class="nav0">Calendario</p>
               <h5 class="nav2">Calendario</h5>
             </li>
             <li class="funciones_smart" id="cuenta">
-              <i class="fa-solid fa-user"></i>
+              <i class="fa-regular fa-user"></i>
               <p class="nav0">Cuenta</p>
               <h5 class="nav2">Cuenta</h5>
             </li>
@@ -71,13 +95,55 @@
               <p class="nav0">Settings</p>
               <h5 class="nav2">Settings</h5>
             </li>
+            <li id="logoutBtn" title="Cerrar sesión">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <p class="nav0">Cerrar sesión</p>
+            </li>
           </ul>
         </nav>
       </div>
       <div>
         <section class="Barra_Superior_principal">
-          <h1 id="Titulo_app">SmartTasks</h1>
+          <div class="tasksProyecAll">
+            <h2>Visión general de tareas y proyectos</h2>
+          </div>
+          <div class="add_persons_notificaciones">
+            <div>
+              <div class="perfil_user">
+                <div class="foto_perfil">
+                  <img
+                    id="fotoUser"
+                    src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                    alt="user"
+                  />
+                </div>
+                <div class="name_Users">
+                  <h5 id="name_user">User SmartTas</h5>
+                </div>
+                <div class="open_cuentas_family_colaborador">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+            </div>
+            <div class="conten_add">
+              <button class="addPersons">
+                Agregar <i class="fa-solid fa-user-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="Saludo_noticias">
+            <div>
+              <h3>Hola, Jose Rolando Velasco</h3>
+              <p>Te mostramos tu progreso del día:</p>
+            </div>
+            <div class="infor_Tareas_estado">
+              <div class="CantTasksAdd">
+                <button>80%</button>
 
+                <p>Actividades completadas</p>
+              </div>
+            </div>
+          </div>
           <div class="themes" id="openThemes">
             <i class="fa-solid fa-palette"></i>
             <div class="content_theme">
@@ -97,11 +163,11 @@
                 </nav>
               </div>
             </div>
-          </div>
-          <div class="Settings_System">
-            <i class="fa-solid fa-bars"></i>
-            <div class="nav_System">
-              <nav></nav>
+            <div class="Settings_System">
+              <i class="fa-solid fa-bars"></i>
+              <div class="nav_System">
+                <nav></nav>
+              </div>
             </div>
           </div>
         </section>
@@ -258,7 +324,6 @@
           </main>
 
           <div class="List_check">
-            <button id="logoutBtn" title="Cerrar sesión">Cerrar sesión</button>
             <h3>Actividades por completar</h3>
 
             <div id="taskList"></div>
