@@ -1,49 +1,64 @@
+// theme.js (reemplaza tu archivo con esto)
+
+const VALID_THEMES = ["light", "dark", "system"];
 
 const systemPrefersDark = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
+function safeEl(id) {
+  return document.getElementById(id);
+}
 
 function applyTheme(theme) {
-  const lightBtn = document.getElementById("Default_light");
-  const darkBtn = document.getElementById("Default_dark");
-  const systemBtn = document.getElementById("System_theme");
+  // Validar valor
+  if (!VALID_THEMES.includes(theme)) theme = "system";
 
-  // Reset estilos
+  const lightBtn = safeEl("Default_light");
+  const darkBtn = safeEl("Default_dark");
+  const systemBtn = safeEl("System_theme");
+
+  // Si los botones no existen todavía, abortamos (evita crash)
+  if (!lightBtn || !darkBtn || !systemBtn) {
+    console.warn("applyTheme: botones del theme no encontrados todavía.");
+    return;
+  }
+
+  // Reset estilos (con comprobaciones)
   lightBtn.style.background = "";
   darkBtn.style.background = "";
   systemBtn.style.background = "";
+  lightBtn.style.color = "";
+  darkBtn.style.color = "";
+  systemBtn.style.color = "";
+
+  // Helpers para elementos opcionales
+  const navMain = document.querySelector(".nav-main");
+  const iconsNav = document.querySelectorAll(".funciones_smart i");
+  const plusAdd = document.querySelector(".plusAdd");
 
   if (theme === "light") {
     document.documentElement.setAttribute("data-theme", "light");
     lightBtn.style.background = "#020580";
     lightBtn.style.color = "#ffffffff";
-    darkBtn.style.color = "";
-    systemBtn.style.color = "";
-  }
-  else if (theme === "dark") {
+  } else if (theme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
     darkBtn.style.background = "#020580";
     darkBtn.style.color = "#ffffffff";
-    lightBtn.style.color = "#000000ff";
-    systemBtn.style.color = "#000000ff";
-    document.querySelector(".nav-main").style.background = "rgba(0, 0, 66, 0.82)"
-    document.querySelector(".nav-main").style.boxShadow = "0 0 0 rgba(26, 2, 46, 0)"
-    const iconsNav = document.querySelectorAll(".funciones_smart i");
-    const icos2 = document.querySelector(".plusAdd");
-    const blueicosNav = "rgba(0, 13, 255, 0.93)";
-    icos2.style.background = blueicosNav;
-    iconsNav.forEach(icos => {
-    icos.style.color = blueicosNav;
-    })
 
-  }
-  else if (theme === "system") {
+    if (navMain) {
+      navMain.style.background = "rgba(0, 0, 66, 0.82)";
+      navMain.style.boxShadow = "0 0 0 rgba(26, 2, 46, 0)";
+    }
+    if (plusAdd) plusAdd.style.background = "rgba(0, 13, 255, 0.93)";
+    if (iconsNav && iconsNav.length) {
+      iconsNav.forEach(ico => {
+        ico.style.color = "rgba(0, 13, 255, 0.93)";
+      });
+    }
+  } else if (theme === "system") {
     document.documentElement.removeAttribute("data-theme");
     systemBtn.style.background = "#020580";
     systemBtn.style.color = "#ffffffff";
-    lightBtn.style.color = "";
-    darkBtn.style.color = "";
-
 
     if (systemPrefersDark()) {
       document.documentElement.setAttribute("data-theme", "dark");
@@ -52,36 +67,37 @@ function applyTheme(theme) {
     }
   }
 
-
   localStorage.setItem("theme", theme);
 }
 
+// Solo inicializamos cuando el DOM está listo
+document.addEventListener("DOMContentLoaded", () => {
+  // Obtener guardado, validar
+  let savedTheme = localStorage.getItem("theme");
+  if (!VALID_THEMES.includes(savedTheme)) savedTheme = "system";
 
-const savedTheme = localStorage.getItem("theme") || "system";
-applyTheme(savedTheme);
+  applyTheme(savedTheme);
 
+  // Añadir listeners con operador seguro
+  document.getElementById("Default_light")?.addEventListener("click", () => {
+    applyTheme("light");
+  });
+  document.getElementById("Default_dark")?.addEventListener("click", () => {
+    applyTheme("dark");
+  });
+  document.getElementById("System_theme")?.addEventListener("click", () => {
+    applyTheme("system");
+  });
+
+  // Si tu control de abrir/animaciones necesita estos botones, ok.
+});
+
+// Escuchar cambios de preferencia del sistema
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", () => {
     if (localStorage.getItem("theme") === "system") {
-      applyTheme("system");
+      // Asegurarse de que los elementos existan antes de aplicar
+      if (document.getElementById("Default_light")) applyTheme("system");
     }
   });
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme") || "system";
-    applyTheme(savedTheme);
-
-    document.getElementById("Default_light").addEventListener("click", () => {
-      applyTheme("light");
-    });
-
-    document.getElementById("Default_dark").addEventListener("click", () => {
-      applyTheme("dark");
-    });
-
-    document.getElementById("System_theme").addEventListener("click", () => {
-      applyTheme("system");
-    });
-});
