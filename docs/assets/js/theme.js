@@ -17,13 +17,12 @@ function applyTheme(theme) {
   const darkBtn = safeEl("Default_dark");
   const systemBtn = safeEl("System_theme");
 
-  // Si los botones no existen todavía, abortamos (evita crash)
   if (!lightBtn || !darkBtn || !systemBtn) {
     console.warn("applyTheme: botones del theme no encontrados todavía.");
     return;
   }
 
-  // Reset estilos (con comprobaciones)
+
   lightBtn.style.background = "";
   darkBtn.style.background = "";
   systemBtn.style.background = "";
@@ -70,15 +69,15 @@ function applyTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-// Solo inicializamos cuando el DOM está listo
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Obtener guardado, validar
+
   let savedTheme = localStorage.getItem("theme");
   if (!VALID_THEMES.includes(savedTheme)) savedTheme = "system";
 
   applyTheme(savedTheme);
 
-  // Añadir listeners con operador seguro
+
   document.getElementById("Default_light")?.addEventListener("click", () => {
     applyTheme("light");
   });
@@ -89,10 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTheme("system");
   });
 
-  // Si tu control de abrir/animaciones necesita estos botones, ok.
 });
 
-// Escuchar cambios de preferencia del sistema
+
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", () => {

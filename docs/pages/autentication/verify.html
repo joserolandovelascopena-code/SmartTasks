@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Verificando cuenta...</title>
+  </head>
+  <body>
+    <h2>Verificando tu cuenta...</h2>
+
+    <script type="module">
+      import { supabaseClient } from "../../assets/js/supabase.js";
+
+      const {
+        data: { user },
+      } = await supabaseClient.auth.getUser();
+
+      if (user) {
+        window.location.href = "../../index.html";
+      }
+    </script>
+  </body>
+</html>

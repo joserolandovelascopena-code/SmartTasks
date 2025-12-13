@@ -1,65 +1,81 @@
 import { supabaseClient } from "./supabase.js";
 
-// ------------------------
-// LOGIN
-// ------------------------
+/* ------------------------
+   SIGN UP + CREATE PROFILE
+-------------------------*/
+export async function signup(fullName, email, password) {
+await supabaseClient.auth.signUp({
+  email,
+  password,
+  options: {
+    emailRedirectTo:
+      "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/verify.html",
+    data: {
+      full_name: fullName
+    }
+  }
+});
+  if (error) throw error;
+
+}
+
+
+
+/* ------------------------
+   LOGIN + GET PROFILE
+-------------------------*/
 export async function login(email, password) {
   const { data, error } = await supabaseClient.auth.signInWithPassword({
     email,
     password
   });
 
-  if (error) {
-    // Error por correo o contraseña incorrectos
-    if (error.message.includes("Invalid login credentials")) {
-      throw new Error("Correo o contraseña incorrectos");
-    }
+  if (error) throw error;
 
-    // Formato de correo inválido
-    if (error.message.includes("Invalid email")) {
-      throw new Error("El correo tiene un formato inválido.");
-    }
+  const user = data.user;
 
-    // Otros errores
-    throw error;
-  }
+  // Buscar perfil
+  const { data: profile } = await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
 
-  const { user } = data;
-
-  if (!user.email_confirmed_at) {
-    await supabaseClient.auth.signOut();
-    throw new Error("Debes verificar tu correo antes de entrar.");
+  // Si NO existe, crearlo
+  if (!profile) {
+    await supabaseClient.from("profiles").insert({
+      id: user.id,
+      full_name: user.user_metadata.full_name ?? null,
+      avatar_url: null
+    });
   }
 
   return user;
 }
 
-
-
-// ------------------------
-// SIGN UP
-// ------------------------
-export async function signup(email, password) {
-  const { error } = await supabaseClient.auth.signUp({
+// CREAR PERFIL PARA USUARIO NUEVO
+export async function createProfile(userId, email) {
+  const { error } = await supabaseClient.from("profiles").insert({
+    id: userId,
     email,
-    password,
-    options: {
-      emailRedirectTo:
-        "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/reset-password.html"
-    }
+    nombre: null,
+    foto_url: null
   });
 
   if (error) throw error;
 }
 
-// ------------------------
-// LOGOUT
-//------------------------
+/* ------------------------
+   LOGOUT  (TAL CUAL LO TIENES)
+-------------------------*/
 export async function logout() {
   await supabaseClient.auth.signOut();
-   window.location.href = "./pages/autentication/login.html";
+  window.location.href = "./pages/autentication/login.html";
 }
 
+/* ------------------------
+   PROTEGER RUTA (TAL CUAL LO TIENES)
+-------------------------*/
 export async function protectRoute() {
   const { data: { user } } = await supabaseClient.auth.getUser();
 
@@ -75,9 +91,9 @@ export async function protectRoute() {
 }
 
 
-// ------------------------
-// RECUPERAR CONTRASEÑA
-// ------------------------
+/* ------------------------
+   RECUPERAR CONTRASEÑA
+-------------------------*/
 export async function recoverPassword(email) {
   const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
     redirectTo:
@@ -87,9 +103,9 @@ export async function recoverPassword(email) {
   if (error) throw error;
 }
 
-// ------------------------
-// ACTUALIZAR CONTRASEÑA
-// ------------------------
+/* ------------------------
+   ACTUALIZAR CONTRASEÑA
+-------------------------*/
 export async function updatePassword(newPass) {
   const { error } = await supabaseClient.auth.updateUser({ password: newPass });
   if (error) throw error;
