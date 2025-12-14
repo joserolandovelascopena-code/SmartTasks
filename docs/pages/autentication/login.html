@@ -30,6 +30,12 @@
         </div>
       </div>
     </div>
+    <section class="conexion_recover">
+      <article class="content_msg">
+        <i class="fa-solid fa-wifi"></i><br />
+        <samp>Conexión restablecidad</samp>
+      </article>
+    </section>
     <div class="contenedor">
       <div class="container_pc">
         <header class="Cuadro_info">
@@ -101,7 +107,7 @@
           Recuperar contraseña <a href="recover.html">Click aquí</a>
         </p>
         <p id="msgs"></p>
-        <p id="msgConexion"></p>
+
         <p><a href="#" id="AppSmartTansks">SmartTansks App</a></p>
       </main>
       <div class="container_movil">
@@ -153,6 +159,7 @@
     </div>
     <script type="module">
       import { login } from "../../assets/js/auth.js";
+      let wasOffline = false;
       document.getElementById("loginBtn").onclick = async () => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("password").value;
@@ -163,6 +170,11 @@
           msgEl.classList.toggle("active");
           return;
         }
+
+        window.addEventListener("offline", () => {
+          msgEl.classList.add("active");
+          wasOffline = true;
+        });
 
         try {
           await login(email, pass);
@@ -197,6 +209,18 @@
             eyePassword.classList.remove("fa-eye");
             eyePassword.classList.add("fa-eye-slash");
           }
+        });
+        window.addEventListener("online", () => {
+          if (!wasOffline) return;
+          document.getElementById("msgs").textContent = "";
+          const recover = document.querySelector(".conexion_recover");
+          recover.classList.add("active");
+
+          setTimeout(() => {
+            recover.classList.remove("active");
+          }, 1500);
+
+          wasOffline = false;
         });
       });
     </script>

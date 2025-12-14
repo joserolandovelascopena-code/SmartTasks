@@ -30,6 +30,12 @@
     />
   </head>
   <body>
+    <section class="conexion_recover">
+      <article class="content_msg">
+        <i class="fa-solid fa-wifi"></i><br />
+        <samp>Conexión restablecidad</samp>
+      </article>
+    </section>
     <div class="contenedor">
       <h2>Crear cuenta</h2>
       <p>
@@ -65,6 +71,7 @@
 
     <script type="module">
       import { signup } from "../../assets/js/auth.js";
+      let wasOffline = false;
 
       document.getElementById("signupBtn").onclick = async () => {
         const nameValue = document.getElementById("name").value;
@@ -78,6 +85,10 @@
 
           return;
         }
+        window.addEventListener("offline", () => {
+          msg.classList.add("active");
+          wasOffline = true;
+        });
 
         try {
           await signup(nameValue, emailValue, passValue);
@@ -104,6 +115,19 @@
             eyePassword.classList.remove("fa-eye");
             eyePassword.classList.add("fa-eye-slash");
           }
+        });
+
+        window.addEventListener("online", () => {
+          if (!wasOffline) return;
+          document.getElementById("msg").textContent = "";
+          const recover = document.querySelector(".conexion_recover");
+          recover.classList.add("active");
+
+          setTimeout(() => {
+            recover.classList.remove("active");
+          }, 1500);
+
+          wasOffline = false;
         });
       });
     </script>

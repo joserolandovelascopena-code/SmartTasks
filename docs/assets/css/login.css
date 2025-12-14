@@ -68,6 +68,39 @@ body{
     animation-delay: 600ms;
 }
 
+/*Mensaje recover conexión*/
+
+.conexion_recover{
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    border-radius: 12px;
+    background: rgb(255, 255, 255);
+    width: 200px;
+    height: 100px;
+    z-index: 10;
+    box-shadow: 0 0  10px rgb(185, 185, 185);
+    display: none;
+}
+.conexion_recover.active{
+    display: block;
+    animation: fadeUp 0.4s ease;
+}
+.content_msg{
+    padding: 10px;
+    text-align: center;
+}
+.content_msg i{
+    color: #00ac81;
+    font-size: 36px;
+    margin: 6px;
+}
+.content_msg samp{ 
+    font-weight:600;
+    color: #00ac81;
+    font-size: 15px;
+    font-family: "Roboto";
+}
 @keyframes loader {
     from{
         transform: translateY(0);
@@ -78,6 +111,16 @@ body{
         opacity: 1;
         transform: translateY(5px) ;
     }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 /*====================================*/
 .contenedor{
@@ -222,9 +265,7 @@ body{
     text-decoration: underline;
 }
 .login_contenedor h2{ 
-   background: linear-gradient(40deg, #56b3ff);
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent; 
+    color: #38bdf8;
     padding: 10px 0; 
     font-size: 28px;
 }
@@ -245,8 +286,8 @@ body{
     text-align: center;
 }
 #msgs.active{
-    margin: 50px 0 0 0;
-    color: red;
+    margin: 20px 0 0 0;
+    color: #f87171;
     animation: errorlogin 0.1s ease;  
     display: block;
 }

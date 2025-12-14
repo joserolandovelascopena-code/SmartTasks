@@ -27,7 +27,53 @@ body {
   color: #e5e7eb;
 }
 
-/* CARD */
+
+/*Mensaje recover conexión*/
+
+.conexion_recover{
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    border-radius: 12px;
+    background: rgb(255, 255, 255);
+    width: 200px;
+    height: 100px;
+    z-index: 10;
+    box-shadow: 0 0  0 2px rgb(95, 95, 95);
+    display: block;
+   
+}
+.conexion_recover.active{
+    display: block;
+    animation: fadeUp 0.4s ease;
+}
+.content_msg{
+    padding: 10px;
+    text-align: center;
+}
+.content_msg i{
+    color: #00ac81;
+    font-size: 36px;
+    margin: 6px;
+}
+.content_msg samp{ 
+    font-weight:600;
+    color: #00ac81;
+    font-size: 15px;
+    font-family: "Roboto";
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+/* ================================ */
 .contenedor {
   width: 100%;
   max-width: 500px;
@@ -185,4 +231,8 @@ body {
     border-radius: 16px;
     height: 100%;
   }
+.conexion_recover{
+    right: 20px;
+    bottom: 20px;
+}
 }

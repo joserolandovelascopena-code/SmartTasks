@@ -28,7 +28,14 @@ export async function login(email, password) {
     password
   });
 
-  if (error) throw error;
+    if (error) {
+
+    if (error.message.includes("Invalid login credentials")) {
+      throw new Error("Correo o contraseña incorrectos");
+    }
+
+    throw error;
+}
 
   const user = data.user;
 
