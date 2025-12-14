@@ -40,7 +40,7 @@ body {
     height: 100px;
     z-index: 10;
     box-shadow: 0 0  0 2px rgb(95, 95, 95);
-    display: block;
+    display: none;
    
 }
 .conexion_recover.active{

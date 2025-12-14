@@ -71,28 +71,46 @@
 
     <script type="module">
       import { signup } from "../../assets/js/auth.js";
+
       let wasOffline = false;
 
+      const msg = document.getElementById("msg");
+      const recover = document.querySelector(".conexion_recover");
+
+      /* 🔴 Sin conexión */
+      window.addEventListener("offline", () => {
+        msg.textContent = "No hay conexión a internet";
+        msg.classList.add("active");
+        wasOffline = true;
+      });
+
+      /* 🟢 Conexión restablecida */
+      window.addEventListener("online", () => {
+        if (!wasOffline) return;
+
+        msg.textContent = "";
+        msg.classList.remove("active");
+
+        recover.classList.add("active");
+        setTimeout(() => recover.classList.remove("active"), 1500);
+
+        wasOffline = false;
+      });
+
+      /* 📝 Registro */
       document.getElementById("signupBtn").onclick = async () => {
         const nameValue = document.getElementById("name").value;
         const emailValue = document.getElementById("email").value;
         const passValue = document.getElementById("password").value;
-        const msg = document.getElementById("msg");
 
         if (!navigator.onLine) {
           msg.textContent = "No hay conexión a internet";
-          msg.classList.toggle("active");
-
+          msg.classList.add("active");
           return;
         }
-        window.addEventListener("offline", () => {
-          msg.classList.add("active");
-          wasOffline = true;
-        });
 
         try {
           await signup(nameValue, emailValue, passValue);
-
           alert("Revisa tu correo y verifica tu cuenta.");
           window.location.href = "./login.html";
         } catch (e) {
@@ -101,33 +119,16 @@
         }
       };
 
+      /* 👁️ Ver contraseña */
       document.addEventListener("DOMContentLoaded", () => {
         const eyePassword = document.getElementById("eyePassword");
         const inputPass = document.getElementById("password");
 
         eyePassword.addEventListener("click", () => {
-          if (inputPass.type === "password") {
-            inputPass.type = "text";
-            eyePassword.classList.remove("fa-eye-slash");
-            eyePassword.classList.add("fa-eye");
-          } else {
-            inputPass.type = "password";
-            eyePassword.classList.remove("fa-eye");
-            eyePassword.classList.add("fa-eye-slash");
-          }
-        });
-
-        window.addEventListener("online", () => {
-          if (!wasOffline) return;
-          document.getElementById("msg").textContent = "";
-          const recover = document.querySelector(".conexion_recover");
-          recover.classList.add("active");
-
-          setTimeout(() => {
-            recover.classList.remove("active");
-          }, 1500);
-
-          wasOffline = false;
+          const isPass = inputPass.type === "password";
+          inputPass.type = isPass ? "text" : "password";
+          eyePassword.classList.toggle("fa-eye", isPass);
+          eyePassword.classList.toggle("fa-eye-slash", !isPass);
         });
       });
     </script>

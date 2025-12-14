@@ -159,28 +159,43 @@
     </div>
     <script type="module">
       import { login } from "../../assets/js/auth.js";
+
       let wasOffline = false;
+      const msgEl = document.getElementById("msgs");
+      const recover = document.querySelector(".conexion_recover");
+
+      window.addEventListener("offline", () => {
+        msgEl.textContent = "No hay conexión a internet";
+        msgEl.classList.add("active");
+        wasOffline = true;
+      });
+
+      window.addEventListener("online", () => {
+        if (!wasOffline) return;
+
+        msgEl.textContent = "";
+        msgEl.classList.remove("active");
+
+        recover.classList.add("active");
+        setTimeout(() => recover.classList.remove("active"), 1500);
+
+        wasOffline = false;
+      });
+
       document.getElementById("loginBtn").onclick = async () => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("password").value;
-        const msgEl = document.getElementById("msgs");
 
         if (!navigator.onLine) {
           msgEl.textContent = "No hay conexión a internet";
-          msgEl.classList.toggle("active");
+          msgEl.classList.add("active");
           return;
         }
-
-        window.addEventListener("offline", () => {
-          msgEl.classList.add("active");
-          wasOffline = true;
-        });
 
         try {
           await login(email, pass);
 
           document.querySelector(".container_loader").classList.add("show");
-          msgEl.classList.remove("active");
 
           setTimeout(() => {
             document.getElementById("mnj").textContent = "Redirigiendo app...";
@@ -200,27 +215,10 @@
         const inputPass = document.getElementById("password");
 
         eyePassword.addEventListener("click", () => {
-          if (inputPass.type === "password") {
-            inputPass.type = "text";
-            eyePassword.classList.remove("fa-eye-slash");
-            eyePassword.classList.add("fa-eye");
-          } else {
-            inputPass.type = "password";
-            eyePassword.classList.remove("fa-eye");
-            eyePassword.classList.add("fa-eye-slash");
-          }
-        });
-        window.addEventListener("online", () => {
-          if (!wasOffline) return;
-          document.getElementById("msgs").textContent = "";
-          const recover = document.querySelector(".conexion_recover");
-          recover.classList.add("active");
-
-          setTimeout(() => {
-            recover.classList.remove("active");
-          }, 1500);
-
-          wasOffline = false;
+          const isPass = inputPass.type === "password";
+          inputPass.type = isPass ? "text" : "password";
+          eyePassword.classList.toggle("fa-eye", isPass);
+          eyePassword.classList.toggle("fa-eye-slash", !isPass);
         });
       });
     </script>
