@@ -1,137 +1,188 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: "Raleway", sans-serif;
-    font-optical-sizing: auto;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
 }
-body{
-    background: linear-gradient(60deg, #01025f, #010925, #021594);
-    padding: 44px 100px;
-    display: grid;
-    background-size: 600% 600%;
-    animation: mover 10s ease-in-out  infinite;
-    justify-content: center;
+h1, h2, h3, h4, h5 {
+  font-family: 'Poppins', sans-serif;
 }
-.contenedor{
-    max-width: 500px;
-    height: 77vh;
-    padding: 30px;
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 0 0 10px blue;
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.contenedor h2{
-     background: linear-gradient(40deg, #1a0153, #0e0158,#012761);
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent; 
-    padding: 10px 0; 
-    font-size: 28px
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    circle at top,
+    #0f172a 0%,
+    #020617 70%
+  );
+  padding: 24px;
+  color: #e5e7eb;
 }
-.contenedor p{
-    color: #686868;
+
+/* CARD */
+.contenedor {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px 36px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(148, 163, 184, 0.08);
+  animation: fadeUp 0.5s ease-out;
 }
+
+/* TITLE */
+.contenedor h2 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #38bdf8;
+}
+
+/* DESCRIPTION */
+.contenedor p {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+/* LOGIN LINK */
 #rederigir_login {
-    color:  #0e0158;
-    font-weight: bold;
-    text-decoration:underline;
+  display: inline-block;
+  margin-left: 4px;
+  color: #22c5af;
+  font-weight: 500;
+  text-decoration: none;
 }
-.registro{
-    display: grid;
-    grid-column: auto auto;
-}
-.registro label{ margin-top: 18px;}
-.registro input{
-    padding: 10px 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border: 1px solid blue;
-    font-size: 14px;
 
-    transition: 0.3s ease-in-out;
+#rederigir_login:hover {
+  text-decoration: underline;
 }
-.input_registro{
-    margin-top: 8px;
-    display: grid;
-    grid-template-columns: 92% 8%;
+
+/* FORM */
+.registro {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
-.input_registro i{
-    background: #01025f;
-    padding: 10px ;
-    color: white;
-    font-size: 19px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+
+.registro label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #cbd5f5;
 }
-.registro input:focus{
-    outline: none;
-    box-shadow: 0 0 10px rgba(50, 50, 255, 0.411);
+
+/* INPUT WRAPPER */
+.input_registro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #020617;
+  padding: 14px 16px;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+  transition: 0.25s ease;
 }
-.registro button{
-     margin-top: 26px;
-     padding: 10px 0;
-     background: #000d53;
-     font-weight: bold;
-     color: white;
-     border-radius: 5px;
-     border: none;
-     transition: 0.3s ease;
-     cursor: pointer;
-    }
-.registro button:hover{
-    scale: 1.01;
-      background: #010f61;
- 
+
+.input_registro:focus-within {
+  box-shadow:
+    0 0 0 2px rgba(56, 189, 248, 0.6),
+    inset 0 0 0 1px rgba(56, 189, 248, 0.4);
 }
+
+/* INPUT */
+.input_registro input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e5e7eb;
+  font-size: 15px;
+}
+
+.input_registro input::placeholder {
+  color: #64748b;
+}
+
+/* ICONS */
+.input_registro i {
+  color: #64748b;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* BUTTON */
+.registro button {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: #020617;
+  background: linear-gradient(135deg, #38bdf8, #22c55e);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.registro button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.35);
+}
+
+/* MESSAGE */
 #msg {
-    text-align: center;
-    margin-top: 40px;
-    color: red;
-}
-#msg.active{
-    animation: errorRegistro 0.2s ease ;
-}
-/*Animaciones*/
-@keyframes mover {
-  0% { background-position: 0% 50%; }
-  60% { background-position: 100% 50%; }
-  100% { background-position: 0% 90%; }
-}
-@keyframes errorRegistro{
-    0%{
-        scale: 1.01;
-    }
-    50%{
-        transform: translateX(3px);
-    }
-    75%{
-        transform: translateX(-3px);
-    }
-    100%{
-        transform: translateX(0);
-        scale: 1;
-    }
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #f87171;
 }
 
-@media (max-width: 470px){
-
-body{
-    background: linear-gradient(60deg, #01025f, #010925, #021594);
-    padding: 0 0;
-    display: grid;
-    background-size: 600% 600%;
-    animation: mover 10s ease-in-out  infinite;
-    justify-content: center;
+#msg.active {
+  animation: shake 0.25s ease;
 }
-.contenedor{
-    max-width: 500px;
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(4px); }
+  50% { transform: translateX(-4px); }
+  75% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+    body{
+        padding: 0;
+    }
+  .contenedor {
+    padding: 28px;
+    border-radius: 16px;
     height: 100%;
-    padding: 30px;
-    border-radius: 0;
-    box-shadow: 0 0 0px blue;
-}
-.input_registro{
-    margin-top: 8px;
-    display: grid;
-    grid-template-columns: 88% auto;
-}
+  }
 }
