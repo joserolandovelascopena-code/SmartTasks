@@ -5,11 +5,11 @@
 *{
     padding: 0;
     margin: 0;
-    font-family: "Raleway", sans-serif;
+    font-family: "Releway", sans-serif;
     font-optical-sizing: auto;
 }
 body{
-    background:#cccfeb;
+    background:#04002b;
     background-size: 600% 600%;
 }
 /*Redirigir*/
@@ -83,7 +83,10 @@ body{
 }
 .Cuadro_info{
     padding: 38px;
-    background: rgb(0, 44, 94);
+     background: url(../icons/svg/layered-waves-haikei.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     height: 78vh;
     border-top-left-radius:6px ;
     border-end-start-radius:6px ;
@@ -149,7 +152,7 @@ body{
     background:#dffaf8 ;
 }
 .funciones_descrition{
-    background: rgb(0, 24, 71);
+    background: rgba(19, 0, 37, 0.836);
     border-radius: 10px;
     height: 200px;
     transition: 0.40s ease-in-out;
@@ -157,15 +160,16 @@ body{
     position: relative;;
 }
 .funciones_descrition h4{
-    color: #815eff;
+    color: #0585fd;
 }
 
 .letf_box{
-      animation: zoomfade2 1s ease-in;
+      animation: zoomfade2 1.10s ease-in;
       box-shadow: 0 0 14px blue;  
+      
 }
 .right_box{
-    animation: zoomfade2 1s ease-in;
+    animation: zoomfade2 1.10s ease-in;
     box-shadow: 0 0 14px blue;  
 }
 .center_box{
@@ -182,8 +186,9 @@ body{
 }
 .text{
     padding-top: 10px;
-    color: #d8d7d7;
-    font-size: 14px;
+    color: #c2c1c1;
+    font-size: 15px;
+    font-family: 'Roboto';
     text-align: center;
 }
 /*=====================================*/
@@ -192,7 +197,7 @@ body{
     background:white;
     border-top-right-radius:6px ;
     border-bottom-right-radius:6px ;
-    box-shadow: 4px 4px 10px #6057e6; 
+    box-shadow: 4px 2px 10px #6057e6; 
     position: relative;
 }
 #header_login{
@@ -273,7 +278,7 @@ body{
 .inputs-layout i{
     padding: 8px;
     font-size: 20px;
-    background: linear-gradient(60deg,#0019a8, #e52e71);
+    background: linear-gradient(60deg,#012761);
     color: rgb(255, 255, 255);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -343,7 +348,7 @@ body{
 @keyframes zoomfade{
     0%{
         opacity: 0;
-        transform: scale(0.90) ;
+        transform: scale(0.80) ;
         
     }
     100%{
@@ -355,7 +360,7 @@ body{
 @keyframes zoomfade2{
     0%{
         opacity: 0;
-        transform: scale(0.90) ;
+        transform: scale(0.80) ;
     }
     100%{
         opacity: 1;
@@ -467,10 +472,12 @@ body{
     gap: 50px;
     border-radius: 5px;
 }
-
+.funciones_descrition{
+    background: rgba(25, 0, 56, 0.774);}
 .funciones_descrition h4{
     color: #815eff;
 }
+
 
 .letf_box,.center_box, .right_box
 ,.description,.footer{

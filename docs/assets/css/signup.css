@@ -1,0 +1,137 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+}
+body{
+    background: linear-gradient(60deg, #01025f, #010925, #021594);
+    padding: 44px 100px;
+    display: grid;
+    background-size: 600% 600%;
+    animation: mover 10s ease-in-out  infinite;
+    justify-content: center;
+}
+.contenedor{
+    max-width: 500px;
+    height: 77vh;
+    padding: 30px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 0 10px blue;
+}
+.contenedor h2{
+     background: linear-gradient(40deg, #1a0153, #0e0158,#012761);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent; 
+    padding: 10px 0; 
+    font-size: 28px
+}
+.contenedor p{
+    color: #686868;
+}
+#rederigir_login {
+    color:  #0e0158;
+    font-weight: bold;
+    text-decoration:underline;
+}
+.registro{
+    display: grid;
+    grid-column: auto auto;
+}
+.registro label{ margin-top: 18px;}
+.registro input{
+    padding: 10px 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 1px solid blue;
+    font-size: 14px;
+
+    transition: 0.3s ease-in-out;
+}
+.input_registro{
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 92% 8%;
+}
+.input_registro i{
+    background: #01025f;
+    padding: 10px ;
+    color: white;
+    font-size: 19px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.registro input:focus{
+    outline: none;
+    box-shadow: 0 0 10px rgba(50, 50, 255, 0.411);
+}
+.registro button{
+     margin-top: 26px;
+     padding: 10px 0;
+     background: #000d53;
+     font-weight: bold;
+     color: white;
+     border-radius: 5px;
+     border: none;
+     transition: 0.3s ease;
+     cursor: pointer;
+    }
+.registro button:hover{
+    scale: 1.01;
+      background: #010f61;
+ 
+}
+#msg {
+    text-align: center;
+    margin-top: 40px;
+    color: red;
+}
+#msg.active{
+    animation: errorRegistro 0.2s ease ;
+}
+/*Animaciones*/
+@keyframes mover {
+  0% { background-position: 0% 50%; }
+  60% { background-position: 100% 50%; }
+  100% { background-position: 0% 90%; }
+}
+@keyframes errorRegistro{
+    0%{
+        scale: 1.01;
+    }
+    50%{
+        transform: translateX(3px);
+    }
+    75%{
+        transform: translateX(-3px);
+    }
+    100%{
+        transform: translateX(0);
+        scale: 1;
+    }
+}
+
+@media (max-width: 470px){
+
+body{
+    background: linear-gradient(60deg, #01025f, #010925, #021594);
+    padding: 0 0;
+    display: grid;
+    background-size: 600% 600%;
+    animation: mover 10s ease-in-out  infinite;
+    justify-content: center;
+}
+.contenedor{
+    max-width: 500px;
+    height: 100%;
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: 0 0 0px blue;
+}
+.input_registro{
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 88% auto;
+}
+}
