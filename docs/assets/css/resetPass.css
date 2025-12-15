@@ -39,7 +39,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 10;
-  display: none;
+  display: block;
 }
 
 .container_loader.show{
@@ -68,7 +68,7 @@ body {
   border: 4px solid rgba(0,255,179,0.25);
   border-top-color: #00ffb3;
   border-radius: 50%;
-  animation: spin 0.9s linear infinite;
+  animation: spin 0.9s linear infinite, intro 0.5s ease;;
 }
 
 .rederigir_login h3{
@@ -257,4 +257,15 @@ body {
     height: 100%;
     border-radius: 0;
   }
+
+  .loader{
+  width: 36px;
+  height: 36px;
+}
+
+.rederigir_login h3{
+  color: #00ffb3;
+  font-weight: 500;
+  font-size: 16px;
+}
 }
