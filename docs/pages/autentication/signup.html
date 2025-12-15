@@ -77,14 +77,12 @@
       const msg = document.getElementById("msg");
       const recover = document.querySelector(".conexion_recover");
 
-      /* 🔴 Sin conexión */
       window.addEventListener("offline", () => {
         msg.textContent = "No hay conexión a internet";
         msg.classList.add("active");
         wasOffline = true;
       });
 
-      /* 🟢 Conexión restablecida */
       window.addEventListener("online", () => {
         if (!wasOffline) return;
 
@@ -97,7 +95,6 @@
         wasOffline = false;
       });
 
-      /* 📝 Registro */
       document.getElementById("signupBtn").onclick = async () => {
         const nameValue = document.getElementById("name").value;
         const emailValue = document.getElementById("email").value;
@@ -119,7 +116,6 @@
         }
       };
 
-      /* 👁️ Ver contraseña */
       document.addEventListener("DOMContentLoaded", () => {
         const eyePassword = document.getElementById("eyePassword");
         const inputPass = document.getElementById("password");

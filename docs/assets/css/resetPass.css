@@ -1,0 +1,197 @@
+:root {
+  --bg-main: radial-gradient(circle at top, #020617 0%, #020617 60%, #020617 100%);
+  --card-bg: rgba(2, 6, 23, 0.92);
+
+  --primary: #22c5af;
+  --primary-soft: rgba(34, 197, 175, 0.15);
+
+  --text-main: #e5e7eb;
+  --text-muted: #94a3b8;
+  --text-error: #f87171;
+  --text-success: #22c55e;
+
+  --border-soft: rgba(148, 163, 184, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+
+  --transition: 0.25s ease;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg-main);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  padding: 24px;
+}
+
+
+/*Mensaje recover conexión*/
+.conexion_recover{
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    border-radius: 12px;
+    background: rgb(255, 255, 255);
+    width: 200px;
+    height: 100px;
+    z-index: 10;
+    box-shadow: 0 0  0 2px rgb(95, 95, 95);
+    display: none;
+   
+}
+.conexion_recover.active{
+    display: block;
+    animation: fadeUp 0.4s ease;
+}
+.content_msg{
+    padding: 10px;
+    text-align: center;
+}
+.content_msg i{
+    color: #00ac81;
+    font-size: 36px;
+    margin: 6px;
+}
+.content_msg samp{ 
+    font-weight:600;
+    color: #00ac81;
+    font-size: 15px;
+    font-family: "Roboto";
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.reset-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 32px 34px;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.7),
+    inset 0 0 0 1px var(--border-soft);
+  animation: fadeIn 0.5s ease;
+}
+
+/* HEADER */
+.reset-card h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.reset-card p {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* FORM */
+.reset-form {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.reset-form label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* INPUT */
+.reset-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: #020617;
+  box-shadow: inset 0 0 0 1px var(--border-soft);
+  transition: var(--transition);
+}
+
+.reset-input:focus-within {
+  box-shadow:
+    0 0 0 2px var(--primary-soft),
+    inset 0 0 0 1px var(--primary);
+}
+
+.reset-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-size: 15px;
+}
+
+.reset-input i {
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* BUTTON */
+.reset-form button {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #020617;
+  background: linear-gradient(135deg, #22c5af, #38bdf8);
+  transition: var(--transition);
+}
+
+.reset-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(34,197,175,.35);
+}
+
+/* MESSAGE */
+#msg {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  min-height: 18px;
+}
+
+#msg.error { color: var(--text-error); }
+#msg.success { color: var(--text-success); }
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .reset-card {
+    height: 100%;
+    border-radius: 0;
+  }
+}
