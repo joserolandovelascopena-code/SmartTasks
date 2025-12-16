@@ -30,12 +30,14 @@
     />
   </head>
   <body>
-    <section class="conexion_recover">
-      <article class="content_msg">
-        <i class="fa-solid fa-wifi"></i><br />
-        <samp>Conexión restablecidad</samp>
-      </article>
-    </section>
+    <div class="conexion_recover">
+      <div class="content_msg">
+        <div class="conx">
+          <i class="fa-solid fa-wifi"></i>
+          <p>Conexión restablecida</p>
+        </div>
+      </div>
+    </div>
     <div class="contenedor">
       <h2>Crear cuenta</h2>
       <p>
@@ -96,18 +98,25 @@
       });
 
       document.getElementById("signupBtn").onclick = async () => {
-        const nameValue = document.getElementById("name").value;
+        const nameValue = document.getElementById("name").value.trim();
         const emailValue = document.getElementById("email").value;
         const passValue = document.getElementById("password").value;
 
         if (!navigator.onLine) {
-          msg.textContent = "No hay conexión a internet";
+          msg.textContent = "En este momento no hay conexión a internet";
+          msg.classList.add("active");
+          return;
+        }
+
+        if (!nameValue) {
+          msg.textContent = "No pueden haber campos vacios: Falta nombre";
           msg.classList.add("active");
           return;
         }
 
         try {
           await signup(nameValue, emailValue, passValue);
+          msg.classList.remove("active");
           alert("Revisa tu correo y verifica tu cuenta.");
           window.location.href = "./login.html";
         } catch (e) {

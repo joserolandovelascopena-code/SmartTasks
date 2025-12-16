@@ -69,18 +69,23 @@ body{
 }
 
 /*Mensaje recover conexión*/
-
 .conexion_recover{
-    position: absolute;
-    right: 10px;
-    bottom: 50px;
+    position: fixed;
+    background: rgba(0, 1, 53, 0.836);
+    right: 20px;
+    bottom: 30px;
     border-radius: 12px;
-    background: rgb(255, 255, 255);
-    width: 200px;
+    border-radius: 20px;
+    width: 300px;
     height: 100px;
     z-index: 10;
-    box-shadow: 0 0  10px rgb(185, 185, 185);
-    display: none;
+    box-shadow: 0 0 10px rgb(0, 203, 230);
+    display: none; 
+}
+.conx{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 4px;
 }
 .conexion_recover.active{
     display: block;
@@ -91,16 +96,17 @@ body{
     text-align: center;
 }
 .content_msg i{
-    color: #00ac81;
+    color: #8bf7dc;
     font-size: 36px;
     margin: 6px;
 }
-.content_msg samp{ 
+.content_msg p{ 
     font-weight:600;
-    color: #00ac81;
+    color: #8bf7dc;
     font-size: 15px;
     font-family: "Roboto";
 }
+
 @keyframes loader {
     from{
         transform: translateY(0);
@@ -240,7 +246,7 @@ body{
 .text{
     padding-top: 5px;
     color: #c2c1c1;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
 }
 /*=====================================*/
@@ -573,6 +579,29 @@ body{
 #SmartTansks{
     text-decoration: none;
     color: white;
+}
+
+.conexion_recover{
+    background: rgba(8, 0, 37, 0.952);
+    width: 80%;
+    height: 50px;
+    right: 40px;
+}
+.conx{
+    display: grid;
+    grid-template-columns: 10% auto;
+    gap: 16px;
+    justify-content: center;
+    
+}
+
+.content_msg i{
+    font-size: 26px;
+    margin: 0px;
+    margin-top: 3px;
+}
+.content_msg p{ 
+    margin-top: 6px;
 }
 
 }

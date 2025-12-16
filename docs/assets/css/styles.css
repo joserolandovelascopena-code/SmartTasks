@@ -488,7 +488,6 @@ margin: 0;
   
 }
 
-/* contenedor relativo para que los absolute dentro funcionen respecto a él */
 .carousel-wrapper {
   position: relative;
   display: flex;

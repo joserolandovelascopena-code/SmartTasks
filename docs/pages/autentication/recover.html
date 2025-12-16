@@ -37,10 +37,11 @@
       <div class="ConfirmationEmail">
         <section class="Contentext">
           <article>
-            <h3>Comfimación</h3>
+            <h3>Comfirmación</h3>
             <div class="textInfo">
               <p>
-                Emos enviado un correo a <strong class="emailEstraido"></strong>
+                Emos enviado un enlace de recuperación al
+                <strong class="emailEstraido"> </strong>
               </p>
 
               <p>
@@ -150,9 +151,9 @@
             msg.classList.remove("active");
             loader.classList.remove("show");
             modalAviso.classList.add("show");
-            emailComfir.textContent = email;
+            emailComfir.textContent = "correo: " + email;
             document.querySelector(".emailEnviado").textContent =
-              "Email enviado: " + email;
+              "Email: " + email;
           }, 1600);
         } catch (e) {
           msg.style.color = "red";

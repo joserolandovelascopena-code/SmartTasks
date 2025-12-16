@@ -30,12 +30,14 @@
         </div>
       </div>
     </div>
-    <section class="conexion_recover">
-      <article class="content_msg">
-        <i class="fa-solid fa-wifi"></i><br />
-        <samp>Conexión restablecidad</samp>
-      </article>
-    </section>
+    <div class="conexion_recover">
+      <div class="content_msg">
+        <div class="conx">
+          <i class="fa-solid fa-wifi"></i>
+          <p>Conexión restablecida</p>
+        </div>
+      </div>
+    </div>
     <div class="contenedor">
       <div class="container_pc">
         <header class="Cuadro_info">
@@ -187,14 +189,13 @@
         const pass = document.getElementById("password").value;
 
         if (!navigator.onLine) {
-          msgEl.textContent = "No hay conexión a internet";
-          msgEl.classList.add("active");
+          msgEl.textContent = "En este momento no hay conexión a internet";
           return;
         }
 
         try {
           await login(email, pass);
-
+          msgEl.classList.remove("active");
           document.querySelector(".container_loader").classList.add("show");
 
           setTimeout(() => {

@@ -29,17 +29,21 @@ body {
 
 /*Mensaje recover conexión*/
 .conexion_recover{
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom: 30px;
     border-radius: 12px;
-    background: rgb(255, 255, 255);
-    width: 200px;
+    border-radius: 20px;
+    width: 300px;
     height: 100px;
     z-index: 10;
-    box-shadow: 0 0  0 2px rgb(95, 95, 95);
-    display: none;
-   
+    box-shadow: 0 0 10px rgb(0, 203, 230);
+    display: none; 
+}
+.conx{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 4px;
 }
 .conexion_recover.active{
     display: block;
@@ -50,13 +54,13 @@ body {
     text-align: center;
 }
 .content_msg i{
-    color: #00ac81;
+    color: #8bf7dc;
     font-size: 36px;
     margin: 6px;
 }
-.content_msg samp{ 
+.content_msg p{ 
     font-weight:600;
-    color: #00ac81;
+    color: #8bf7dc;
     font-size: 15px;
     font-family: "Roboto";
 }
@@ -230,7 +234,27 @@ body {
     height: 100%;
   }
 .conexion_recover{
-    right: 20px;
-    bottom: 20px;
+    background: rgba(8, 0, 37, 0.952);
+    width: 80%;
+    height: 50px;
+    right: 40px;
 }
+.conx{
+    display: grid;
+    grid-template-columns: 10% auto;
+    gap: 16px;
+    justify-content: center;
+    
+}
+
+.content_msg i{
+    font-size: 26px;
+    margin: 0px;
+    margin-top: 3px;
+}
+.content_msg p{ 
+    margin-top: 6px;
+}
+
+
 }
