@@ -1,6 +1,6 @@
 :root {
   --bg-main: radial-gradient(circle at top, #020617 0%, #020617 60%, #020617 100%);
-  --card-bg: rgba(2, 6, 23, 0.92);
+  --card-bg: rgba(0, 6, 29, 0.92);
 
   --primary: #22c5af;
   --primary-soft: rgba(34, 197, 175, 0.15);
@@ -141,7 +141,6 @@ body {
 
 /*===============================*/
 .reset-card {
-  width: 100%;
   max-width: 460px;
   background: var(--card-bg);
   border-radius: var(--radius-lg);
@@ -251,7 +250,7 @@ body {
 /* MOBILE */
 @media (max-width: 480px) {
   body{
-    padding: 20px;
+    padding: 10px;
   }
   .reset-card {
     height: 100%;

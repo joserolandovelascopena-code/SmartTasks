@@ -4,52 +4,156 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recuperar contraseña</title>
-  </head>
-  <body>
-    <h2>Recuperar contraseña</h2>
-    <p>
-      Ingresa tu correo y te enviaremos un enlace para restablecer tu
-      contraseña.
-    </p>
+    <link rel="icon" href="../../assets/icons/icon.png" type="image/png" />
+    <link rel="stylesheet" href="../../assets/css/recover.css" />
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Correo electrónico"
-      autocomplete="email"
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
     />
 
-    <button id="recoverBtn">Enviar enlace</button>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="conexion_recover">
+      <div class="content_msg">
+        <div class="conx">
+          <i class="fa-solid fa-wifi"></i>
+          <p>Conexión restablecida</p>
+        </div>
+      </div>
+    </div>
+    <div class="messageModal">
+      <div class="ConfirmationEmail">
+        <section class="Contentext">
+          <article>
+            <h3>Comfimación</h3>
+            <div class="textInfo">
+              <p>
+                Emos enviado un correo a <strong class="emailEstraido"></strong>
+              </p>
 
-    <p id="msg"></p>
+              <p>
+                revisa tu correo verefica tu edentidad, en el caso de no
+                encontrarlo, prueva buscando en spam.
+              </p>
+            </div>
+            <p class="emailEnviado"></p>
+            <div class="aviso">
+              <p>
+                <strong> Precaución:</strong>
+                Para volver a soliciatar un cambio de contraseña, en el mismo
+                email, solo se aceptara la solicitud duspués de 1:00 minuto de
+                aver solocitado un cambio. El correo caduca a los 5 minutos.
+              </p>
+            </div>
+            <button class="btnAcpetar">Aceptar</button>
+          </article>
+        </section>
+      </div>
+    </div>
+    <div class="contenedor">
+      <div class="contenido">
+        <header class="header">
+          <h2>Recuperar contraseña</h2>
+          <p>
+            Ingresa tu correo y te enviaremos un enlace para restablecer tu
+            contraseña.
+          </p>
+        </header>
+        <main class="contenInputs">
+          <label for="email">Correo</label>
+          <div class="input">
+            <input
+              id="email"
+              type="email"
+              placeholder="Correo electrónico"
+              autocomplete="email"
+            /><i class="fa-regular fa-envelope"></i>
+          </div>
+
+          <button id="recoverBtn">Enviar enlace</button>
+
+          <p id="msg"></p>
+        </main>
+      </div>
+      <div class="animaciónLoder">
+        <div class="loader" id="loader"></div>
+      </div>
+    </div>
 
     <script type="module">
       import { recoverPassword } from "../../assets/js/auth.js";
 
+      let wasOffline = false;
       const msg = document.getElementById("msg");
+      const loader = document.querySelector(".loader");
+      const recover = document.querySelector(".conexion_recover");
+      const emailComfir = document.querySelector(".emailEstraido");
+      const modalAviso = document.querySelector(".messageModal");
+      const btnCerrar = document.querySelector(".btnAcpetar");
+
+      window.addEventListener("offline", () => {
+        msg.textContent = "No hay conexión a internet";
+        msg.classList.add("active");
+        wasOffline = true;
+      });
+
+      window.addEventListener("online", () => {
+        if (!wasOffline) return;
+        msg.textContent = "";
+        msg.classList.remove("active");
+        recover.classList.add("active");
+        setTimeout(() => recover.classList.remove("active"), 2000);
+        wasOffline = false;
+      });
 
       document.getElementById("recoverBtn").onclick = async () => {
         const email = document.getElementById("email").value.trim();
+
+        if (!navigator.onLine) {
+          msg.textContent = "En este momento no hay conexión a internet";
+          return;
+        }
 
         if (!email) {
           msg.textContent = "Ingresa tu correo";
           return;
         }
 
-        if (!navigator.onLine) {
-          msg.textContent = "No hay conexión a internet";
-          return;
-        }
-
         try {
           await recoverPassword(email);
-          msg.style.color = "green";
-          msg.textContent = "Revisa tu correo para continuar";
+
+          loader.classList.add("show");
+
+          setTimeout(() => {
+            msg.classList.remove("active");
+            loader.classList.remove("show");
+            modalAviso.classList.add("show");
+            emailComfir.textContent = email;
+            document.querySelector(".emailEnviado").textContent =
+              "Email enviado: " + email;
+          }, 1600);
         } catch (e) {
           msg.style.color = "red";
           msg.textContent = e.message;
         }
       };
+
+      // cerrar modal
+      btnCerrar.addEventListener("click", () => {
+        modalAviso.classList.remove("show");
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,358 @@
+:root {
+  --bg-main: radial-gradient(circle at top, #020617 0%, #020617 60%, #020617 100%);
+  --card-bg: rgba(0, 6, 29, 0.92);
+  --card-contfir:rgba(0, 13, 46, 0.92);
+
+  --primary: #22c5af;
+  --primary-soft: rgba(34, 197, 175, 0.15);
+
+  --text-main: #e5e7eb;
+  --text-muted: #94a3b8;
+  --text-error: #f87171;
+  --text-success: #22c55e;
+
+  --border-soft: rgba(148, 163, 184, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+
+  --transition: 0.25s ease;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg-main);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  padding: 24px;
+}
+/*Mensaje recover conexión*/
+.loader{
+  display: none;
+}
+.loader.show{
+  position: absolute;
+  margin-left: 10%;
+  width: 620px;        
+  height: 6px;        
+  background: #a6d4f3;  
+  border-radius: 15px;
+  margin: -9px auto;
+  display: block;
+  overflow: hidden;
+  transform: translateX(-20px);
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 50%;       
+  height: 100%;
+  background: #0080d6; 
+  border-radius: 10px;
+  animation: barraProgrets 0.80s linear forwards infinite;
+}
+
+/*========================*/
+.messageModal{
+  position: fixed;
+  z-index: 40;
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.messageModal.show{
+  display: block;
+}
+.ConfirmationEmail{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #020c3a6c;
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  animation: intro 0.6s ease;
+}
+.Contentext{
+  width: 360px;
+  height: 500px;
+  background: var(--card-contfir);
+  border-radius: 12px; 
+    box-shadow:
+    0 30px 70px rgba(0,0,0,.7),
+    inset 0 0 0 1px var(--border-soft);
+  padding: 20px;
+  line-height: 1.2;
+  animation: fadeIn2 .4s ease-in;
+}
+.Contentext h3{
+  text-align: center;
+  color: #e0e0e0;
+}
+.textInfo{
+  margin-top: 10px;
+  font-size: 15px;
+  color: #c5c5c5;
+}
+.aviso strong{
+  color: #f7f7f7;
+}
+.emailEnviado{
+  margin-top: 15px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #020617;
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
+}
+.aviso{
+   margin-top: 60px;
+  font-size: 15px;
+  color: #b6bdc5;
+  line-height: 1.2;
+}
+.btnAcpetar{
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #020617;
+  background: linear-gradient(135deg, #22c5af, #38bdf8);
+  transition: var(--transition);
+}
+.btnAcpetar:hover{
+    transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(34,197,175,.35);
+}
+
+/*========================*/
+.conexion_recover{
+    position: absolute;
+
+    right: 20px;
+    bottom: 30px;
+    border-radius: 12px;
+    border-radius: var(--radius-lg);
+    width: 300px;
+    height: 100px;
+    z-index: 10;
+    box-shadow: 0 0 10px rgb(0, 203, 230);
+    display: none; 
+}
+.conx{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 4px;
+}
+.conexion_recover.active{
+    display: block;
+    animation: fadeUp 0.4s ease;
+}
+.content_msg{
+    padding: 10px;
+    text-align: center;
+}
+.content_msg i{
+    color: #8bf7dc;
+    font-size: 36px;
+    margin: 6px;
+}
+.content_msg p{ 
+    font-weight:600;
+    color: #8bf7dc;
+    font-size: 15px;
+    font-family: "Roboto";
+}
+
+/*Animaciones efects*/
+@keyframes intro {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes barraProgrets {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(560px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+/*==============================================*/
+
+.contenedor{
+  position: relative;
+  width: 560px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.7),
+    inset 0 0 0 1px var(--border-soft);
+  animation: fadeIn 0.5s ease;
+  overflow: hidden;
+}
+.contenido{
+    padding: 32px 34px;
+}
+.header h2{
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.contenedor p {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.contenInputs{
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.reset-form label {
+  font-size: 13px;
+  font-weight: 500;
+}
+.input{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: #020617;
+  box-shadow: inset 0 0 0 1px var(--border-soft);
+  transition: var(--transition);
+}
+
+
+.input:focus-within {
+  box-shadow:
+    0 0 0 2px var(--primary-soft),
+    inset 0 0 0 1px var(--primary);
+}
+
+.input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-size: 15px;
+}
+.input i {
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+}
+.contenInputs button {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #020617;
+  background: linear-gradient(135deg, #22c5af, #38bdf8);
+  transition: var(--transition);
+}
+
+.contenInputs button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(34,197,175,.35);
+}
+
+#msg {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  min-height: 18px;
+}
+
+#msg.error { color: var(--text-error); }
+#msg.success { color: var(--text-success); }
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn2 {
+  from { transform: translateY(12px); }
+  to {  transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+
+  .header h2{
+  font-size: 26px;
+}
+.contenedor{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+.contenido{
+    padding: 20px 20px;
+}
+.Contentext{
+  width: 300px;
+  height: 500px;
+}
+
+.conexion_recover{
+    width: 80%;
+    height: 50px;
+    right: 40px;
+}
+.conx{
+    display: grid;
+    grid-template-columns: 10% auto;
+    gap: 16px;
+    justify-content: center;
+    
+}
+
+.content_msg i{
+    font-size: 26px;
+    margin: 0px;
+    margin-top: 3px;
+}
+.content_msg p{ 
+    margin-top: 6px;
+}
+
+}
