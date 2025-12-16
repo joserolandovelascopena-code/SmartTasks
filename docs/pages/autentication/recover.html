@@ -62,6 +62,11 @@
         </section>
       </div>
     </div>
+    <div class="containerNav">
+      <nav class="nav">
+        <i class="fa-solid fa-arrow-left"></i>
+      </nav>
+    </div>
     <div class="contenedor">
       <div class="contenido">
         <header class="header">
@@ -102,6 +107,11 @@
       const emailComfir = document.querySelector(".emailEstraido");
       const modalAviso = document.querySelector(".messageModal");
       const btnCerrar = document.querySelector(".btnAcpetar");
+      const btnSalir = document.querySelector(".containerNav");
+
+      btnSalir.addEventListener("click", () => {
+        window.location.href = "./login.html";
+      });
 
       window.addEventListener("offline", () => {
         msg.textContent = "No hay conexión a internet";
