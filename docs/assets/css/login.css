@@ -603,5 +603,7 @@ body{
 .content_msg p{ 
     margin-top: 6px;
 }
-
+.rederigir_app h3{  
+    font-size: 16px;
+}
 }

@@ -30,6 +30,14 @@
     />
   </head>
   <body>
+    <div class="container_loader">
+      <div class="rederigir_login">
+        <div class="conten_loader">
+          <div class="loader"></div>
+          <h3 id="mnj">Creado cuenta...</h3>
+        </div>
+      </div>
+    </div>
     <div class="conexion_recover">
       <div class="content_msg">
         <div class="conx">
@@ -48,19 +56,19 @@
       </p>
       <div class="registro">
         <label for="name">Nombre</label>
-        <div class="input_registro">
-          <input id="name" type="text" placeholder="Nombre completo" /><i
-            class="fa-regular fa-user"
-          ></i>
+        <div class="input_registro" data-type="text">
+          <input id="name" type="text" placeholder="Nombre completo" />
+          <i class="fa-regular fa-user"></i>
         </div>
+
         <label for="email">Email</label>
-        <div class="input_registro">
+        <div class="input_registro" data-type="email">
           <input id="email" type="email" placeholder="Correo" /><i
             class="fa-regular fa-envelope"
           ></i>
         </div>
         <label for="password">Contraseña</label>
-        <div class="input_registro">
+        <div class="input_registro" data-type="password">
           <input id="password" type="password" placeholder="Contraseña" /><i
             class="fa-regular fa-eye-slash"
             id="eyePassword"
@@ -70,7 +78,6 @@
         <p id="msg"></p>
       </div>
     </div>
-
     <script type="module">
       import { signup } from "../../assets/js/auth.js";
 
@@ -97,9 +104,74 @@
         wasOffline = false;
       });
 
+      const inputsRegistro = document.querySelectorAll(".input_registro");
+
+      function setError(container) {
+        container.classList.remove("success");
+        container.classList.add("error");
+      }
+
+      function setSuccess(container) {
+        container.classList.remove("error");
+        container.classList.add("success");
+      }
+
+      function validateContainer(container) {
+        const input = container.querySelector("input");
+        const value = input.value.trim();
+        const type = input.type;
+
+        if (!value) {
+          setError(container);
+          return false;
+        }
+
+        if (type === "email") {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            setError(container);
+            return false;
+          }
+        }
+
+        if (type === "password") {
+          if (value.length < 6) {
+            setError(container);
+            return false;
+          }
+        }
+
+        setSuccess(container);
+        return true;
+      }
+
+      inputsRegistro.forEach((container) => {
+        const input = container.querySelector("input");
+
+        input.addEventListener("input", () => {
+          validateContainer(container);
+        });
+      });
+
       document.getElementById("signupBtn").onclick = async () => {
+        let hasError = false;
+
+        inputsRegistro.forEach((container) => {
+          const valid = validateContainer(container);
+          if (!valid) hasError = true;
+        });
+
+        if (hasError) {
+          msg.textContent = "Corrige los campos marcados en rojo";
+          msg.classList.add("active");
+          return;
+        }
+
         const nameValue = document.getElementById("name").value.trim();
-        const emailValue = document.getElementById("email").value;
+        const emailValue = document
+          .getElementById("email")
+          .value.trim()
+          .toLowerCase();
         const passValue = document.getElementById("password").value;
 
         if (!navigator.onLine) {
@@ -108,33 +180,38 @@
           return;
         }
 
-        if (!nameValue) {
-          msg.textContent = "No pueden haber campos vacios: Falta nombre";
-          msg.classList.add("active");
-          return;
-        }
-
         try {
           await signup(nameValue, emailValue, passValue);
           msg.classList.remove("active");
-          alert("Revisa tu correo y verifica tu cuenta.");
-          window.location.href = "./login.html";
+          const loader = document.querySelector(".container_loader");
+          const textLoader = document.getElementById("mnj");
+          loader.classList.add("show");
+          setTimeout(() => {
+            textLoader.textContent = "Cuneta creada";
+          }, 1000);
+          setTimeout(() => {
+            textLoader.textContent = "Revisa tu correo y comfima tu edentidad";
+          }, 1500);
+          setTimeout(() => {
+            textLoader.textContent = "Redirigiendo...";
+          }, 4000);
+          setTimeout(() => {
+            window.location.href = "./login.html";
+          }, 5000);
         } catch (e) {
           msg.textContent = e.message;
           msg.classList.add("active");
         }
       };
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const eyePassword = document.getElementById("eyePassword");
-        const inputPass = document.getElementById("password");
+      const eyePassword = document.getElementById("eyePassword");
+      const inputPass = document.getElementById("password");
 
-        eyePassword.addEventListener("click", () => {
-          const isPass = inputPass.type === "password";
-          inputPass.type = isPass ? "text" : "password";
-          eyePassword.classList.toggle("fa-eye", isPass);
-          eyePassword.classList.toggle("fa-eye-slash", !isPass);
-        });
+      eyePassword.addEventListener("click", () => {
+        const isPass = inputPass.type === "password";
+        inputPass.type = isPass ? "text" : "password";
+        eyePassword.classList.toggle("fa-eye", isPass);
+        eyePassword.classList.toggle("fa-eye-slash", !isPass);
       });
     </script>
   </body>
