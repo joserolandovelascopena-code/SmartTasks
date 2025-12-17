@@ -66,9 +66,9 @@ body {
 }
 
 .loader{
-  display: block;
+  display: none;
 }
-.loader{
+.loader.show{
   position: absolute;
   margin-left: 10%;
   width: 620px;        
