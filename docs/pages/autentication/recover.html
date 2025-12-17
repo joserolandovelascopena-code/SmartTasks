@@ -38,18 +38,22 @@
         <section class="Contentext">
           <article>
             <h3>Comfirmación</h3>
-            <div class="textInfo">
-              <p>
-                Emos enviado un enlace de recuperación al
-                <strong class="emailEstraido"> </strong>
-              </p>
+            <div class="headerMessage">
+              <div class="textInfo">
+                <p>
+                  Emos enviado un enlace de recuperación al
+                  <strong class="emailEstraido"
+                    >joserolandovelascipena@gmail.com</strong
+                  >
+                </p>
 
-              <p>
-                revisa tu correo verefica tu edentidad, en el caso de no
-                encontrarlo, prueva buscando en spam.
-              </p>
+                <p>
+                  revisa tu correo verefica tu edentidad, en el caso de no
+                  encontrarlo, prueva buscando en spam.
+                </p>
+              </div>
             </div>
-            <p class="emailEnviado"></p>
+            <p class="emailEnviado">Email: joserolandovelascipena@gmail.com</p>
             <div class="aviso">
               <p>
                 <strong> Precaución:</strong>
@@ -109,6 +113,7 @@
       const modalAviso = document.querySelector(".messageModal");
       const btnCerrar = document.querySelector(".btnAcpetar");
       const btnSalir = document.querySelector(".containerNav");
+      const body = document.querySelector("body");
 
       btnSalir.addEventListener("click", () => {
         window.location.href = "./login.html";
@@ -149,6 +154,7 @@
 
           setTimeout(() => {
             msg.classList.remove("active");
+            body.style.overflow = "hidden";
             loader.classList.remove("show");
             modalAviso.classList.add("show");
             emailComfir.textContent = "correo: " + email;
@@ -164,6 +170,7 @@
       // cerrar modal
       btnCerrar.addEventListener("click", () => {
         modalAviso.classList.remove("show");
+        body.style.overflow = "auto";
       });
     </script>
   </body>
