@@ -143,5 +143,25 @@ p {
 @media (max-width: 420px) {
   .verify-card {
     width: 90%;
+    padding: 36px 24px;
   }
+  .verify-card {
+    background: linear-gradient(
+      180deg,
+      #020617,
+      #020617
+    );
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.6),
+      inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+  }
+
+  h2 {
+    color: #f1f5f9;
+  }
+
+  p {
+    color: #cbd5f5;
+  }
+
 }
