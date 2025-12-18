@@ -1,8 +1,8 @@
 import { supabaseClient } from "./supabase.js";
-// storage.js
+
 const Storage = {
 
-  // Obtener todas las tareas ordenadas por ID
+
 async getTasks() {
   const { data: sessionData } = await supabaseClient.auth.getSession();
   const userId = sessionData?.session?.user?.id;
@@ -15,7 +15,7 @@ async getTasks() {
   const { data, error } = await supabaseClient
     .from("tasks")
     .select("*")
-    .eq("user_id", userId)        // ← FILTRAR POR USUARIO
+    .eq("user_id", userId)       
     .order("id", { ascending: false });
 
   if (error) {
@@ -53,7 +53,7 @@ async updateTask(id, fields) {
       .eq("id", id)
       .select();
 
-    console.log("updateTask response:", resp); // muestra { data, error, status, statusText, etc. }
+    console.log("updateTask response:", resp); 
     if (resp.error) {
       console.error("Error actualizando tarea:", resp.error);
       return null;

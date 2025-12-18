@@ -11,7 +11,7 @@ body {
   display: grid;
   place-items: center;
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at bottom, #0f172a, #020617);
+  background: radial-gradient(circle at center, #0f172a, #020617);
 }
 
 /* CHECK */
@@ -58,7 +58,6 @@ body {
   }
 }
 
-
 /* CARD */
 .verify-card {
   width: 360px;
@@ -69,7 +68,7 @@ body {
   box-shadow:
     0 40px 80px rgba(0, 0, 0, 0.7),
     inset 0 0 0 1px rgba(148, 163, 184, 0.08);
-  animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite, fadeZoom 3s ease-in-out alternate infinite ;
 }
 
 /* ENERGY CORE */
@@ -129,13 +128,13 @@ p {
 
 @keyframes float {
   0% {
-    transform: perspective(900px) translateY(0);
+    transform: perspective(1000px) translateY(0);
   }
   50% {
-    transform: perspective(900px) translateY(-10px);
+    transform: perspective(1000px) translateY(-30px);
   }
   100% {
-    transform: perspective(900px) translateY(0);
+    transform: perspective(1000px) translateY(0);
   }
 }
 

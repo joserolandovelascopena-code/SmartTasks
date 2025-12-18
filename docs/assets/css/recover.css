@@ -73,7 +73,7 @@ body {
   margin-left: 10%;
   width: 620px;        
   height: 6px;        
-  background: #a6d4f3;  
+  background: #d0ccff;  
   border-radius: 15px;
   margin: -9px auto;
   display: block;
@@ -86,9 +86,9 @@ body {
   position: absolute;
   width: 50%;       
   height: 100%;
-  background: #0080d6; 
+  background: #0076d6; 
   border-radius: 10px;
-  animation: barraProgrets 0.80s linear forwards infinite;
+  animation: barraProgrets 0.50s linear forwards infinite;
 }
 
 /*========================*/
@@ -133,7 +133,79 @@ body {
 }
 .Contentext h3{
   text-align: center;
-  color: #e0e0e0;
+  font-size: 18px;
+  color: #ffffff;
+}
+.IconoMessage {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(60deg, #3f7bb3c2, #68ffe1a8);
+  border-radius: 12px;
+}
+.IconoMessage i{
+  font-size: 30px;
+  color: #71dbc1;
+}
+.postEmail{
+ top: 0;
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ background:transparent;
+}
+.containerIco{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 12px;
+}
+#iconCen{
+  margin-top: 8px;
+  padding: 8px;
+  height: 50px;
+  width: 50px;
+  background-color: #ffd1ff;
+  border-radius: 50%;
+  color: red;
+  border: 2px solid rgb(255, 0, 119);
+  box-shadow: 0 0 30px #f790f7;
+}
+#arroba{
+  bottom: 20px;
+  left: 80px;
+  position: absolute;
+  font-size: 20px;
+  color: #eeca00;
+  border-radius: 50%;
+  padding: 5px;
+  height: 30px;
+  width: 30px;
+  box-shadow: 0 0 60px #e9da04;
+  background-color: rgb(237, 255, 224);
+}
+#key{
+  position: absolute;
+  right: 30px;
+  bottom: 26px;
+  font-size: 20px;
+  color: #00a3ee;
+  border-radius: 50%;
+  padding: 8px;
+  height: 40px;
+  width: 40px;
+  background: #dbe6ff;
+  border: 2px solid rgb(0, 217, 255);
+}
+#links{
+  margin-top: 36px;
+  margin-left: 20px;
 }
 .textInfo{
   font-size: 15px;
@@ -152,7 +224,7 @@ body {
   font-weight: 700;
 }
 .aviso{
-   margin-top: 60px;
+   margin-top: 10px;
   font-size: 15px;
   color: #b6bdc5;
   line-height: 1.2;
@@ -161,7 +233,7 @@ body {
   margin-top: 20px;
   width: 100%;
   padding: 14px;
-  border-radius: 16px;
+  border-radius: 12px;
   border: none;
   font-size: 16px;
   font-weight: 600;
@@ -369,7 +441,7 @@ body {
 }
 .Contentext{
   width: 330px;
-  height: 500px;
+  height: 540px;
 }
 
 .conexion_recover{

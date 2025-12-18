@@ -306,9 +306,22 @@ body{
 }
 .inputs-layout{
     display: grid;
-    grid-template-columns: 89% auto;
+    grid-template-columns: 1fr;
     row-gap: 9px;
 }
+.inputs{
+    display: flex;
+    width: 100%;  
+    box-shadow: inset 0 0 0 1px 12px;
+    transition: 0.25s ease; 
+    border-radius: 12px;
+}
+.inputs:focus-within {
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 175, 0.918),
+    inset 0 0 0 1px #22c5af;
+}
+
 .inputs-layout label{
     grid-column: 1 /span 2;
     animation: fade 0.30s ease-in-out;
@@ -320,6 +333,7 @@ body{
 }
 .inputs-layout input{
     padding: 10px 16px;
+    width: 90%;
     border-top-left-radius: 14px;
     border-bottom-left-radius: 14px;
     font-size: 14px;
@@ -510,9 +524,6 @@ body{
 }
 .Cuadro_info{
     padding: 28px;
-}
-.inputs-layout{
-    grid-template-columns: 84% auto;
 }
 
 .credenciales{

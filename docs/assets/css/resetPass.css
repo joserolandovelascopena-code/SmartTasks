@@ -253,11 +253,10 @@ body {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 /* MOBILE */
 @media (max-width: 480px) {
   body{
-    padding: 20px;
+    padding: 10px;
   }
   .reset-card {
     height: 100%;

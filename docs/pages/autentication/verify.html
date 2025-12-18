@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="icon" href="../../assets/icons/icon.png" type="image/png" />
     <title>Verificando cuenta...</title>
     <link rel="stylesheet" href="../../assets/css/verify.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,7 +46,6 @@
         refresh_token,
       });
 
-      // 🎉 SUCCESS UI
       card.classList.add("success");
       msg.textContent = "Cuenta verificada";
       sub.textContent = "Acceso confirmado";
@@ -57,7 +56,7 @@
 
       setTimeout(() => {
         window.location.href = "../../index.html";
-      }, 1200);
+      }, 1800);
     </script>
   </body>
 </html>
