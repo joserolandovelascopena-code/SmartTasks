@@ -100,6 +100,15 @@ body {
   width: 100%;
   height: 100%;
 }
+svg{
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin-left: 10px;
+  padding: 10px;
+  margin-bottom: 0px;
+
+}
 .messageModal.show{
   display: block;
 }
@@ -115,7 +124,7 @@ body {
 }
 .Contentext{
   width: 360px;
-  height: 500px;
+  height: 530px;
   background: var(--card-contfir);
   border-radius: 12px; 
     box-shadow:
@@ -143,9 +152,10 @@ body {
   flex-direction: column;
   place-items: center;
   width: 100%;
-  height: 100px;
-  background: linear-gradient(60deg, #3f7bb3c2, #68ffe1a8);
+  height: 200px;
+  background:  linear-gradient(40deg, #85dcff6c,  #85dcff71);
   border-radius: 12px;
+  color: #e4e4e4;
 }
 .IconoMessage i{
   font-size: 30px;
@@ -165,6 +175,8 @@ body {
   background: transparent;
   overflow: hidden;
   border-radius: 12px;
+  display: grid;
+  place-content: center;
 }
 #iconCen{
   margin-top: 8px;
@@ -177,39 +189,9 @@ body {
   border: 2px solid rgb(255, 0, 119);
   box-shadow: 0 0 30px #f790f7;
 }
-#arroba{
-  bottom: 20px;
-  left: 80px;
-  position: absolute;
-  font-size: 20px;
-  color: #eeca00;
-  border-radius: 50%;
-  padding: 5px;
-  height: 30px;
-  width: 30px;
-  box-shadow: 0 0 60px #e9da04;
-  background-color: rgb(237, 255, 224);
-}
-#key{
-  position: absolute;
-  right: 30px;
-  bottom: 26px;
-  font-size: 20px;
-  color: #00a3ee;
-  border-radius: 50%;
-  padding: 8px;
-  height: 40px;
-  width: 40px;
-  background: #dbe6ff;
-  border: 2px solid rgb(0, 217, 255);
-}
-#links{
-  margin-top: 36px;
-  margin-left: 20px;
-}
 .textInfo{
   font-size: 15px;
-  color: #c5c5c5;
+   color: #d4d4d4;
 }
 .aviso strong{
   color: #f7f7f7;
@@ -226,9 +208,54 @@ body {
 .aviso{
    margin-top: 10px;
   font-size: 15px;
-  color: #b6bdc5;
+  color: #d4d4d4;
   line-height: 1.2;
 }
+.btnsOpciones{
+  display: grid;
+  grid-template-columns: auto 45% ;
+  gap: 5px;
+}
+.btnsOpciones button{
+  margin-top: 10px;
+  padding: 10px 8px;
+    background: #020617;
+   color: #d0ccff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: 0.3s ease;
+  font-size: 14px;
+}
+.btnsOpciones button:hover{
+  border: 2px solid rgb(0, 183, 255);
+  scale: .95;
+}
+
+#loginhrF a{
+  text-decoration: none;
+  color: #d0ccff;
+}
+
+#bntTemp{
+  display: flex;
+  gap: 4px;
+  transition:0.3s ease;
+  width: 100%;
+  justify-content: center;
+}
+#bntTemp:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+}
+#Tiempo{
+  color: #028dff;
+  font-weight: bold;
+}
+#bntTemp {
+    cursor: pointer;
+}
+
 .btnAcpetar{
   margin-top: 20px;
   width: 100%;
@@ -407,10 +434,12 @@ body {
   text-align: center;
   font-size: 14px;
   min-height: 18px;
+
 }
 
-#msg.error { color: var(--text-error); }
-#msg.success { color: var(--text-success); }
+
+#msg.error { color: var(--text-error);}
+#msg.success { color: var(--text-success);}
 
 /* ANIMATIONS */
 @keyframes fadeIn {
@@ -441,8 +470,11 @@ body {
 }
 .Contentext{
   width: 330px;
-  height: 540px;
+  height: 560px;
 }
+.btnsOpciones{
+  display: grid;
+  grid-template-columns: auto 40% ;}
 
 .conexion_recover{
     width: 80%;
