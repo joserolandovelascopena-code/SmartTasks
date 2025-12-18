@@ -196,7 +196,7 @@
             <div class="btnsOpciones">
               <div class="tmp">
                 <button id="bntTemp" disabled>
-                  <p>Nuevo reenvío en:</p>
+                  <p id="txtLabel">Nuevo reenvío en:</p>
                   <p id="Tiempo">1:00</p>
                 </button>
               </div>
@@ -278,15 +278,19 @@
 
       const btnTemp = document.getElementById("bntTemp");
       const tiempoTxt = document.getElementById("Tiempo");
+      const txtLabel = document.getElementById("txtLabel");
 
-      let tiempo = 60; // segundos
+      let tiempo = 60;
       let intervalo = null;
 
       function iniciarTemporizador() {
+        clearInterval(intervalo);
+
         tiempo = 60;
         btnTemp.disabled = true;
         btnTemp.classList.add("disabled");
 
+        txtLabel.textContent = "Nuevo reenvío en:";
         tiempoTxt.textContent = "1:00";
 
         intervalo = setInterval(() => {
@@ -301,10 +305,10 @@
 
           if (tiempo <= 0) {
             clearInterval(intervalo);
-            tiempoTxt.textContent = "0:00";
             btnTemp.disabled = false;
             btnTemp.classList.remove("disabled");
-            btnTemp.innerHTML = "<p>Reenviar correo</p>";
+            txtLabel.textContent = "Reenviar correo";
+            tiempoTxt.textContent = "";
           }
         }, 1000);
       }
@@ -316,7 +320,7 @@
 
         try {
           await recoverPassword(email);
-          iniciarTemporizador(); // reinicia el conteo
+          iniciarTemporizador();
         } catch (e) {
           alert("Error al reenviar el correo");
         }
