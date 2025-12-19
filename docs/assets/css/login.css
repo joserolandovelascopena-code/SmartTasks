@@ -35,7 +35,7 @@ body{
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: #020c3ae1;
+    background-color: #020c3af1;
     backdrop-filter: blur(5px);
     display: grid;
     justify-content: center;

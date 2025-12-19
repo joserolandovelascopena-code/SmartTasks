@@ -65,10 +65,15 @@ h1, h2, h3, h4, h5 {
 }
 .name_Users{
   position: relative;
-  width: 100px;
-  overflow-x: auto;
+  width: 100%;
+  height: 30px;
+  overflow:scroll;
+  display: flex;
 }
-.perfil_user h5{margin: 6px 0 0 0 } 
+.name_Users::-webkit-scrollbar{
+  display: none;
+}
+.perfil_user h5{margin: 6px 0 0 0; width: 100%; } 
 .foto_perfil img{
   width: 28px;
   height: 28px;
@@ -133,7 +138,7 @@ h1, h2, h3, h4, h5 {
   color: #31d100;
   font-weight: bold;
   height: 40px;
-}
+} 
 .CantTasksAdd h5{
   margin: 6px 0 0 0;
   color: #505050;

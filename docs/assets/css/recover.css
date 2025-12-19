@@ -88,7 +88,7 @@ body {
   height: 100%;
   background: #0076d6; 
   border-radius: 10px;
-  animation: barraProgrets 0.50s linear forwards infinite;
+  animation: barraProgrets 0.90s linear forwards infinite;
 }
 
 /*========================*/
@@ -231,9 +231,13 @@ svg{
   scale: .95;
 }
 
+#loginhrF {
+    background: linear-gradient(135deg, #22c5af, #38bdf8);
+}
 #loginhrF a{
   text-decoration: none;
-  color: #d0ccff;
+  color: #020617;
+  font-weight: 500;
 }
 
 #bntTemp{
@@ -474,6 +478,7 @@ svg{
 .Contentext{
   width: 330px;
   height: 560px;
+  background: rgba(0, 18, 63, 0.92);
 }
 .btnsOpciones{
   display: grid;

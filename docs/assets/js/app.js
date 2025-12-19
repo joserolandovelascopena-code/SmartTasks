@@ -11,6 +11,12 @@ export const App = {
   async loadTasks() { this.tasks = await Storage.getTasks(); },
   async init() {
     await this.loadTasks();
+
+    const profile = await Storage.getProfile();
+     if (profile) {
+    UI.renderPerfile(profile);
+    }
+
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks);
     UI.initCarousel();
@@ -84,12 +90,27 @@ async addTask() {
 
   await Storage.saveTask(nuevaTarea);
 
-  // Recargar lista
+
   await this.loadTasks();
   UI.renderTasks(this.tasks);
 
   input.value = "";
 
+}, 
+async getProfile(){
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  if (!sessionData.session) return alert("No hay sesión activa");
+
+  const user_id = sessionData.session.user.id;
+
+  const loaderUser = {
+    full_name,
+    avatar_url,
+    user_id
+  }
+
+  await Storage.getProfile(loaderUser);
+  UI.renderPerfile();
 },
 
 async toggleTask(id) {
@@ -99,13 +120,13 @@ async toggleTask(id) {
   this.tasks = this.tasks.map(t => {
     if (t.id === id) {
       newDone = !t.done;
-      tareaCambiada = !t.done; // Guardamos si se completó
+      tareaCambiada = !t.done; 
       return { ...t, done: newDone };
     }
     return t;
   });
 
-  // Mostrar modal SOLO cuando la tarea fue completada (done = true)
+
   if (tareaCambiada === true) {
     mostrarModalCompletado();
   }

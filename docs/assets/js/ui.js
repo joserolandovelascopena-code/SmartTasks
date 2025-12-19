@@ -200,32 +200,36 @@ if (task.categoria === "Vacaciones") {
   icon.style.background = "#fedcffff";
   icon.classList.add("fa-solid", "fa-umbrella-beach");
 }
-//ii
-
-
-
-
-      
 
       list.appendChild(li);
     });
     
   },
-  renderCategoria() {
-  // Selecciona todas las opciones dentro de tu contenedor real
+renderPerfile(perfile){
+  if (!perfile) return;
+
+  const nameMainUser = document.getElementById("MainNameUser");
+  const nameSecondUser = document.getElementById("name_user");
+
+  nameMainUser.textContent = "Hola, " + perfile.full_name ?? "User SmartTas";
+  nameSecondUser.textContent = perfile.full_name ?? "User SmartTas";
+},
+
+renderCategoria() {
+
   const opciones = document.querySelectorAll(".contenedor_categoria .options");
 
   opciones.forEach(op => {
     op.addEventListener("click", () => {
-      // dataset.categoria viene de data-categoria="..." en tu HTML
+
       const selected = op.dataset.categoria;
-      App.categoriaSeleccionada = selected;   // guardar la categoría
+      App.categoriaSeleccionada = selected;   
       console.log("Categoria seleccionada:", selected);
 
-      // limpiar la clase visual 'selected' de todas las opciones
+
       opciones.forEach(x => x.classList.remove("selected"));
 
-      // añadir clase visual a la opción clickeada
+     
       op.classList.add("selected");
 
     });

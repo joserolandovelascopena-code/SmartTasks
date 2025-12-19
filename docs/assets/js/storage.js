@@ -2,6 +2,29 @@ import { supabaseClient } from "./supabase.js";
 
 const Storage = {
 
+async getProfile(){
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const userId = sessionData?.session?.user?.id;
+
+   
+    if (!userId) {
+    console.error("No hay sesión activa");
+    return [];
+    }
+
+   const { data, error } = await supabaseClient
+  .from("profiles")
+  .select("*")
+  .eq("id", userId)
+  .single(); // 👈 clave
+
+    if (error) {
+    console.error("Error obteniendo perfiles:", error.message);
+    return [];
+    }
+  
+    return data;
+},
 
 async getTasks() {
   const { data: sessionData } = await supabaseClient.auth.getSession();
