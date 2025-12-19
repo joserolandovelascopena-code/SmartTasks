@@ -32,7 +32,6 @@ export const App = {
     const categoria = document.querySelector(".Categoria");
     const input = document.getElementById("newTask");
     const btnGuardar = document.getElementById("Guadar-btn");
-    const btnAbrirCategoria = document.getElementById("addBtn");
     const bodycontenedor = document.querySelector(".contenedor");
 
    input.addEventListener("focus", () => {
@@ -40,11 +39,6 @@ export const App = {
     categoria.classList.add("active");
     bodycontenedor.style.overflow = "hidden";
     }
-    });
-
-    btnAbrirCategoria.addEventListener("click", () => {
-      categoria.classList.toggle("active");
-      bodycontenedor.style.overflowY = bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
     });
 
     btnGuardar.addEventListener("click", () => {

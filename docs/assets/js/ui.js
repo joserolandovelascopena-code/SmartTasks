@@ -33,8 +33,12 @@ export const UI = {
      <input type="checkbox"class="check ${task.done ? "done" : ""}"${task.done ? "checked" : ""} data-id="${task.id}">
      <span class="task-text ${task.done ? "done" : ""}">${task.text}</span>
      </div>
+     <stection class="contentCatPro">
      <span class="task-cat">${task.categoria}   <i class="CateIcons"></i></span>
-     <span class="task-pro">${"Prioridad: " + task.prioridad} </span>
+     </stection>
+     <stection class="contentCatPro">
+     <span class="task-pro">${task.prioridad} </span>
+     </stection>
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
    
      <div class="editar_item">
@@ -125,19 +129,21 @@ export const UI = {
       }
 
       if (task.prioridad === "Baja") {
-        li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #3cad40ff, #06a35aff, #3daf55ff )";
-        li.querySelector(".task-pro").style.color = "#ffffffff";
+        li.querySelector(".task-pro").style.background = "#c2ffcfff ";
+        li.querySelector(".task-pro").style.border = "1px solid #00cc3dff";
+        li.querySelector(".task-pro").style.color = "#01ad35ff";
       }
 
       if (task.prioridad === "Media") {
-      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #02ebdfff, #0145ffff )";
-      li.querySelector(".task-pro").style.color = "#ffffffff";
+      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #02ebdf2a, #0145ff36 )";
+        li.querySelector(".task-pro").style.border = "1px solid #00a9ecff";
+      li.querySelector(".task-pro").style.color = "#0004fdff";
       }
 
       if (task.prioridad === "Alta") {
 
-      li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #ff008cff, #ff0040ff, #ff0062ff";
-      li.querySelector(".task-pro").style.color = "#fff";
+      li.querySelector(".task-pro").style.background = " #fadee3ff";
+      li.querySelector(".task-pro").style.color = "#ff0000ff";
       }
 
       // Iconos Style categoria
@@ -211,8 +217,8 @@ renderPerfile(perfile){
   const nameMainUser = document.getElementById("MainNameUser");
   const nameSecondUser = document.getElementById("name_user");
 
-  nameMainUser.textContent = "Hola, " + perfile.full_name ?? "User SmartTas";
-  nameSecondUser.textContent = perfile.full_name ?? "User SmartTas";
+  nameMainUser.textContent = "Hola, " + perfile.full_name ?? "User SmartTasks";
+  nameSecondUser.textContent = perfile.full_name ?? "User SmartTasks";
 },
 
 renderCategoria() {
