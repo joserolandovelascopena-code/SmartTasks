@@ -477,6 +477,15 @@ svg{
   height: 660px;
   background: rgba(0, 18, 63, 0.92);
 }
+svg{
+  width: 200px;
+  height: 200px;
+}
+.Contentext h3{
+  text-align: center;
+  margin-top: 5px;
+  font-size: 18px;
+}
 .IconoMessage {
   height: 280px;}
 .btnsOpciones{
