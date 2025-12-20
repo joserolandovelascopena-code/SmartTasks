@@ -1545,7 +1545,47 @@ margin: 4px 0 0 0;}
 }
 
 .Barra_Superior_principal{
-  grid-template-columns: 79% 12% 4%;
+  grid-template-columns: auto auto;
+}
+/*Perfil*/
+.add_persons_notificaciones{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  padding-left: 0px;
+}
+.Saludo_noticias{
+  grid-template-columns: 64% auto;
+  grid-column: 1 / span 2;
+  height: 180px;
+}
+.CantTasksAdd{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.CantTasksAdd{
+  background: linear-gradient(30deg, #a1bdfa, #fffdf8);
+  height: 100%;
+  position: relative;
+  justify-content: center;
+}
+.CantTasksAdd button{
+  border: 3px solid rgb(0, 204, 255);
+  background: #ffffff;
+  font-size: 15px;
+  color: #01cce7;
+  height: 60px;
+  width: 70px;
+  margin-left: 12px;
+} 
+.CantTasksAdd h5{
+  margin: 6px 0 0 0;
+  color: #464545;
+  font-weight: normal;
+}
+.contanier_settinRigth{
+  grid-column: 1 / span 2;
 }
 
 .content_theme{
@@ -1584,7 +1624,6 @@ margin: 4px 0 0 0;}
   grid-template-columns: auto;
 }
 .contenedor_categoria{
-  grid-row: 1 /span 1;
   display:flex;
   gap: 15px;
   max-height: 80px;
