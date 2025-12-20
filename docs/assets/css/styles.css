@@ -17,6 +17,7 @@ h1, h2, h3, h4, h5 {
 }
 /*Contenido pricipal INICIO*/
 .container_main{
+  position: relative;
   display: grid;
   grid-template-columns: 16% auto;
   height: 100%;
@@ -45,7 +46,11 @@ h1, h2, h3, h4, h5 {
   color: #272626;
   font-weight: normal;
 }
-
+.NavMovil{
+  grid-column: 1 /span 2;
+  padding: 5px 8px;
+  display: none;
+}
 
 /*Perfil*/
 .add_persons_notificaciones{
@@ -1390,9 +1395,10 @@ font-size: 15px;
 
 
 /*Resposing*/
-
 @media (max-width: 470px){
+  
 .container_main{
+  overflow-y: auto;
   grid-template-columns: auto;
 }
 #Titulo_app{
@@ -1545,14 +1551,31 @@ margin: 4px 0 0 0;}
 }
 
 .Barra_Superior_principal{
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
+  position: relative;
 }
 /*Perfil*/
-.add_persons_notificaciones{
+.NavMovil{
+  display: block;
   display: grid;
-  grid-template-columns: auto auto;
-  gap: 10px;
-  padding-left: 0px;
+  grid-template-columns: 93% auto;
+  background: white;
+  box-shadow: 1px 0 5px gainsboro;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 40;
+}
+
+.Notificaciones i{
+  font-size: 20px;
+  margin-top: 8px;
+}
+.add_persons_notificaciones{
+  display: none;
+}
+.tasksProyecAll{
+  margin-top: 40px;
 }
 .Saludo_noticias{
   grid-template-columns: 64% auto;
@@ -1587,7 +1610,16 @@ margin: 4px 0 0 0;}
 .contanier_settinRigth{
   grid-column: 1 / span 2;
 }
-
+#tasksOptions {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 4px;
+  width: 100%;
+}
+#tasksOptions button{
+  display: flex;
+  gap: 3px;
+}
 .content_theme{
   position: relative;
   display: none;
