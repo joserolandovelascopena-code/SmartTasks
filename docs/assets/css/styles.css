@@ -1373,13 +1373,12 @@ font-size: 15px;
   100% { background-position: 0% 50%; }
 }
 @keyframes Titulo-fade{
-  to{
-    transform: scale(1);
-    opacity: 1;
-  }
+
   from{
-    transform: scale(1.3);
-    opacity: 0.5;
+    opacity: 0;
+  }
+    to{
+    opacity: 1;
   }
 }
 
@@ -1392,7 +1391,7 @@ font-size: 15px;
   font-size: 24px;
   font-weight: bold;
   color: #2ed5ff;
-  animation: Titulo-fade .90s ease-in-out;
+  animation: Titulo-fade .80s ease-in-out;
 }
 /*=================================================*/
 
@@ -1449,12 +1448,15 @@ font-size: 15px;
 }
 .List_check{
   padding: 0px;
-  grid-column: 1 / span 2;
   box-shadow: 0 0 0px rgba(220, 220, 220, 0);
+  position: relative;
+  overflow: hidden;
 
 }
 #taskList{
   padding: 4px;
+  height: 400px;
+  padding-block-end: 10px;
 }
 .task-item{
   display: grid;
