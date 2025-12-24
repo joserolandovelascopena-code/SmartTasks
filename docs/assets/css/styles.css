@@ -1400,6 +1400,9 @@ font-size: 15px;
 /*Resposing*/
 @media (max-width: 470px){
   
+  body{
+    overflow: auto;
+  }
 .container_main{
   overflow: auto;
   grid-template-columns: auto;
