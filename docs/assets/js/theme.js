@@ -37,11 +37,11 @@ function applyTheme(theme) {
 
   if (theme === "light") {
     document.documentElement.setAttribute("data-theme", "light");
-    lightBtn.style.background = "#020580";
+    lightBtn.style.background = "#000138";
     lightBtn.style.color = "#ffffffff";
   } else if (theme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
-    darkBtn.style.background = "#020580";
+    darkBtn.style.background = "#000138";
     darkBtn.style.color = "#ffffffff";
 
     if (navMain) {
@@ -56,7 +56,7 @@ function applyTheme(theme) {
     }
   } else if (theme === "system") {
     document.documentElement.removeAttribute("data-theme");
-    systemBtn.style.background = "#020580";
+    systemBtn.style.background = "#000138";
     systemBtn.style.color = "#ffffffff";
 
     if (systemPrefersDark()) {

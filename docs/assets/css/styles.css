@@ -252,9 +252,11 @@ height: 50px;
 .content_theme{
   position: relative;
   display: none;
+  background-color: #0026ff;
 }
 .content_theme.active{
   display: block;
+  position: absolute;
 }
 .nav_themes.active{
   animation: themeAnimation 0.16s ease-in-out;
@@ -268,8 +270,6 @@ height: 50px;
   box-shadow: 0 0 30px gainsboro;
   background: white;
   padding: 20px;
-  margin-left: -78px;
-
 }
 
 .nav_themes i{
@@ -288,6 +288,10 @@ height: 50px;
 .nav_themes p{
   padding: 0;
   margin: 0;
+}
+#openThemes{
+  display: flex;
+  gap: 2px;
 }
 #Default_light, 
 #Default_dark,
@@ -310,7 +314,7 @@ height: 50px;
 #Default_light:hover, 
 #Default_dark:hover,
 #System_theme:hover{
-  background-color: #020580;
+  background-color: #000138;
   color: #f5fdff;
   transform: scale(1.03);
 }
@@ -321,9 +325,9 @@ height: 50px;
   height: 99vh;
   margin: 4px;
   border-radius: 8px;
-  color: rgb(172, 171, 171);
+  color: rgb(218, 217, 217);
   font-size: 14px;
-  background: linear-gradient(40deg,#090031, #00003d ) ;
+  background: #000138;
 }
 .nav_menu{
   padding: 15px 6px 6px 6px;
@@ -337,7 +341,7 @@ height: 50px;
   padding: 5px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 14px;
 }
 .funciones_smart{
   cursor: pointer;
@@ -359,7 +363,7 @@ margin: 0;
   padding: 3px;
 }
 .funciones_smart:hover {
-  background: linear-gradient(60deg,  #1e2ce9,  #1f79ff);
+  background: #1e2ce91a;
   color: white;
 }
 .funciones_smart p{
@@ -369,7 +373,11 @@ margin: 0;
   font-size: 15px;
   color: rgb(184, 182, 182);
 }
-
+.lineDiv{
+  height: 2px;
+  background-color: rgb(51, 55, 102);
+  border-radius: 5px;
+}
 /*Funciones por separado*/
 #Hogar{
   display: flex;
@@ -385,7 +393,7 @@ margin: 0;
   gap: 14px;
   padding: 2px 4px;
   background: #0217da4d;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 #buscador{
   margin: 5px 0;
@@ -404,35 +412,35 @@ margin: 0;
 .formSearc i{
   padding-top: 7px;
   padding-left: 3px;
+  color: rgb(231, 231, 231);
 }
-.plusAdd{
-  width: 24px;
-  height: 24px;
-  padding-top: 3px;
-  padding-left: 3px;
-  position: relative;
-  border-radius: 50%;
-  background-color: #020580;
-  overflow: hidden;
+.Root-taks{
+  margin-top: 20vh;
+
 }
-#Add:hover{
-    background: #ff004044; 
-}
+
 #Add{
   cursor: pointer;
   display: flex;
-  gap: 8px;
-  transition: 0.2s linear;
-  padding: 4px;
+  gap: 6px;
+  transition: .2s ease-in-out;
+  padding: 8px 2px;
   border-radius: 5px;
+  border-radius: 6px;
+  background: rgb(62, 59, 252);
+  justify-content: center;
+  color: white;
 }
 #Add p{
   margin: 0;
-  padding-top: 4px;
 }
 #Add i{
-  color: #00d9ff;
-  font-size: 19px;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+}
+#Add:hover{
+    background: #0044ff60; 
+    scale: .96;
 }
 #Proyectos{
   display: flex;
@@ -449,21 +457,16 @@ margin: 0;
 #settings{
   display: flex;
   gap: 8px;
-  margin-top: 10rem;
-  background: linear-gradient(60deg, #001aff57);
-  color: white;
   padding: 5px 3px;
-  border-radius: 6px;
-  justify-content: center;
 }
 #settings i{color: #ffffff;}
 #logoutBtni{
-  color: rgb(255, 0, 128);}
+  color: rgb(187, 187, 187);}
 #logoutBtn{
   display: flex;
   gap: 8px;
   padding: 3px;
-  color: rgb(255, 0, 149);
+  color: rgb(202, 202, 202);
   cursor: pointer;
 }
 #logoutBtn p{
@@ -966,7 +969,7 @@ font-size: 15px;
 .task-item{
   display: grid;
   grid-template-columns: 54% 20% auto 2%;
-  box-shadow: 0 0  0 1px rgba(170, 170, 170, 0.781);
+  box-shadow: 0 0 5px rgba(170, 170, 170, 0.781);
   gap: 20px;
   transition: 0.90s ease-out;
   padding: 12px;
@@ -1398,8 +1401,9 @@ font-size: 15px;
 @media (max-width: 470px){
   
 .container_main{
-  overflow-y: auto;
+  overflow: auto;
   grid-template-columns: auto;
+  height: 100%;
 }
 #Titulo_app{
   margin: 8px 0 28px 10px;
@@ -1409,6 +1413,8 @@ font-size: 15px;
   gap: 0px;
   padding: 16px;
   grid-template-columns: repeat(1, 1fr);
+  overflow: auto;
+  height: auto;
 }
 
 #addBtn{
