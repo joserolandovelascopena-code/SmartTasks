@@ -16,7 +16,7 @@ async getProfile(){
   .from("profiles")
   .select("*")
   .eq("id", userId)
-  .single(); // 👈 clave
+  .single(); 
 
     if (error) {
     console.error("Error obteniendo perfiles:", error.message);

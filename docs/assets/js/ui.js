@@ -21,12 +21,12 @@ export const UI = {
    
 
       if (task.done) {
-        li.style.background = "linear-gradient(to right, #ff797933, #ff646446)";
+        li.style.background = " #7998ff38"
        } else {
-        li.style.background = "linear-gradient( 90deg, #ffffffff, #ffffffff)" ;
+        li.style.background = "#ffffffff"
       }
 
-   
+  
       // texto + estilo de completada
      li.innerHTML = `
      <div class="box_tasks_text">
@@ -46,7 +46,7 @@ export const UI = {
         <div class="cuerpo_modal">
           <div class="header-editar">
             <p>Editar</p>
-            <span class="Closeeditar" id="closeeditar">&times;</span>
+            <span class="Closeeditar">&times;</span>
           </div>
           <div class="contenido-editar">
             <article class="input-editar">
@@ -74,9 +74,7 @@ export const UI = {
       </section></div>
      `;
 
-
-
-
+   
       // marcar completada
       li.querySelector(".check").addEventListener("click", () =>{
         App.toggleTask(task.id);
@@ -91,10 +89,16 @@ export const UI = {
       li.querySelector(".delete-btn").addEventListener("click", () => {
         App.deleteTask(task.id);
       });
-      li.addEventListener("click", () => {
-        UI.hasClickedTask = true;
-        UI.renderTarjetas(task)
-      });
+   li.addEventListener("click", (e) => {
+  if (
+    e.target.closest(".delete-btn") ||
+    e.target.closest(".openEditar") ||
+    e.target.closest(".check")
+  ) return;
+
+  UI.hasClickedTask = true;
+  UI.renderTarjetas(App.tasks);
+});
 
     // ABRIR MODAL TAREA
     const contenedorEditar = li.querySelector(".editar_item");
@@ -102,10 +106,15 @@ export const UI = {
     const closeEditar = li.querySelector(".Closeeditar");
 
 
-     li.querySelector(".openEditar").addEventListener("click", () => {
-     contenedorEditar.classList.add("active");
-     modalEditar.classList.add("active");
-     });
+   li.querySelector(".openEditar").addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  UI.renderEditar(li, task);
+
+  contenedorEditar.classList.add("active");
+  modalEditar.classList.add("active");
+});
+
 
 
      closeEditar.addEventListener("click", (e) => {
@@ -113,13 +122,6 @@ export const UI = {
      contenedorEditar.classList.remove("active");
      modalEditar.classList.remove("active");
      });
-
-    contenedorEditar.addEventListener("click", (e) => {
-     e.stopPropagation(); 
-     contenedorEditar.classList.remove("active");
-     modalEditar.classList.remove("active");
-     });
-
 
 
       //Estilo Proridad
@@ -219,6 +221,16 @@ renderPerfile(perfile){
 
   nameMainUser.textContent = "Hola, " + perfile.full_name ?? "User SmartTasks";
   nameSecondUser.textContent = perfile.full_name ?? "User SmartTasks";
+},
+
+renderEditar(li, task) {
+  if (!li || !task) return;
+
+  const input = li.querySelector(".input.editar");
+  if (!input) return;
+
+  input.value = task.text;
+  input.dataset.id = task.id;
 },
 
 renderCategoria() {
