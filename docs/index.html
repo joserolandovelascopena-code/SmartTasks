@@ -251,8 +251,8 @@
         <div class="backgraud-tasks">
           <nav>
             <ul class="Nav_addTasks">
-              <li id="CloseAddTasks"><i class="fa-solid fa-arrow-left"></i></li>
               <li><h3>Agregar Tarea</h3></li>
+              <li id="CloseAddTasks"><i class="fa-solid fa-arrow-left"></i></li>
             </ul>
           </nav>
           <section class="contenido_main">
@@ -292,63 +292,97 @@
             </div>
 
             <main class="scroll_subir_task">
-              <section id="task-input">
-                <input
-                  type="text"
-                  id="newTask"
-                  placeholder="Nueva tarea..."
-                  title="Escribe una actividad"
-                />
-              </section>
               <section class="main-cont-categoria">
-                <article class="Categoria" title="Categorías">
-                  <h4>Establecer un limete</h4>
-
-                  <div class="horaio_día">
-                    <div class="tiempo" id="fecha">
-                      <i class="fa-regular fa-calendar-days"></i>
-                      <p>Fecha/Día</p>
+                <article class="Categoria">
+                  <section id="task-input">
+                    <input
+                      type="text"
+                      id="newTask"
+                      placeholder="Nueva tarea..."
+                      title="Escribe una actividad"
+                    />
+                  </section>
+                  <div class="CuadroContendorAgTasks">
+                    <h4 id="TituloProgamació">Programación</h4>
+                    <div class="horaio_día">
+                      <div class="tiempo" id="fecha">
+                        <div class="Progmacion">
+                          <i class="fa-regular fa-calendar-days"></i>
+                          <p>Fecha/Día</p>
+                        </div>
+                        <p class="programacionTasks">Seleccionar</p>
+                        <div id="openCalandar">
+                          <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                      </div>
+                      <div class="tiempo" id="hora">
+                        <div class="Progmacion">
+                          <i class="fa-regular fa-clock"></i>
+                          <p>Duracion</p>
+                        </div>
+                        <p class="programacionTasks">00:00:00</p>
+                        <div id="openReloj">
+                          <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                      </div>
+                      <div class="tiempo" id="openOpiciones">
+                        <div class="Progmacion">
+                          <i class="fa-solid fa-rotate-right"></i>
+                          <p>Repetición</p>
+                        </div>
+                        <div class="repeticion_tasks">
+                          <div class="conten_repetion">
+                            <div id="repet">
+                              <i class="fa-regular fa-circle-check"></i>
+                              <p>Una vez</p>
+                            </div>
+                            <div id="repet">
+                              <i class="fa-solid fa-clock-rotate-left"></i>
+                              <p>Todos los días</p>
+                            </div>
+                            <div id="repet">
+                              <i class="fa-regular fa-calendar"></i>
+                              <p>Semanal</p>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="programacionTasks">Solo una vez</p>
+                        <div class="repetición">
+                          <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                      </div>
                     </div>
-                    <div class="tiempo" id="hora">
-                      <i class="fa-regular fa-clock"></i>
-                      <p>Tiempo de duracion</p>
+                    <h4>Importancia</h4>
+                    <div class="importancia">
+                      <div
+                        class="proridad options-prioridad"
+                        data-prioridad="Baja"
+                        title="Baja"
+                      >
+                        Baja
+                      </div>
+                      <div
+                        class="proridad options-prioridad"
+                        data-prioridad="Media"
+                        title="Normal"
+                      >
+                        Media
+                      </div>
+                      <div
+                        class="proridad options-prioridad"
+                        data-prioridad="Alta"
+                        title="Mayor Importancia"
+                      >
+                        Alta
+                      </div>
                     </div>
-                  </div>
-                  <h4>Importancia</h4>
-                  <div class="importancia">
-                    <div
-                      class="proridad options-prioridad"
-                      data-prioridad="Baja"
-                      title="Baja"
-                    >
-                      Baja
-                    </div>
-                    <div
-                      class="proridad options-prioridad"
-                      data-prioridad="Media"
-                      title="Normal"
-                    >
-                      Media
-                    </div>
-                    <div
-                      class="proridad options-prioridad"
-                      data-prioridad="Alta"
-                      title="Mayor Importancia"
-                    >
-                      Alta
-                    </div>
-                  </div>
-                  <div class="agregar">
-                    <button id="Guadar-btn" title="Guardar">
-                      Guardar Tarea
-                    </button>
                   </div>
                 </article>
                 <article class="descrition_box">
                   <div>
                     <div class="title_description">
                       <i class="fa-solid fa-hashtag icoDes"></i>
-                      <p>Arganiza mejor tu tarea</p>
+                      <p>Detalles opcionales</p>
                     </div>
                     <div class="descrition">
                       <input
@@ -358,36 +392,10 @@
                       />
                     </div>
                   </div>
-                  <div class="separar">
-                    <div class="title_description">
-                      <i class="fa-solid fa-hashtag icoRepe"></i>
-                      <p>Establecer un ciclo de repetición</p>
-                    </div>
-                    <div class="repeticion_tasks">
-                      <div class="conten_repetion">
-                        <div id="repet">
-                          <i class="fa-regular fa-circle-check"></i>
-                          <p>Una vez</p>
-                        </div>
-                        <div id="repet">
-                          <i class="fa-solid fa-clock-rotate-left"></i>
-                          <p>Todos los días</p>
-                        </div>
-                        <div id="repet">
-                          <i class="fa-regular fa-calendar"></i>
-                          <p>Semanal</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="repetición">
-                      <p>Solo una vez</p>
-                      <div>
-                        <button id="openOpiciones">Ver Opciones</button>
-                      </div>
-                    </div>
-                  </div>
                 </article>
-                <br />
+                <div class="agregar">
+                  <button id="Guadar-btn" title="Guardar">Guardar Tarea</button>
+                </div>
               </section>
             </main>
           </section>
