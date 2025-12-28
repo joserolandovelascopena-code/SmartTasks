@@ -164,13 +164,21 @@ document.addEventListener("DOMContentLoaded", () =>{
   const openAdd = document.getElementById("Add");
   const contenAdd = document.querySelector(".subir_tarea");
   const bodycontenedor = document.querySelector(".contenedor");
+  const closeAddTaks = document.getElementById("CloseAddTasks");
 
   openAdd.addEventListener("click", () =>{
-    contenAdd.classList.toggle("show")
+    contenAdd.classList.add("show")
     bodycontenedor.style.overflowY = bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
-    bodycontenedor.classList.toggle("show")
+    bodycontenedor.classList.add("show")
     document.querySelector(".List_check").classList.toggle("show");
     document.querySelector(".info_tarea").classList.toggle("show");
+  });
+    closeAddTaks.addEventListener("click", () =>{
+    contenAdd.classList.remove("show")
+    bodycontenedor.style.overflowY = bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
+    bodycontenedor.classList.remove("show")
+    document.querySelector(".List_check").classList.remove("show");
+    document.querySelector(".info_tarea").classList.remove("show");
   });
 });
 

@@ -83,7 +83,6 @@
 
             <li class="funciones_smart" id="Proyectos">
               <i class="fa-regular fa-folder-open"></i>
-              <i class="fa-regular fa-comment-dots"></i>
               <p class="nav0">Tus proyectos</p>
               <h5 class="nav2">Proyectos</h5>
             </li>
@@ -92,7 +91,7 @@
               <p class="nav0">Calendario</p>
               <h5 class="nav2">Calendario</h5>
             </li>
-            <li class="funciones_smart" id="cuenta">
+            <li class="funciones_smart cuenta" id="cuenta">
               <i class="fa-regular fa-user"></i>
               <p class="nav0">Cuenta</p>
               <h5 class="nav2">Cuenta</h5>
@@ -228,153 +227,6 @@
         </section>
 
         <div class="contenedor">
-          <main class="subir_tarea">
-            <div class="backgraud-tasks">
-              <header class="contenido_main">
-                <div class="contenedor_categoria">
-                  <div class="trabajo options" data-categoria="Trabajo">
-                    <p>Trabajo</p>
-                    <i class="fa-solid fa-briefcase"></i>
-                  </div>
-                  <div class="estudio options" data-categoria="Estudio">
-                    <p>Estudio</p>
-                    <i class="fa-solid fa-book"></i>
-                  </div>
-                  <div class="dieta options" data-categoria="Dieta">
-                    <p>Dieta</p>
-                    <i class="fa-solid fa-apple-whole"></i>
-                  </div>
-                  <div class="marketing options" data-categoria="Marketing">
-                    <p>Marketing</p>
-                    <i class="fa-solid fa-chart-line"></i>
-                  </div>
-                  <div
-                    class="rutina_diaria options"
-                    data-categoria="Rutina diaria"
-                  >
-                    <p>Rutina díaria</p>
-                    <i class="fa-solid fa-person-running"></i>
-                  </div>
-                  <div class="fitnest options" data-categoria="Fitness">
-                    <p>Fitness</p>
-                    <i class="fa-solid fa-dumbbell"></i>
-                  </div>
-                  <div
-                    class="festividades options"
-                    data-categoria="Festividades"
-                  >
-                    <p>Festividades</p>
-                    <i class="fa-solid fa-church"></i>
-                  </div>
-                  <div class="vacaciones options" data-categoria="Vacaciones">
-                    <p>Vacaciones</p>
-                    <i class="fa-solid fa-umbrella-beach"></i>
-                  </div>
-                </div>
-
-                <main class="scroll_subir_task">
-                  <section id="task-input">
-                    <input
-                      type="text"
-                      id="newTask"
-                      placeholder="Nueva tarea..."
-                      title="Escribe una actividad"
-                    />
-                  </section>
-                  <section class="main-cont-categoria">
-                    <article class="Categoria" title="Categorías">
-                      <h4>Establecer un limete</h4>
-
-                      <div class="horaio_día">
-                        <div class="tiempo" id="fecha">
-                          <i class="fa-regular fa-calendar-days"></i>
-                          <p>Fecha/Día</p>
-                        </div>
-                        <div class="tiempo" id="hora">
-                          <i class="fa-regular fa-clock"></i>
-                          <p>Tiempo de duracion</p>
-                        </div>
-                      </div>
-                      <h4>Importancia</h4>
-                      <div class="importancia">
-                        <div
-                          class="proridad options-prioridad"
-                          data-prioridad="Baja"
-                          title="Baja"
-                        >
-                          Baja
-                        </div>
-                        <div
-                          class="proridad options-prioridad"
-                          data-prioridad="Media"
-                          title="Normal"
-                        >
-                          Media
-                        </div>
-                        <div
-                          class="proridad options-prioridad"
-                          data-prioridad="Alta"
-                          title="Mayor Importancia"
-                        >
-                          Alta
-                        </div>
-                      </div>
-                      <div class="agregar">
-                        <button id="Guadar-btn" title="Guardar">
-                          Guardar Tarea
-                        </button>
-                      </div>
-                    </article>
-                    <article class="descrition_box">
-                      <div>
-                        <div class="title_description">
-                          <i class="fa-solid fa-hashtag icoDes"></i>
-                          <p>Arganiza mejor tu tarea</p>
-                        </div>
-                        <div class="descrition">
-                          <input
-                            type="text"
-                            id="descripción"
-                            placeholder="Descripción opcional"
-                          />
-                        </div>
-                      </div>
-                      <div class="separar">
-                        <div class="title_description">
-                          <i class="fa-solid fa-hashtag icoRepe"></i>
-                          <p>Establecer un siclo de repetición</p>
-                        </div>
-                        <div class="repeticion_tasks">
-                          <div class="conten_repetion">
-                            <div id="repet">
-                              <i class="fa-regular fa-circle-check"></i>
-                              <p>Una vez</p>
-                            </div>
-                            <div id="repet">
-                              <i class="fa-solid fa-clock-rotate-left"></i>
-                              <p>Todos los días</p>
-                            </div>
-                            <div id="repet">
-                              <i class="fa-regular fa-calendar"></i>
-                              <p>Semanal</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="repetición">
-                          <p>Solo una vez</p>
-                          <div>
-                            <button id="openOpiciones">Ver Opciones</button>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                    <br />
-                  </section>
-                </main>
-              </header>
-            </div>
-          </main>
-
           <div class="List_check">
             <h3>Actividades por completar</h3>
 
@@ -395,7 +247,154 @@
           <div class="card">Tarjeta 4</div>
         </div>
       </div>
+      <main class="subir_tarea">
+        <div class="backgraud-tasks">
+          <nav>
+            <ul class="Nav_addTasks">
+              <li id="CloseAddTasks"><i class="fa-solid fa-arrow-left"></i></li>
+              <li><h3>Agregar Tarea</h3></li>
+            </ul>
+          </nav>
+          <section class="contenido_main">
+            <div class="contenedor_categoria">
+              <div class="trabajo options" data-categoria="Trabajo">
+                <p>Trabajo</p>
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <div class="estudio options" data-categoria="Estudio">
+                <p>Estudio</p>
+                <i class="fa-solid fa-book"></i>
+              </div>
+              <div class="dieta options" data-categoria="Dieta">
+                <p>Dieta</p>
+                <i class="fa-solid fa-apple-whole"></i>
+              </div>
+              <div class="marketing options" data-categoria="Marketing">
+                <p>Marketing</p>
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div class="rutina_diaria options" data-categoria="Rutina diaria">
+                <p>Rutina díaria</p>
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+              <div class="fitnest options" data-categoria="Fitness">
+                <p>Fitness</p>
+                <i class="fa-solid fa-dumbbell"></i>
+              </div>
+              <div class="festividades options" data-categoria="Festividades">
+                <p>Festividades</p>
+                <i class="fa-solid fa-church"></i>
+              </div>
+              <div class="vacaciones options" data-categoria="Vacaciones">
+                <p>Vacaciones</p>
+                <i class="fa-solid fa-umbrella-beach"></i>
+              </div>
+            </div>
+
+            <main class="scroll_subir_task">
+              <section id="task-input">
+                <input
+                  type="text"
+                  id="newTask"
+                  placeholder="Nueva tarea..."
+                  title="Escribe una actividad"
+                />
+              </section>
+              <section class="main-cont-categoria">
+                <article class="Categoria" title="Categorías">
+                  <h4>Establecer un limete</h4>
+
+                  <div class="horaio_día">
+                    <div class="tiempo" id="fecha">
+                      <i class="fa-regular fa-calendar-days"></i>
+                      <p>Fecha/Día</p>
+                    </div>
+                    <div class="tiempo" id="hora">
+                      <i class="fa-regular fa-clock"></i>
+                      <p>Tiempo de duracion</p>
+                    </div>
+                  </div>
+                  <h4>Importancia</h4>
+                  <div class="importancia">
+                    <div
+                      class="proridad options-prioridad"
+                      data-prioridad="Baja"
+                      title="Baja"
+                    >
+                      Baja
+                    </div>
+                    <div
+                      class="proridad options-prioridad"
+                      data-prioridad="Media"
+                      title="Normal"
+                    >
+                      Media
+                    </div>
+                    <div
+                      class="proridad options-prioridad"
+                      data-prioridad="Alta"
+                      title="Mayor Importancia"
+                    >
+                      Alta
+                    </div>
+                  </div>
+                  <div class="agregar">
+                    <button id="Guadar-btn" title="Guardar">
+                      Guardar Tarea
+                    </button>
+                  </div>
+                </article>
+                <article class="descrition_box">
+                  <div>
+                    <div class="title_description">
+                      <i class="fa-solid fa-hashtag icoDes"></i>
+                      <p>Arganiza mejor tu tarea</p>
+                    </div>
+                    <div class="descrition">
+                      <input
+                        type="text"
+                        id="descripción"
+                        placeholder="Descripción opcional"
+                      />
+                    </div>
+                  </div>
+                  <div class="separar">
+                    <div class="title_description">
+                      <i class="fa-solid fa-hashtag icoRepe"></i>
+                      <p>Establecer un ciclo de repetición</p>
+                    </div>
+                    <div class="repeticion_tasks">
+                      <div class="conten_repetion">
+                        <div id="repet">
+                          <i class="fa-regular fa-circle-check"></i>
+                          <p>Una vez</p>
+                        </div>
+                        <div id="repet">
+                          <i class="fa-solid fa-clock-rotate-left"></i>
+                          <p>Todos los días</p>
+                        </div>
+                        <div id="repet">
+                          <i class="fa-regular fa-calendar"></i>
+                          <p>Semanal</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="repetición">
+                      <p>Solo una vez</p>
+                      <div>
+                        <button id="openOpiciones">Ver Opciones</button>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <br />
+              </section>
+            </main>
+          </section>
+        </div>
+      </main>
     </div>
+
     <script type="module" src="assets/js/supabase.js"></script>
     <script type="module" src="assets/js/supabase.js"></script>
     <script type="module" src="assets/js/storage.js"></script>
