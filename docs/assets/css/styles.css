@@ -152,7 +152,7 @@ h1, h2, h3, h4, h5 {
 } 
 .CantTasksAdd h5{
   margin: 6px 0 0 0;
-  color: #505050;
+  font-weight: normal;
 }
 /*==================================*/
 .contanier_settinRigth{
@@ -191,6 +191,7 @@ h1, h2, h3, h4, h5 {
 }
 .cantidadTareas p{
   margin: 0;
+  font-size: 14px; 
 }
 .dateNow{
 border-radius: 12px;
@@ -217,8 +218,8 @@ height: 50px;
   margin: 0;
   margin-top: 8px;
   margin-left: 6px;
-  color: #5a5a5a;
-  font-size: 16px;
+  font-weight: normal;
+  font-size: 15px;
 
 }
 #tasksOptions button{
@@ -767,18 +768,16 @@ margin: 0;
   color: #069caf;
   text-align: center;
   font-size: 14px;
-  font-weight:500;
   position: absolute;
   width: 100%;
   padding: 6px 6px ;
 }
 .task-pro{
-  font-size: 15px;
+  font-size: 14px;
   padding: 6px 6px;
   border-radius: 8px;
   text-align: center;
   border-bottom: 2px dashed gainsboro;
-  font-weight: 500;
   position: absolute;
   width: 100%;
 }
@@ -964,6 +963,9 @@ margin: 0;
 .List_check.show{
   opacity: 0;
 }
+.List_check h4 {
+  font-weight: normal;
+}
 .task-item{
   display: grid;
   grid-template-columns: 54% 20% auto 2%;
@@ -982,6 +984,7 @@ margin: 0;
   flex-grow: 5;
   padding-top: 6px ;
   margin-left: 8px;
+  font-size: 14px;
 }
 .box_tasks_text{
   display: grid;
@@ -1400,7 +1403,7 @@ margin: 0;
 
 
 /*Resposing*/
-@media (max-width: 490px){
+@media (max-width: 700px){
  #Calendario,#settings,#logoutBtn,
  #searchSmar,#cuenta,
 #appSmat{
@@ -1410,7 +1413,7 @@ margin: 0;
     display: none;
   }
 }
-@media (max-width: 470px){
+@media (max-width: 700px){
   
   body{
     overflow: auto;
@@ -1532,11 +1535,11 @@ margin: 4px 0 0 0;}
   font-size: 18px;
   padding-top: 6px;
   padding-left: 7px;
-  color: rgb(0, 0, 0);
+  color: rgb(31, 31, 31);
 }
 .funciones_smart i{
   font-size: 26px;
-  color: rgb(0, 0, 0);
+  color: rgb(31, 31, 31);
 }
 #Hogar{
   display: grid;
@@ -1621,7 +1624,6 @@ margin: 4px 0 0 0;}
 .CantTasksAdd h5{
   margin: 6px 0 0 0;
   color: #464545;
-  font-weight: normal;
 }
 .contanier_settinRigth{
   grid-column: 1 / span 2;
@@ -1675,7 +1677,7 @@ margin: 4px 0 0 0;}
   height: 100%;
 }
 .conten_repetion{
-  width: 340px;
+  width: 286px;
 }
 .contenido_main{
   display: block;
@@ -1693,7 +1695,7 @@ margin: 4px 0 0 0;}
   padding: 14px;
 }
 .options{
-  flex: 0 0 10rem;
+  flex: 0 0 9.1rem;
   cursor: pointer;
   display: grid;
   grid-template-columns: auto 10%;
