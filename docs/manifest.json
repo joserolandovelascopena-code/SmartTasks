@@ -5,7 +5,7 @@
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#121212",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "assets/icons/icon-192.webp",
