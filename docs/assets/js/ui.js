@@ -42,11 +42,14 @@ export const UI = {
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
    
      <div class="editar_item">
-     <section class="Editar_targeta">
+       <section class="Editar_targeta">
+       <div class="backgrauEditar">
         <div class="cuerpo_modal">
           <div class="header-editar">
             <p>Editar</p>
+            <div>
             <span class="Closeeditar">&times;</span>
+            </div>
           </div>
           <div class="contenido-editar">
             <article class="input-editar">
@@ -57,21 +60,54 @@ export const UI = {
               />
             </article>
             <article class="Configuracion">
-              <div class="trabajo">s</div>
-              <div class="fitnest"></div>
-              <div class="estudio"></div>
-              <div class="dieta"></div>
-              <div class="marketing"></div>
-              <div class="rutina-diaria"></div>
+              <div class="contenedor_Editar">
+              <div class="trabajo2 options2" data-categoria="Trabajo">
+                <p>Trabajo</p>
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <div class="estudio2 options2" data-categoria="Estudio">
+                <p>Estudio</p>
+                <i class="fa-solid fa-book"></i>
+              </div>
+              <div class="dieta2 options2" data-categoria="Dieta">
+                <p>Dieta</p>
+                <i class="fa-solid fa-apple-whole"></i>
+              </div>
+              <div class="marketing2 options2" data-categoria="Marketing">
+                <p>Marketing</p>
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div class="rutina_diaria2 options2" data-categoria="Rutina diaria">
+                <p>Rutina díaria</p>
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+              <div class="fitnest2 options2" data-categoria="Fitness">
+                <p>Fitness</p>
+                <i class="fa-solid fa-dumbbell"></i>
+              </div>
+              <div class="festividades2 options2" data-categoria="Festividades">
+                <p>Festividades</p>
+                <i class="fa-solid fa-church"></i>
+              </div>
+              <div class="vacaciones2 options2" data-categoria="Vacaciones">
+                <p>Vacaciones</p>
+                <i class="fa-solid fa-umbrella-beach"></i>
+              </div>
+            </div>
             </article>
-            <article class="duracion"></article>
-            <article class="días"></article>
-              
-           <button class="delete-btn">✖</button>
+            <div class="ProgramacionEditar">
+            <article class="días btnEditarProgrmacion"><i class="fa-regular fa-calendar-days"></i><p>Día/Fecha</p></article>
+            <article class="duracion btnEditarProgrmacion"><i class="fa-regular fa-clock"></i><p>Duración</p></article>
+            </div>
+            <div class="eliminarTasks">
+               <button class="delete-btn">Eliminar</button>
+            <div>
+           </div>
+             <article class="footer-editar"></article>
+           </div>
           </div>
-          <article class="footer-editar"></article>
-        </div>
-      </section></div>
+        </section>
+      </div>
      `;
 
    
