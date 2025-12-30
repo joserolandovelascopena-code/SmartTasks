@@ -1035,10 +1035,10 @@ margin: 0;
 #Guadar-btn{
   padding: 12px 60px;
   border-radius: 8px;
-  background-color: #5900ff54;
-  border: 2px solid #3f02ce;
-  border-bottom: 6px solid #26006d;
-  color: #290088;
+  border: 2px solid  #00c3ff;
+  border-bottom: 6px solid #006a8a;
+  background:#a7f0fa ;
+  color: #006a8a;
   font-size: 16px;
   font-weight: bold;
   transition: 0.40s ease-in-out;
@@ -1299,13 +1299,14 @@ margin: 0;
 .Closeeditar {
   font-size: 25px;
   cursor: pointer;
-  display: inline-block; /* MUY IMPORTANTE */
+  display: inline-block;
   transition: transform 0.5s ease;
   transform-origin: center;
 }
 
 .Closeeditar:hover {
   transform: rotateY(180deg);
+    color: rgb(0, 26, 255) ;
 }
 
 .contenido-editar{
@@ -1501,10 +1502,11 @@ margin: 0;
   cursor: pointer;
   width: 100%;
   padding: 12px 8px;
-  background:#bbdbf5 ;
-  color: #0004ff;
-  border: none;
-  border-radius: 5px;
+  border: 2px solid  #00c3ff;
+  border-bottom: 6px solid #006a8a;
+  background:#a7f0fa ;
+  color: #006a8a;
+  border-radius: 8px;
   font-size: 16px;
   transition: .3s ease;
   font-weight: 600;
