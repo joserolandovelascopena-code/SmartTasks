@@ -165,16 +165,19 @@ li.querySelector(".opentAviso").addEventListener("click", (e) => {
 
     avisofondo.classList.remove("show");
     contenidoAviso.classList.remove("show");
+    
+    void avisofondo.offsetWidth;
+    void contenidoAviso.offsetWidth;
+
     avisofondo.classList.add("hide");
     contenidoAviso.classList.add("hide");
-
     setTimeout(() => {
       avisoDelete.classList.remove("active");
       avisofondo.classList.remove("hide");
       contenidoAviso.classList.remove("hide");
       contenedorEditar.classList.remove("active");
       App.deleteTask(task.id);
-    }, 400); // ⬅ mismo tiempo que la animación
+    }, 400);
   };
 
   // ===== CANCELAR =====
@@ -184,7 +187,7 @@ btnCancelarDelete.onclick = (e) => {
   avisofondo.classList.remove("show");
   contenidoAviso.classList.remove("show");
 
-  // 🔥 fuerza reinicio de animación
+
   void avisofondo.offsetWidth;
   void contenidoAviso.offsetWidth;
 
