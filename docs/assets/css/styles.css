@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
   align-items: center;
   padding: 50px;
-  background: rgba(0, 17, 43, 0.24);
+  background: rgba(0, 17, 43, 0.555);
 }
 .ContentAvisoDelete{
   width:400px;
@@ -118,7 +118,7 @@ h1, h2, h3, h4, h5 {
   color: #464545;
 }
 .delete-btn{
-  background: rgb(255, 98, 81);
+  background: rgb(255, 77, 57);
   color: rgb(255, 255, 255);
 }
 /*Contenido pricipal INICIO*/
@@ -1604,17 +1604,23 @@ margin: 0;
 @media (max-width: 700px){
 
 /*Avisos del sistema*/
+.backgrundAviso{
+  padding: 20px;
+}
+.ContentAvisoDelete{
+  width:400px;
+}
 .ContentAvisoDelete h4{
-  font-size: 14px;
+  font-size: 15px;
 }
 .ContentAvisoDelete i{
-  font-size: 18px;
-  height: 40px;
-  width: 40px;
+  font-size: 20px;
+  height: 46px;
+  width: 46px;
 }
 .botonAviso button {
   padding: 8px 18px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .textAviso{
   padding: 0 8px;
@@ -1906,7 +1912,7 @@ margin: 4px 0 0 0;}
   padding: 14px;
 }
 .options{
-  flex: 0 0 9.6rem;
+  flex: 0 0 9.5rem;
   cursor: pointer;
   display: grid;
   grid-template-columns: auto 10%;
