@@ -1239,16 +1239,16 @@ margin: 0;
 
 }
 .editar_item{
-  display: block;
+  display: none;
   background-color: #020580;
 }
-.editar_item, .active{
+.editar_item.active{
   display: block;
 }
 .Editar_targeta{
-  display: block;
+  display: none;
 }
-.Editar_targeta, .active{
+.Editar_targeta.active{
   display: block;
   position: fixed;
   top:0;

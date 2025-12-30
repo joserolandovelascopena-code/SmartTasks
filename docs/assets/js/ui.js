@@ -41,7 +41,7 @@ export const UI = {
      </stection>
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
    
-    <div class="editar_item">
+      <div class="editar_item">
         <section class="Editar_targeta">
           <div class="backgrauEditar">
             <div class="cuerpo_modal">
@@ -107,40 +107,63 @@ export const UI = {
                   </div>
                 </article>
 
-                <div class="ProgramacionEditar">
-                  <article class="días btnEditarProgrmacion">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <p>Día/Fecha</p>
-                  </article>
+                <div class="contentSeccionesEditar">
+                  <h5>Programación de la Tarea</h5>
+                  <div class="ProgramacionEditar">
+                    <article class="días btnEditarProgrmacion">
+                      <i class="fa-regular fa-calendar-days"></i>
+                      <p>Día/Fecha</p>
+                    </article>
 
-                  <article class="duracion btnEditarProgrmacion">
-                    <i class="fa-regular fa-clock"></i>
-                    <p>Duración</p>
-                  </article>
+                    <article class="duracion btnEditarProgrmacion">
+                      <i class="fa-regular fa-clock"></i>
+                      <p>Duración</p>
+                    </article>
 
-                  <article class="repetir btnEditarProgrmacion">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <p>Repetir</p>
-                  </article>
+                    <article class="repetir btnEditarProgrmacion">
+                      <i class="fa-solid fa-rotate-right"></i>
+                      <p>Repetir</p>
+                    </article>
+                  </div>
                 </div>
 
-                <div class="Proridad">
-                  <article class="EditarProridad">
-                    <button data="bajaEditar">Baja</button>
-                  </article>
-                  <article class="EditarProridad">
-                    <button data="mediaEditar">Media</button>
-                  </article>
-                  <article class="EditarProridad">
-                    <button data="altaEditar">Alta</button>
-                  </article>
+                <div class="contentSeccionesEditar">
+                  <h5>Proridad de la tarea</h5>
+                  <div class="ProridadEditar">
+                    <article class="EditarProridad">
+                      <button data="bajaEditar">Baja</button>
+                    </article>
+                    <article class="EditarProridad">
+                      <button data="mediaEditar">Media</button>
+                    </article>
+                    <article class="EditarProridad">
+                      <button data="altaEditar">Alta</button>
+                    </article>
+                  </div>
+                </div>
+
+                <div class="descripcionEditar">
+                  <label for="EditarDescripcion">Descripción</label>
+                  <textarea
+                    name="EditarDescripcion"
+                    class="EditarDescripcion"
+                    placeholder="Editar descripcion"
+                    title="Descripción de la tarea"
+                  ></textarea>
                 </div>
 
                 <div class="eliminarTasks">
-                  <button class="opentAviso">Eliminar</button>
+                  <i class="far fa-trash-can"></i>
+                  <h5>Eliminar tarea</h5>
+
+                  <button class="opentAviso">Borrar tarea</button>
                 </div>
 
-                <article class="footer-editar"></article>
+                <article class="footer-editar">
+                  <div class="GuardarCambios">
+                    <button class="btnGuardarCambios">Guardar Cambios</button>
+                  </div>
+                </article>
               </div>
             </div>
           </div>
