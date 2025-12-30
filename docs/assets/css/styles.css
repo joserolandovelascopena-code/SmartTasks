@@ -15,6 +15,112 @@ h1, h2, h3, h4, h5 {
 :root {
   --color-icons: linear-gradient(60deg, #596fee,#f700ff);
 }
+
+/*Avisos del sistema*/ 
+.advertenciaDelete.active{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 32;
+  top: 0;
+  left: 0;
+  display: block;
+}
+.advertenciaDelete{
+  display: none;
+}
+.backgrundAviso{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background: rgba(0, 17, 43, 0.24);
+}
+.ContentAvisoDelete{
+  width:400px;
+  background: white;
+  border-radius: 8px;
+  position: relative;
+}
+.backgrundAviso.show {
+  animation: intro2 .4s ease-in-out forwards;
+}
+
+.backgrundAviso.hide {
+  animation: intro2 .4s ease-in-out reverse forwards;
+}
+
+.ContentAvisoDelete.show {
+  animation: fadeIn .4s ease-in-out forwards;
+}
+
+.ContentAvisoDelete.hide {
+  animation: fadeIn .4s ease-in-out reverse forwards;
+}
+
+
+.ContentAvisoDelete h4{
+  font-weight: normal;
+  color: #000000;
+  text-align: center;
+  font-size: 16px;
+}
+.headerMainAviso{
+  width: 100%;
+  padding: 8px;
+  box-shadow: 0 1px 1px gainsboro;
+}
+.headerMainAviso p{
+  font-size: 12px;
+  color: #949494;
+}
+.headerAviso{
+  display: flex;
+  justify-content: center;
+}
+.ContentAvisoDelete i{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px 0 10px 0;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 26px;
+  border: 2px solid salmon;
+  color: salmon;
+}
+.botonAviso {
+  margin-top: 10px;
+  padding: 10px 0 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.botonAviso button {
+  padding: 10px 30px;
+  border-radius: 8px;
+  border: none;
+  transition: .4s ease;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+.botonAviso button:hover {
+  scale: 1.04;
+}
+.CerrarAvisoDelete{
+  background: #dedfff;
+  color: #464545;
+}
+.delete-btn{
+  background: rgb(255, 98, 81);
+  color: rgb(255, 255, 255);
+}
 /*Contenido pricipal INICIO*/
 .container_main{
   position: relative;
@@ -1216,7 +1322,7 @@ margin: 0;
 }
 .input-editar input{
   width: 100%;
-  padding: 12px 6px;
+  padding: 8px 6px;
   font-size: 15px;
   color: #424242;
   border: 2px solid transparent;
@@ -1282,7 +1388,7 @@ margin: 0;
   margin-top: 16px;
 }
 
-.delete-btn {
+.opentAviso {
   background: #ffe6eb;
   padding: 12px 8px;
   border: none;
@@ -1293,7 +1399,7 @@ margin: 0;
   width: 100%;
   transition: .3s ease-in-out;
 }
-.delete-btn:hover {
+.opentAviso:hover {
   scale: 0.98;
   background: #fad8df;
 }
@@ -1486,20 +1592,37 @@ margin: 0;
 
 /*Resposing*/
 @media (max-width: 700px){
- #Calendario,#settings,#logoutBtn,
- #searchSmar,#cuenta,
+#Calendario,#settings,#logoutBtn,
+#searchSmar,#cuenta,
 #appSmat{
     display: none;
   }
-  .lineDiv,.titu,.Root-taks{
-    display: none;
-  }
+.lineDiv,.titu,.Root-taks{
+  display: none;
+}
 }
 @media (max-width: 700px){
-  
-  body{
-    overflow: auto;
-  }
+
+/*Avisos del sistema*/
+.ContentAvisoDelete h4{
+  font-size: 14px;
+}
+.ContentAvisoDelete i{
+  font-size: 18px;
+  height: 40px;
+  width: 40px;
+}
+.botonAviso button {
+  padding: 8px 18px;
+  font-size: 12px;
+}
+.textAviso{
+  padding: 0 8px;
+}
+/*==================*/  
+body{
+  overflow: auto;
+}
 .container_main{
   grid-template-columns: auto;
   height: 100%;

@@ -96,11 +96,13 @@ export const UI = {
             </div>
             </article>
             <div class="ProgramacionEditar">
-            <article class="días btnEditarProgrmacion"><i class="fa-regular fa-calendar-days"></i><p>Día/Fecha</p></article>
-            <article class="duracion btnEditarProgrmacion"><i class="fa-regular fa-clock"></i><p>Duración</p></article>
+            <article class="días btnEditarProgrmacion">
+            <i class="fa-regular fa-calendar-days"></i><p>Día/Fecha</p></article>
+            <article class="duracion btnEditarProgrmacion">
+            <i class="fa-regular fa-clock"></i><p>Duración</p></article>
             </div>
             <div class="eliminarTasks">
-               <button class="delete-btn">Eliminar</button>
+               <button class="opentAviso">Eliminar</button>
             <div>
            </div>
              <article class="footer-editar"></article>
@@ -108,6 +110,26 @@ export const UI = {
           </div>
         </section>
       </div>
+
+       <section class="advertenciaDelete">
+        <div class="backgrundAviso">
+          <article class="ContentAvisoDelete">
+            <header class="headerMainAviso">
+              <p>Aviso de confirmación</p>
+            </header>
+            <div class="headerAviso">
+              <i class="fa fa-xmark"></i>
+            </div>
+            <div class="textAviso">
+              <h4>¿Estás seguro de eliminar esta tarea?</h4>
+              <div class="botonAviso">
+                <button class="CerrarAvisoDelete">Cancelar</button
+                ><button class="delete-btn">Si, Eliminar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
      `;
 
    
@@ -122,27 +144,81 @@ export const UI = {
       });
 
       // eliminar tarea
-      li.querySelector(".delete-btn").addEventListener("click", () => {
-        App.deleteTask(task.id);
-      });
-   li.addEventListener("click", (e) => {
-  if (
-    e.target.closest(".delete-btn") ||
-    e.target.closest(".openEditar") ||
-    e.target.closest(".check")
-  ) return;
+li.querySelector(".opentAviso").addEventListener("click", (e) => {
+  e.stopPropagation();
 
-  UI.hasClickedTask = true;
-  UI.renderTarjetas(App.tasks);
+  const btnDeleteTasks = li.querySelector(".delete-btn");
+  const btnCancelarDelete = li.querySelector(".CerrarAvisoDelete");
+  const avisoDelete = li.querySelector(".advertenciaDelete");
+  const avisofondo = li.querySelector(".backgrundAviso");
+  const contenidoAviso = li.querySelector(".ContentAvisoDelete");
+  const contenedorEditar = li.querySelector(".editar_item");
+
+  // abrir
+  avisoDelete.classList.add("active");
+  avisofondo.classList.add("show");
+  contenidoAviso.classList.add("show");
+
+  // ===== ELIMINAR =====
+  btnDeleteTasks.onclick = (e) => {
+    e.stopPropagation();
+
+    avisofondo.classList.remove("show");
+    contenidoAviso.classList.remove("show");
+    avisofondo.classList.add("hide");
+    contenidoAviso.classList.add("hide");
+
+    setTimeout(() => {
+      avisoDelete.classList.remove("active");
+      avisofondo.classList.remove("hide");
+      contenidoAviso.classList.remove("hide");
+      contenedorEditar.classList.remove("active");
+      App.deleteTask(task.id);
+    }, 400); // ⬅ mismo tiempo que la animación
+  };
+
+  // ===== CANCELAR =====
+btnCancelarDelete.onclick = (e) => {
+  e.stopPropagation();
+
+  avisofondo.classList.remove("show");
+  contenidoAviso.classList.remove("show");
+
+  // 🔥 fuerza reinicio de animación
+  void avisofondo.offsetWidth;
+  void contenidoAviso.offsetWidth;
+
+  avisofondo.classList.add("hide");
+  contenidoAviso.classList.add("hide");
+
+  setTimeout(() => {
+    avisoDelete.classList.remove("active");
+    avisofondo.classList.remove("hide");
+    contenidoAviso.classList.remove("hide");
+  }, 400);
+};
+
 });
 
-    // ABRIR MODAL TAREA
-    const contenedorEditar = li.querySelector(".editar_item");
-    const modalEditar = li.querySelector(".Editar_targeta");
-    const closeEditar = li.querySelector(".Closeeditar");
+      li.addEventListener("click", (e) => {
+
+     if (
+       e.target.closest(".opentAviso") ||
+       e.target.closest(".openEditar") ||
+       e.target.closest(".check")
+      ) return;
+
+     UI.hasClickedTask = true;
+     UI.renderTarjetas(App.tasks);
+});
+
+// ABRIR MODAL TAREA
+const contenedorEditar = li.querySelector(".editar_item");
+const modalEditar = li.querySelector(".Editar_targeta");
+const closeEditar = li.querySelector(".Closeeditar");
 
 
-   li.querySelector(".openEditar").addEventListener("click", (e) => {
+ li.querySelector(".openEditar").addEventListener("click", (e) => {
   e.stopPropagation();
 
   UI.renderEditar(li, task);
@@ -153,18 +229,18 @@ export const UI = {
 
 
 
-     closeEditar.addEventListener("click", (e) => {
-     e.stopPropagation(); 
-     contenedorEditar.classList.remove("active");
-     modalEditar.classList.remove("active");
-     });
+closeEditar.addEventListener("click", (e) => {
+  e.stopPropagation(); 
+  contenedorEditar.classList.remove("active");
+  modalEditar.classList.remove("active");
+});
 
 
       //Estilo Proridad
-        if (task.prioridad === "Ninguna") {
-        li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff )";
-        li.querySelector(".task-pro").style.color = "#a0a0a0ff";
-      }
+  if (task.prioridad === "Ninguna") {
+    li.querySelector(".task-pro").style.background = "linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff )";
+    li.querySelector(".task-pro").style.color = "#a0a0a0ff";
+  }
 
       if (task.prioridad === "Baja") {
         li.querySelector(".task-pro").style.background = "#c2ffcfff ";
@@ -282,8 +358,6 @@ renderCategoria() {
 
 
       opciones.forEach(x => x.classList.remove("selected"));
-
-     
       op.classList.add("selected");
 
     });
@@ -308,11 +382,11 @@ renderPrioridad() {
       const element = document.querySelector(`[data-prioridad="${selected}"]`);
       
       if (selected === "Baja") {
-        element.style.background = "linear-gradient(40deg, #04cf60ff, #03b65cff )";; // verde
+        element.style.background = "linear-gradient(40deg, #04cf60ff, #03b65cff )";;
       } else if (selected === "Media") {
-        element.style.background = "linear-gradient(40deg, #02ebdfff, #0145ffff )"; // amarillo
+        element.style.background = "linear-gradient(40deg, #02ebdfff, #0145ffff )"; 
       } else if (selected === "Alta") {
-        element.style.background = "linear-gradient(40deg, #ff6565ff, #ff0162ff )";; // rojo
+        element.style.background = "linear-gradient(40deg, #ff6565ff, #ff0162ff )";; 
       }
 
       element.style.color = "#fff";
