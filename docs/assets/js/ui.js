@@ -41,72 +41,108 @@ export const UI = {
      </stection>
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
    
-     <div class="editar_item">
-       <section class="Editar_targeta">
-       <div class="backgrauEditar">
-        <div class="cuerpo_modal">
-          <div class="header-editar">
-            <p>Editar</p>
-            <div>
-            <span class="Closeeditar">&times;</span>
+    <div class="editar_item">
+        <section class="Editar_targeta">
+          <div class="backgrauEditar">
+            <div class="cuerpo_modal">
+              <div class="header-editar">
+                <p>Editar</p>
+                <div>
+                  <span class="Closeeditar">&times;</span>
+                </div>
+              </div>
+
+              <div class="contenido-editar">
+                <article class="input-editar">
+                  <input
+                    type="text"
+                    class="input editar"
+                    placeholder="Edita la actividad"
+                  />
+                </article>
+
+                <article class="Configuracion">
+                  <div class="contenedor_Editar">
+                    <div class="trabajo2 options2" data-categoria="Trabajo">
+                      <p>Trabajo</p>
+                      <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="estudio2 options2" data-categoria="Estudio">
+                      <p>Estudio</p>
+                      <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div class="dieta2 options2" data-categoria="Dieta">
+                      <p>Dieta</p>
+                      <i class="fa-solid fa-apple-whole"></i>
+                    </div>
+                    <div class="marketing2 options2" data-categoria="Marketing">
+                      <p>Marketing</p>
+                      <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div
+                      class="rutina_diaria2 options2"
+                      data-categoria="Rutina diaria"
+                    >
+                      <p>Rutina díaria</p>
+                      <i class="fa-solid fa-person-running"></i>
+                    </div>
+                    <div class="fitnest2 options2" data-categoria="Fitness">
+                      <p>Fitness</p>
+                      <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <div
+                      class="festividades2 options2"
+                      data-categoria="Festividades"
+                    >
+                      <p>Festividades</p>
+                      <i class="fa-solid fa-church"></i>
+                    </div>
+                    <div
+                      class="vacaciones2 options2"
+                      data-categoria="Vacaciones"
+                    >
+                      <p>Vacaciones</p>
+                      <i class="fa-solid fa-umbrella-beach"></i>
+                    </div>
+                  </div>
+                </article>
+
+                <div class="ProgramacionEditar">
+                  <article class="días btnEditarProgrmacion">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <p>Día/Fecha</p>
+                  </article>
+
+                  <article class="duracion btnEditarProgrmacion">
+                    <i class="fa-regular fa-clock"></i>
+                    <p>Duración</p>
+                  </article>
+
+                  <article class="repetir btnEditarProgrmacion">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <p>Repetir</p>
+                  </article>
+                </div>
+
+                <div class="Proridad">
+                  <article class="EditarProridad">
+                    <button data="bajaEditar">Baja</button>
+                  </article>
+                  <article class="EditarProridad">
+                    <button data="mediaEditar">Media</button>
+                  </article>
+                  <article class="EditarProridad">
+                    <button data="altaEditar">Alta</button>
+                  </article>
+                </div>
+
+                <div class="eliminarTasks">
+                  <button class="opentAviso">Eliminar</button>
+                </div>
+
+                <article class="footer-editar"></article>
+              </div>
             </div>
-          </div>
-          <div class="contenido-editar">
-            <article class="input-editar">
-              <input
-                type="text"
-                class="input editar"
-                placeholder="Edita la actividad"
-              />
-            </article>
-            <article class="Configuracion">
-              <div class="contenedor_Editar">
-              <div class="trabajo2 options2" data-categoria="Trabajo">
-                <p>Trabajo</p>
-                <i class="fa-solid fa-briefcase"></i>
-              </div>
-              <div class="estudio2 options2" data-categoria="Estudio">
-                <p>Estudio</p>
-                <i class="fa-solid fa-book"></i>
-              </div>
-              <div class="dieta2 options2" data-categoria="Dieta">
-                <p>Dieta</p>
-                <i class="fa-solid fa-apple-whole"></i>
-              </div>
-              <div class="marketing2 options2" data-categoria="Marketing">
-                <p>Marketing</p>
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
-              <div class="rutina_diaria2 options2" data-categoria="Rutina diaria">
-                <p>Rutina díaria</p>
-                <i class="fa-solid fa-person-running"></i>
-              </div>
-              <div class="fitnest2 options2" data-categoria="Fitness">
-                <p>Fitness</p>
-                <i class="fa-solid fa-dumbbell"></i>
-              </div>
-              <div class="festividades2 options2" data-categoria="Festividades">
-                <p>Festividades</p>
-                <i class="fa-solid fa-church"></i>
-              </div>
-              <div class="vacaciones2 options2" data-categoria="Vacaciones">
-                <p>Vacaciones</p>
-                <i class="fa-solid fa-umbrella-beach"></i>
-              </div>
-            </div>
-            </article>
-            <div class="ProgramacionEditar">
-            <article class="días btnEditarProgrmacion">
-            <i class="fa-regular fa-calendar-days"></i><p>Día/Fecha</p></article>
-            <article class="duracion btnEditarProgrmacion">
-            <i class="fa-regular fa-clock"></i><p>Duración</p></article>
-            </div>
-            <div class="eliminarTasks">
-               <button class="opentAviso">Eliminar</button>
-            <div>
-           </div>
-             <article class="footer-editar"></article>
-           </div>
           </div>
         </section>
       </div>
