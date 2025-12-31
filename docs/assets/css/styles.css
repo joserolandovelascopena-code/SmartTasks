@@ -955,7 +955,7 @@ margin: 0;
   padding: 6px 6px ;
 }
 .task-pro{
-  font-size: 14px;
+  font-size: 14px; 
   padding: 6px 6px;
   border-radius: 8px;
   text-align: center;
@@ -1317,7 +1317,7 @@ margin: 0;
   display: block;
 }
 .Editar_targeta{
-  display: none;
+  display: block;
 }
 .Editar_targeta.active{
   display: block;
@@ -1468,12 +1468,15 @@ margin: 0;
 .btnEditarProgrmacion{
   box-shadow: 0 0 0 1px gainsboro;
   padding: 9px 8px;
-  background-color: #020580;
-  color: #f5fdff;
   border-radius: 8px;
   display: flex;
   gap: 4px;
   justify-content: center;
+  cursor: pointer;
+}
+.btnEditarProgrmacion i{
+  color: #77efff;
+  font-size: 20px;
 }
 .ProgramacionEditar p{ font-size: 14px;}
 .ProridadEditar{
@@ -1487,12 +1490,14 @@ margin: 0;
 .ProridadEditar button{
   width: 100%;
   padding: 9px 8px;
+  background: #e3f2f7;
   box-shadow: 0 0 0 1px gainsboro;
   padding: 9px 8px;
   border: none;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
   transition: .3s ease-in-out;
+  cursor: pointer;
 }
 .ProridadEditar button:hover{
   scale: .98;
@@ -1539,6 +1544,7 @@ margin: 0;
   padding: 8px 10px 8px 16px;
   gap: 10px;
   align-items: center;
+  margin-bottom: 28px;
 }
 .eliminarTasks h5{
   font-weight: normal;
@@ -2142,20 +2148,25 @@ margin: 4px 0 0 0;}
   gap:10px ;
 }
 /*=============================*/
+.backgrauEditar{
+  justify-items: auto;
+}
 .cuerpo_modal{
   position: relative;
   overflow: hidden;
-  margin-top: 50px;
+  top: 0;
   padding-top: 50px;
   width: 600px;
-  height: 94%;
+  height: 93%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .options2{
   flex: 0 0 10rem;
 }
 .eliminarTasks{
   grid-template-columns: 6% 60% auto;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 .footer-editar{
   padding: 15px 20px;
