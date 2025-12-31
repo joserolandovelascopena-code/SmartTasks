@@ -17,6 +17,52 @@ h1, h2, h3, h4, h5 {
 }
 
 /*Avisos del sistema*/ 
+.msgsConfirmacion{
+  position: fixed;
+  z-index: 30;
+  top: 30px;
+  right: 40px;
+  display: none;
+}
+.msgsConfirmacion.active{
+  display: block;
+}
+.contentMsg{
+  width: auto;
+  max-width: 600px;
+  padding: 10px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 2% auto;
+  gap: 20px;
+  align-items: center;
+  background: white;
+  box-shadow: 0  0 30px rgb(238, 237, 237);
+  border-radius: 8px;
+  border: 1px solid rgb(189, 186, 186);
+  animation: msgSystm .5s ease-in-out;
+}
+
+.contentMsg.show{
+  animation: msgSystm .4s ease-in-out forwards;
+}
+.contentMsg h5{
+  font-weight: 600;
+  color: #313131;
+  font-family: 'Inter', sans-serif;
+}
+.contentMsg i{
+  height: 20px;
+  width: 20px;
+  font-size: 12px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000000;
+  color: white;
+}
+
 .advertenciaDelete.active{
   position: fixed;
   width: 100%;
@@ -37,7 +83,7 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
   align-items: center;
   padding: 50px;
-  background: rgba(0, 17, 43, 0.555);
+  background: rgba(3, 0, 44, 0.726);
 }
 .ContentAvisoDelete{
   width:400px;
@@ -136,6 +182,18 @@ h1, h2, h3, h4, h5 {
   background: linear-gradient(40deg, #596fee, #eb236c,#ff8a00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/*animacones de mensages*/
+@keyframes msgSystm{
+  from{
+    opacity: 0.8;
+    transform: translateY(-20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 /*Barra superior principal*/
 .Barra_Superior_principal{
@@ -947,11 +1005,9 @@ margin: 0;
   cursor: pointer;
 }
 .agregar{
-  width: 100%;
-  margin-top: 30px;
   padding: 10px;
   display: grid;
-  justify-content: center;
+  align-items: center;
   position: relative;
 }
 /*descrition*/
@@ -971,17 +1027,19 @@ margin: 0;
   margin-top: 16px;
   background: #ebeffc;
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 80% auto;
   gap: 10px;
   padding: 14px 10px;
 }
-.descrition_box input{
+.descrition_box textarea {
   width: 100%;
   padding: 10px 10px;
+  height: 126px;
   border-radius: 6px;
   border: none;
+  font-family: 'Poppins', sans-serif;
 }
-.descrition_box input{
+.descrition_box textarea{
    outline: none;
 }
 .repetición i{
@@ -1033,7 +1091,7 @@ margin: 0;
 }
 
 #Guadar-btn{
-  padding: 12px 60px;
+  padding: 12px 10px;
   border-radius: 8px;
   border: 2px solid  #00c3ff;
   border-bottom: 6px solid #006a8a;
@@ -1043,6 +1101,8 @@ margin: 0;
   font-weight: bold;
   transition: 0.40s ease-in-out;
   cursor: pointer;
+  height: 50px;
+  bottom: 0;
 }
 #Guadar-btn:hover{
   transform: scale(1.04);
@@ -1525,6 +1585,7 @@ margin: 0;
     opacity: 1;
   }
 }
+
 @keyframes fadeIn {
   from { opacity: 0.2; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1716,6 +1777,13 @@ margin: 0;
 @media (max-width: 700px){
 
 /*Avisos del sistema*/
+/*Avisos del sistema*/ 
+.msgsConfirmacion{
+  position: fixed;
+  z-index: 30;
+  top: 30px;
+  right: 20px;
+}
 .backgrundAviso{
   padding: 20px;
 }
@@ -2073,7 +2141,7 @@ margin: 4px 0 0 0;}
   height: 94%;
 }
 .options2{
-  flex: 0 0 10.5rem;
+  flex: 0 0 10rem;
 }
 .eliminarTasks{
   grid-template-columns: 6% 60% auto;

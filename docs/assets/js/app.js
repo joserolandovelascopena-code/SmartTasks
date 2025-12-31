@@ -22,8 +22,12 @@ export const App = {
     UI.initCarousel();
     UI.renderCategoria();
     UI.renderPrioridad();
+this.toast = document.querySelector(".msgsConfirmacion");
+this.toastContent = document.querySelector(".contentMsg");
+this.toastText = document.querySelector("#msgSystem");
+this.toastIcon = document.querySelector(".iconoSucces");
 
-    document.getElementById("Guadar-btn").addEventListener("click", () => this.addTask());
+   
     document.getElementById("newTask").addEventListener("keypress", (e) => {
       if (e.key === "Enter") this.addTask();
     });
@@ -40,32 +44,61 @@ export const App = {
     bodycontenedor.style.overflow = "hidden";
     }
     });
+  
+btnGuardar.addEventListener("click", async (e) => {
+  e.preventDefault();
 
-    btnGuardar.addEventListener("click", () => {
-      document.querySelector(".subir_tarea").classList.remove("show");
-      document.querySelector(".List_check").classList.remove("show");
-      document.querySelector(".info_tarea").classList.remove("show");
-    });
+  const success = await App.addTask();
+  if (!success) return;
 
-    btnGuardar.addEventListener("click", () => {
-      categoria.classList.remove("active");
-      bodycontenedor.style.overflowY = "auto";
-    });
+  document.querySelector(".subir_tarea")?.classList.remove("show");
+  categoria.classList.remove("active");
+  bodycontenedor.style.overflowY = "auto";
+  document.querySelector(".List_check").classList.remove("show");
+  document.querySelector(".info_tarea").classList.remove("show");
+});
 
-    input.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        categoria.classList.remove("active");
-        bodycontenedor.style.overflowY = "auto";
-      }
-    });
-  },
+
+},
+
+showSystemMsg(msg, type = "error") {
+  if (!this.toast || !this.toastIcon) return;
+
+  this.toastText.textContent = msg;
+  this.toastIcon.className = type === "error"
+    ? "fa fa-xmark"
+    : "fa fa-check";
+
+  clearTimeout(this._toast1);
+  clearTimeout(this._toast2);
+
+  this.toast.classList.remove("active");
+  this.toastContent.classList.remove("show");
+
+  requestAnimationFrame(() => {
+    this.toast.classList.add("active");
+    this.toastContent.classList.add("show");
+  });
+
+  this._toast1 = setTimeout(() => {
+    this.toastContent.classList.remove("show");
+  }, 4000);
+
+  this._toast2 = setTimeout(() => {
+    this.toast.classList.remove("active");
+  }, 5000);
+},
 
 
 async addTask() {
   const input = document.getElementById("newTask");
   const text = input.value.trim();
 
-  if (!text) return alert("Escribe una tarea");
+
+  if (!text) {
+    this.showSystemMsg("Error: escribe una tarea", "error");
+    return false;
+  }
 
   // Obtener usuario
   const { data: sessionData } = await supabaseClient.auth.getSession();
@@ -89,7 +122,7 @@ async addTask() {
   UI.renderTasks(this.tasks);
 
   input.value = "";
-
+  return true;
 }, 
 async getProfile(){
   const { data: sessionData } = await supabaseClient.auth.getSession();

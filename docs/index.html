@@ -54,6 +54,15 @@
         </div>
       </div>
 
+      <section class="msgsConfirmacion">
+        <article class="contentMsg">
+          <div>
+            <i class="fa fa-xmark iconoSucces"></i>
+          </div>
+          <h5 id="msgSystem">Se elimino exitosamente la tarea seleccionada</h5>
+        </article>
+      </section>
+
       <div class="nav-main">
         <nav class="nav_menu">
           <ul class="contenedor_menu">
@@ -381,21 +390,23 @@
                 <article class="descrition_box">
                   <div>
                     <div class="title_description">
-                      <i class="fa-solid fa-hashtag icoDes"></i>
+                      <i class="fa-solid fa-file-lines icoDes"></i>
                       <p>Detalles opcionales</p>
                     </div>
                     <div class="descrition">
-                      <input
-                        type="text"
-                        id="descripción"
-                        placeholder="Descripción opcional"
-                      />
+                      <textarea
+                        name="descripción"
+                        id="descripcion"
+                        placeholder="Descripción"
+                      ></textarea>
                     </div>
                   </div>
+                  <div class="agregar">
+                    <button type="button" id="Guadar-btn" title="Guardar">
+                      Guardar Tarea
+                    </button>
+                  </div>
                 </article>
-                <div class="agregar">
-                  <button id="Guadar-btn" title="Guardar">Guardar Tarea</button>
-                </div>
               </section>
             </main>
           </section>
