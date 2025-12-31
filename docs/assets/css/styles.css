@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5 {
   color: white;
 }
 /*================================*/
-.advertenciaDelete, .active{
+.advertenciaDelete.active{
   position: fixed;
   width: 100%;
   height: 100%;
@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5 {
   display: block;
 }
 .advertenciaDelete{
-  display: block;
+  display: none;
 }
 .backgrundAviso{
   width: 100%;
