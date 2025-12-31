@@ -1,5 +1,8 @@
 // ui.js
 import { App } from "./app.js";
+import { Toast } from "./toastManager/toast.js";
+import { Sound } from "./toastManager/sound.js";
+
 
 export const UI = {
 
@@ -206,7 +209,7 @@ export const UI = {
       // eliminar tarea
 li.querySelector(".opentAviso").addEventListener("click", (e) => {
   e.stopPropagation();
-
+ 
   const btnDeleteTasks = li.querySelector(".delete-btn");
   const btnCancelarDelete = li.querySelector(".CerrarAvisoDelete");
   const avisoDelete = li.querySelector(".advertenciaDelete");
@@ -236,7 +239,14 @@ li.querySelector(".opentAviso").addEventListener("click", (e) => {
       avisofondo.classList.remove("hide");
       contenidoAviso.classList.remove("hide");
       contenedorEditar.classList.remove("active");
+
+     
       App.deleteTask(task.id);
+      Toast.show("Se eliminó exitosamente la tarea","success");
+        document.addEventListener("click", () => {
+        Sound.play("success");
+      }, { once: true });
+
     }, 400);
   };
 

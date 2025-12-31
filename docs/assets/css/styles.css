@@ -22,11 +22,9 @@ h1, h2, h3, h4, h5 {
   z-index: 30;
   top: 30px;
   right: 40px;
-  display: none;
+  pointer-events: none;
 }
-.msgsConfirmacion.active{
-  display: block;
-}
+
 .contentMsg{
   width: auto;
   max-width: 600px;
@@ -37,15 +35,20 @@ h1, h2, h3, h4, h5 {
   gap: 20px;
   align-items: center;
   background: white;
-  box-shadow: 0  0 30px rgb(238, 237, 237);
+  box-shadow: 0  8px 30px rgb(214, 214, 214);
   border-radius: 8px;
   border: 1px solid rgb(189, 186, 186);
-  animation: msgSystm .5s ease-in-out;
+
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity .40s ease, transform .40s ease;
 }
 
 .contentMsg.show{
-  animation: msgSystm .4s ease-in-out forwards;
+  opacity: 1;
+  transform: translateX(0);
 }
+
 .contentMsg h5{
   font-weight: 600;
   color: #313131;
@@ -83,7 +86,8 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
   align-items: center;
   padding: 50px;
-  background: rgba(3, 0, 44, 0.726);
+  background: rgba(0, 4, 53, 0.623);
+  backdrop-filter: blur(2px) ;
 }
 .ContentAvisoDelete{
   width:400px;
@@ -1794,11 +1798,24 @@ margin: 0;
 @media (max-width: 700px){
 
 /*Avisos del sistema*/
+.contentMsg{
+  transform: translateY(-40px);
+}
+
+.contentMsg.show{
+  opacity: 1;
+  transform: translateY(0);
+}
 .msgsConfirmacion{
   position: fixed;
   z-index: 30;
   top: 30px;
-  right: 20px;
+  right: auto;
+  width: 100%;
+}
+.backgraudMsgs{
+  display: grid;
+  justify-content: center;
 }
 .backgrundAviso{
   padding: 20px;

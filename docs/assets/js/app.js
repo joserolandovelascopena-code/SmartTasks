@@ -1,8 +1,9 @@
 // app.js
-// app.js
 import { Storage } from "./storage.js";
 import { UI } from "./ui.js";
 import { supabaseClient } from "./supabase.js"; 
+import { Toast } from "./toastManager/toast.js";
+import { Sound } from "./toastManager/sound.js";
 
 export const App = {
   tasks: [],
@@ -11,6 +12,9 @@ export const App = {
   async loadTasks() { this.tasks = await Storage.getTasks(); },
   async init() {
     await this.loadTasks();
+
+    Sound.init();
+    Toast.init();
 
     const profile = await Storage.getProfile();
      if (profile) {
@@ -22,10 +26,6 @@ export const App = {
     UI.initCarousel();
     UI.renderCategoria();
     UI.renderPrioridad();
-this.toast = document.querySelector(".msgsConfirmacion");
-this.toastContent = document.querySelector(".contentMsg");
-this.toastText = document.querySelector("#msgSystem");
-this.toastIcon = document.querySelector(".iconoSucces");
 
    
     document.getElementById("newTask").addEventListener("keypress", (e) => {
@@ -61,49 +61,26 @@ btnGuardar.addEventListener("click", async (e) => {
 
 },
 
-showSystemMsg(msg, type = "error") {
-  if (!this.toast || !this.toastIcon) return;
-
-  this.toastText.textContent = msg;
-  this.toastIcon.className = type === "error"
-    ? "fa fa-xmark"
-    : "fa fa-check";
-
-  clearTimeout(this._toast1);
-  clearTimeout(this._toast2);
-
-  this.toast.classList.remove("active");
-  this.toastContent.classList.remove("show");
-
-  requestAnimationFrame(() => {
-    this.toast.classList.add("active");
-    this.toastContent.classList.add("show");
-  });
-
-  this._toast1 = setTimeout(() => {
-    this.toastContent.classList.remove("show");
-  }, 4000);
-
-  this._toast2 = setTimeout(() => {
-    this.toast.classList.remove("active");
-  }, 5000);
-},
-
-
 async addTask() {
   const input = document.getElementById("newTask");
   const text = input.value.trim();
 
 
   if (!text) {
-    this.showSystemMsg("Error: escribe una tarea", "error");
+    Toast.show("Error: escribe una tarea", "error");
     return false;
   }
 
   // Obtener usuario
   const { data: sessionData } = await supabaseClient.auth.getSession();
-  if (!sessionData.session) return alert("No hay sesión activa");
+  if (!sessionData.session) {
+    Toast.show("Error: No hay sesión activa", "error");
+    document.addEventListener("click", () => {
+    Sound.play("error");
+}, { once: true });
 
+    return false;
+  }
   const user_id = sessionData.session.user.id;
 
   const nuevaTarea = {
@@ -198,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () =>{
   const contenAdd = document.querySelector(".subir_tarea");
   const bodycontenedor = document.querySelector(".contenedor");
   const closeAddTaks = document.getElementById("CloseAddTasks");
+  const bodyDoc = document.querySelector("body");
 
   openAdd.addEventListener("click", () =>{
     contenAdd.classList.add("show")
