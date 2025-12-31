@@ -174,13 +174,14 @@ export const UI = {
         <div class="backgrundAviso">
           <article class="ContentAvisoDelete">
             <header class="headerMainAviso">
-              <p>Aviso de confirmación</p>
+              <p>Borrar tarea</p>
             </header>
             <div class="headerAviso">
               <i class="fa fa-xmark"></i>
             </div>
             <div class="textAviso">
-              <h4>¿Estás seguro de eliminar esta tarea?</h4>
+              <h4>¿Estás seguro de que deseas eliminar esta tarea?</h4>
+              <p>Esta acción no se puede deshacer</p>
               <div class="botonAviso">
                 <button class="CerrarAvisoDelete">Cancelar</button
                 ><button class="delete-btn">Si, Eliminar</button>
