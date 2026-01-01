@@ -44,6 +44,7 @@ export const UI = {
      </stection>
      <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
    
+      
       <div class="editar_item">
         <section class="Editar_targeta">
           <div class="backgrauEditar">
@@ -60,7 +61,7 @@ export const UI = {
                   <input
                     type="text"
                     class="input editar"
-                    placeholder="Edita la actividad"
+                    placeholder="Actividad"
                   />
                 </article>
 
@@ -172,7 +173,7 @@ export const UI = {
           </div>
         </section>
       </div>
-
+      
         <section class="advertenciaDelete">
         <div class="backgrundAviso">
           <article class="ContentAvisoDelete">
