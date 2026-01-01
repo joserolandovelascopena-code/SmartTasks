@@ -243,8 +243,6 @@ li.querySelector(".opentAviso").addEventListener("click", (e) => {
      
      App.deleteTask(task.id);
      Toast.show("Se eliminó exitosamente la tarea", "success");
-
-
     }, 400);
   };
 

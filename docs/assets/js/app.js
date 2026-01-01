@@ -72,7 +72,9 @@ async addTask() {
 
 
   if (!text) {
-   Toast.show("Error: escribe una tarea", "error");
+   Toast.show(
+   "Error: escribe una tarea",
+   "error",{ sound: true });
    return false;
   }
 
@@ -104,8 +106,10 @@ async addTask() {
 }, 
 async getProfile(){
   const { data: sessionData } = await supabaseClient.auth.getSession();
-  if (!sessionData.session) return alert("No hay sesión activa");
-
+  if (!sessionData.session) {
+    Toast.show("Error: No hay sesión activa", "error");
+    return false;
+  }
   const user_id = sessionData.session.user.id;
 
   const loaderUser = {

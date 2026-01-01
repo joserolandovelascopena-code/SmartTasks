@@ -11,22 +11,26 @@ export const Toast = {
     this.icon = document.querySelector(".iconoSucces");
   },
 
-  show(msg, type = "success", time = 4000) {
-    if (!this.el) return;
+ show(msg, type = "success", options = {}) {
+  if (!this.el) return;
 
-    this.text.textContent = msg;
-    this.icon.className = type === "error"
-      ? "fa fa-xmark"
-      : "fa fa-check";
+  const { sound = false, time = 4000 } = options;
 
+  this.text.textContent = msg;
+  this.icon.className = type === "error"
+    ? "fa fa-xmark"
+    : "fa fa-check";
+
+  if (sound) {
     Sound.play(type);
-
-    clearTimeout(this.timer);
-    this.el.classList.add("show");
-
-    this.timer = setTimeout(() => {
-      this.el.classList.remove("show");
-    }, time);
-
   }
+
+  clearTimeout(this.timer);
+  this.el.classList.add("show");
+
+  this.timer = setTimeout(() => {
+    this.el.classList.remove("show");
+  }, time);
+}
+
 };
