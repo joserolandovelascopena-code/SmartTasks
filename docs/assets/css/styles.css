@@ -1359,6 +1359,7 @@ margin: 0;
   position: absolute;
   width: 100%;
   z-index: 17; 
+  align-items: center;
 }
 .header-editar p{
   font-weight: bold;
@@ -2156,7 +2157,13 @@ margin: 4px 0 0 0;}
   gap:10px ;
 }
 /*=============================*/
-
+.header-editar{
+  padding: 15px 30px 0px 18px;
+}
+.Closeeditar {
+    font-size: 28px;
+   color: #000;
+}
 .backgrauEditar{
   justify-items: auto;
 }
@@ -2164,17 +2171,18 @@ margin: 4px 0 0 0;}
   position: relative;
   overflow: hidden;
   top: 0;
+  padding-top: 50px;
   margin-top: 0;
   width: 600px;
   height: 100%;
   border-radius: 0;
 }
 .options2{
-  flex: 0 0 10rem;
+  flex: 0 0 10.5rem;
 }
 .eliminarTasks{
   grid-template-columns: 6% 60% auto;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 .footer-editar{
   padding: 15px 20px;
