@@ -241,11 +241,9 @@ li.querySelector(".opentAviso").addEventListener("click", (e) => {
       contenedorEditar.classList.remove("active");
 
      
-      App.deleteTask(task.id);
-      Toast.show("Se eliminó exitosamente la tarea","success");
-        document.addEventListener("click", () => {
-        Sound.play("success");
-      }, { once: true });
+     App.deleteTask(task.id);
+     Toast.show("Se eliminó exitosamente la tarea", "success");
+
 
     }, 400);
   };

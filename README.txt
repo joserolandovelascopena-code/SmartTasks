@@ -18,7 +18,13 @@ Estructura de SmartatTasks
 │     │       ├── supabase.js
 │     │       ├── auth.js 
 │     │       ├── theme.js (Funcion de temas por botones de prefencia de stylo Claro, Oscuro, Sistema)
-│     │       └── ui.js (se ecarga delo visual en la app, pinta las peticiones del usuario)
+│     │       ├── ui.js (se ecarga delo visual en la app, pinta las peticiones del usuario) toastManager
+│     │       └── /toastManager
+│     │           ├── /sunsSystem
+│     │           │   ├── errorMsg.wav
+│     │           │   └── succes.mp3
+│     │           ├── sound.js
+│     │           └── toast.js
 │     ├── /pages
 │     │   ├── /autentication
 │     │   │   ├── login.html

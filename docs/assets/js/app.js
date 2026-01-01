@@ -5,6 +5,11 @@ import { supabaseClient } from "./supabase.js";
 import { Toast } from "./toastManager/toast.js";
 import { Sound } from "./toastManager/sound.js";
 
+document.addEventListener("pointerdown", () => {
+  Sound.unlock();
+}, { once: true });
+
+
 export const App = {
   tasks: [],
   categoriaSeleccionada: "", 
@@ -28,7 +33,7 @@ export const App = {
     UI.renderPrioridad();
 
    
-    document.getElementById("newTask").addEventListener("keypress", (e) => {
+  document.getElementById("newTask").addEventListener("keypress", (e) => {
       if (e.key === "Enter") this.addTask();
     });
 
@@ -45,7 +50,7 @@ export const App = {
     }
     });
   
-btnGuardar.addEventListener("click", async (e) => {
+  btnGuardar.addEventListener("click", async (e) => {
   e.preventDefault();
 
   const success = await App.addTask();
@@ -67,18 +72,14 @@ async addTask() {
 
 
   if (!text) {
-    Toast.show("Error: escribe una tarea", "error");
-    return false;
+   Toast.show("Error: escribe una tarea", "error");
+   return false;
   }
 
   // Obtener usuario
   const { data: sessionData } = await supabaseClient.auth.getSession();
   if (!sessionData.session) {
     Toast.show("Error: No hay sesión activa", "error");
-    document.addEventListener("click", () => {
-    Sound.play("error");
-}, { once: true });
-
     return false;
   }
   const user_id = sessionData.session.user.id;
