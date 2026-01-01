@@ -173,7 +173,7 @@ export const UI = {
           </div>
         </section>
       </div>
-      
+
         <section class="advertenciaDelete">
         <div class="backgrundAviso">
           <article class="ContentAvisoDelete">
@@ -184,7 +184,7 @@ export const UI = {
               <i class="far fa-trash-can"></i>
             </div>
             <div class="textAviso">
-              <h4>¿Estás seguro de que deseas eliminar esta tarea?</h4>
+              <h3>¿Estás seguro de que deseas eliminar esta tarea?</h3>
               <p>Esta acción no se puede deshacer.</p>
               <div class="botonAviso">
                 <button class="CerrarAvisoDelete">Cancelar</button

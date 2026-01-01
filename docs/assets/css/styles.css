@@ -50,7 +50,6 @@ h1, h2, h3, h4, h5 {
 }
 
 .contentMsg h5{
-  font-weight: 600;
   font-size: 15px;
   color: #313131;
   font-family: 'Inter', sans-serif;
@@ -87,8 +86,7 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
   align-items: center;
   padding: 50px;
-  background: rgba(0, 4, 53, 0.623);
-  backdrop-filter: blur(2px) ;
+  background: rgba(0, 3, 34, 0.76);
 }
 .ContentAvisoDelete{
   width:400px;
@@ -112,14 +110,6 @@ h1, h2, h3, h4, h5 {
   animation: fadeIn .4s ease-in-out reverse forwards;
 }
 
-
-.ContentAvisoDelete h4{
-  font-weight: normal;
-  color: #000000;
-  text-align: center;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-}
 .headerMainAviso{
   width: 100%;
   padding: 8px;
@@ -137,6 +127,14 @@ h1, h2, h3, h4, h5 {
 }
 .textAviso{
   padding:16px ;
+}
+.textAviso h3{
+  font-weight: bold;
+  font-size: 15px;
+  color: #000000;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+
 }
 .textAviso p{
   font-size: 14px;
@@ -769,9 +767,6 @@ margin: 0;
 #CloseAddTasks{
   cursor: pointer;
 }
-.Nav_addTasks h3{
-  font-weight: normal;
-}
 #task-input{
   position: relative;
   display: flex;
@@ -1366,8 +1361,8 @@ margin: 0;
   z-index: 17; 
 }
 .header-editar p{
-  font-weight: 600;
-  font-size: 17px;
+  font-weight: bold;
+  font-size: 20px;
 }
 .Closeeditar {
   font-size: 25px;
@@ -1821,9 +1816,7 @@ margin: 0;
 .ContentAvisoDelete{
   width:400px;
 }
-.ContentAvisoDelete h4{
-  font-size: 15px;
-}
+
 .ContentAvisoDelete i{
   font-size: 20px;
   height: 46px;
@@ -2163,6 +2156,7 @@ margin: 4px 0 0 0;}
   gap:10px ;
 }
 /*=============================*/
+
 .backgrauEditar{
   justify-items: auto;
 }
