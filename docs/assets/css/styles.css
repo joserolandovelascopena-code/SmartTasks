@@ -1015,11 +1015,21 @@ margin: 0;
   border-radius: 10px;
   cursor: pointer;
 }
+.agregar2{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
 .agregar{
-  padding: 10px;
   display: grid;
-  align-items: center;
-  position: relative;
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid gainsboro;
+  padding: 15px 20px;
+  background: white;
 }
 /*descrition*/
 .title_description{
@@ -1101,7 +1111,7 @@ margin: 0;
   background: transparent;
 }
 
-#Guadar-btn{
+.Guadar-btn{
   padding: 12px 10px;
   border-radius: 8px;
   border: 2px solid  #00c3ff;
@@ -1113,10 +1123,14 @@ margin: 0;
   transition: 0.40s ease-in-out;
   cursor: pointer;
   height: 50px;
-  bottom: 0;
+  width: 100%;
 }
-#Guadar-btn:hover{
+.Guadar-btn:hover{
   transform: scale(1.04);
+}
+.btnmovil{
+  display: none;
+  animation: fadeIn .5s ease ;
 }
 
 /*======================================*/
@@ -2138,7 +2152,6 @@ margin: 4px 0 0 0;}
   font-size: 13px;
 }
 .agregar{
-  justify-content:unset;
   padding: 0;
   position: fixed;
   bottom: 0;
@@ -2147,6 +2160,12 @@ margin: 4px 0 0 0;}
   border-top: 1px solid gainsboro;
   padding: 15px 20px;
   background: white;
+}
+.btnmovil{
+  display: block;
+}
+.btnmovilPc{
+  display: none;
 }
 
 /*descrition*/

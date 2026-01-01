@@ -38,9 +38,9 @@ export const App = {
     });
 
     // Lógica de mostrar y ocultar categoría
-    const categoria = document.querySelector(".Categoria");
+   const categoria = document.querySelector(".Categoria");
     const input = document.getElementById("newTask");
-    const btnGuardar = document.getElementById("Guadar-btn");
+    const btnGuardar = document.querySelectorAll(".Guadar-btn");
     const bodycontenedor = document.querySelector(".contenedor");
 
    input.addEventListener("focus", () => {
@@ -49,19 +49,24 @@ export const App = {
     bodycontenedor.style.overflow = "hidden";
     }
     });
+    
+    btnGuardar.forEach(btnSave => {
+      btnSave.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const success = await App.addTask();
+      if (!success) return;
+
+      document.querySelector(".subir_tarea")?.classList.remove("show");
+      categoria.classList.remove("active");
+      bodycontenedor.style.overflowY = "auto";
+      document.querySelector(".List_check").classList.remove("show");
+      document.querySelector(".info_tarea").classList.remove("show");
+    });
+
+    });
   
-  btnGuardar.addEventListener("click", async (e) => {
-  e.preventDefault();
 
-  const success = await App.addTask();
-  if (!success) return;
-
-  document.querySelector(".subir_tarea")?.classList.remove("show");
-  categoria.classList.remove("active");
-  bodycontenedor.style.overflowY = "auto";
-  document.querySelector(".List_check").classList.remove("show");
-  document.querySelector(".info_tarea").classList.remove("show");
-});
 
 
 },
