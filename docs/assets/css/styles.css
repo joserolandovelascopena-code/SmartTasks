@@ -2102,6 +2102,10 @@ margin: 4px 0 0 0;}
 .conten_repetion{
   width: 286px;
 }
+.scroll_subir_task{
+  padding: 0 0 600px 0;
+  margin-top: 20px;
+}
 .contenido_main{
   display: block;
   max-height: 100%;
@@ -2109,7 +2113,7 @@ margin: 4px 0 0 0;}
   overflow-y:auto ;
   border: 0px solid gainsboro;
   border-radius: 0px;
-  padding: 10px;
+  padding:10px  ;
 }
 .contenedor_categoria{
   grid-row: 1 / span 1;
@@ -2136,10 +2140,15 @@ margin: 4px 0 0 0;}
 .agregar{
   justify-content:unset;
   padding: 0;
-}
-#Guadar-btn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  border-top: 1px solid gainsboro;
+  padding: 15px 20px;
+  background: white;
 }
+
 /*descrition*/
 .title_description{
   margin-block-end: 6px;
@@ -2178,7 +2187,7 @@ margin: 4px 0 0 0;}
   border-radius: 0;
 }
 .options2{
-  flex: 0 0 10.5rem;
+  flex: 0 0 10.4rem;
 }
 .eliminarTasks{
   grid-template-columns: 6% 60% auto;
