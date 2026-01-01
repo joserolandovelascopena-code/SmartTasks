@@ -1348,7 +1348,7 @@ margin: 0;
   overflow: hidden;
   margin-top: 50px;
   padding: 12px;
-  padding-top: 50px;
+  padding-top: 40px;
   width: 600px;
   height: 530px;
   background-color: rgb(255, 255, 255);
@@ -1357,19 +1357,17 @@ margin: 0;
 }
 .header-editar{
   display: grid;
-  grid-template-columns: 97% auto;
+  grid-template-columns: 99% auto;
   top: 0;
   left: 0;
-  padding: 8px 18px;
+  padding: 10px 30px 0px 18px;
   position: absolute;
   width: 100%;
-  box-shadow: 0 3px 5px rgba(220, 220, 220, 0.63);
-  z-index: 17;
+  z-index: 17; 
 }
 .header-editar p{
   font-weight: 600;
   font-size: 17px;
-  margin: 3px;
 }
 .Closeeditar {
   font-size: 25px;
@@ -1412,7 +1410,6 @@ margin: 0;
 }
 
 .contenedor_Editar{
-  margin-top: 10px;
   position: relative;
   display: flex;
   gap: 10px;
@@ -2169,16 +2166,11 @@ margin: 4px 0 0 0;}
 .backgrauEditar{
   justify-items: auto;
 }
-.header-editar{
-
-  grid-template-columns: 95% auto;
-}
 .cuerpo_modal{
   position: relative;
   overflow: hidden;
   top: 0;
   margin-top: 0;
-  padding-top: 50px;
   width: 600px;
   height: 100%;
   border-radius: 0;
