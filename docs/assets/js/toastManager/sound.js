@@ -4,12 +4,8 @@ export const Sound = {
   unlocked: false,
 
   init() {
-    this.success = new Audio(
-      "assets/js/toastManager/sunsSystem/succes.mp3"
-    );
-    this.error = new Audio(
-      "assets/js/toastManager/sunsSystem/errorMsg.wav"
-    );
+    this.success = new Audio("assets/js/toastManager/sunsSystem/succes.mp3");
+    this.error = new Audio("assets/js/toastManager/sunsSystem/errorMsg.wav");
 
     this.success.volume = 0.1;
     this.error.volume = 0.1;
@@ -27,8 +23,8 @@ export const Sound = {
     if (!audio) return;
 
     audio.currentTime = 0;
-    audio.play().catch(err => {
+    audio.play().catch((err) => {
       console.warn("Audio bloqueado:", err);
     });
-  }
+  },
 };

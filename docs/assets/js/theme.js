@@ -22,7 +22,6 @@ function applyTheme(theme) {
     return;
   }
 
-
   lightBtn.style.background = "";
   darkBtn.style.background = "";
   systemBtn.style.background = "";
@@ -50,7 +49,7 @@ function applyTheme(theme) {
     }
     if (plusAdd) plusAdd.style.background = "rgba(0, 13, 255, 0.93)";
     if (iconsNav && iconsNav.length) {
-      iconsNav.forEach(ico => {
+      iconsNav.forEach((ico) => {
         ico.style.color = "rgba(0, 13, 255, 0.93)";
       });
     }
@@ -69,14 +68,11 @@ function applyTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-
   let savedTheme = localStorage.getItem("theme");
   if (!VALID_THEMES.includes(savedTheme)) savedTheme = "system";
 
   applyTheme(savedTheme);
-
 
   document.getElementById("Default_light")?.addEventListener("click", () => {
     applyTheme("light");
@@ -87,9 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("System_theme")?.addEventListener("click", () => {
     applyTheme("system");
   });
-
 });
-
 
 window
   .matchMedia("(prefers-color-scheme: dark)")

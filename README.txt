@@ -9,7 +9,7 @@ Estructura de SmartatTasks
 │     │   │   ├── styles.css
 │     │   │   └── theme.css (Temas de index ya configurado)
 │     │   ├── /icons
-│     │   │   ├── icon-192.png (logo app)
+│     │   │   ├── icon-192.png (logo app) 
 │     │   │   └── icon-512.png (igual logo app)
 │     │   └── /js
 │     │       ├── app.js (app se encarga de las peticiones backend)
