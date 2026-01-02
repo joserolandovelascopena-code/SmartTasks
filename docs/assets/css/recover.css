@@ -1,7 +1,12 @@
 :root {
-  --bg-main: radial-gradient(circle at top, #020617 0%, #020617 60%, #020617 100%);
+  --bg-main: radial-gradient(
+    circle at top,
+    #020617 0%,
+    #020617 60%,
+    #020617 100%
+  );
   --card-bg: rgba(0, 6, 29, 0.92);
-  --card-contfir:rgba(0, 13, 46, 0.92);
+  --card-contfir: rgba(0, 13, 46, 0.92);
 
   --primary: #22c5af;
   --primary-soft: rgba(34, 197, 175, 0.15);
@@ -17,12 +22,12 @@
 
   --transition: 0.25s ease;
 }
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 body {
@@ -30,11 +35,11 @@ body {
   display: grid;
   place-items: center;
   background: var(--bg-main);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--text-main);
   padding: 24px;
 }
-.containerNav{
+.containerNav {
   position: absolute;
   top: 18px;
   left: 18px;
@@ -51,29 +56,25 @@ body {
   transition: 0.3s ease-in-out;
   cursor: pointer;
   background: var(--card-bg);
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.7),
-  inset 0 0 0 1px var(--border-soft);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 0 0 1px var(--border-soft);
   color: #38bdf8;
 }
-.containerNav:hover{
-    box-shadow:
-    0 0 0 2px var(--primary-soft),
-    inset 0 0 0 1px var(--primary);
+.containerNav:hover {
+  box-shadow: 0 0 0 2px var(--primary-soft), inset 0 0 0 1px var(--primary);
 }
-.nav{
+.nav {
   left: 0;
 }
 
-.loader{
+.loader {
   display: none;
 }
-.loader.show{
+.loader.show {
   position: absolute;
   margin-left: 10%;
-  width: 620px;        
-  height: 6px;        
-  background: #d0ccff;  
+  width: 620px;
+  height: 6px;
+  background: #d0ccff;
   border-radius: 15px;
   margin: -9px auto;
   display: block;
@@ -84,15 +85,15 @@ body {
 .loader::before {
   content: "";
   position: absolute;
-  width: 50%;       
+  width: 50%;
   height: 100%;
-  background: #0076d6; 
+  background: #0076d6;
   border-radius: 10px;
-  animation: barraProgrets 0.90s linear forwards infinite;
+  animation: barraProgrets 0.9s linear forwards infinite;
 }
 
 /*========================*/
-.messageModal{
+.messageModal {
   position: fixed;
   top: 0;
   z-index: 40;
@@ -100,19 +101,18 @@ body {
   width: 100%;
   height: 100%;
 }
-svg{
+svg {
   position: relative;
   width: 160px;
   height: 160px;
   margin-left: 10px;
   padding: 10px;
   margin-bottom: 0px;
-
 }
-.messageModal.show{
+.messageModal.show {
   display: block;
 }
-.ConfirmationEmail{
+.ConfirmationEmail {
   position: relative;
   width: 100%;
   height: 100%;
@@ -122,25 +122,23 @@ svg{
   place-items: center;
   animation: intro 0.6s ease;
 }
-.Contentext{
+.Contentext {
   width: 360px;
   height: 530px;
   background: var(--card-contfir);
-  border-radius: 12px; 
-    box-shadow:
-    0 30px 70px rgba(0,0,0,.7),
-    inset 0 0 0 1px var(--border-soft);
+  border-radius: 12px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 0 0 1px var(--border-soft);
   padding: 20px;
   line-height: 1.2;
-  animation: fadeIn2 .4s ease-in;
+  animation: fadeIn2 0.4s ease-in;
 }
-.headerMessage{
+.headerMessage {
   padding: 10px;
   background: #020617;
   border-radius: 12px;
   margin-top: 10px;
 }
-.Contentext h3{
+.Contentext h3 {
   text-align: center;
   font-size: 18px;
   color: #ffffff;
@@ -153,22 +151,22 @@ svg{
   place-items: center;
   width: 100%;
   height: 200px;
-  background:  linear-gradient(40deg, #85dcff6c,  #85dcff71);
+  background: linear-gradient(40deg, #85dcff6c, #85dcff71);
   border-radius: 12px;
   color: #e4e4e4;
 }
-.IconoMessage i{
+.IconoMessage i {
   font-size: 30px;
   color: #71dbc1;
 }
-.postEmail{
- top: 0;
- position: absolute;
- width: 100%;
- height: 100%;
- background:transparent;
+.postEmail {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
 }
-.containerIco{
+.containerIco {
   position: relative;
   height: 100%;
   width: 100%;
@@ -178,7 +176,7 @@ svg{
   display: grid;
   place-content: center;
 }
-#iconCen{
+#iconCen {
   margin-top: 8px;
   padding: 8px;
   height: 50px;
@@ -189,14 +187,14 @@ svg{
   border: 2px solid rgb(255, 0, 119);
   box-shadow: 0 0 30px #f790f7;
 }
-.textInfo{
+.textInfo {
   font-size: 15px;
-   color: #d4d4d4;
+  color: #d4d4d4;
 }
-.aviso strong{
+.aviso strong {
   color: #f7f7f7;
 }
-.emailEnviado{
+.emailEnviado {
   margin-top: 15px;
   padding: 15px 12px;
   border-radius: 12px;
@@ -205,59 +203,58 @@ svg{
   color: white;
   font-weight: 700;
 }
-.aviso{
-   margin-top: 10px;
+.aviso {
+  margin-top: 10px;
   font-size: 15px;
   color: #d4d4d4;
   line-height: 1.2;
 }
-.btnsOpciones{
+.btnsOpciones {
   display: grid;
-  grid-template-columns: auto 45% ;
+  grid-template-columns: auto 45%;
   gap: 5px;
 }
-.btnsOpciones button{
+.btnsOpciones button {
   margin-top: 10px;
   padding: 10px 8px;
-    background: #020617;
-   color: #d0ccff;
+  background: #020617;
+  color: #d0ccff;
   border-radius: 10px;
   border: 2px solid transparent;
   transition: 0.3s ease;
   font-size: 14px;
 }
-.btnsOpciones button:hover{
+.btnsOpciones button:hover {
   border: 2px solid rgb(0, 183, 255);
-  scale: .95;
+  scale: 0.95;
 }
 
-#loginhrF a{
+#loginhrF a {
   text-decoration: none;
   color: #c5c5c5;
   font-weight: 500;
 }
 
-#bntTemp{
+#bntTemp {
   display: flex;
   gap: 4px;
-  transition:0.3s ease;
+  transition: 0.3s ease;
   width: 100%;
   justify-content: center;
 }
 #bntTemp:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-
 }
-#Tiempo{
+#Tiempo {
   color: #028dff;
   font-weight: bold;
 }
 #bntTemp {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.btnAcpetar{
+.btnAcpetar {
   margin-top: 20px;
   width: 100%;
   padding: 14px;
@@ -270,47 +267,47 @@ svg{
   background: linear-gradient(135deg, #22c5af, #38bdf8);
   transition: var(--transition);
 }
-.btnAcpetar:hover{
-    transform: translateY(-1px);
-  box-shadow: 0 12px 30px rgba(34,197,175,.35);
+.btnAcpetar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(34, 197, 175, 0.35);
 }
 
 /*========================*/
-.conexion_recover{
-    position: absolute;
-    right: 20px;
-    bottom: 30px;
-    border-radius: 12px;
-    border-radius: var(--radius-lg);
-    width: 300px;
-    height: 100px;
-    z-index: 50;
-    box-shadow: 0 0 10px rgb(0, 203, 230);
-    display: none; 
+.conexion_recover {
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  border-radius: 12px;
+  border-radius: var(--radius-lg);
+  width: 300px;
+  height: 100px;
+  z-index: 50;
+  box-shadow: 0 0 10px rgb(0, 203, 230);
+  display: none;
 }
-.conx{
-    display: grid;
-    grid-template-columns: auto;
-    gap: 4px;
+.conx {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 4px;
 }
-.conexion_recover.active{
-    display: block;
-    animation: fadeUp 0.4s ease;
+.conexion_recover.active {
+  display: block;
+  animation: fadeUp 0.4s ease;
 }
-.content_msg{
-    padding: 10px;
-    text-align: center;
+.content_msg {
+  padding: 10px;
+  text-align: center;
 }
-.content_msg i{
-    color: #8bf7dc;
-    font-size: 36px;
-    margin: 6px;
+.content_msg i {
+  color: #8bf7dc;
+  font-size: 36px;
+  margin: 6px;
 }
-.content_msg p{ 
-    font-weight:600;
-    color: #8bf7dc;
-    font-size: 15px;
-    font-family: "Roboto";
+.content_msg p {
+  font-weight: 600;
+  color: #8bf7dc;
+  font-size: 15px;
+  font-family: "Roboto";
 }
 
 /*Animaciones efects*/
@@ -344,22 +341,20 @@ svg{
 }
 /*==============================================*/
 
-.contenedor{
+.contenedor {
   position: relative;
   width: 560px;
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.7),
-    inset 0 0 0 1px var(--border-soft);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 0 0 1px var(--border-soft);
   animation: fadeIn 0.5s ease;
   overflow: hidden;
 }
-.contenido{
-    padding: 32px 34px;
+.contenido {
+  padding: 32px 34px;
 }
-.header h2{
-  font-family: 'Poppins', sans-serif;
+.header h2 {
+  font-family: "Poppins", sans-serif;
   font-size: 30px;
   font-weight: 700;
   color: var(--primary);
@@ -371,7 +366,7 @@ svg{
   line-height: 1.6;
   color: var(--text-muted);
 }
-.contenInputs{
+.contenInputs {
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -381,7 +376,7 @@ svg{
   font-size: 13px;
   font-weight: 500;
 }
-.input{
+.input {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -392,11 +387,8 @@ svg{
   transition: var(--transition);
 }
 
-
 .input:focus-within {
-  box-shadow:
-    0 0 0 2px var(--primary-soft),
-    inset 0 0 0 1px var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-soft), inset 0 0 0 1px var(--primary);
 }
 
 .input input {
@@ -427,7 +419,7 @@ svg{
 
 .contenInputs button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 30px rgba(34,197,175,.35);
+  box-shadow: 0 12px 30px rgba(34, 197, 175, 0.35);
 }
 
 #msg {
@@ -435,87 +427,98 @@ svg{
   text-align: center;
   font-size: 14px;
   min-height: 18px;
-
 }
 
-
-#msg.error { color: var(--text-error);}
-#msg.success { color: var(--text-success);}
+#msg.error {
+  color: var(--text-error);
+}
+#msg.success {
+  color: var(--text-success);
+}
 
 /* ANIMATIONS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn2 {
-  from { transform: translateY(12px); }
-  to {  transform: translateY(0); }
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 480px) {
+  .header h2 {
+    font-size: 26px;
+  }
+  .contenedor {
+    position: relative;
+    margin-top: 0px;
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+  }
+  .loader.show {
+    margin-top: 38px;
+  }
 
-  .header h2{
-  font-size: 26px;
-}
-.contenedor{
-  position: relative;
-  margin-top: 0px;
-  width: 100%;
-  height: 400px;
-  border-radius: 8px;
-}
-.loader.show{
-  margin-top: 38px;
-}
-
-.contenido{
+  .contenido {
     padding: 20px 20px;
-}
-.Contentext{
-  width: 330px;
-  height: 660px;
-  background: rgba(0, 18, 63, 0.92);
-}
-svg{
-  width: 200px;
-  height: 200px;
-}
-.Contentext h3{
-  text-align: center;
-  margin-top: 5px;
-  font-size: 18px;
-}
-.IconoMessage {
-  height: 280px;}
-.btnsOpciones{
-  display: grid;
-  grid-template-columns: auto 40% ;}
+  }
+  .Contentext {
+    width: 330px;
+    height: 660px;
+    background: rgba(0, 18, 63, 0.92);
+  }
+  svg {
+    width: 200px;
+    height: 200px;
+  }
+  .Contentext h3 {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 18px;
+  }
+  .IconoMessage {
+    height: 280px;
+  }
+  .btnsOpciones {
+    display: grid;
+    grid-template-columns: auto 40%;
+  }
 
-.conexion_recover{
+  .conexion_recover {
     width: 80%;
     height: 50px;
     right: 40px;
-}
-.conx{
+  }
+  .conx {
     display: grid;
     grid-template-columns: 10% auto;
     gap: 16px;
     justify-content: center;
-    
-}
+  }
 
-.content_msg i{
+  .content_msg i {
     font-size: 26px;
     margin: 0px;
     margin-top: 3px;
-}
-.content_msg p{ 
+  }
+  .content_msg p {
     margin-top: 6px;
-}
+  }
 
-.messageModal{
-  top: 0;
-}
-
+  .messageModal {
+    top: 0;
+  }
 }

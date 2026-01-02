@@ -87,6 +87,26 @@ async updateTask(id, fields) {
     return null;
   }
 },
+
+async SaveUpdateTask(id, fields) {
+  try {
+    const { data, error } = await supabaseClient
+      .from("tasks")
+      .update(fields)
+      .eq("id", id)
+      .select();
+
+    if (error) {
+      console.error("Error editando tarea:", error);
+      return null;
+    }
+
+    return data?.[0] ?? null;
+  } catch (err) {
+    console.error("Exception SaveUpdateTask:", err);
+    return null;
+  }
+},
   // Eliminar tarea
   async deleteTask(id) {
     const { error } = await supabaseClient
