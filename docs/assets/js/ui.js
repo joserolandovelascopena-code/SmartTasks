@@ -421,7 +421,6 @@ export const UI = {
     if (input) input.value = task.text;
     if (textarea) textarea.value = task.description ?? "";
 
-    // marcar categoría
     li.querySelectorAll(".options2").forEach((o) => {
       o.classList.toggle("selected", o.dataset.categoria === task.categoria);
     });
@@ -455,6 +454,7 @@ export const UI = {
         document.querySelectorAll(".options-prioridad").forEach((p) => {
           p.style.background = "";
           p.style.color = "";
+          p.style.border = "";
         });
 
         // aplicar estilo a la seleccionada
@@ -465,12 +465,24 @@ export const UI = {
         if (selected === "Baja") {
           element.style.background =
             "linear-gradient(40deg, #04cf60ff, #03b65cff )";
+          element.style.borderBottom = "4px solid #039e50ff ";
+          element.style.borderTop = "2px solid #03d16aff ";
+          element.style.borderLeft = "2px solid #03d16aff ";
+          element.style.borderRight = "2px solid #03d16aff ";
         } else if (selected === "Media") {
           element.style.background =
             "linear-gradient(40deg, #02ebdfff, #0145ffff )";
+          element.style.borderBottom = "4px solid #00cbe6ff";
+          element.style.borderTop = "2px solid #01e1ffff";
+          element.style.borderLeft = "2px solid #01e1ffff ";
+          element.style.borderRight = "2px solid #01e1ffff ";
         } else if (selected === "Alta") {
           element.style.background =
             "linear-gradient(40deg, #ff6565ff, #ff0162ff )";
+          element.style.borderBottom = "4px solid #ff0162ff ";
+          element.style.borderTop = "2px solid #ff6565ff";
+          element.style.borderLeft = "2px solid #ff6565ff ";
+          element.style.borderRight = "2px solid #ff6565ff";
         }
 
         element.style.color = "#fff";

@@ -866,6 +866,10 @@ h5 {
   background-color: #020580;
   color: #f5fdff;
 }
+.contenedor_Editar .options2.selected {
+  background-color: #020580;
+  color: #f5fdff;
+}
 
 .Categoria h4 {
   margin: 0;
@@ -1033,12 +1037,23 @@ h5 {
 .proridad {
   margin-top: 9px;
   padding: 8px;
-  color: #494949;
-  background: rgb(243, 248, 255);
-  box-shadow: 0 0 6px rgb(190, 190, 190);
+  border: 2px solid rgb(229, 241, 255);
+  border-bottom: 4px solid rgb(174, 227, 248);
+  color: #004458;
   border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.4s ease;
+  background: #e3f2f7;
 }
+
+.baja:hover,
+.media:hover,
+.alta:hover {
+  scale: 0.98;
+}
+
 .agregar2 {
   padding: 10px;
   display: flex;
@@ -1438,7 +1453,7 @@ h5 {
 .input-editar input {
   width: 100%;
   padding: 8px 6px;
-  font-size: 14px;
+  font-size: 16px;
   color: #313131;
   font-weight: 600;
   border: 2px solid transparent;
@@ -1457,7 +1472,7 @@ h5 {
   position: relative;
   display: flex;
   gap: 10px;
-  overflow-y: auto;
+  overflow-x: auto;
   padding: 8px 1px;
   height: 60px;
 }
@@ -1496,10 +1511,10 @@ h5 {
 .contentSeccionesEditar h5,
 .contentSeccionesEditar h5 {
   margin-top: 10px;
-  font-weight: normal;
   box-shadow: 0 1px 1px gainsboro;
   left: 0;
   padding: 6px 8px;
+  font-size: 14px;
 }
 .ProgramacionEditar {
   position: relative;
@@ -1511,13 +1526,16 @@ h5 {
   padding: 8px 8px 20px 8px;
 }
 .btnEditarProgrmacion {
-  box-shadow: 0 0 0 1px gainsboro;
+  border: 2px solid rgb(229, 241, 255);
+  border-bottom: 4px solid rgb(174, 227, 248);
   padding: 9px 8px;
   border-radius: 8px;
   display: flex;
   gap: 4px;
   justify-content: center;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
 }
 .btnEditarProgrmacion i {
   color: #77efff;
@@ -1538,13 +1556,16 @@ h5 {
   width: 100%;
   padding: 9px 8px;
   background: #e3f2f7;
-  box-shadow: 0 0 0 1px gainsboro;
+  color: #004458;
   padding: 9px 8px;
-  border: none;
   border-radius: 8px;
   font-family: "Poppins", sans-serif;
   transition: 0.3s ease-in-out;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  border: 2px solid rgb(229, 241, 255);
+  border-bottom: 4px solid rgb(174, 227, 248);
 }
 .ProridadEditar button:hover {
   scale: 0.98;
@@ -1564,6 +1585,8 @@ h5 {
   box-shadow: 0 1px 1px gainsboro;
   left: 0;
   padding: 6px 8px;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 10px;
 }
 .descripcionEditar textarea {
@@ -1599,11 +1622,14 @@ h5 {
 }
 
 .opentAviso {
-  background: #ffe6ebcc;
+  background: #fcf2f6cc;
   padding: 12px 5px;
-  border: none;
+  border: 1px solid rgb(253, 222, 218);
+  border-bottom: 3px solid rgba(231, 71, 71, 0.842);
   border-radius: 5px;
+
   font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
   color: rgb(255, 0, 64);
   transition: 0.3s ease-in-out;
@@ -1626,17 +1652,17 @@ h5 {
   cursor: pointer;
   width: 100%;
   padding: 12px 8px;
-  border: 2px solid #00c3ff;
+  border: 2px solid #01a0ac;
   border-bottom: 6px solid #006a8a;
   background: #a7f0fa;
-  color: #006a8a;
-  border-radius: 8px;
+  color: #004458;
+  border-radius: 12px;
   font-size: 16px;
   transition: 0.3s ease;
   font-weight: 600;
 }
 .btnGuardarCambios:hover {
-  background: #bbbcff;
+  background: #00b7ff;
   scale: 0.99;
 }
 /*=============== Animaciones ====================*/
@@ -1726,6 +1752,7 @@ h5 {
   }
 }
 /* Fondo del modal */
+
 .modal {
   position: fixed;
   z-index: 29;
@@ -1754,6 +1781,8 @@ h5 {
   background: linear-gradient(100deg, #0026ff, #f7186a, #020580);
   background-size: 600% 600%;
   animation: mover 4s ease infinite;
+  border: 1px solid #02048077;
+  border-bottom: 8px solid #02048077;
 }
 .backgraud-content {
   transform: scale(0.6);
@@ -1782,6 +1811,8 @@ h5 {
   border: 6px solid #0084ff;
   position: relative;
   margin: auto;
+}
+.check-anim.show {
   animation: pop 0.1s ease forwards 0.1s;
 }
 
@@ -1886,6 +1917,7 @@ h5 {
   /*Avisos del sistema*/
   .contentMsg {
     transform: translateY(-40px);
+    padding: 12px 16px;
   }
 
   .contentMsg.show {
