@@ -16,6 +16,77 @@ document.addEventListener("click", (e) => {
   option.classList.add("selected");
 });
 
+document.addEventListener("click", (e) => {
+  const prioridad = e.target.closest(".btnProridadEdit");
+  if (!prioridad) return;
+
+  App.prioridadSeleccionada = prioridad.dataset.prioridad;
+
+  prioridad
+    .closest(".EditarProridad")
+    ?.querySelectorAll(".btnProridadEdit")
+    .forEach((pro) => pro.classList.remove("selected"));
+
+  prioridad.classList.add("selected");
+});
+
+// PRIORIDAD – AGREGAR
+document.addEventListener("click", (e) => {
+  const element = e.target.closest(".options-prioridad");
+  if (!element) return;
+
+  const selected = element.dataset.prioridad;
+  App.prioridadSeleccionada = selected;
+
+  document.querySelectorAll(".options-prioridad").forEach((el) => {
+    el.classList.remove("active-baja", "active-media", "active-alta");
+  });
+
+  if (selected === "Baja") element.classList.add("active-baja");
+  if (selected === "Media") element.classList.add("active-media");
+  if (selected === "Alta") element.classList.add("active-alta");
+});
+
+// PRIORIDAD – EDITAR
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btnProridadEdit");
+  if (!btn) return;
+
+  const prioridad = btn.dataset.prioridad;
+  App.prioridadSeleccionada = prioridad;
+
+  const container = btn.closest(".ProridadEditar");
+
+  container.querySelectorAll(".btnProridadEdit").forEach((el) => {
+    el.classList.remove("baja", "media", "alta");
+  });
+
+  aplicarPrioridad(btn, prioridad);
+});
+
+function aplicarPrioridad(element, prioridad) {
+  element.classList.remove("baja", "media", "alta");
+
+  if (prioridad === "Baja") element.classList.add("baja");
+  if (prioridad === "Media") element.classList.add("media");
+  if (prioridad === "Alta") element.classList.add("alta");
+}
+
+function cargarPrioridadEdit(container, prioridadGuardada) {
+  if (!container || !prioridadGuardada) return;
+
+  const btn = container.querySelector(
+    `.btnProridadEdit[data-prioridad="${prioridadGuardada}"]`
+  );
+  if (!btn) return;
+
+  container
+    .querySelectorAll(".btnProridadEdit")
+    .forEach((b) => b.classList.remove("baja", "media", "alta"));
+
+  aplicarPrioridad(btn, prioridadGuardada);
+}
+
 export const UI = {
   hasClickedTask: false,
 
@@ -38,22 +109,32 @@ export const UI = {
 
       // texto + estilo de completada
       li.innerHTML = `
-     <div class="box_tasks_text">
-     <input type="checkbox"class="check ${task.done ? "done" : ""}"${
-        task.done ? "checked" : ""
-      } data-id="${task.id}">
-     <span class="task-text ${task.done ? "done" : ""}">${task.text}</span>
-     </div>
-     <stection class="contentCatPro">
-     <span class="task-cat">${task.categoria}   <i class="CateIcons"></i></span>
-     </stection>
-     <stection class="contentCatPro">
-     <span class="task-pro">${task.prioridad} </span>
-     </stection>
-     <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
-   
+    <div class="box_tasks_text">
+      <input
+        type="checkbox"
+        name="taskDone"
+        class="check ${task.done ? "done" : ""}"
+        ${task.done ? "checked" : ""}
+        data-id="${task.id}"
+      >
+        <span class="task-text ${task.done ? "done" : ""}">
+          ${task.text}
+        </span>
+    </div>
+
+     <section class="contentCatPro">
+       <span class="task-cat">
+         ${task.categoria} <i class="CateIcons"></i>
+       </span>
+     </section>
+
+      <section class="contentCatPro">
+        <span class="task-pro">${task.prioridad}</span>
+       </section>
+
+        <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
       
-      <div class="editar_item">
+        <div class="editar_item">
         <section class="Editar_targeta">
           <div class="backgrauEditar">
             <div class="cuerpo_modal">
@@ -68,6 +149,8 @@ export const UI = {
                 <article class="input-editar">
                   <input
                     type="text"
+                    id="EditarTask-${task.id}"
+                    name="EditarTask"
                     class="input editar InputEditarTasks"
                     placeholder="Actividad"
                   />
@@ -143,20 +226,27 @@ export const UI = {
                   <h5>Proridad de la tarea</h5>
                   <div class="ProridadEditar">
                     <article class="EditarProridad">
-                      <button data="bajaEditar">Baja</button>
+                      <button data-prioridad="Baja" class="btnProridadEdit">
+                        Baja
+                      </button>
                     </article>
                     <article class="EditarProridad">
-                      <button data="mediaEditar">Media</button>
+                      <button data-prioridad="Media" class="btnProridadEdit">
+                        Media
+                      </button>
                     </article>
                     <article class="EditarProridad">
-                      <button data="altaEditar">Alta</button>
+                      <button data-prioridad="Alta" class="btnProridadEdit">
+                        Alta
+                      </button>
                     </article>
                   </div>
                 </div>
 
                 <div class="descripcionEditar">
-                  <label for="EditarDescripcion">Descripción</label>
+                  <label for="EditarDescripcion-${task.id}">Descripción</label>
                   <textarea
+                    id="EditarDescripcion-${task.id}"
                     name="EditarDescripcion"
                     class="EditarDescripcion"
                     placeholder="Editar descripcion"
@@ -173,7 +263,7 @@ export const UI = {
 
                 <article class="footer-editar">
                   <div class="GuardarCambios">
-                    <button class="btnGuardarCambios">Guardar Cambios</button>
+                    <button type="button" class="btnGuardarCambios">Guardar Cambios</button>
                   </div>
                 </article>
               </div>
@@ -182,7 +272,7 @@ export const UI = {
         </section>
       </div>
 
-        <section class="advertenciaDelete">
+      <section class="advertenciaDelete">
         <div class="backgrundAviso">
           <article class="ContentAvisoDelete">
             <header class="headerMainAviso">
@@ -293,7 +383,6 @@ export const UI = {
       const contenedorEditar = li.querySelector(".editar_item");
       const modalEditar = li.querySelector(".Editar_targeta");
       const closeEditar = li.querySelector(".Closeeditar");
-
       li.querySelector(".openEditar").addEventListener("click", (e) => {
         e.stopPropagation();
 
@@ -307,6 +396,9 @@ export const UI = {
         modalEditar.classList.add("active");
 
         UI.fillEditModal(li, App.currentEditTask);
+
+        const contPrioridad = li.querySelector(".ProridadEditar");
+        cargarPrioridadEdit(contPrioridad, task.prioridad);
       });
 
       closeEditar.addEventListener("click", (e) => {
@@ -424,6 +516,10 @@ export const UI = {
     li.querySelectorAll(".options2").forEach((o) => {
       o.classList.toggle("selected", o.dataset.categoria === task.categoria);
     });
+
+    li.querySelectorAll(".btnProridadEdit").forEach((p) => {
+      p.classList.toggle("selected", p.dataset.prioridad === task.prioridad);
+    });
   },
 
   renderCategoria() {
@@ -449,43 +545,6 @@ export const UI = {
         const selected = prioridad.dataset.prioridad;
         App.prioridadSeleccionada = selected;
         console.log("Prioridad seleccionada:", selected);
-
-        // limpiar
-        document.querySelectorAll(".options-prioridad").forEach((p) => {
-          p.style.background = "";
-          p.style.color = "";
-          p.style.border = "";
-        });
-
-        // aplicar estilo a la seleccionada
-        const element = document.querySelector(
-          `[data-prioridad="${selected}"]`
-        );
-
-        if (selected === "Baja") {
-          element.style.background =
-            "linear-gradient(40deg, #04cf60ff, #03b65cff )";
-          element.style.borderBottom = "4px solid #039e50ff ";
-          element.style.borderTop = "2px solid #03d16aff ";
-          element.style.borderLeft = "2px solid #03d16aff ";
-          element.style.borderRight = "2px solid #03d16aff ";
-        } else if (selected === "Media") {
-          element.style.background =
-            "linear-gradient(40deg, #02ebdfff, #0145ffff )";
-          element.style.borderBottom = "4px solid #00cbe6ff";
-          element.style.borderTop = "2px solid #01e1ffff";
-          element.style.borderLeft = "2px solid #01e1ffff ";
-          element.style.borderRight = "2px solid #01e1ffff ";
-        } else if (selected === "Alta") {
-          element.style.background =
-            "linear-gradient(40deg, #ff6565ff, #ff0162ff )";
-          element.style.borderBottom = "4px solid #ff0162ff ";
-          element.style.borderTop = "2px solid #ff6565ff";
-          element.style.borderLeft = "2px solid #ff6565ff ";
-          element.style.borderRight = "2px solid #ff6565ff";
-        }
-
-        element.style.color = "#fff";
       });
     });
   },

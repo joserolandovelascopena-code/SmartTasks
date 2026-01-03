@@ -64,27 +64,35 @@ const Storage = {
       return null;
     }
   },
-
   async updateTask(id, fields) {
     try {
-      const resp = await supabaseClient
+      const { data: sessionData } = await supabaseClient.auth.getSession();
+      const userId = sessionData?.session?.user?.id;
+
+      if (!userId) {
+        console.error("No hay sesión activa");
+        return null;
+      }
+
+      const { data, error } = await supabaseClient
         .from("tasks")
         .update(fields)
         .eq("id", id)
-        .select();
+        .eq("user_id", userId)
+        .select()
+        .single();
 
-      console.log("updateTask response:", resp);
-      if (resp.error) {
-        console.error("Error actualizando tarea:", resp.error);
+      if (error) {
+        console.error("Error actualizando tarea:", error.message);
         return null;
       }
-      return resp.data?.[0] ?? null;
+
+      return data;
     } catch (err) {
       console.error("Exception en updateTask:", err);
       return null;
     }
   },
-
   async SaveUpdateTask(id, fields) {
     try {
       const { data, error } = await supabaseClient
