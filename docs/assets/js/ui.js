@@ -107,6 +107,10 @@ export const UI = {
         li.style.background = "#ffffffff";
       }
 
+      const desc = task.descripcion?.trim()
+        ? task.descripcion
+        : "No hay descripción";
+
       // texto + estilo de completada
       li.innerHTML = `
     <div class="box_tasks_text">
@@ -249,7 +253,7 @@ export const UI = {
                     id="EditarDescripcion-${task.id}"
                     name="EditarDescripcion"
                     class="EditarDescripcion"
-                    placeholder="Editar descripcion"
+                  
                     title="Descripción de la tarea"
                   ></textarea>
                 </div>
@@ -511,8 +515,10 @@ export const UI = {
     const textarea = li.querySelector(".EditarDescripcion");
 
     if (input) input.value = task.text;
-    if (textarea) textarea.value = task.description ?? "";
-
+    if (textarea) {
+      textarea.value = task.descripcion ?? "";
+      textarea.placeholder = "No hay descripción aún.";
+    }
     li.querySelectorAll(".options2").forEach((o) => {
       o.classList.toggle("selected", o.dataset.categoria === task.categoria);
     });

@@ -19,7 +19,7 @@ export const App = {
   currentEditTask: null,
   categoriaSeleccionada: null,
   prioridadSeleccionada: null,
-
+  descripcionTaks: null,
   async loadTasks() {
     this.tasks = await Storage.getTasks();
   },
@@ -84,35 +84,39 @@ export const App = {
     const input = document.getElementById("newTask");
     const text = input.value.trim();
 
+    const descriptionTextarea = document.getElementById("descripcion");
+    const descriptionText = descriptionTextarea?.value.trim() || "";
+
     if (!text) {
       Toast.show("Error: escribe una tarea", "error", { sound: true });
       return false;
     }
 
-    // Obtener usuario
     const { data: sessionData } = await supabaseClient.auth.getSession();
     if (!sessionData.session) {
       Toast.show("Error: No hay sesión activa", "error");
       return false;
     }
-    const user_id = sessionData.session.user.id;
 
     const nuevaTarea = {
       text,
       categoria: this.categoriaSeleccionada || "Ninguna",
       prioridad: this.prioridadSeleccionada || "Ninguna",
+      descripcion: descriptionText,
       done: false,
-      user_id,
+      user_id: sessionData.session.user.id,
     };
 
     await Storage.saveTask(nuevaTarea);
-
     await this.loadTasks();
     UI.renderTasks(this.tasks);
 
     input.value = "";
+    if (descriptionTextarea) descriptionTextarea.value = "";
+
     return true;
   },
+
   async editeTasks() {
     if (!this.currentEditTaskId) {
       Toast.show("No hay tarea en edición", "error");
