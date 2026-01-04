@@ -19,7 +19,7 @@ export const App = {
   currentEditTask: null,
   categoriaSeleccionada: null,
   prioridadSeleccionada: null,
-  descripcionTaks: null,
+
   async loadTasks() {
     this.tasks = await Storage.getTasks();
   },
@@ -110,6 +110,7 @@ export const App = {
     await Storage.saveTask(nuevaTarea);
     await this.loadTasks();
     UI.renderTasks(this.tasks);
+    UI.renderTarjetas(this.tasks, true);
 
     input.value = "";
     if (descriptionTextarea) descriptionTextarea.value = "";
@@ -130,8 +131,12 @@ export const App = {
     if (!inputEdite) return false;
 
     const text = inputEdite.value.trim();
+
+    const textarea = modalActivo.querySelector(".EditarDescripcion");
+    const descripcionNew = textarea ? textarea.value.trim() : "";
+
     if (!text) {
-      Toast.show("Campo vacío", "error", { sound: true });
+      Toast.show("Campo vacío, tarea sin nombre", "error", { sound: true });
       return false;
     }
 
@@ -141,21 +146,17 @@ export const App = {
       text,
       categoria: this.categoriaSeleccionada || taskActual.categoria,
       prioridad: this.prioridadSeleccionada || taskActual.prioridad,
+      descripcion: descripcionNew,
     };
 
     await Storage.SaveUpdateTask(this.currentEditTaskId, fields);
 
     this.currentEditTaskId = null;
-    this.currentEditTask = {
-      id: null,
-      categoria: null,
-      prioridad: null,
-      done: null,
-      description: null,
-    };
+    this.currentEditTask = null;
 
     await this.loadTasks();
     UI.renderTasks(this.tasks);
+    UI.renderTarjetas(this.tasks, true);
 
     Toast.show("Se ha actualizado la tarea", "success", { sound: true });
     return true;
@@ -227,6 +228,7 @@ export const App = {
     }
 
     UI.renderTasks(this.tasks);
+    UI.renderTarjetas(this.tasks, true);
   },
 };
 
