@@ -3,12 +3,24 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 28px 38px;
+  padding: 20px 38px;
   z-index: 40;
   background: white;
   border-left: 2px solid gainsboro;
   margin: 5px 0;
-  display: none;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.openPerfil {
+  cursor: pointer;
+}
+.Perfile.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 .loyoutPerfile {
   position: relative;
@@ -18,6 +30,7 @@
 }
 
 .headerPerfil {
+  position: relative;
   border-radius: 12px;
   background: linear-gradient(
     to bottom,
@@ -28,9 +41,77 @@
   background-size: 600%;
   height: 220px;
 }
+.iconoAjustesheader {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 46px;
+  height: 46px;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff5b;
+  border-radius: 15px;
+  border: 2px solid rgb(153, 152, 153);
+  border-top: 4px solid rgb(153, 152, 152);
+  border-bottom: 4px solid rgb(153, 152, 152);
+}
+.iconoAjustesheader i {
+  font-size: 22px;
+  color: #5a5a5ac2;
+}
 .nameUserDescrip {
   margin-top: 10px;
 }
 .nameUserDescrip h2 {
   cursor: #575757;
+}
+.fotoPerfil {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  text-align: center;
+}
+
+.fotoPerfil img {
+  border-radius: 50%;
+  height: 180px;
+  width: 180px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 4px solid rgb(177, 177, 247);
+}
+
+/*responsing*/
+
+@media (max-width: 700px) {
+  .Perfile {
+    position: fixed;
+    padding: 0;
+
+    border-left: 0px solid gainsboro;
+    margin: 0px 0;
+  }
+  .loyoutPerfile {
+    grid-template-columns: auto;
+    gap: 40px;
+  }
+  .headerPerfil {
+    border-radius: 14px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .fotoPerfil img {
+    height: 140px;
+    width: 140px;
+  }
+  .contenidoSecundario {
+    padding: 0 10px;
+  }
 }

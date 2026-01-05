@@ -2149,14 +2149,17 @@ h5 {
     display: block;
   }
   .nav-main {
-    background-color: #fff;
-    box-shadow: 3px 0 10px rgba(199, 199, 199, 0.568);
-    z-index: 14;
+    background: white;
+    border-top: 3px solid gainsboro;
+    box-shadow: 0 0 0 gainsboro;
+    z-index: 100;
     position: fixed;
     bottom: 0;
     height: 66px;
     width: 100%;
     margin: 0;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
   .plusAdd {
     width: 28px;
@@ -2166,7 +2169,6 @@ h5 {
     font-size: 13px;
   }
   .funciones_smart h5 {
-    margin: 4px 0 0 0;
     color: #8a8a8a;
   }
   #Add h5 {
@@ -2174,14 +2176,18 @@ h5 {
   }
   #Add i {
     margin-left: 10px;
-    font-size: 18px;
-    padding-top: 6px;
-    padding-left: 7px;
+    font-size: 25px;
+
     color: rgb(31, 31, 31);
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
   .funciones_smart i {
-    font-size: 26px;
+    font-size: 25px;
     color: rgb(31, 31, 31);
+    padding-top: 5px;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
   #Hogar {
     display: grid;
@@ -2207,7 +2213,7 @@ h5 {
 
   .contenedor_menu {
     grid-template-columns: repeat(4, 1fr);
-    gap: 0px;
+    gap: 30px;
     padding: 0px;
   }
 

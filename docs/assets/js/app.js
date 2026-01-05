@@ -349,6 +349,21 @@ function mostrarModalCompletado() {
   }, 2200);
 }
 
+//perfil
+const openPerfile = document.querySelectorAll(".openPerfil");
+const closePerfil = document.getElementById("Hogar");
+const perfilContainer = document.querySelector(".Perfile");
+
+openPerfile.forEach((per) => {
+  per.addEventListener("click", () => {
+    perfilContainer.classList.add("show");
+  });
+});
+
+closePerfil.addEventListener("click", () => {
+  perfilContainer.classList.remove("show");
+});
+
 //Themes
 
 document.addEventListener("DOMContentLoaded", () => {
