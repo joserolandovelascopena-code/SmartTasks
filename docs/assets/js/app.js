@@ -15,6 +15,7 @@ document.addEventListener(
 
 export const App = {
   tasks: [],
+  profile: null,
   currentEditTaskId: null,
   currentEditTask: null,
   categoriaSeleccionada: null,
@@ -29,10 +30,21 @@ export const App = {
     Sound.init();
     Toast.init();
 
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (!sessionData.session) return;
+
+    const userId = sessionData.session.user.id;
+
     const profile = await Storage.getProfile();
-    if (profile) {
-      UI.renderPerfile(profile);
-    }
+    const totalTasks = await Storage.cantidadTasksPorUsuario(userId);
+
+    this.profile = {
+      ...profile,
+      totalTasks,
+    };
+
+    // Render inicial
+    UI.renderPerfile(this.profile);
 
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks);
@@ -48,7 +60,9 @@ export const App = {
     const categoria = document.querySelector(".Categoria");
     const input = document.getElementById("newTask");
     const btnGuardar = document.querySelectorAll(".Guadar-btn");
+    const contenAdd = document.querySelector(".subir_tarea");
     const bodycontenedor = document.querySelector(".contenedor");
+    const backgraudAnimation = document.querySelector(".backgraud-tasks");
 
     input.addEventListener("focus", () => {
       if (!input.value.trim()) {
@@ -64,11 +78,11 @@ export const App = {
         const success = await App.addTask();
         if (!success) return;
 
-        document.querySelector(".subir_tarea")?.classList.remove("show");
-        categoria.classList.remove("active");
         bodycontenedor.style.overflowY = "auto";
         document.querySelector(".List_check").classList.remove("show");
         document.querySelector(".info_tarea").classList.remove("show");
+        contenAdd.classList.remove("show");
+        backgraudAnimation.classList.remove("show");
       });
     });
 
@@ -109,8 +123,12 @@ export const App = {
 
     await Storage.saveTask(nuevaTarea);
     await this.loadTasks();
+
+    this.profile.totalTasks = this.tasks.length;
+
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
+    UI.renderPerfile(this.profile);
 
     input.value = "";
     if (descriptionTextarea) descriptionTextarea.value = "";
@@ -161,22 +179,22 @@ export const App = {
     Toast.show("Se ha actualizado la tarea", "success", { sound: true });
     return true;
   },
+
   async getProfile() {
     const { data: sessionData } = await supabaseClient.auth.getSession();
     if (!sessionData.session) {
       Toast.show("Error: No hay sesión activa", "error");
-      return false;
+      return;
     }
+
     const user_id = sessionData.session.user.id;
 
-    const loaderUser = {
-      full_name,
-      avatar_url,
-      user_id,
-    };
+    const full_name = this.userProfile.full_name;
+    const avatar_url = this.userProfile.avatar_url;
 
-    await Storage.getProfile(loaderUser);
-    UI.renderPerfile();
+    const loaderUser = { full_name, avatar_url, user_id };
+
+    UI.renderPerfile(loaderUser);
   },
 
   async toggleTask(id) {
@@ -219,42 +237,71 @@ export const App = {
   },
 
   async deleteTask(id) {
+    // 1. Actualizas el estado principal
     this.tasks = this.tasks.filter((t) => t.id !== id);
 
+    // 2. Actualizas el contador EN MEMORIA
+    if (this.profile) {
+      this.profile.totalTasks = this.tasks.length;
+    }
+
+    // 3. Persistes en BD
     try {
       await Storage.deleteTask(id);
     } catch (err) {
       console.error("Error borrando tarea en BD:", err);
     }
 
+    // 4. Renderizas
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
+    UI.renderPerfile(this.profile);
+  },
+
+  async cantidadTasksPorUsuario(userId) {
+    const { count, error } = await supabaseClient
+      .from("tasks")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error contando tareas:", error.message);
+      return 0;
+    }
+
+    return count;
   },
 };
 
-//add tasks
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.getElementById("Add");
   const contenAdd = document.querySelector(".subir_tarea");
   const bodycontenedor = document.querySelector(".contenedor");
   const closeAddTaks = document.getElementById("CloseAddTasks");
-  const bodyDoc = document.querySelector("body");
+  const backgraudAnimation = document.querySelector(".backgraud-tasks");
+  const listCheck = document.querySelector(".List_check");
+  const infoTarea = document.querySelector(".info_tarea");
 
   openAdd.addEventListener("click", () => {
+    bodycontenedor.style.overflowY = "hidden";
+
     contenAdd.classList.add("show");
-    bodycontenedor.style.overflowY =
-      bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
+    backgraudAnimation.classList.add("show");
+
     bodycontenedor.classList.add("show");
-    document.querySelector(".List_check").classList.toggle("show");
-    document.querySelector(".info_tarea").classList.toggle("show");
+    listCheck.classList.add("show");
+    infoTarea.classList.add("show");
   });
+
   closeAddTaks.addEventListener("click", () => {
+    bodycontenedor.style.overflowY = "auto";
+
     contenAdd.classList.remove("show");
-    bodycontenedor.style.overflowY =
-      bodycontenedor.style.overflowY === "hidden" ? "auto" : "hidden";
+    backgraudAnimation.classList.remove("show");
+
     bodycontenedor.classList.remove("show");
-    document.querySelector(".List_check").classList.remove("show");
-    document.querySelector(".info_tarea").classList.remove("show");
+    listCheck.classList.remove("show");
+    infoTarea.classList.remove("show");
   });
 });
 

@@ -123,5 +123,23 @@ const Storage = {
 
     return true;
   },
+  async cantidadTasksPorUsuario(userId) {
+    try {
+      const { count, error } = await supabaseClient
+        .from("tasks")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", userId);
+
+      if (error) {
+        console.error("Error obteniendo cantidad de tareas:", error);
+        return null;
+      }
+
+      return count;
+    } catch (err) {
+      console.error("Exception cantidadTasks:", err);
+      return null;
+    }
+  },
 };
 export { Storage };

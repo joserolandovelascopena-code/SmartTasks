@@ -1,0 +1,36 @@
+/*Perfil*/
+.Perfile {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 28px 38px;
+  z-index: 40;
+  background: white;
+  border-left: 2px solid gainsboro;
+  margin: 5px 0;
+  display: none;
+}
+.loyoutPerfile {
+  position: relative;
+  display: grid;
+  grid-template-columns: 50% auto;
+  gap: 40px;
+}
+
+.headerPerfil {
+  border-radius: 12px;
+  background: linear-gradient(
+    to bottom,
+    rgb(200, 231, 255),
+    rgb(235, 242, 250),
+    rgb(245, 248, 250)
+  );
+  background-size: 600%;
+  height: 220px;
+}
+.nameUserDescrip {
+  margin-top: 10px;
+}
+.nameUserDescrip h2 {
+  cursor: #575757;
+}

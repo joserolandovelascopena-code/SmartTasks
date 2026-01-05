@@ -502,10 +502,22 @@ export const UI = {
 
     const nameMainUser = document.getElementById("MainNameUser");
     const nameSecondUser = document.getElementById("name_user");
+    const namePerfil = document.querySelector(".namePerfil");
+    const cantidadTasks = document.getElementById("CantidadTasks");
 
-    nameMainUser.textContent =
-      "Hola, " + perfile.full_name ?? "User SmartTasks";
-    nameSecondUser.textContent = perfile.full_name ?? "User SmartTasks";
+    const cantidad = Number(perfile.totalTasks) || 0;
+
+    if (cantidad > 0) {
+      cantidadTasks.textContent = `${cantidad} Tareas`;
+    } else {
+      cantidadTasks.textContent = "No hay tareas";
+    }
+
+    const name = perfile.full_name ?? "User SmartTasks";
+
+    nameMainUser.textContent = "Hola, " + name;
+    nameSecondUser.textContent = name;
+    namePerfil.textContent = name;
   },
 
   fillEditModal(li, task) {

@@ -19,6 +19,7 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/style2.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -131,6 +132,17 @@
         </nav>
       </div>
       <div>
+        <section class="Perfile">
+          <div class="loyoutPerfile">
+            <article class="contenidoPerfil">
+              <div class="headerPerfil">o</div>
+              <div class="nameUserDescrip">
+                <h2 class="namePerfil">Hola mundo</h2>
+              </div>
+            </article>
+            <article class="info_Secundaria">i</article>
+          </div>
+        </section>
         <section class="Barra_Superior_principal">
           <article class="NavMovil">
             <div class="foto_perfil">
@@ -230,8 +242,7 @@
                 <i class="fa-solid fa-list-check"></i>
               </div>
               <div class="cantidadTareas">
-                <p>14</p>
-                <p>Tasks</p>
+                <p id="CantidadTasks">0</p>
               </div>
             </div>
           </div>
@@ -307,9 +318,11 @@
               <section class="main-cont-categoria">
                 <article class="Categoria">
                   <section id="task-input">
+                    <label for="newTask">Nombre de la tarea</label>
                     <input
                       type="text"
                       id="newTask"
+                      name="Nueva Tarea"
                       placeholder="Nueva tarea..."
                       title="Escribe una actividad"
                     />

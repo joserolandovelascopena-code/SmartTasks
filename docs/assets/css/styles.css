@@ -204,9 +204,7 @@ h5 {
   margin: 0 0 0px 0px;
   font-size: 19px;
   animation: aparecer 0.6s ease-in-out;
-  background: linear-gradient(40deg, #596fee, #eb236c, #ff8a00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 
 /*animacones de mensages*/
@@ -386,6 +384,7 @@ h5 {
 .cantidadTareas p {
   margin: 0;
   font-size: 14px;
+  font-weight: bold;
 }
 .dateNow {
   border-radius: 12px;
@@ -558,7 +557,7 @@ h5 {
 #appSmat {
   display: grid;
   grid-template-columns: auto;
-  justify-content: left;
+  justify-content: center;
   padding: 3px;
 }
 .funciones_smart:hover {
@@ -688,24 +687,44 @@ h5 {
 }
 
 .subir_tarea {
-  position: absolute;
-  width: 100%;
-  height: 68%;
-  z-index: 28;
-  display: none;
-  background-color: white;
-  padding: 10px;
+  position: fixed;
+  z-index: 32;
+  inset: 0;
+  background: white;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 .subir_tarea.show {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
+
+/* Fondo */
 .backgraud-tasks {
-  height: 100%;
-  animation: fadeIn 0.5s ease;
+  position: fixed;
+  inset: 0;
+  background: rgb(255, 255, 255);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  padding: 20px;
 }
+
+.backgraud-tasks.show {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+}
+
 .contenido_main {
   position: relative;
-  height: 92%;
+  height: 87vh;
   padding-top: 16px;
   margin: 10px 0 0 0;
   border: 1px solid gainsboro;
@@ -782,10 +801,13 @@ h5 {
 .Nav_addTasks {
   display: grid;
   grid-template-columns: auto 2%;
-  padding: 6px;
   list-style: none;
+  padding: 0;
   align-items: center;
   color: #464545;
+}
+.Nav_addTasks h3 {
+  left: 0;
 }
 .Nav_addTasks i {
   font-size: 19px;
@@ -796,7 +818,10 @@ h5 {
 #task-input {
   position: relative;
   display: flex;
+  flex-direction: column;
   margin-block-end: 20px;
+  gap: 12px;
+  font-weight: bold;
 }
 
 #task-input input {
@@ -883,7 +908,6 @@ h5 {
   width: auto;
   padding: 5px 5px;
   color: #3f3f3f;
-  font-weight: normal;
 }
 #TituloProgamació {
   border-bottom: 1px solid gainsboro;
@@ -1106,9 +1130,10 @@ h5 {
 }
 .title_description p {
   margin: 0px 0;
+  font-weight: bold;
 }
 .icoDes {
-  color: #f7186a;
+  color: #2cd1e7;
 }
 .icoRepe {
   color: #00be39;
@@ -1116,6 +1141,7 @@ h5 {
 
 .descrition_box {
   width: 100%;
+  height: 142px;
   border-radius: 5px;
   margin-top: 16px;
   background: #ebeffc;
@@ -1123,11 +1149,12 @@ h5 {
   grid-template-columns: 80% auto;
   gap: 10px;
   padding: 14px 10px;
+  position: relative;
 }
 .descrition_box textarea {
   width: 100%;
+  height: 100%;
   padding: 10px 10px;
-  height: 126px;
   border-radius: 6px;
   border: none;
   font-family: "Poppins", sans-serif;
@@ -1339,11 +1366,12 @@ h5 {
   justify-items: center;
   text-align: center;
   border-radius: 8px;
-  border: 2px dashed rgb(0, 140, 255);
+
   background-color: #8cc7d41e;
 }
 .viso_caja_vacia p {
   transform: translateY(-30px);
+  font-family: "Poppins", sans-serif;
 }
 .caja svg {
   width: 300px;
@@ -1432,7 +1460,7 @@ h5 {
   height: 530px;
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
-  animation: fadeIn 0.4s ease-in-out;
+  animation: introApp 0.4s ease-in-out;
 }
 .header-editar {
   display: grid;
@@ -1738,6 +1766,14 @@ h5 {
     opacity: 1;
     scale: 1;
     transform: rotateX("0deg") translateZ(0);
+  }
+}
+@keyframes introApp {
+  from {
+    transform: translateY(4px);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 
@@ -2234,9 +2270,8 @@ h5 {
     width: 70px;
     margin-left: 12px;
   }
-  .CantTasksAdd h5 {
-    margin: 6px 0 0 0;
-    color: #464545;
+  .cantidadTareas p {
+    font-size: 12px;
   }
   .contanier_settinRigth {
     grid-column: 1 / span 2;
@@ -2268,8 +2303,11 @@ h5 {
     left: 10px;
   }
   /*subir tarea*/
+
   .Nav_addTasks {
-    grid-template-columns: auto 6%;
+    display: grid;
+    grid-template-columns: auto 9%;
+    padding: 15px 10px 0 20px;
   }
   .scroll_subir_task {
     padding: 0;
@@ -2278,6 +2316,7 @@ h5 {
   .backgraud-tasks {
     height: 100%;
     position: relative;
+    padding: 0;
   }
 
   /*==================*/
@@ -2293,7 +2332,7 @@ h5 {
     width: 286px;
   }
   .scroll_subir_task {
-    padding: 0 0 600px 0;
+    padding: 0 0 540px 0;
     margin-top: 20px;
   }
   .contenido_main {
@@ -2303,7 +2342,8 @@ h5 {
     overflow-y: auto;
     border: 0px solid gainsboro;
     border-radius: 0px;
-    padding: 10px;
+    padding: 10px 20px 20px 20px;
+    padding-bottom: 30px;
   }
   .contenedor_categoria {
     grid-row: 1 / span 1;
@@ -2350,6 +2390,9 @@ h5 {
   }
   .descrition_box {
     grid-template-columns: auto;
+  }
+  .descrition_box textarea {
+    height: 70px;
   }
   .separar {
     padding-top: 30px;
