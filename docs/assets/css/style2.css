@@ -1,3 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+/*Categorias y proridades*/
+.task-pro.styleNinguna {
+  background: linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff);
+  color: #a0a0a0ff;
+}
+.task-pro.styleBaja {
+  background: #c2ffcfff;
+  color: #01ad35ff;
+  border-bottom: 3px solid rgb(0, 238, 163);
+}
+.task-pro.styleNormal {
+  background: linear-gradient(40deg, #02ebdf2a, #0145ff36);
+  border-bottom: 3px solid rgb(175, 200, 255);
+  color: #0004fdff;
+}
+.task-pro.styleAlta {
+  background: #fadee3ff;
+  border-bottom: 3px solid rgb(253, 170, 181);
+  color: #ff0000ff;
+}
+/* --------- CATEGORÍAS --------- */
+
+/* Trabajo */
+.cate-trabajo {
+  color: #ff00b3ff;
+  background: #000;
+}
+
+/* Estudio */
+.cate-estudio {
+  color: #ff0000ff;
+  background: #fff;
+}
+
+/* Dieta */
+.cate-dieta {
+  color: #01cc4fff;
+  background: #fff;
+}
+
+/* Marketing */
+.cate-marketing {
+  color: #0bff03ff;
+  background: #31010181;
+}
+
+/* Rutina diaria */
+.cate-rutina {
+  color: #01cc4fff;
+  background: #fff;
+}
+
+/* Fitness */
+.cate-fitness {
+  color: #ff9900ff;
+  background: #fff;
+}
+
+/* Festividades */
+.cate-festividades {
+  color: #ff08b5ff;
+  background: #0027a8ff;
+}
+
+/* Vacaciones */
+.cate-vacaciones {
+  color: #5900ffff;
+  background: #fedcffff;
+}
+
 /*Perfil*/
 .Perfile {
   position: absolute;
@@ -25,8 +97,10 @@
 .loyoutPerfile {
   position: relative;
   display: grid;
-  grid-template-columns: 50% auto;
+  grid-template-columns: 50% 30%;
   gap: 40px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .headerPerfil {
@@ -87,6 +161,169 @@
   border: 4px solid rgb(177, 177, 247);
 }
 
+/*Seccion 2*/
+.info_Secundaria {
+  border-radius: 10px;
+}
+.contenidoSeccion2 {
+  padding: 8px;
+}
+.HeaderSecond {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.iconheaderPerfil {
+  position: relative;
+}
+.cantidadTasksPerfile {
+  height: 24px;
+  width: 24px;
+  background: rgb(255, 108, 108);
+  border: 2px solid rgb(248, 59, 37);
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -4px;
+  left: 20px;
+}
+
+/* Mostrar */
+.cantidadTasksPerfile.show {
+  display: flex;
+}
+
+.cantidadTasksPerfile.up {
+  animation: popUp 0.4s ease;
+}
+
+.cantidadTasksPerfile.down {
+  animation: popDown 0.4s ease;
+}
+
+/*==============*/
+.MsgsDEColabrador_Family {
+  padding: 6px;
+}
+.msgInvitaion {
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid gainsboro;
+  padding: 15px 10px;
+}
+.msgInvitaion p {
+  font-weight: 600;
+  color: #4e4e4e;
+  font-size: 15px;
+}
+.headerMsg {
+  display: flex;
+  gap: 10px;
+}
+.imgAppPerfil img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgb(234, 208, 250);
+}
+.psroyectosGrupales {
+  margin-top: 10px;
+  padding: 15px 10px;
+  border-radius: 12px;
+  background: rgb(217, 238, 255);
+}
+.listaProyectosGrupales {
+  list-style: none;
+  margin: 0;
+}
+.listaProyectosGrupales li {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  border: 2px solid rgb(0, 140, 255);
+  box-shadow: 0 0 50px rgb(198, 198, 255);
+}
+.Item_proyectPerfil {
+  background: rgb(255, 255, 255);
+}
+.Item_proyectPerfil i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  background: #01b5ec;
+  color: #004458;
+  border-bottom: 3px solid #006a8a;
+  border-right: 2px solid #006a8a;
+}
+.btnAgregarProyect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnAgregarProyect button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  border: 2px solid #01b5ec;
+  border-bottom: 6px solid #006a8a;
+  background: #01b5ec;
+  color: #004458;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.btnAgregarProyect button:hover {
+  scale: 0.96;
+}
+.btnAgregarProyect i {
+  padding-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.headerProyectosResu {
+  margin-bottom: 10px;
+}
+/* Animaciones */
+@keyframes popUp {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes popDown {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 /*responsing*/
 
 @media (max-width: 700px) {
@@ -100,11 +337,19 @@
   .loyoutPerfile {
     grid-template-columns: auto;
     gap: 40px;
+    padding-bottom: 80px;
   }
   .headerPerfil {
     border-radius: 14px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  .HeaderSecond {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
   }
 
   .fotoPerfil img {

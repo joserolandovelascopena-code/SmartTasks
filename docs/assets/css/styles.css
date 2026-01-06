@@ -1001,7 +1001,7 @@ h5 {
     rgb(236, 236, 236),
     rgb(247, 247, 248)
   );
-  box-shadow: 0 0 10px gainsboro;
+  border-bottom: 3px solid rgb(217, 222, 233);
   font-size: 14px;
   border-radius: 8px;
   color: #069caf;
@@ -1016,7 +1016,7 @@ h5 {
   padding: 6px 6px;
   border-radius: 8px;
   text-align: center;
-  border-bottom: 2px dashed gainsboro;
+  border-bottom: 3px solid rgb(217, 222, 233);
   position: absolute;
   width: 100%;
 }
@@ -1265,7 +1265,7 @@ h5 {
 }
 .task-item {
   display: grid;
-  grid-template-columns: 50% 24% auto 2%;
+  grid-template-columns: 50% auto 2%;
   box-shadow: 0 0 5px rgba(170, 170, 170, 0.781);
   gap: 20px;
   transition: 0.9s ease-out;
@@ -1275,10 +1275,14 @@ h5 {
   border-radius: 8px;
   margin-block-end: 15px;
 }
-
+.CategoriasProridad {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
 .task-text {
   cursor: pointer;
-  flex-grow: 5;
+
   padding-top: 6px;
   margin-left: 8px;
   font-size: 15px;
@@ -2105,8 +2109,32 @@ h5 {
   }
   .task-item {
     display: grid;
-    grid-template-columns: 41% 43% 3%;
+    grid-template-columns: 90% 3%;
+    gap: 16px;
   }
+  .CategoriasProridad {
+    display: grid;
+    grid-template-columns: 40% auto;
+    gap: 16px;
+  }
+  .task-pro {
+    font-size: 13px;
+    padding: 5px 0;
+    width: 80px;
+  }
+  .task-cat {
+    font-size: 13px;
+    padding: 5px 0;
+    width: 120px;
+  }
+  .contentCatPro {
+    position: relative;
+    height: 40px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
   .box_tasks_text {
     grid-column: 1 / span 3;
     display: grid;

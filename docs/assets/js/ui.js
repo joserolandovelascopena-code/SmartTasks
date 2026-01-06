@@ -1,6 +1,7 @@
 // ui.js
 import { App } from "./app.js";
 import { Toast } from "./toastManager/toast.js";
+let lastCantidadTasks = null;
 
 document.addEventListener("click", (e) => {
   const option = e.target.closest(".options2");
@@ -126,6 +127,7 @@ export const UI = {
         </span>
     </div>
 
+    <div class="CategoriasProridad">
      <section class="contentCatPro">
        <span class="task-cat">
          ${task.categoria} <i class="CateIcons"></i>
@@ -135,7 +137,7 @@ export const UI = {
       <section class="contentCatPro">
         <span class="task-pro">${task.prioridad}</span>
        </section>
-
+    </div>
         <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
       
         <div class="editar_item">
@@ -412,86 +414,62 @@ export const UI = {
       });
 
       //Estilo Proridad
+      const proridadStyle = li.querySelector(".task-pro");
       if (task.prioridad === "Ninguna") {
-        li.querySelector(".task-pro").style.background =
-          "linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff )";
-        li.querySelector(".task-pro").style.color = "#a0a0a0ff";
+        proridadStyle.classList.add("styleNinguna");
       }
-
       if (task.prioridad === "Baja") {
-        li.querySelector(".task-pro").style.background = "#c2ffcfff ";
-        li.querySelector(".task-pro").style.border = "1px solid #00cc3dff";
-        li.querySelector(".task-pro").style.color = "#01ad35ff";
+        proridadStyle.classList.add("styleBaja");
       }
 
       if (task.prioridad === "Media") {
-        li.querySelector(".task-pro").style.background =
-          "linear-gradient(40deg, #02ebdf2a, #0145ff36 )";
-        li.querySelector(".task-pro").style.border = "1px solid #00a9ecff";
-        li.querySelector(".task-pro").style.color = "#0004fdff";
+        proridadStyle.classList.add("styleNormal");
       }
 
       if (task.prioridad === "Alta") {
-        li.querySelector(".task-pro").style.background = " #fadee3ff";
-        li.querySelector(".task-pro").style.color = "#ff0000ff";
+        proridadStyle.classList.add("styleAlta");
       }
 
       // ---------------- ICONOS POR CATEGORÍA ----------------- //
 
-      if (task.categoria === "Trabajo") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#ff00b3ff";
-        icon.style.background = "rgba(0, 0, 0, 1)";
-        icon.classList.add("fa-solid", "fa-briefcase");
-      }
+      const icon = li.querySelector(".CateIcons");
+      if (!icon) return;
 
-      if (task.categoria === "Estudio") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#ff0000ff";
-        icon.style.background = "#ffffffff";
-        icon.classList.add("fa-solid", "fa-book");
-      }
+      // Limpiar clases anteriores
+      icon.className = "CateIcons fa-solid";
 
-      if (task.categoria === "Dieta") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#01cc4fff";
-        icon.style.background = "#ffffffff";
-        icon.classList.add("fa-solid", "fa-apple-whole");
-      }
+      switch (task.categoria) {
+        case "Trabajo":
+          icon.classList.add("cate-trabajo", "fa-briefcase");
+          break;
 
-      if (task.categoria === "Marketing") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#0bff03ff";
-        icon.style.background = "#31010181";
-        icon.classList.add("fa-solid", "fa-chart-line");
-      }
+        case "Estudio":
+          icon.classList.add("cate-estudio", "fa-book");
+          break;
 
-      if (task.categoria === "Rutina diaria") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#01cc4fff";
-        icon.style.background = "#ffffffff";
-        icon.classList.add("fa-solid", "fa-person-running");
-      }
+        case "Dieta":
+          icon.classList.add("cate-dieta", "fa-apple-whole");
+          break;
 
-      if (task.categoria === "Fitness") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#ff9900ff";
-        icon.style.background = "#ffffffff";
-        icon.classList.add("fa-solid", "fa-dumbbell");
-      }
+        case "Marketing":
+          icon.classList.add("cate-marketing", "fa-chart-line");
+          break;
 
-      if (task.categoria === "Festividades") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#ff08b5ff";
-        icon.style.background = "#0027a8ff";
-        icon.classList.add("fa-solid", "fa-church");
-      }
+        case "Rutina diaria":
+          icon.classList.add("cate-rutina", "fa-person-running");
+          break;
 
-      if (task.categoria === "Vacaciones") {
-        const icon = li.querySelector(".CateIcons");
-        icon.style.color = "#5900ffff";
-        icon.style.background = "#fedcffff";
-        icon.classList.add("fa-solid", "fa-umbrella-beach");
+        case "Fitness":
+          icon.classList.add("cate-fitness", "fa-dumbbell");
+          break;
+
+        case "Festividades":
+          icon.classList.add("cate-festividades", "fa-church");
+          break;
+
+        case "Vacaciones":
+          icon.classList.add("cate-vacaciones", "fa-umbrella-beach");
+          break;
       }
 
       list.appendChild(li);
@@ -500,24 +478,61 @@ export const UI = {
   renderPerfile(perfile) {
     if (!perfile) return;
 
+    //NOMBRES
     const nameMainUser = document.getElementById("MainNameUser");
     const nameSecondUser = document.getElementById("name_user");
     const namePerfil = document.querySelector(".namePerfil");
-    const cantidadTasks = document.getElementById("CantidadTasks");
-
-    const cantidad = Number(perfile.totalTasks) || 0;
-
-    if (cantidad > 0) {
-      cantidadTasks.textContent = `${cantidad} Tareas`;
-    } else {
-      cantidadTasks.textContent = "No hay tareas";
-    }
+    const nameMsgs = document.querySelector(".NameUserMsg");
 
     const name = perfile.full_name ?? "User SmartTasks";
 
-    nameMainUser.textContent = "Hola, " + name;
-    nameSecondUser.textContent = name;
-    namePerfil.textContent = name;
+    if (nameMainUser) nameMainUser.textContent = "Hola, " + name;
+    if (nameSecondUser) nameSecondUser.textContent = name;
+    if (namePerfil) namePerfil.textContent = name;
+    if (nameMsgs) nameMsgs.textContent = name;
+
+    /*TAREAS */
+    const cantidadTasks = document.getElementById("CantidadTasks");
+    const badge = document.querySelector(".cantidadTasksPerfile");
+
+    const cantidad = Number(perfile.totalTasks) || 0;
+
+    if (cantidadTasks) {
+      cantidadTasks.textContent =
+        cantidad > 0 ? `${cantidad} Tareas` : "No hay tareas";
+    }
+
+    if (cantidad === 0) {
+      if (badge) {
+        badge.className = "cantidadTasksPerfile";
+      }
+      lastCantidadTasks = 0;
+      return;
+    }
+
+    // ---- Mostrar badge ----
+    if (!badge) return;
+
+    badge.textContent = cantidad;
+    badge.classList.add("show");
+
+    if (lastCantidadTasks === null) {
+      lastCantidadTasks = cantidad;
+      return;
+    }
+
+    if (cantidad === lastCantidadTasks) return;
+
+    badge.classList.remove("up", "down");
+    void badge.offsetWidth;
+
+    if (cantidad > lastCantidadTasks) {
+      badge.classList.add("up");
+    } else {
+      badge.classList.add("down");
+    }
+
+    lastCantidadTasks = cantidad;
   },
 
   fillEditModal(li, task) {

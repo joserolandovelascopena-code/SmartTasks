@@ -353,10 +353,15 @@ function mostrarModalCompletado() {
 const openPerfile = document.querySelectorAll(".openPerfil");
 const closePerfil = document.getElementById("Hogar");
 const perfilContainer = document.querySelector(".Perfile");
+const cantidadTkasPerfile = document.querySelector(".cantidadTasksPerfile");
 
 openPerfile.forEach((per) => {
   per.addEventListener("click", () => {
     perfilContainer.classList.add("show");
+
+    cantidadTkasPerfile.classList.remove("active");
+    void cantidadTkasPerfile.offsetWidth; // fuerza reflow
+    cantidadTkasPerfile.classList.add("active");
   });
 });
 
