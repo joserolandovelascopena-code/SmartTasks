@@ -203,6 +203,7 @@ h5 {
   font-size: 19px;
   animation: aparecer 0.6s ease-in-out;
   text-align: center;
+  color: #535353;
 }
 
 /*animacones de mensages*/
@@ -521,9 +522,9 @@ h5 {
   height: 99vh;
   margin: 4px;
   border-radius: 8px;
-  color: rgb(218, 217, 217);
+  color: rgb(109, 109, 109);
   font-size: 14px;
-  background: #000138;
+  background: #ffffff;
 }
 .nav_menu {
   padding: 15px 6px 6px 6px;
@@ -560,7 +561,6 @@ h5 {
 }
 .funciones_smart:hover {
   background: #1e2ce91a;
-  color: white;
 }
 .funciones_smart p {
   margin: 0px 0;
@@ -570,7 +570,7 @@ h5 {
   color: rgb(184, 182, 182);
 }
 .lineDiv {
-  height: 2px;
+  height: 1px;
   background-color: rgb(51, 55, 102);
   border-radius: 5px;
 }
@@ -596,7 +596,7 @@ h5 {
   background: transparent;
   border: none;
   width: 100%;
-  color: white;
+  color: rgb(117, 117, 117);
   border-radius: 6px;
 }
 #buscador::placeholder {
@@ -608,7 +608,7 @@ h5 {
 .formSearc i {
   padding-top: 7px;
   padding-left: 3px;
-  color: rgb(231, 231, 231);
+  color: rgb(255, 255, 255);
 }
 .Root-taks {
   margin-top: 20vh;
@@ -654,17 +654,11 @@ h5 {
   gap: 8px;
   padding: 5px 3px;
 }
-#settings i {
-  color: #ffffff;
-}
-#logoutBtni {
-  color: rgb(187, 187, 187);
-}
+
 #logoutBtn {
   display: flex;
   gap: 8px;
   padding: 3px;
-  color: rgb(202, 202, 202);
   cursor: pointer;
 }
 #logoutBtn p {
@@ -2179,7 +2173,7 @@ h5 {
   }
   .nav-main {
     background: white;
-    border-top: 3px solid gainsboro;
+    border-top: 2px solid gainsboro;
     box-shadow: 0 0 0 gainsboro;
     z-index: 20;
     position: fixed;
