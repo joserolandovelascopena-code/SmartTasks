@@ -1216,10 +1216,12 @@ h5 {
 .Guadar-btn {
   padding: 12px 10px;
   border-radius: 12px;
-  border: 2px solid #01a0ac;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  border: 2px solid #01b5ec;
   border-bottom: 6px solid #006a8a;
-  background: #a7f0fa;
-  color: #006a8a;
+  background: #01b5ec;
+  color: #004458;
   font-size: 16px;
   font-weight: bold;
   transition: 0.4s ease-in-out;
@@ -1265,7 +1267,7 @@ h5 {
 }
 .task-item {
   display: grid;
-  grid-template-columns: 50% auto 2%;
+  grid-template-columns: 48% auto 2%;
   box-shadow: 0 0 5px rgba(170, 170, 170, 0.781);
   gap: 20px;
   transition: 0.9s ease-out;
@@ -1734,14 +1736,15 @@ h5 {
   cursor: pointer;
   width: 100%;
   padding: 12px 8px;
-  border: 2px solid #01a0ac;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  border: 2px solid #01b5ec;
   border-bottom: 6px solid #006a8a;
-  background: #a7f0fa;
+  background: #01b5ec;
   color: #004458;
   border-radius: 12px;
   font-size: 16px;
   transition: 0.3s ease;
-  font-weight: 600;
 }
 .btnGuardarCambios:hover {
   background: #00b7ff;
@@ -2178,7 +2181,7 @@ h5 {
     background: white;
     border-top: 3px solid gainsboro;
     box-shadow: 0 0 0 gainsboro;
-    z-index: 38;
+    z-index: 20;
     position: fixed;
     bottom: 0;
     height: 66px;
