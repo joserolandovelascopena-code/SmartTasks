@@ -279,6 +279,7 @@ h5 {
 .foto_perfil img {
   width: 28px;
   height: 28px;
+  object-fit: cover;
   border-radius: 50%;
   border: 1.5px solid gainsboro;
   margin: 0;

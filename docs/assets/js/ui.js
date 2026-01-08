@@ -494,9 +494,15 @@ export const UI = {
     const avatarImg = document.querySelector(".fotoPerfil img");
     const avatarBarraNav = document.querySelectorAll(".foto_perfil img");
     const avatarMsg = document.querySelector(".imgAppPerfil img");
-
+    const previewImg = document.querySelector(".VisualizarFotoPerfil img");
     if (avatarImg) {
       avatarImg.src = perfile.avatar_url
+        ? `${perfile.avatar_url}?t=${Date.now()}`
+        : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+    }
+
+    if (previewImg) {
+      previewImg.src = perfile.avatar_url
         ? `${perfile.avatar_url}?t=${Date.now()}`
         : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
     }

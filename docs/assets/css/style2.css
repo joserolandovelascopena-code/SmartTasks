@@ -528,6 +528,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  object-fit: cover;
   border: 2px solid rgb(234, 208, 250);
 }
 .psroyectosGrupales {
@@ -700,6 +701,28 @@
     border-top: 4px solid rgb(255, 255, 255);
     border-bottom: 4px solid rgb(255, 255, 255);
   }
+  /*Editar========*/
+  .ContentEditar {
+    position: relative;
+    padding: 14px;
+
+    height: 100%;
+    background: rgb(238, 246, 253);
+    border-radius: 0;
+  }
+  .EditarPerfilHeader {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .VisualizarFotoPerfil img {
+    position: relative;
+    width: 178px;
+    height: 178px;
+    border: 5px solid rgb(244, 247, 250);
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  /*Editar========*/
   .iconoAjustesheader i {
     font-size: 17px;
     color: #5a5a5ac2;
