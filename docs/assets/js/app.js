@@ -402,6 +402,8 @@ const previewImg = document.querySelector(".VisualizarFotoPerfil img");
 // Botón aceptar
 const btnAceptar = document.querySelector(".ApcentarCambio");
 
+const VisualizarFotoBorder = document.querySelector(".borderActiveImg");
+
 openEditarFotos.addEventListener("click", () => {
   editorPerfil.classList.add("show");
   contenidoEditarFotos.classList.add("show");
@@ -413,8 +415,12 @@ btnCerrarEditor.addEventListener("click", (e) => {
 
   editorPerfil.classList.remove("show");
   contenidoEditarFotos.classList.remove("show");
+  VisualizarFotoBorder.classList.remove("show");
 });
 
+inputFotoPerfil.addEventListener("click", () => {
+  VisualizarFotoBorder.classList.remove("show");
+});
 inputFotoPerfil.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -431,6 +437,7 @@ inputFotoPerfil.addEventListener("change", (e) => {
   };
 
   reader.readAsDataURL(file);
+  VisualizarFotoBorder.classList.add("show");
 });
 
 inputFotoHeader.addEventListener("change", (e) => {
@@ -479,6 +486,25 @@ btnAceptar.addEventListener("click", async () => {
       haptic: true,
     });
   }
+});
+
+const actionSheet = document.querySelector(".actionSheet");
+const ContentSheet = document.querySelector(".ContentSheet");
+const btnOpenSheet = document.querySelector(".btnOpenSheet");
+const btnCancelarAccionSheet = document.querySelector(
+  ".btnCancelarAccionSheet"
+);
+
+btnOpenSheet.addEventListener("click", () => {
+  actionSheet.classList.add("active");
+  ContentSheet.classList.add("active");
+});
+
+btnCancelarAccionSheet.addEventListener("click", () => {
+  ContentSheet.classList.remove("active");
+  setTimeout(() => {
+    actionSheet.classList.remove("active");
+  }, 400);
 });
 
 //Themes

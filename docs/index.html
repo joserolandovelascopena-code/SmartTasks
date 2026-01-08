@@ -225,7 +225,7 @@
                       width="38"
                       height="38"
                       src="https://img.icons8.com/?size=100&id=jhjNIASGSpAR&format=png&color=000000"
-                      alt=""
+                      alt="Cantidad de tareas"
                     />
                     <p class="cantidadTasksPerfile"></p>
                   </div>
@@ -611,13 +611,18 @@
             ><i class="fa-solid fa-xmark"></i
           ></samp>
           <h3>Editar fotos de perfil</h3>
+          <samp class="btnOpenSheet">
+            <i class="fa-solid fa-ellipsis-vertical"></i
+          ></samp>
         </div>
         <div class="foto_Perfil_header">
           <div class="VisualizarFotoPerfil">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-              alt="Visualizacion de foto de perfil"
-            />
+            <div class="borderActiveImg">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt="Visualizacion de foto de perfil"
+              />
+            </div>
           </div>
           <div class="Opciones_Perfil">
             <div class="opcion_foto_Perfil">
@@ -654,6 +659,32 @@
             <button class="ApcentarCambio" type="button">Aceptar</button>
           </div>
         </div>
+        <section class="actionSheet">
+          <article class="ContenedorSheet">
+            <div class="CajaSheet">
+              <div class="ContentSheet">
+                <div class="AccionesAvanzadasEditarFoto">
+                  <h5>Opciones</h5>
+                  <div class="opcionesEditarfoto">
+                    <div><i class="fa-regular fa-trash-can"></i></div>
+                    <p>Eliminar foto de perfil</p>
+                  </div>
+                  <div class="opcionesEditarfoto">
+                    <div><i class="fa-regular fa-image"></i></div>
+                    <p>Ver recomendaciones</p>
+                  </div>
+                  <div class="opcionesEditarfoto">
+                    <div><i class="fa-regular fa-circle-question"></i></div>
+                    <p>Ayuda</p>
+                  </div>
+                </div>
+                <div class="btnCancelarAccionSheet">
+                  <button type="button">Cacelar</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
       </div>
     </article>
 
