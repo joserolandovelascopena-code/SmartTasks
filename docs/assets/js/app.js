@@ -158,7 +158,10 @@ export const App = {
     const descripcionNew = textarea ? textarea.value.trim() : "";
 
     if (!text) {
-      Toast.show("Campo vacío, tarea sin nombre", "error", { sound: true });
+      Toast.show("Campo vacío, tarea sin nombre", "error", {
+        sound: true,
+        haptic: true,
+      });
       return false;
     }
 
@@ -180,7 +183,10 @@ export const App = {
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
 
-    Toast.show("Se ha actualizado la tarea", "success", { sound: true });
+    Toast.show("Se ha actualizado la tarea", "success", {
+      sound: true,
+      haptic: true,
+    });
     return true;
   },
 
@@ -462,10 +468,16 @@ btnAceptar.addEventListener("click", async () => {
     UI.renderPerfile(App.profile);
 
     editorPerfil.classList.remove("show");
-    Toast.show("Foto actualizada correctamente", "success", { sound: true });
+    Toast.show("Foto actualizada correctamente", "success", {
+      sound: true,
+      haptic: true,
+    });
   } catch (err) {
     console.error(err);
-    Toast.show("Error al subir la imagen", "error", { sound: true });
+    Toast.show("Error al subir la imagen", "error", {
+      sound: true,
+      haptic: true,
+    });
   }
 });
 
