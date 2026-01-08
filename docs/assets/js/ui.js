@@ -491,6 +491,29 @@ export const UI = {
     if (namePerfil) namePerfil.textContent = name;
     if (nameMsgs) nameMsgs.textContent = name;
 
+    const avatarImg = document.querySelector(".fotoPerfil img");
+    const avatarBarraNav = document.querySelectorAll(".foto_perfil img");
+    const avatarMsg = document.querySelector(".imgAppPerfil img");
+
+    if (avatarImg) {
+      avatarImg.src = perfile.avatar_url
+        ? `${perfile.avatar_url}?t=${Date.now()}`
+        : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+    }
+
+    avatarBarraNav.forEach((fotoNav) => {
+      if (fotoNav) {
+        fotoNav.src = perfile.avatar_url
+          ? `${perfile.avatar_url}?t=${Date.now()}`
+          : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+      }
+    });
+
+    if (avatarMsg) {
+      avatarMsg.src = perfile.avatar_url
+        ? `${perfile.avatar_url}?t=${Date.now()}`
+        : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+    }
     /*TAREAS */
     const cantidadTasks = document.getElementById("CantidadTasks");
     const badge = document.querySelector(".cantidadTasksPerfile");

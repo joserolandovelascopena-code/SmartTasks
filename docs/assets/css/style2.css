@@ -103,6 +103,156 @@
   overflow-y: auto;
 }
 
+/*Editar Perfil========================*/
+.EditarPerfilHeader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(0, 0, 0, 0.4);
+  z-index: 80;
+
+  opacity: 0;
+  pointer-events: none;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+.EditarPerfilHeader.show {
+  position: fixed;
+  opacity: 1;
+  pointer-events: auto;
+}
+.ContentEditar {
+  position: relative;
+  padding: 8px;
+  width: 400px;
+  height: 500px;
+  background: rgb(238, 246, 253);
+  border-radius: 30px;
+
+  scale: 0.9;
+  overflow-y: auto;
+  transition: 0.4s ease-in;
+}
+.ContentEditar.show {
+  scale: 1;
+}
+.headerEditarHeader {
+  height: 56px;
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 6% auto;
+  padding: 10px;
+}
+.CerrarEditor_Foto {
+  z-index: 10;
+}
+.CerrarEditor_Foto i {
+  font-size: 22px;
+  color: #575757;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+.CerrarEditor_Foto i:hover {
+  background: #c8d5da;
+}
+
+.headerEditarHeader h3 {
+  text-align: center;
+  font-weight: normal;
+  margin-right: 15px;
+}
+.foto_Perfil_header {
+  height: 85%;
+  background: white;
+  border-radius: 10px;
+  position: relative;
+}
+.VisualizarFotoPerfil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.VisualizarFotoPerfil img {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 5px solid rgb(244, 247, 250);
+  border-radius: 50%;
+  object-fit: cover;
+}
+.Opciones_Perfil {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(2, auto);
+  gap: 40px;
+  margin-top: 60px;
+}
+.opcion_foto_Perfil p,
+.opcion_foto_header p {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 5px;
+}
+#inputFotoPerfil,
+#inputFotoHeader {
+  display: none;
+}
+.BTN_SUBIR_FOTO_USER,
+.BTN_SUBIR_HEADER_USER {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  font-size: 26px;
+  color: #8c00ff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(227, 238, 252);
+  transition: 0.2s ease;
+}
+.BTN_SUBIR_FOTO_USER:hover,
+.BTN_SUBIR_HEADER_USER:hover {
+  scale: 1.02;
+  background: rgb(218, 230, 247);
+}
+.btnAceptar {
+  margin-top: 50px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+.btnAceptar button {
+  padding: 10px 50px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  background: #3700ff;
+  color: white;
+  border-radius: 12px;
+  border: none;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.btnAceptar button:hover {
+  scale: 0.98;
+}
+/*Editar========================*/
 .headerPerfil {
   position: relative;
   border-radius: 12px;
@@ -114,6 +264,25 @@
   );
   background-size: 600%;
   height: 220px;
+}
+.iconoSalirheader {
+  display: flex;
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background: #ffffff5b;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  border-radius: 8px;
+  color: #6e6e6eb7;
+  cursor: pointer;
+  z-index: 10;
+
+  opacity: 0;
+  pointer-events: none;
 }
 .iconoAjustesheader {
   display: flex;
@@ -129,6 +298,8 @@
   border: 2px solid rgb(153, 152, 153);
   border-top: 4px solid rgb(153, 152, 152);
   border-bottom: 4px solid rgb(153, 152, 152);
+  cursor: pointer;
+  z-index: 10;
 }
 .iconoAjustesheader i {
   font-size: 22px;
@@ -155,9 +326,7 @@
   border-radius: 50%;
   height: 180px;
   width: 180px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   border: 4px solid rgb(177, 177, 247);
 }
 .descripcionUser {
@@ -466,6 +635,7 @@
   padding: 10px 12px;
   border-radius: 12px;
   background: rgb(241, 245, 247);
+  color: #575656;
 }
 .ajustesAcceso p {
   font-family: "Poppins", sans-serif;
@@ -515,7 +685,11 @@
     border-radius: 14px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    height: 140px;
+    height: 180px;
+  }
+  .iconoSalirheader {
+    opacity: 1;
+    pointer-events: auto;
   }
   .iconoAjustesheader {
     width: 30px;
@@ -530,7 +704,9 @@
     font-size: 17px;
     color: #5a5a5ac2;
   }
+
   .fotoPerfil img {
+    margin-top: 20px;
     height: 110px;
     width: 110px;
     border: 2px solid rgb(177, 177, 247);

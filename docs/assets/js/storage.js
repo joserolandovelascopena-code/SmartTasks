@@ -24,6 +24,50 @@ const Storage = {
     return data;
   },
 
+  async uploadAvatar(file) {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const user = sessionData?.session?.user;
+
+    if (!user || !file) throw new Error("No hay sesión o archivo");
+
+    const fileExt = file.name.split(".").pop();
+    const fileName = `avatar.${fileExt}`;
+    const filePath = `${user.id}/${fileName}`;
+
+    // 1. Subir archivo
+    const { error: uploadError } = await supabaseClient.storage
+      .from("avatars")
+      .upload(filePath, file, {
+        upsert: true,
+        contentType: file.type,
+      });
+
+    if (uploadError) throw uploadError;
+
+    // 2. Obtener URL pública
+    const { data } = supabaseClient.storage
+      .from("avatars")
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  },
+
+  async updateAvatarUrl(url) {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const user = sessionData?.session?.user;
+
+    if (!user) throw new Error("No hay sesión");
+
+    const { error } = await supabaseClient
+      .from("profiles")
+      .update({ avatar_url: url })
+      .eq("id", user.id);
+
+    if (error) throw error;
+
+    return true;
+  },
+
   async getTasks() {
     const { data: sessionData } = await supabaseClient.auth.getSession();
     const userId = sessionData?.session?.user?.id;

@@ -352,6 +352,7 @@ function mostrarModalCompletado() {
 //perfil
 const openPerfile = document.querySelectorAll(".openPerfil");
 const closePerfil = document.getElementById("Hogar");
+const closePerfilFlecha = document.querySelector(".salirPerfil");
 const perfilContainer = document.querySelector(".Perfile");
 const cantidadTkasPerfile = document.querySelector(".cantidadTasksPerfile");
 
@@ -367,6 +368,101 @@ openPerfile.forEach((per) => {
 
 closePerfil.addEventListener("click", () => {
   perfilContainer.classList.remove("show");
+});
+
+closePerfilFlecha.addEventListener("click", () => {
+  perfilContainer.classList.remove("show");
+});
+
+// editar fotos
+
+// Modal
+const editorPerfil = document.querySelector(".EditarPerfilHeader");
+const btnCerrarEditor = document.querySelector(".CerrarEditor_Foto");
+
+const openEditarFotos = document.querySelector(".iconoAjustesheader");
+const contenidoEditarFotos = document.querySelector(".ContentEditar");
+
+const inputFotoPerfil = document.getElementById("inputFotoPerfil");
+const inputFotoHeader = document.getElementById("inputFotoHeader");
+
+// Preview
+const previewImg = document.querySelector(".VisualizarFotoPerfil img");
+
+// Botón aceptar
+const btnAceptar = document.querySelector(".ApcentarCambio");
+
+openEditarFotos.addEventListener("click", () => {
+  editorPerfil.classList.add("show");
+  contenidoEditarFotos.classList.add("show");
+});
+
+btnCerrarEditor.addEventListener("click", (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+
+  editorPerfil.classList.remove("show");
+  contenidoEditarFotos.classList.remove("show");
+});
+
+inputFotoPerfil.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Archivo no válido");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    previewImg.src = reader.result;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+inputFotoHeader.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Archivo no válido");
+    return;
+  }
+
+  console.log("Header seleccionado:", file.name);
+});
+
+btnAceptar.addEventListener("click", async () => {
+  try {
+    const file = inputFotoPerfil.files[0];
+    if (!file) {
+      Toast.show("Selecciona una imagen", "warning");
+      return;
+    }
+
+    Toast.show("Subiendo foto...", "info");
+
+    // 1. Subir a Supabase
+    const avatarUrl = await Storage.uploadAvatar(file);
+
+    // 2. Guardar en profiles
+    await Storage.updateAvatarUrl(avatarUrl);
+
+    // 3. Actualizar estado local
+    App.profile.avatar_url = avatarUrl;
+
+    // 4. Re-render perfil
+    UI.renderPerfile(App.profile);
+
+    editorPerfil.classList.remove("show");
+    Toast.show("Foto actualizada correctamente", "success", { sound: true });
+  } catch (err) {
+    console.error(err);
+    Toast.show("Error al subir la imagen", "error", { sound: true });
+  }
 });
 
 //Themes

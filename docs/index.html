@@ -136,9 +136,13 @@
           <div class="loyoutPerfile">
             <article class="contenidoPerfil">
               <div class="headerPerfil">
+                <article class="iconoSalirheader salirPerfil">
+                  <i class="fa-solid fa-arrow-left"></i>
+                </article>
                 <article class="iconoAjustesheader">
                   <i class="fa-solid fa-pen-to-square editarHeader"></i>
                 </article>
+
                 <article class="fotoPerfil">
                   <div class="foto">
                     <div>
@@ -216,14 +220,14 @@
             <article class="info_Secundaria">
               <div class="contenidoSeccion2">
                 <div class="HeaderSecond">
-                  <div class="iconheaderPerfil">
+                  <div class="iconheaderPerfil" title="Cantidad de Tareas">
                     <img
                       width="38"
                       height="38"
                       src="https://img.icons8.com/?size=100&id=jhjNIASGSpAR&format=png&color=000000"
                       alt=""
                     />
-                    <p class="cantidadTasksPerfile">24</p>
+                    <p class="cantidadTasksPerfile"></p>
                   </div>
 
                   <div class="iconheaderPerfil">
@@ -598,6 +602,60 @@
         </div>
       </main>
     </div>
+
+    <!--Modales editar Fotos-->
+    <article class="EditarPerfilHeader">
+      <div class="ContentEditar">
+        <div class="headerEditarHeader">
+          <samp class="CerrarEditor_Foto" title="Cerrar editor de perfil"
+            ><i class="fa-solid fa-xmark"></i
+          ></samp>
+          <h3>Editar fotos de perfil</h3>
+        </div>
+        <div class="foto_Perfil_header">
+          <div class="VisualizarFotoPerfil">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              alt="Visualizacion de foto de perfil"
+            />
+          </div>
+          <div class="Opciones_Perfil">
+            <div class="opcion_foto_Perfil">
+              <form>
+                <label for="inputFotoPerfil" class="BTN_SUBIR_FOTO_USER"
+                  ><i class="fa-regular fa-images"></i
+                ></label>
+                <p>Foto perfil</p>
+                <input
+                  type="file"
+                  name="foto"
+                  id="inputFotoPerfil"
+                  accept="image/*"
+                />
+              </form>
+            </div>
+
+            <div class="opcion_foto_header">
+              <form>
+                <label for="inputFotoHeader" class="BTN_SUBIR_HEADER_USER">
+                  <i class="fa-regular fa-id-badge"></i
+                ></label>
+                <p>Header foto</p>
+                <input
+                  type="file"
+                  name="foto"
+                  id="inputFotoHeader"
+                  accept="image/*"
+                />
+              </form>
+            </div>
+          </div>
+          <div class="btnAceptar">
+            <button class="ApcentarCambio" type="button">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </article>
 
     <script type="module" src="assets/js/supabase.js"></script>
     <script type="module" src="assets/js/storage.js"></script>
