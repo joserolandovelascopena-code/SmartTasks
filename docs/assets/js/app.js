@@ -504,6 +504,9 @@ btnAceptar.addEventListener("click", async () => {
       sound: true,
       haptic: true,
     });
+    setTimeout(() => {
+      BtnLoaderCambiarFoto.classList.remove("active");
+    }, 300);
   }
 });
 
