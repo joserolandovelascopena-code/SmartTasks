@@ -402,7 +402,10 @@ const previewImg = document.querySelector(".VisualizarFotoPerfil img");
 // Botón aceptar
 const btnAceptar = document.querySelector(".ApcentarCambio");
 
+//animaciones succes de editar
 const VisualizarFotoBorder = document.querySelector(".borderActiveImg");
+const btnAceptarCambiosFoto = document.querySelector(".btnAceptar button");
+const BtnLoaderCambiarFoto = document.querySelector(".cajaBtnLoader");
 
 openEditarFotos.addEventListener("click", () => {
   editorPerfil.classList.add("show");
@@ -416,17 +419,23 @@ btnCerrarEditor.addEventListener("click", (e) => {
   editorPerfil.classList.remove("show");
   contenidoEditarFotos.classList.remove("show");
   VisualizarFotoBorder.classList.remove("show");
+  btnAceptarCambiosFoto.classList.remove("active");
 });
 
 inputFotoPerfil.addEventListener("click", () => {
   VisualizarFotoBorder.classList.remove("show");
+  btnAceptarCambiosFoto.classList.remove("active");
 });
+
 inputFotoPerfil.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
-    alert("Archivo no válido");
+    Toast.show("Archivo no válido", "error", {
+      sound: true,
+      haptic: true,
+    });
     return;
   }
 
@@ -438,6 +447,7 @@ inputFotoPerfil.addEventListener("change", (e) => {
 
   reader.readAsDataURL(file);
   VisualizarFotoBorder.classList.add("show");
+  btnAceptarCambiosFoto.classList.add("active");
 });
 
 inputFotoHeader.addEventListener("change", (e) => {
@@ -445,7 +455,10 @@ inputFotoHeader.addEventListener("change", (e) => {
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
-    alert("Archivo no válido");
+    Toast.show("Archivo no válido", "error", {
+      sound: true,
+      haptic: true,
+    });
     return;
   }
 
@@ -460,10 +473,22 @@ btnAceptar.addEventListener("click", async () => {
       return;
     }
 
+    BtnLoaderCambiarFoto.classList.add("active");
+
     Toast.show("Subiendo foto...", "info");
 
     // 1. Subir a Supabase
     const avatarUrl = await Storage.uploadAvatar(file);
+
+    setTimeout(() => {
+      editorPerfil.classList.remove("show");
+      BtnLoaderCambiarFoto.classList.remove("active");
+
+      Toast.show("Foto actualizada correctamente", "success", {
+        sound: true,
+        haptic: true,
+      });
+    }, 1500);
 
     // 2. Guardar en profiles
     await Storage.updateAvatarUrl(avatarUrl);
@@ -473,12 +498,6 @@ btnAceptar.addEventListener("click", async () => {
 
     // 4. Re-render perfil
     UI.renderPerfile(App.profile);
-
-    editorPerfil.classList.remove("show");
-    Toast.show("Foto actualizada correctamente", "success", {
-      sound: true,
-      haptic: true,
-    });
   } catch (err) {
     console.error(err);
     Toast.show("Error al subir la imagen", "error", {

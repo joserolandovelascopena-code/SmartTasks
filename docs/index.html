@@ -34,11 +34,6 @@
 
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-
-    <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -656,7 +651,14 @@
             </div>
           </div>
           <div class="btnAceptar">
-            <button class="ApcentarCambio" type="button">Aceptar</button>
+            <button class="ApcentarCambio" type="button">
+              <p>Aceptar</p>
+              <div class="cajaBtnLoader">
+                <samp class="ContendorBtnLoader"
+                  ><samp class="loaderBtn"></samp
+                ></samp>
+              </div>
+            </button>
           </div>
         </div>
         <section class="actionSheet">
@@ -679,7 +681,7 @@
                   </div>
                 </div>
                 <div class="btnCancelarAccionSheet">
-                  <button type="button">Cacelar</button>
+                  <button type="button">Aceptar</button>
                 </div>
               </div>
             </div>

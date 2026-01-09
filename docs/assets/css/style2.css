@@ -164,9 +164,10 @@
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
-.CerrarEditor_Foto i:active {
+.CerrarEditor_Foto i:hover {
   background: #c8d5da;
 }
+
 .btnOpenSheet {
   cursor: pointer;
   display: flex;
@@ -261,7 +262,11 @@
   height: 40px;
 }
 .btnAceptar button {
-  padding: 10px 50px;
+  padding: 10px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 
   font-family: "Poppins", sans-serif;
   font-weight: bold;
@@ -271,11 +276,33 @@
   border: none;
   transition: 0.3s ease;
   cursor: pointer;
+  opacity: 0.5;
 }
 .btnAceptar button:hover {
   scale: 0.98;
 }
-
+.btnAceptar button.active {
+  opacity: 1;
+}
+.cajaBtnLoader {
+  display: none;
+}
+.cajaBtnLoader.active {
+  display: block;
+}
+.ContendorBtnLoader {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+}
+.loaderBtn {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(183, 223, 211, 0.719);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spinloaderBtn 0.6s linear infinite;
+}
 /*btn sheet*/
 .actionSheet {
   position: absolute;
@@ -781,6 +808,15 @@
   }
 }
 
+@keyframes spinloaderBtn {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /*responsing*/
 
 @media (max-width: 700px) {
@@ -858,6 +894,31 @@
 
   .btnAceptar button {
     padding: 10px 70px;
+  }
+
+  .actionSheet {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .ContentSheet {
+    background: rgb(155, 160, 167);
+  }
+
+  .AccionesAvanzadasEditarFoto {
+    position: relative;
+    background: white;
+    height: 74%;
+    padding: 12px;
+    border-radius: 12px;
+  }
+  .btnCancelarAccionSheet {
+    margin-top: 10px;
+    height: 16%;
+    background: white;
+    border-radius: 12px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
   /*Editar========*/
 
