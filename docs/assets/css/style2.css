@@ -111,7 +111,7 @@
   left: 0;
   top: 0;
   background: rgb(0, 0, 0, 0.4);
-  z-index: 80;
+  z-index: 50;
 
   opacity: 0;
   pointer-events: none;
@@ -130,7 +130,7 @@
   padding: 8px;
   width: 400px;
   height: 540px;
-  background: rgb(238, 246, 253);
+  background: rgb(230, 240, 248);
   border-radius: 30px;
 
   scale: 0.9;
@@ -224,6 +224,95 @@
   grid-template-columns: repeat(2, auto);
   gap: 40px;
   margin-top: 20px;
+}
+.previsualizarHeader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 51;
+  background: rgba(0, 0, 0, 0.349);
+  backdrop-filter: blur(50px);
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.previsualizarHeader.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.caja_Visualizar {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.ContentVisualizarHeder {
+  padding-top: 60px;
+  position: relative;
+  width: 600px;
+  height: 500px;
+  background: transparent;
+}
+.ImgVisualizarHeader {
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  height: 70%;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(10px);
+
+  transition: 0.3s ease-in-out;
+}
+.ImgVisualizarHeader.show {
+  transform: translateY(0);
+}
+.previewSystem {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 9;
+}
+.PreviewHeaderMain {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.2s linear;
+  opacity: 0;
+}
+.PreviewHeaderMain.show {
+  opacity: 1;
+}
+.btnsOpiconesVisualizar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  position: absolute;
+  bottom: 5px;
+  z-index: 11;
+}
+
+.btnsOpiconesVisualizar button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  background: #100049cb;
+  color: white;
+  cursor: pointer;
 }
 .opcion_foto_Perfil p,
 .opcion_foto_header p {
@@ -338,8 +427,8 @@
 
   background: rgb(191, 197, 206);
   transform: translateY(100%);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   transition: 0.4s ease;
 }
 .ContentSheet.active {
@@ -348,37 +437,45 @@
 .AccionesAvanzadasEditarFoto {
   position: relative;
   background: white;
-  height: 70%;
+  height: 74%;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 15px;
+}
+.AccionesAvanzadasEditarFoto h5 {
+  font-size: 15px;
 }
 .opcionesEditarfoto {
   margin-top: 8px;
   display: grid;
-  grid-template-columns: 5% auto;
+  grid-template-columns: 8% auto;
+  align-items: center;
   gap: 10px;
-  padding: 10px 5px;
+  padding: 8px 5px;
   border-radius: 8px;
   transition: 0.2s ease-in;
   color: #000;
   cursor: pointer;
 }
-.opcionesEditarfoto:active {
+.opcionesEditarfoto:hover {
   background: rgb(225, 236, 241);
 }
 .opcionesEditarfoto p {
   font-size: 15px;
+  font-weight: bold;
+  color: #535353;
 }
 .opcionesEditarfoto i {
-  font-size: 17px;
-  color: #6e6e6e;
+  font-size: 20px;
+  color: #575656;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 .btnCancelarAccionSheet {
   margin-top: 10px;
-  height: 20%;
+  height: 16%;
   background: white;
-  border-radius: 12px;
+  border-radius: 15px;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -403,8 +500,10 @@
     rgb(235, 242, 250),
     rgb(245, 248, 250)
   );
-  background-size: 600%;
   height: 220px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .iconoSalirheader {
   display: flex;
@@ -413,12 +512,12 @@
   left: 20px;
   width: 30px;
   height: 30px;
-  background: #ffffff5b;
+  background: #ffffffec;
   justify-content: center;
   align-items: center;
   font-size: 17px;
   border-radius: 8px;
-  color: #6e6e6eb7;
+  color: #5e5d5db7;
   cursor: pointer;
   z-index: 10;
 
@@ -456,13 +555,16 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   position: relative;
   display: flex;
   text-align: center;
 }
-
+.foto {
+  margin-left: 26px;
+  margin-top: 16px;
+}
 .fotoPerfil img {
   border-radius: 50%;
   height: 180px;
@@ -784,6 +886,7 @@
 }
 
 /* Animaciones */
+
 @keyframes popUp {
   0% {
     transform: scale(1);
@@ -836,7 +939,7 @@
     border-radius: 14px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    height: 180px;
+    height: 280px;
   }
   .iconoSalirheader {
     opacity: 1;
@@ -927,21 +1030,35 @@
     color: #5a5a5ac2;
   }
 
+  .foto {
+    margin-top: 80px;
+  }
   .fotoPerfil img {
     margin-top: 20px;
-    height: 120px;
-    width: 120px;
+    height: 160px;
+    width: 160px;
     border: 2px solid rgb(177, 177, 247);
   }
   .nameUserDescrip h2 {
     font-size: 20px;
   }
-  .nameUserDescrip,
-  .descripcionUser {
-    text-align: center;
-  }
+
   .descripcionUser p {
     font-size: 14px;
+  }
+
+  .ContentVisualizarHeder {
+    width: 340px;
+    height: 300px;
+  }
+  .btnsOpiconesVisualizar {
+    padding-top: 50px;
+    bottom: 0;
+  }
+
+  .btnsOpiconesVisualizar button {
+    padding: 5px 16px;
+    font-size: 12px;
   }
 
   /*==================*/

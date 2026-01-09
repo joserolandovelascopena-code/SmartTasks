@@ -495,6 +495,9 @@ export const UI = {
     const avatarBarraNav = document.querySelectorAll(".foto_perfil img");
     const avatarMsg = document.querySelector(".imgAppPerfil img");
     const previewImg = document.querySelector(".VisualizarFotoPerfil img");
+
+    const headerPerfileIMG = document.querySelector(".headerPerfil");
+
     if (avatarImg) {
       avatarImg.src = perfile.avatar_url
         ? `${perfile.avatar_url}?t=${Date.now()}`
@@ -520,6 +523,13 @@ export const UI = {
         ? `${perfile.avatar_url}?t=${Date.now()}`
         : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
     }
+
+    if (headerPerfileIMG) {
+      headerPerfileIMG.style.backgroundImage = perfile.header_url
+        ? `url(${perfile.header_url}?t=${Date.now()})`
+        : "";
+    }
+
     /*TAREAS */
     const cantidadTasks = document.getElementById("CantidadTasks");
     const badge = document.querySelector(".cantidadTasksPerfile");

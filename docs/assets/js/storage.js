@@ -52,6 +52,30 @@ const Storage = {
     return data.publicUrl;
   },
 
+  async uploadHeader(file) {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const user = sessionData?.session?.user;
+    if (!user || !file) throw new Error("No hay sesión o archivo");
+
+    const fileExt = file.name.split(".").pop();
+    const filePath = `${user.id}/header.${fileExt}`;
+
+    const { error } = await supabaseClient.storage
+      .from("avatars")
+      .upload(filePath, file, {
+        upsert: true,
+        contentType: file.type,
+      });
+
+    if (error) throw error;
+
+    const { data } = supabaseClient.storage
+      .from("avatars")
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  },
+
   async updateAvatarUrl(url) {
     const { data: sessionData } = await supabaseClient.auth.getSession();
     const user = sessionData?.session?.user;
@@ -66,6 +90,18 @@ const Storage = {
     if (error) throw error;
 
     return true;
+  },
+
+  async updateHeaderUrl(url) {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const user = sessionData?.session?.user;
+
+    const { error } = await supabaseClient
+      .from("profiles")
+      .update({ header_url: url })
+      .eq("id", user.id);
+
+    if (error) throw error;
   },
 
   async getTasks() {

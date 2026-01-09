@@ -201,8 +201,9 @@ export const App = {
 
     const full_name = this.userProfile.full_name;
     const avatar_url = this.userProfile.avatar_url;
+    const avatarHeader_url = this.userProfile.header_url;
 
-    const loaderUser = { full_name, avatar_url, user_id };
+    const loaderUser = { full_name, avatar_url, avatarHeader_url, user_id };
 
     UI.renderPerfile(loaderUser);
   },
@@ -398,14 +399,19 @@ const inputFotoHeader = document.getElementById("inputFotoHeader");
 
 // Preview
 const previewImg = document.querySelector(".VisualizarFotoPerfil img");
+const previewHeader = document.querySelector(".previsualizarHeader");
+const previewImgHeader = document.querySelector(".PreviewHeaderMain");
 
 // Botón aceptar
 const btnAceptar = document.querySelector(".ApcentarCambio");
+const btnCancelarHeder = document.querySelector(".CancelarHeader");
+const btnAceptarHeader = document.querySelector(".AceptarHeader");
 
 //animaciones succes de editar
 const VisualizarFotoBorder = document.querySelector(".borderActiveImg");
 const btnAceptarCambiosFoto = document.querySelector(".btnAceptar button");
 const BtnLoaderCambiarFoto = document.querySelector(".cajaBtnLoader");
+const trasitionPreviewHeader = document.querySelector(".ImgVisualizarHeader");
 
 openEditarFotos.addEventListener("click", () => {
   editorPerfil.classList.add("show");
@@ -425,6 +431,19 @@ btnCerrarEditor.addEventListener("click", (e) => {
 inputFotoPerfil.addEventListener("click", () => {
   VisualizarFotoBorder.classList.remove("show");
   btnAceptarCambiosFoto.classList.remove("active");
+});
+
+inputFotoHeader.addEventListener("click", () => {
+  previewHeader.classList.add("show");
+  trasitionPreviewHeader.classList.add("show");
+});
+
+btnCancelarHeder.addEventListener("click", () => {
+  trasitionPreviewHeader.classList.remove("show");
+
+  setTimeout(() => {
+    previewHeader.classList.remove("show");
+  }, 200);
 });
 
 inputFotoPerfil.addEventListener("change", (e) => {
@@ -451,6 +470,7 @@ inputFotoPerfil.addEventListener("change", (e) => {
 });
 
 inputFotoHeader.addEventListener("change", (e) => {
+  previewImgHeader.classList.add("show");
   const file = e.target.files[0];
   if (!file) return;
 
@@ -462,7 +482,13 @@ inputFotoHeader.addEventListener("change", (e) => {
     return;
   }
 
-  console.log("Header seleccionado:", file.name);
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    previewImgHeader.src = reader.result;
+  };
+
+  reader.readAsDataURL(file);
 });
 
 btnAceptar.addEventListener("click", async () => {
@@ -484,7 +510,7 @@ btnAceptar.addEventListener("click", async () => {
       editorPerfil.classList.remove("show");
       BtnLoaderCambiarFoto.classList.remove("active");
 
-      Toast.show("Foto actualizada correctamente", "success", {
+      Toast.show("Se actualizo la foto de perfil ", "success", {
         sound: true,
         haptic: true,
       });
@@ -501,6 +527,52 @@ btnAceptar.addEventListener("click", async () => {
   } catch (err) {
     console.error(err);
     Toast.show("Error al subir la imagen", "error", {
+      sound: true,
+      haptic: true,
+    });
+    setTimeout(() => {
+      BtnLoaderCambiarFoto.classList.remove("active");
+    }, 300);
+  }
+});
+
+btnAceptarHeader.addEventListener("click", async () => {
+  try {
+    const file = inputFotoHeader.files[0];
+    if (!file) {
+      Toast.show("Selecciona una imagen", "warning");
+      return;
+    }
+
+    previewHeader.classList.remove("show");
+
+    BtnLoaderCambiarFoto.classList.add("active");
+
+    Toast.show("Subiendo header...", "info");
+
+    const avatarUrl_header = await Storage.uploadHeader(file);
+
+    setTimeout(() => {
+      editorPerfil.classList.remove("show");
+      BtnLoaderCambiarFoto.classList.remove("active");
+
+      Toast.show("Se cambio el header correctamente", "success", {
+        sound: true,
+        haptic: true,
+      });
+    }, 1500);
+
+    // 2. Guardar en profiles
+    await Storage.updateHeaderUrl(avatarUrl_header);
+
+    // 3. Actualizar estado local
+    App.profile.header_url = avatarUrl_header;
+
+    // 4. Re-render perfil
+    UI.renderPerfile(App.profile);
+  } catch (err) {
+    console.error(err);
+    Toast.show("Error al cambiar header", "error", {
       sound: true,
       haptic: true,
     });
