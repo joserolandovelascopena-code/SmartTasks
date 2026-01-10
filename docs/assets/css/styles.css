@@ -2087,7 +2087,12 @@ h5 {
     right: auto;
     width: 100%;
   }
-  .backgraudMsgs {
+  .MSGS_SECOND_INFERIOR {
+    width: 100%;
+    left: 0;
+  }
+  .backgraudMsgs,
+  .backgraudMsgsInferior {
     display: grid;
     justify-content: center;
   }
@@ -2392,7 +2397,7 @@ h5 {
 
   .Nav_addTasks {
     display: grid;
-    grid-template-columns: auto 9%;
+    grid-template-columns: auto 7%;
     padding: 15px 10px 0 20px;
   }
   .scroll_subir_task {
