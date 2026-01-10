@@ -255,9 +255,11 @@ export const App = {
     }
 
     try {
-      await Storage.deleteTask(id);
+      const taskName = await Storage.deleteTask(id);
+
+      Toast.showInferior(`Se eliminó la tarea: "${taskName}"`, "deleElement");
     } catch (err) {
-      console.error("Error borrando tarea en BD:", err);
+      console.error("Error borrando tarea en BD:", err.message);
     }
 
     UI.renderTasks(this.tasks);
@@ -283,6 +285,9 @@ export const App = {
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.getElementById("Add");
   const contenAdd = document.querySelector(".subir_tarea");
+
+  const perfilContainer = document.querySelector(".Perfile");
+
   const bodycontenedor = document.querySelector(".contenedor");
   const closeAddTaks = document.getElementById("CloseAddTasks");
   const backgraudAnimation = document.querySelector(".backgraud-tasks");
@@ -290,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoTarea = document.querySelector(".info_tarea");
 
   openAdd.addEventListener("click", () => {
+    perfilContainer.classList.remove("show");
     bodycontenedor.style.overflowY = "hidden";
 
     contenAdd.classList.add("show");
@@ -362,11 +368,12 @@ const closePerfil = document.getElementById("Hogar");
 const closePerfilFlecha = document.querySelector(".salirPerfil");
 const perfilContainer = document.querySelector(".Perfile");
 const cantidadTkasPerfile = document.querySelector(".cantidadTasksPerfile");
+const contenAdd = document.querySelector(".subir_tarea");
 
 openPerfile.forEach((per) => {
   per.addEventListener("click", () => {
     perfilContainer.classList.add("show");
-
+    contenAdd.classList.remove("show");
     cantidadTkasPerfile.classList.remove("active");
     void cantidadTkasPerfile.offsetWidth; // fuerza reflow
     cantidadTkasPerfile.classList.add("active");
@@ -621,19 +628,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/*
-function actualizarEstadoConexion() {
-    const mensajeDesconexion = document.getElementById('mensaje-offline'); 
+window.addEventListener("offline", () => {
+  Toast.showInferior(
+    "En este momento no tienes conexión a internet",
+    "offline"
+  );
+});
 
-    if (navigator.onLine) {
-        console.log("Conectado a Internet");
-        if (mensajeDesconexion) {
-            mensajeDesconexion.style.display = 'none';
-        }
-    } else {
-        console.log("Desconectado de Internet");
-        if (mensajeDesconexion) {
-            mensajeDesconexion.style.display = 'block'; 
-        }
-    }
-}*/
+window.addEventListener("online", () => {
+  Toast.hideInferior();
+  Toast.showInferior("Conexión restablecida", "recoverWifi");
+  UI.renderPerfile(this.profile);
+});

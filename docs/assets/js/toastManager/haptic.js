@@ -8,7 +8,7 @@ export const Haptic = {
     if (type === "error") {
       navigator.vibrate([30, 40, 30]);
     } else {
-      navigator.vibrate(15);
+      navigator.vibrate(20);
     }
   },
 };

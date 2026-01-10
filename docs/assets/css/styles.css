@@ -57,8 +57,8 @@ h5 {
   display: flex;
   justify-items: center;
   justify-content: center;
-  height: 25px;
-  width: 25px;
+  height: 22px;
+  width: 22px;
   background: #000000;
   border-radius: 50%;
 }
@@ -88,23 +88,23 @@ h5 {
 .contentMsgInferior {
   z-index: 80;
   width: auto;
-  max-width: 600px;
-  padding: 14px 16px;
+  max-width: 700px;
+  padding: 12px 16px;
   position: relative;
   display: grid;
-  grid-template-columns: 2% auto auto;
+  grid-template-columns: 2% auto;
   gap: 25px;
   align-items: center;
-  background: #000000;
+  background: #222222;
   color: white;
   box-shadow: 0 8px 30px rgb(214, 214, 214);
   border-radius: 8px;
   border: 1px solid rgb(189, 186, 186);
 
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
-  transform: translateY(50px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(500px);
+  transition: opacity 0.2s ease, transform 0.3s ease;
 }
 
 .contentMsgInferior.show {
@@ -112,11 +112,8 @@ h5 {
   pointer-events: auto;
   transform: translateY(0);
 }
-#IconWifi {
-  display: none;
-}
-#IconWifi.show {
-  display: block;
+.iconWifi {
+  font-size: 20px;
 }
 
 .contentMsgInferior h5 {
@@ -734,9 +731,12 @@ h5 {
 .contenedor::-webkit-scrollbar {
   display: none;
 }
-
+.contenFlooat {
+  position: relative;
+}
 .subir_tarea {
-  position: fixed;
+  box-shadow: 0 0 3px gainsboro;
+  position: absolute;
   z-index: 50;
   inset: 0;
   background: white;
@@ -755,10 +755,7 @@ h5 {
 
 /* Fondo */
 .backgraud-tasks {
-  position: fixed;
-  inset: 0;
   background: rgb(255, 255, 255);
-
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -774,16 +771,14 @@ h5 {
 .contenido_main {
   position: relative;
   height: 87vh;
-  padding-top: 16px;
-  margin: 10px 0 0 0;
-  border: 1px solid gainsboro;
+
   border-radius: 5px;
   background-color: white;
   overflow-y: auto;
   display: grid;
   grid-template-columns: 15% auto;
   gap: 15px;
-  padding: 20px;
+  padding: 5px;
 }
 
 .targetas_info {
@@ -854,9 +849,12 @@ h5 {
   padding: 0;
   align-items: center;
   color: #464545;
+  font-size: 15px;
+  margin-bottom: 10px;
 }
-.Nav_addTasks h3 {
-  left: 0;
+.titleSection {
+  padding-left: 5px;
+  margin-top: -6px;
 }
 .Nav_addTasks i {
   font-size: 19px;
@@ -884,7 +882,8 @@ h5 {
   border-radius: 12px;
 }
 #task-input input::placeholder {
-  font-size: 16px;
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
 }
 
 #taskList {
@@ -1084,7 +1083,7 @@ h5 {
   border-radius: 10px;
   padding: 10px;
   display: grid;
-  grid-template-columns: 58% 28% auto;
+  grid-template-columns: 50% 36% auto;
   gap: 10px;
   color: #616161;
   cursor: pointer;
@@ -1195,7 +1194,7 @@ h5 {
   margin-top: 16px;
   background: #ebeffc;
   display: grid;
-  grid-template-columns: 80% auto;
+  grid-template-columns: 70% auto;
   gap: 10px;
   padding: 14px 10px;
   position: relative;
@@ -1222,7 +1221,7 @@ h5 {
 }
 
 .conten_repetion {
-  width: 334px;
+  width: 270px;
   background: white;
   padding: 15px;
   box-shadow: 0 0 20px rgb(206, 206, 206);
@@ -2470,7 +2469,10 @@ h5 {
   .btnmovilPc {
     display: none;
   }
-
+  .titleSection {
+    padding-left: 0;
+    margin-top: 0;
+  }
   /*descrition*/
   .title_description {
     margin-block-end: 6px;

@@ -47,7 +47,16 @@ export const Toast = {
     if (!this.elSeond) return;
 
     const { sound = false, haptic = false } = options;
-    const time = type === "deleElement" ? 10000 : 400;
+
+    const TIME_BY_TYPE = {
+      deleElement: 5000,
+      success: 2500,
+      recoverWifi: 2500,
+      error: 4000,
+      offline: Infinity,
+    };
+
+    const time = TIME_BY_TYPE[type] ?? 400;
 
     this.textSecond.textContent = msg;
 
@@ -55,6 +64,12 @@ export const Toast = {
       this.iconSecond.className = "fa fa-xmark";
     } else if (type === "deleElement") {
       this.iconSecond.className = "far fa-trash-can";
+    } else if (type === "offline") {
+      this.iconSecond.className = "material-symbols-outlined";
+      this.iconSecond.textContent = "wifi_off";
+    } else if (type === "recoverWifi") {
+      this.iconSecond.className = "fa-solid fa-wifi iconWifi";
+      this.iconSecond.textContent = "";
     } else {
       this.iconSecond.className = "fa fa-check";
     }
@@ -65,8 +80,15 @@ export const Toast = {
     clearTimeout(this.timer);
     this.elSeond.classList.add("show");
 
-    this.timer = setTimeout(() => {
-      this.elSeond.classList.remove("show");
-    }, time);
+    if (time !== Infinity) {
+      this.timer = setTimeout(() => {
+        this.elSeond.classList.remove("show");
+      }, time);
+    }
+  },
+
+  hideInferior() {
+    if (!this.elSeond) return;
+    this.elSeond.classList.remove("show");
   },
 };

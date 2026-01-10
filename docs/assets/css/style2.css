@@ -72,11 +72,11 @@
 
 /*Perfil*/
 .Perfile {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   padding: 20px 38px;
-  z-index: 37;
+  z-index: 50;
   background: white;
   border-left: 2px solid gainsboro;
   margin: 5px 0;

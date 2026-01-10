@@ -192,17 +192,33 @@ const Storage = {
       return null;
     }
   },
+
   // Eliminar tarea
   async deleteTask(id) {
-    const { error } = await supabaseClient.from("tasks").delete().eq("id", id);
+    const { data, error: selectError } = await supabaseClient
+      .from("tasks")
+      .select("text")
+      .eq("id", id)
+      .single();
 
-    if (error) {
-      console.error("Error eliminando tarea:", error.message);
-      return false;
+    if (selectError) {
+      throw new Error(selectError.message);
     }
 
-    return true;
+    const taskName = data.text;
+
+    const { error: deleteError } = await supabaseClient
+      .from("tasks")
+      .delete()
+      .eq("id", id);
+
+    if (deleteError) {
+      throw new Error(deleteError.message);
+    }
+
+    return taskName;
   },
+
   async cantidadTasksPorUsuario(userId) {
     try {
       const { count, error } = await supabaseClient
