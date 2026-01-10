@@ -248,22 +248,18 @@ export const App = {
   },
 
   async deleteTask(id) {
-    // 1. Actualizas el estado principal
     this.tasks = this.tasks.filter((t) => t.id !== id);
 
-    // 2. Actualizas el contador EN MEMORIA
     if (this.profile) {
       this.profile.totalTasks = this.tasks.length;
     }
 
-    // 3. Persistes en BD
     try {
       await Storage.deleteTask(id);
     } catch (err) {
       console.error("Error borrando tarea en BD:", err);
     }
 
-    // 4. Renderizas
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
     UI.renderPerfile(this.profile);

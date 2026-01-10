@@ -349,7 +349,10 @@ export const UI = {
             contenedorEditar.classList.remove("active");
 
             App.deleteTask(task.id);
-            Toast.show("Se eliminó exitosamente la tarea", "success");
+            Toast.showInferior(
+              "Se eliminó exitosamente la tarea",
+              "deleElement"
+            );
           }, 400);
         };
         // ===== CANCELAR =====

@@ -36,6 +36,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
 
@@ -50,10 +54,10 @@
         </div>
       </div>
 
-      <section class="msgsConfirmacion">
+      <section class="MSGS_SYSTEM_MAIN">
         <div class="backgraudMsgs">
           <article class="contentMsg">
-            <div>
+            <div class="contSuccesSystem">
               <i class="fa fa-xmark iconoSucces"></i>
             </div>
             <h5 id="msgSystem">Se eliminó exitosamente la tarea</h5>
@@ -61,6 +65,19 @@
         </div>
       </section>
 
+      <section class="MSGS_SECOND_INFERIOR">
+        <div class="backgraudMsgsInferior">
+          <article class="contentMsgInferior">
+            <div class="contSuccesSystemInferior">
+              <i class="iconoSuccesInferior"></i>
+              <samp id="IconWifi" class="material-symbols-outlined"></samp>
+            </div>
+            <h5 id="msgSystemSecond">
+              En este momento no hay conexión a internet
+            </h5>
+          </article>
+        </div>
+      </section>
       <div class="nav-main">
         <nav class="nav_menu">
           <ul class="contenedor_menu">
