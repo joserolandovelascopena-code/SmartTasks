@@ -1287,14 +1287,14 @@ h5 {
 
 /*======================================*/
 .grafiaca_progreso {
-  box-shadow: 0 0 10px gainsboro;
+  box-shadow: 0 0 3px gainsboro;
   border-radius: 12px;
   grid-row: 1 / span 0;
 }
 
 /*=====================================*/
 .proyects {
-  box-shadow: 0 0 10px gainsboro;
+  box-shadow: 0 0 3px gainsboro;
   border-radius: 12px;
 }
 /*=====================================*/
@@ -1380,7 +1380,7 @@ h5 {
   left: 4px;
 }
 .info_tarea {
-  box-shadow: 0 0 10px gainsboro;
+  box-shadow: 0 0 3px gainsboro;
   padding: 10px;
   opacity: 1;
   transition: 0.1s ease;
@@ -2233,16 +2233,15 @@ h5 {
   }
   .nav-main {
     background: white;
-    border-top: 2px solid gainsboro;
-    box-shadow: 0 0 0 gainsboro;
+    border-top: 2px solid rgba(187, 187, 187, 0.699);
+    border-radius: 0;
+    box-shadow: 0 0 0 rgb(0, 0, 0);
     z-index: 20;
     position: fixed;
     bottom: 0;
     height: 66px;
     width: 100%;
     margin: 0;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
   }
   .plusAdd {
     width: 28px;
