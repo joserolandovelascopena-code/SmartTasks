@@ -272,7 +272,7 @@ h5 {
 }
 /*Barra superior principal*/
 .Barra_Superior_principal {
-  box-shadow: 4px 0 10px gainsboro;
+  box-shadow: 0 0 3px gainsboro;
   z-index: 28;
   padding: 6px 10px;
   position: relative;
@@ -415,7 +415,6 @@ h5 {
   padding: 5px;
 }
 .icoCantidad {
-  background-color: #ffffff;
   border-radius: 12px;
   text-align: center;
   color: #00d9ff;
@@ -573,7 +572,7 @@ h5 {
 .nav-main {
   box-shadow: 0px 0px 3px rgba(199, 199, 199, 0.973);
   position: relative;
-  height: 99vh;
+  height: 98.6vh;
   margin: 4px;
   border-radius: 8px;
   color: rgb(109, 109, 109);
@@ -755,7 +754,6 @@ h5 {
 
 /* Fondo */
 .backgraud-tasks {
-  background: rgb(255, 255, 255);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -873,7 +871,7 @@ h5 {
 
 #task-input input {
   padding: 16px 8px;
-  background: rgba(249, 254, 255, 0.788);
+  background: rgba(255, 255, 255, 0.788);
   width: 100%;
   border: none;
   box-shadow: 0 0 0 2px gainsboro;
@@ -882,7 +880,7 @@ h5 {
   border-radius: 12px;
 }
 #task-input input::placeholder {
-  font-size: 12px;
+  font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
 
@@ -920,7 +918,7 @@ h5 {
 }
 #task-input input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #3305fd75;
+  box-shadow: 0 0 0 2px rgb(0, 162, 255);
 }
 /*Categorias*/
 .main-cont-categoria {
