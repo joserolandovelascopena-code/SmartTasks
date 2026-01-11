@@ -98,3 +98,12 @@ html[data-theme="light"] {
 [data-theme="dark"] .agregar {
   background: var(--bg-modal-dark);
 }
+
+[data-theme="dark"] .contentMsg {
+  box-shadow: 0 8px 30px rgb(110, 110, 110);
+}
+[data-theme="dark"] .contentMsgInferior {
+  box-shadow: 0 8px 30px rgb(34, 34, 34);
+  background: var(--bg-modal-dark);
+  border: 1px solid grey;
+}

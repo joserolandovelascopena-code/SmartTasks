@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 
+.renderIcons {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-100%);
+}
+
 /*Categorias y proridades*/
 .task-pro.styleNinguna {
   background: linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff);
