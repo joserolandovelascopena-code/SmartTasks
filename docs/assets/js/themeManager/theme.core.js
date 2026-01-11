@@ -9,6 +9,20 @@ import {
   setActiveButton,
 } from "./theme.helpers.js";
 
+function resetInlineThemeStyles(elements = []) {
+  elements.forEach((el) => {
+    if (!el) return;
+
+    // Reset completo de estilos inline
+    el.removeAttribute("style");
+  });
+}
+
+function resetNodeListStyles(nodeList = []) {
+  if (!nodeList.length) return;
+  nodeList.forEach((el) => el.removeAttribute("style"));
+}
+
 export function applyTheme(theme) {
   if (!VALID_THEMES.includes(theme)) theme = "system";
 
@@ -26,6 +40,7 @@ export function applyTheme(theme) {
   const navMain = qs(".nav-main");
   const iconsNav = qsa(".funciones_smart i");
   const navMovil = qs(".NavMovil");
+  const fotoAddPersonHome = qs(".perfil_user");
 
   const perfil = qs(".Perfile");
   const editarModalPerfil = qs(".ContentEditar ");
@@ -33,8 +48,9 @@ export function applyTheme(theme) {
   const closeEditarPerfil = qs(".CerrarEditor_Foto i ");
   const BottonSheetPerfil = qs(".ContentSheet");
   const opcionesSheetPerfil = qs(".AccionesAvanzadasEditarFoto");
+  const OpcionesShetBackgroud = qsa(".opcionesEditarfoto");
   const textOpcionesShet = qsa(".opcionesEditarfoto p");
-
+  const iconOpcionesShet = qsa(".opcionesEditarfoto  i");
   const addTareasContenedor = qs(".subir_tarea");
   const contenidoAddTarea = qs(".contenido_main");
   const navAddTasks = qs(".Nav_addTasks");
@@ -55,6 +71,40 @@ export function applyTheme(theme) {
   const numberDateHome = qs(".day");
   const cantidadTareasHome = qs(".candTasks");
 
+  const ALL_THEME_ELEMENTS = [
+    navMain,
+    navMovil,
+    fotoAddPersonHome,
+    perfil,
+    editarModalPerfil,
+    contenidoEditarPerfil,
+    BottonSheetPerfil,
+    opcionesSheetPerfil,
+    addTareasContenedor,
+    contenidoAddTarea,
+    navAddTasks,
+    sectionAddTkas,
+    sectionAddTkas1,
+    sectionAddTkas2,
+    descripcionTasks,
+    inputAddTasks,
+    titleNameApp,
+    fechaCantidadTasks,
+    dateNow,
+    numberDateHome,
+    cantidadTareasHome,
+    plusAdd,
+  ];
+
+  const ALL_THEME_NODELISTS = [
+    encabezadosNavMain,
+    encabezadosSectionAddTasks,
+    iconsNav,
+    OpcionesShetBackgroud,
+    textOpcionesShet,
+    iconOpcionesShet,
+  ];
+
   //Const colors
   const COLORS = {
     white: "#fff",
@@ -67,6 +117,9 @@ export function applyTheme(theme) {
   };
 
   if (theme === "light") {
+    resetInlineThemeStyles(ALL_THEME_ELEMENTS);
+    ALL_THEME_NODELISTS.forEach(resetNodeListStyles);
+
     document.documentElement.setAttribute("data-theme", "light");
     setActiveButton(lightBtn);
   }
@@ -82,6 +135,9 @@ export function applyTheme(theme) {
     if (navMovil) {
       navMovil.style.background = COLORS.black;
       navMovil.style.boxShadow = "0 0  3px rgb(27, 27, 27)";
+    }
+    if (fotoAddPersonHome) {
+      fotoAddPersonHome.style.background = COLORS.black;
     }
 
     if (titleNameApp) {
@@ -109,6 +165,18 @@ export function applyTheme(theme) {
       BottonSheetPerfil.style.background = COLORS.blackSoft;
       opcionesSheetPerfil.style.background = COLORS.blackSoft;
       opcionesSheetPerfil.style.color = COLORS.white;
+    }
+
+    if (OpcionesShetBackgroud) {
+      OpcionesShetBackgroud.forEach((op) => {
+        op.style.background = COLORS.gray;
+      });
+    }
+
+    if (iconOpcionesShet) {
+      iconOpcionesShet.forEach((icon) => {
+        icon.style.color = COLORS.whiteDark;
+      });
     }
 
     if (textOpcionesShet) {
@@ -171,6 +239,9 @@ export function applyTheme(theme) {
   }
 
   if (theme === "system") {
+    resetInlineThemeStyles(ALL_THEME_ELEMENTS);
+    ALL_THEME_NODELISTS.forEach(resetNodeListStyles);
+
     setActiveButton(systemBtn);
 
     document.documentElement.setAttribute(
