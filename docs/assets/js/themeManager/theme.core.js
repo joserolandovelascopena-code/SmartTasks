@@ -13,7 +13,6 @@ function resetInlineThemeStyles(elements = []) {
   elements.forEach((el) => {
     if (!el) return;
 
-    // Reset completo de estilos inline
     el.removeAttribute("style");
   });
 }
@@ -41,6 +40,14 @@ export function applyTheme(theme) {
   const iconsNav = qsa(".funciones_smart i");
   const navMovil = qs(".NavMovil");
   const fotoAddPersonHome = qs(".perfil_user");
+
+  const editarTareaContenido = qsa(".cuerpo_modal ");
+  const footerEditarTarea = qsa(".footer-editar ");
+  const inputEditeTarea = qsa(".input-editar input ");
+  const textTareaEditarTasks = qsa(".descripcionEditar textarea");
+  const btnsProgramcion = qsa(".btnEditarProgrmacion");
+  const CajasEccionEditarTasks = qsa(".cajaSeccionEditar");
+  const openMsgDlete = qsa(".eliminarTasks");
 
   const perfil = qs(".Perfile");
   const editarModalPerfil = qs(".ContentEditar ");
@@ -74,9 +81,11 @@ export function applyTheme(theme) {
   const ALL_THEME_ELEMENTS = [
     navMain,
     navMovil,
+    titleVisionGeneral,
     fotoAddPersonHome,
     perfil,
     editarModalPerfil,
+    closeEditarPerfil,
     contenidoEditarPerfil,
     BottonSheetPerfil,
     opcionesSheetPerfil,
@@ -98,6 +107,13 @@ export function applyTheme(theme) {
 
   const ALL_THEME_NODELISTS = [
     encabezadosNavMain,
+    editarTareaContenido,
+    footerEditarTarea,
+    textTareaEditarTasks,
+    inputEditeTarea,
+    btnsProgramcion,
+    openMsgDlete,
+    CajasEccionEditarTasks,
     encabezadosSectionAddTasks,
     iconsNav,
     OpcionesShetBackgroud,
@@ -111,6 +127,7 @@ export function applyTheme(theme) {
     whiteDark: "#aaaaaa",
     black: "#000",
     blackSoft: "#232627ff",
+    graySoft: "#555555",
     gray: "#383838ff",
     blueTransparent: "#8cc7d41e",
     skyBlue: "rgb(0, 162, 255)",
@@ -136,6 +153,7 @@ export function applyTheme(theme) {
       navMovil.style.background = COLORS.black;
       navMovil.style.boxShadow = "0 0  3px rgb(27, 27, 27)";
     }
+
     if (fotoAddPersonHome) {
       fotoAddPersonHome.style.background = COLORS.black;
     }
@@ -240,8 +258,6 @@ export function applyTheme(theme) {
 
   if (theme === "system") {
     resetInlineThemeStyles(ALL_THEME_ELEMENTS);
-    ALL_THEME_NODELISTS.forEach(resetNodeListStyles);
-
     setActiveButton(systemBtn);
 
     document.documentElement.setAttribute(

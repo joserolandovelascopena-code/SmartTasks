@@ -140,7 +140,7 @@ export const UI = {
     </div>
         <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
       
-        <div class="editar_item">
+       <div class="editar_item">
         <section class="Editar_targeta">
           <div class="backgrauEditar">
             <div class="cuerpo_modal">
@@ -208,7 +208,7 @@ export const UI = {
                   </div>
                 </article>
 
-                <div class="contentSeccionesEditar">
+                <div class="contentSeccionesEditar cajaSeccionEditar">
                   <h5>Programación de la Tarea</h5>
                   <div class="ProgramacionEditar">
                     <article class="días btnEditarProgrmacion">
@@ -228,7 +228,7 @@ export const UI = {
                   </div>
                 </div>
 
-                <div class="contentSeccionesEditar">
+                <div class="contentSeccionesEditar cajaSeccionEditar">
                   <h5>Proridad de la tarea</h5>
                   <div class="ProridadEditar">
                     <article class="EditarProridad">
@@ -249,13 +249,12 @@ export const UI = {
                   </div>
                 </div>
 
-                <div class="descripcionEditar">
+                <div class="descripcionEditar cajaSeccionEditar">
                   <label for="EditarDescripcion-${task.id}">Descripción</label>
                   <textarea
                     id="EditarDescripcion-${task.id}"
                     name="EditarDescripcion"
                     class="EditarDescripcion"
-                  
                     title="Descripción de la tarea"
                   ></textarea>
                 </div>
@@ -269,7 +268,9 @@ export const UI = {
 
                 <article class="footer-editar">
                   <div class="GuardarCambios">
-                    <button type="button" class="btnGuardarCambios">Guardar Cambios</button>
+                    <button type="button" class="btnGuardarCambios">
+                      Guardar Cambios
+                    </button>
                   </div>
                 </article>
               </div>

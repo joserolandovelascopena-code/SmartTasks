@@ -1472,8 +1472,9 @@ h5 {
   color: #949494;
 }
 .editar_item {
+  position: fixed;
   display: none;
-  background-color: #020580;
+  z-index: 50;
 }
 .editar_item.active {
   display: block;
@@ -1660,6 +1661,7 @@ h5 {
   margin-top: 8px;
   padding: 8px 8px 20px 8px;
 }
+
 .ProridadEditar button {
   width: 100%;
   padding: 9px 8px;
