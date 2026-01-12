@@ -283,7 +283,7 @@ export const App = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const openAdd = document.getElementById("Add");
+  const openAdd = document.querySelectorAll(".openAdd");
   const contenAdd = document.querySelector(".subir_tarea");
 
   const perfilContainer = document.querySelector(".Perfile");
@@ -294,16 +294,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const listCheck = document.querySelector(".List_check");
   const infoTarea = document.querySelector(".info_tarea");
 
-  openAdd.addEventListener("click", () => {
-    perfilContainer.classList.remove("show");
-    bodycontenedor.style.overflowY = "hidden";
+  openAdd.forEach((op) => {
+    op.addEventListener("click", () => {
+      perfilContainer.classList.remove("show");
+      bodycontenedor.style.overflowY = "hidden";
 
-    contenAdd.classList.add("show");
-    backgraudAnimation.classList.add("show");
+      contenAdd.classList.add("show");
+      backgraudAnimation.classList.add("show");
 
-    bodycontenedor.classList.add("show");
-    listCheck.classList.add("show");
-    infoTarea.classList.add("show");
+      bodycontenedor.classList.add("show");
+      listCheck.classList.add("show");
+      infoTarea.classList.add("show");
+    });
   });
 
   closeAddTaks.addEventListener("click", () => {

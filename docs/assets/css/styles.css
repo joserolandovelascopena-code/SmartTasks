@@ -671,8 +671,10 @@ h5 {
 .Root-taks {
   margin-top: 20vh;
 }
-
-#Add {
+.agregarMovil {
+  display: none;
+}
+.openAdd {
   cursor: pointer;
   display: flex;
   gap: 6px;
@@ -684,14 +686,14 @@ h5 {
   justify-content: center;
   color: white;
 }
-#Add p {
+.openAdd p {
   margin: 0;
 }
-#Add i {
+.openAdd i {
   font-size: 16px;
   color: rgb(255, 255, 255);
 }
-#Add:hover {
+.openAdd:hover {
   background: #0044ff60;
   scale: 0.98;
 }
@@ -2068,7 +2070,6 @@ h5 {
   #settings,
   #logoutBtn,
   #searchSmar,
-  #cuenta,
   #appSmat {
     display: none;
   }
@@ -2264,21 +2265,21 @@ h5 {
   .funciones_smart h5 {
     color: #8a8a8a;
   }
-  #Add h5 {
+  .openAdd h5 {
     margin: 4px 0 0 0;
   }
-  #Add i {
+  .openAdd i {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 22px;
 
     color: rgb(31, 31, 31);
     margin-bottom: 0;
     padding-bottom: 0;
   }
   .funciones_smart i {
-    font-size: 20px;
+    font-size: 22px;
     color: rgb(31, 31, 31);
     padding-top: 5px;
     margin-bottom: 0;
@@ -2289,7 +2290,7 @@ h5 {
     gap: 2px;
     margin-left: 0;
   }
-  #Add {
+  .openAdd {
     display: grid;
     gap: 0px;
     justify-content: center;
@@ -2301,13 +2302,20 @@ h5 {
     display: grid;
     gap: 0px;
   }
+
   #Calendario {
     display: grid;
     gap: 0px;
   }
 
+  .agregarCompu {
+    display: none;
+  }
+  .agregarMovil {
+    display: block;
+  }
   .contenedor_menu {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
     padding: 0px;
   }
