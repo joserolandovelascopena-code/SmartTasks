@@ -111,11 +111,12 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .btnEditarProgrmacion {
-  background: #000000;
-  border-color: #8400ff;
+  color: rgb(0, 74, 97);
+  background: #0099ff;
+  border-color: #87c1f0;
 }
 [data-theme="dark"] .btnEditarProgrmacion i {
-  color: #8400ff;
+  color: rgb(0, 74, 97);
 }
 
 [data-theme="dark"] .contenedor_categoria .options.selected {
@@ -136,11 +137,17 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .options {
-  box-shadow: 0 0 0 1px var(--border-dark);
+  box-shadow: 0 0 0 0px var(--border-dark);
+  border: 1px solid #2788dd;
+  color: white;
+  background: #474747;
 }
 
 [data-theme="dark"] .options2 {
-  box-shadow: 0 0 0 1px var(--border-dark);
+  box-shadow: 0 0 0 0px var(--border-dark);
+  border: 1px solid #2788dd;
+  color: white;
+  background: #474747;
 }
 
 [data-theme="dark"] .cajaSeccionEditar {
