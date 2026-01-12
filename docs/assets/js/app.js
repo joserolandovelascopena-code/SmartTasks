@@ -102,7 +102,7 @@ export const App = {
     const descriptionText = descriptionTextarea?.value.trim() || "";
 
     if (!text) {
-      Toast.show("Error: escribe una tarea", "error", {
+      Toast.show("Por favor, introduce un nombre a la tarea", "error", {
         sound: true,
         haptic: true,
       });

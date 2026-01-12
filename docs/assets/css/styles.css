@@ -2099,6 +2099,8 @@ h5 {
   .MSGS_SECOND_INFERIOR {
     width: 100%;
     left: 0;
+    bottom: 32;
+    padding: 0 10px;
   }
   .backgraudMsgs,
   .backgraudMsgsInferior {
