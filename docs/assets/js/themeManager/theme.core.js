@@ -145,27 +145,12 @@ export function applyTheme(theme) {
     document.documentElement.setAttribute("data-theme", "dark");
     setActiveButton(darkBtn);
 
-    if (navMain) {
-      navMain.style.background = COLORS.black;
-      navMain.style.boxShadow = "0 0  3px rgb(48, 47, 47)";
-    }
-    if (navMovil) {
-      navMovil.style.background = COLORS.black;
-      navMovil.style.boxShadow = "0 0  3px rgb(27, 27, 27)";
-    }
-
     if (fotoAddPersonHome) {
       fotoAddPersonHome.style.background = COLORS.black;
     }
 
     if (titleNameApp) {
       titleNameApp.style.color = COLORS.white;
-    }
-
-    if (encabezadosNavMain.length) {
-      encabezadosNavMain.forEach((el) => {
-        el.style.color = COLORS.whiteDark;
-      });
     }
 
     if (perfil) {
@@ -211,10 +196,10 @@ export function applyTheme(theme) {
       addTareasContenedor.style.background = COLORS.blackSoft;
       contenidoAddTarea.style.background = COLORS.blackSoft;
       navAddTasks.style.color = COLORS.white;
-      sectionAddTkas.style.background = COLORS.black;
+      sectionAddTkas.style.background = "#1f1f1f";
 
-      sectionAddTkas1.style.background = COLORS.black;
-      sectionAddTkas2.style.background = COLORS.black;
+      sectionAddTkas1.style.background = "#1f1f1f";
+      sectionAddTkas2.style.background = "#1f1f1f";
     }
 
     if (descripcionTasks) {
@@ -233,10 +218,6 @@ export function applyTheme(theme) {
 
     encabezadosSectionAddTasks.forEach((encabezados) => {
       encabezados.style.color = COLORS.white;
-    });
-
-    iconsNav.forEach((ico) => {
-      ico.style.color = COLORS.whiteDark;
     });
 
     if (titleVisionGeneral) {
