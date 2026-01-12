@@ -172,6 +172,34 @@ html[data-theme="light"] {
   background: var(--bg-modal-dark);
 }
 
+/*Lista tareas*/
+[data-theme="dark"] .task-item {
+  background: #242424;
+}
+
+[data-theme="dark"] .task-pro.styleBaja {
+  background: rgba(194, 255, 207, 0.205);
+  color: rgb(0, 224, 67);
+  border-bottom: 3px solid rgb(0, 238, 163);
+  border-bottom: 0;
+}
+[data-theme="dark"] .task-pro.styleNormal {
+  background: linear-gradient(40deg, #02ebdf2a, #0145ff36);
+  color: #02b2e7;
+  border-bottom: 0;
+}
+[data-theme="dark"] .task-pro.styleAlta {
+  background: rgba(255, 255, 255, 0.144);
+  color: rgb(252, 147, 147);
+  border-bottom: 0;
+}
+
+[data-theme="dark"] .task-cat {
+  background: linear-gradient(40deg, rgb(51, 51, 51));
+  color: #00c3ff;
+  border-bottom: 0px;
+}
+
 /*Mensajes System*/
 [data-theme="dark"] .contentMsg {
   box-shadow: 0 8px 30px rgb(110, 110, 110);

@@ -104,8 +104,6 @@ export const UI = {
 
       if (task.done) {
         li.style.background = " #7998ff38";
-      } else {
-        li.style.background = "#ffffffff";
       }
 
       const desc = task.descripcion?.trim()
