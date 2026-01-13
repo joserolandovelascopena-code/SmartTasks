@@ -64,6 +64,21 @@ html[data-theme="light"] {
 
 /* DARK */
 
+[data-theme="dark"] .contenidoVisualizarOpciones {
+  background: var(--bg-modal-dark);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .listaOpcionesModalVisualizar i {
+  color: #a0a0a0;
+}
+
+[data-theme="dark"] .listaOpcionesModalVisualizar p {
+  color: #dfdfdf;
+}
+[data-theme="dark"] .listaOpcionesModalVisualizar:hover {
+  background: #797979;
+}
 /*Menús*/
 
 [data-theme="dark"] .nav-main {
@@ -256,18 +271,5 @@ html[data-theme="light"] {
   /*Editar y perfil*/
   [data-theme="dark"] .Closeeditar {
     color: white;
-  }
-
-  [data-theme="dark"] .contenidoVisualizarOpciones {
-    background: var(--bg-modal-dark);
-    box-shadow: none;
-  }
-
-  [data-theme="dark"] .listaOpcionesModalVisualizar i {
-    color: #a0a0a0;
-  }
-
-  [data-theme="dark"] .listaOpcionesModalVisualizar p {
-    color: #dfdfdf;
   }
 }

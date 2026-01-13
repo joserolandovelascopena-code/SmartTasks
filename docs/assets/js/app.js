@@ -4,6 +4,7 @@ import { UI } from "./ui.js";
 import { supabaseClient } from "./supabase.js";
 import { Toast } from "./toastManager/toast.js";
 import { Sound } from "./toastManager/sound.js";
+import { OverlayManager } from "./overlayManager/overlayManager.js";
 
 document.addEventListener(
   "pointerdown",
@@ -12,6 +13,10 @@ document.addEventListener(
   },
   { once: true }
 );
+
+if (!history.state) {
+  history.replaceState({ base: true }, "", location.pathname);
+}
 
 export const App = {
   tasks: [],
@@ -287,36 +292,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const contenAdd = document.querySelector(".subir_tarea");
 
   const perfilContainer = document.querySelector(".Perfile");
-
   const bodycontenedor = document.querySelector(".contenedor");
+
   const closeAddTaks = document.getElementById("CloseAddTasks");
   const backgraudAnimation = document.querySelector(".backgraud-tasks");
   const listCheck = document.querySelector(".List_check");
   const infoTarea = document.querySelector(".info_tarea");
 
-  openAdd.forEach((op) => {
-    op.addEventListener("click", () => {
-      perfilContainer.classList.remove("show");
-      bodycontenedor.style.overflowY = "hidden";
+  function openAddTask() {
+    perfilContainer.classList.remove("show");
+    bodycontenedor.style.overflowY = "hidden";
 
-      contenAdd.classList.add("show");
-      backgraudAnimation.classList.add("show");
+    contenAdd.classList.add("show");
+    backgraudAnimation.classList.add("show");
+    bodycontenedor.classList.add("show");
+    listCheck.classList.add("show");
+    infoTarea.classList.add("show");
 
-      bodycontenedor.classList.add("show");
-      listCheck.classList.add("show");
-      infoTarea.classList.add("show");
-    });
-  });
+    history.pushState({ addTask: true }, "", "#add-task");
+  }
 
-  closeAddTaks.addEventListener("click", () => {
+  function closeAddTask() {
     bodycontenedor.style.overflowY = "auto";
 
     contenAdd.classList.remove("show");
     backgraudAnimation.classList.remove("show");
-
     bodycontenedor.classList.remove("show");
     listCheck.classList.remove("show");
     infoTarea.classList.remove("show");
+  }
+
+  openAdd.forEach((op) => {
+    op.addEventListener("click", openAddTask);
+  });
+
+  closeAddTaks.addEventListener("click", () => {
+    history.back();
+  });
+
+  // 🔹 BOTÓN ATRÁS DEL SISTEMA
+  window.addEventListener("popstate", () => {
+    if (contenAdd.classList.contains("show")) {
+      closeAddTask();
+    }
   });
 });
 
@@ -368,27 +386,42 @@ function mostrarModalCompletado() {
 const openPerfile = document.querySelectorAll(".openPerfil");
 const closePerfil = document.getElementById("Hogar");
 const closePerfilFlecha = document.querySelector(".salirPerfil");
+
 const perfilContainer = document.querySelector(".Perfile");
 const cantidadTkasPerfile = document.querySelector(".cantidadTasksPerfile");
 const contenAdd = document.querySelector(".subir_tarea");
 
+function openPerfil() {
+  perfilContainer.classList.add("show");
+  contenAdd.classList.remove("show");
+
+  cantidadTkasPerfile.classList.remove("active");
+  void cantidadTkasPerfile.offsetWidth;
+  cantidadTkasPerfile.classList.add("active");
+
+  history.pushState({ perfil: true }, "", "#perfil");
+
+  //Manager
+  OverlayManager.push("perfil", closePerfilView);
+}
+
+function closePerfilView() {
+  perfilContainer.classList.remove("show");
+}
+
 openPerfile.forEach((per) => {
-  per.addEventListener("click", () => {
-    perfilContainer.classList.add("show");
-    contenAdd.classList.remove("show");
-    cantidadTkasPerfile.classList.remove("active");
-    void cantidadTkasPerfile.offsetWidth; // fuerza reflow
-    cantidadTkasPerfile.classList.add("active");
-  });
+  per.addEventListener("click", openPerfil);
 });
 
 closePerfil.addEventListener("click", () => {
-  perfilContainer.classList.remove("show");
+  history.back();
 });
 
 closePerfilFlecha.addEventListener("click", () => {
-  perfilContainer.classList.remove("show");
+  history.back();
 });
+
+//============================================
 
 const modalOpcionesClickFoto = document.querySelector(
   ".modalOpcionesClickImagePerfil"
@@ -396,9 +429,8 @@ const modalOpcionesClickFoto = document.querySelector(
 const openModalOpcionesClickFoto = document.querySelector(".fotoPerfil img");
 const contenidoModal = document.querySelector(".contenidoVisualizarOpciones");
 
-// ABRIR MODAL
 openModalOpcionesClickFoto.addEventListener("click", (e) => {
-  e.stopPropagation(); // evita cierre inmediato
+  e.stopPropagation();
   modalOpcionesClickFoto.classList.add("show");
 });
 
@@ -430,8 +462,8 @@ btnCerrarLightBox.addEventListener("click", () => {
     lightBox.classList.remove("show");
   }, 300);
 });
-// editar fotos
 
+// editar fotos
 // Modal
 const editorPerfil = document.querySelector(".EditarPerfilHeader");
 const btnCerrarEditor = document.querySelector(".CerrarEditor_Foto");
@@ -458,21 +490,31 @@ const btnAceptarCambiosFoto = document.querySelector(".btnAceptar button");
 const BtnLoaderCambiarFoto = document.querySelector(".cajaBtnLoader");
 const trasitionPreviewHeader = document.querySelector(".ImgVisualizarHeader");
 
+function openEditorFotos() {
+  editorPerfil.classList.add("show");
+  contenidoEditarFotos.classList.add("show");
+
+  history.pushState({ editorFotos: true }, "", "#add_Fotos_Perfil");
+
+  OverlayManager.push("addFotosPerfil", closeEditorFotos);
+}
+
+function closeEditorFotos() {
+  editorPerfil.classList.remove("show");
+  contenidoEditarFotos.classList.remove("show");
+  VisualizarFotoBorder.classList.remove("show");
+  btnAceptarCambiosFoto.classList.remove("active");
+}
+
 openEditarFotos.forEach((op) => {
-  op.addEventListener("click", () => {
-    editorPerfil.classList.add("show");
-    contenidoEditarFotos.classList.add("show");
-  });
+  op.addEventListener("click", openEditorFotos);
 });
 
 btnCerrarEditor.addEventListener("click", (e) => {
   e.stopPropagation();
   e.preventDefault();
 
-  editorPerfil.classList.remove("show");
-  contenidoEditarFotos.classList.remove("show");
-  VisualizarFotoBorder.classList.remove("show");
-  btnAceptarCambiosFoto.classList.remove("active");
+  history.back();
 });
 
 inputFotoPerfil.addEventListener("click", () => {
