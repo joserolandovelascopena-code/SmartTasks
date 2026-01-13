@@ -1321,6 +1321,23 @@
   .cojaContendidoBox {
     align-items: center;
   }
+  .opcionesCerrar {
+    z-index: 60;
+  }
+  .opcionesCerrar i {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    border-radius: 50%;
+    background: #000000;
+    color: #008cff;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #0088ff;
+    transition: 0.2s ease;
+    cursor: pointer;
+  }
   .ImagenLightBoxUser {
     max-width: 700px;
     width: 400px;
