@@ -449,19 +449,29 @@ const openVisualizarFotoUser = document.querySelector(
   ".openVisualizarFotoUser"
 );
 const btnCerrarLightBox = document.querySelector(".btnCerrarLightBox");
-const lightBox = document.querySelector(".LightBox ");
+const lightBox = document.querySelector(".LightBox");
 const contenidoLightBox = document.querySelector(".cotenidoLightBox");
 
-openVisualizarFotoUser.addEventListener("click", () => {
+function openViewLightBox() {
   lightBox.classList.add("show");
   contenidoLightBox.classList.add("show");
-});
 
-btnCerrarLightBox.addEventListener("click", () => {
+  history.pushState({ lightBox: true }, "", "#lightBox_foto_del_perfil");
+
+  OverlayManager.push("lightBox_photoUser", closeViewLightBox);
+}
+
+function closeViewLightBox() {
   contenidoLightBox.classList.remove("show");
   setTimeout(() => {
     lightBox.classList.remove("show");
   }, 300);
+}
+
+openVisualizarFotoUser.addEventListener("click", openViewLightBox);
+
+btnCerrarLightBox.addEventListener("click", () => {
+  history.back();
 });
 
 // editar fotos
