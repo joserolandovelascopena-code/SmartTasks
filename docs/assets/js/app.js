@@ -390,6 +390,46 @@ closePerfilFlecha.addEventListener("click", () => {
   perfilContainer.classList.remove("show");
 });
 
+const modalOpcionesClickFoto = document.querySelector(
+  ".modalOpcionesClickImagePerfil"
+);
+const openModalOpcionesClickFoto = document.querySelector(".fotoPerfil img");
+const contenidoModal = document.querySelector(".contenidoVisualizarOpciones");
+
+// ABRIR MODAL
+openModalOpcionesClickFoto.addEventListener("click", (e) => {
+  e.stopPropagation(); // evita cierre inmediato
+  modalOpcionesClickFoto.classList.add("show");
+});
+
+// CERRAR AL CLICK FUERA
+document.addEventListener("click", (e) => {
+  if (
+    modalOpcionesClickFoto.classList.contains("show") &&
+    !contenidoModal.contains(e.target) &&
+    !openModalOpcionesClickFoto.contains(e.target)
+  ) {
+    modalOpcionesClickFoto.classList.remove("show");
+  }
+});
+
+const openVisualizarFotoUser = document.querySelector(
+  ".openVisualizarFotoUser"
+);
+const btnCerrarLightBox = document.querySelector(".btnCerrarLightBox");
+const lightBox = document.querySelector(".LightBox ");
+const contenidoLightBox = document.querySelector(".cotenidoLightBox");
+
+openVisualizarFotoUser.addEventListener("click", () => {
+  lightBox.classList.add("show");
+  contenidoLightBox.classList.add("show");
+});
+btnCerrarLightBox.addEventListener("click", () => {
+  contenidoLightBox.classList.remove("show");
+  setTimeout(() => {
+    lightBox.classList.remove("show");
+  }, 300);
+});
 // editar fotos
 
 // Modal

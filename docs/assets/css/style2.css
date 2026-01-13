@@ -497,6 +497,143 @@
   cursor: pointer;
   color: #01a2d3;
 }
+
+/*modal visualizar opcones*/
+.modalOpcionesClickImagePerfil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 51;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+
+  opacity: 0;
+  scale: 0.96;
+  pointer-events: none;
+  transition: 0.3s ease-in-out;
+}
+.modalOpcionesClickImagePerfil.show {
+  pointer-events: auto;
+  opacity: 1;
+  scale: 1;
+}
+.contenidoVisualizarOpciones {
+  position: relative;
+  width: 260px;
+  height: 98px;
+  border-radius: 8px;
+  background: white;
+  margin-left: 35%;
+  margin-top: 60px;
+  box-shadow: 0 0 10px gainsboro;
+  padding: 10px;
+  cursor: pointer;
+}
+.OpenEditor {
+  margin-top: 8px;
+}
+.listaOpcionesModalVisualizar {
+  display: grid;
+  grid-template-columns: 10% auto;
+  gap: 10px;
+  padding: 8px;
+  transition: 0.2s ease-out;
+  border-radius: 5px;
+}
+.listaOpcionesModalVisualizar:hover {
+  background: #e0eff5;
+}
+.listaOpcionesModalVisualizar:active {
+  scale: 0.98;
+}
+.listaOpcionesModalVisualizar i {
+  font-size: 18px;
+  color: #6e6e6e;
+}
+.textoOp {
+  text-align: left;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/*Box mostrar*/
+.LightBox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 90;
+  display: none;
+  top: 0;
+  left: 0;
+}
+.LightBox.show {
+  display: block;
+}
+.cojaContendidoBox {
+  position: relative;
+  background: #000000;
+  width: 100%;
+  height: 100%;
+}
+
+.cotenidoLightBox {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  scale: 0.9;
+  transition: 0.3s ease;
+  animation: introLighBox 0.3s ease;
+}
+.cotenidoLightBox.show {
+  scale: 1;
+}
+.opcionesCerrar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  padding-left: 16px;
+  padding-top: 16px;
+  display: flex;
+  gap: 10px;
+  color: white;
+  align-items: center;
+}
+.opcionesCerrar i {
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  border-radius: 50%;
+  background: #f8faff;
+  color: #008cff;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #008cff;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.opcionesCerrar i:hover {
+  color: #004458;
+}
+.opcionesCerrar i:active {
+  scale: 0.9;
+}
+.ImagenLightBoxUser {
+  width: 900px;
+  height: 100vh;
+  background: transparent;
+  position: relative;
+}
+.ImagenLightBoxUser img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 /*Editar========================*/
 .headerPerfil {
   position: relative;
@@ -578,6 +715,14 @@
   width: 180px;
   object-fit: cover;
   border: 4px solid rgb(177, 177, 247);
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+.fotoPerfil img:hover {
+  opacity: 0.8;
+}
+.fotoPerfil img:active {
+  scale: 0.99;
 }
 .descripcionUser {
   padding-bottom: 20px;
@@ -927,6 +1072,15 @@
   }
 }
 
+@keyframes introLighBox {
+  from {
+    scale: 0.9;
+  }
+  to {
+    scale: 1;
+  }
+}
+
 /*responsing*/
 
 @media (max-width: 700px) {
@@ -1157,5 +1311,31 @@
   .ajustesAccesoRapido {
     height: auto;
     margin-bottom: 0;
+  }
+
+  /*Box mostrar*/
+  .contenidoVisualizarOpciones {
+    margin-left: 17%;
+    margin-top: 50px;
+  }
+  .cojaContendidoBox {
+    align-items: center;
+  }
+  .ImagenLightBoxUser {
+    max-width: 700px;
+    width: 400px;
+    height: 500px;
+    max-height: 700px;
+    background: transparent;
+    position: relative;
+    display: grid;
+    align-items: center;
+  }
+  .ImagenLightBoxUser img {
+    top: 33%;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 }
