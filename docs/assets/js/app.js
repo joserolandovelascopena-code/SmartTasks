@@ -436,7 +436,7 @@ btnCerrarLightBox.addEventListener("click", () => {
 const editorPerfil = document.querySelector(".EditarPerfilHeader");
 const btnCerrarEditor = document.querySelector(".CerrarEditor_Foto");
 
-const openEditarFotos = document.querySelector(".iconoAjustesheader");
+const openEditarFotos = document.querySelectorAll(".openEditarPerfilHeader");
 const contenidoEditarFotos = document.querySelector(".ContentEditar");
 
 const inputFotoPerfil = document.getElementById("inputFotoPerfil");
@@ -458,9 +458,11 @@ const btnAceptarCambiosFoto = document.querySelector(".btnAceptar button");
 const BtnLoaderCambiarFoto = document.querySelector(".cajaBtnLoader");
 const trasitionPreviewHeader = document.querySelector(".ImgVisualizarHeader");
 
-openEditarFotos.addEventListener("click", () => {
-  editorPerfil.classList.add("show");
-  contenidoEditarFotos.classList.add("show");
+openEditarFotos.forEach((op) => {
+  op.addEventListener("click", () => {
+    editorPerfil.classList.add("show");
+    contenidoEditarFotos.classList.add("show");
+  });
 });
 
 btnCerrarEditor.addEventListener("click", (e) => {

@@ -246,11 +246,11 @@ html[data-theme="light"] {
 
   [data-theme="dark"] .funciones_smart i,
   .funciones_smart p {
-    color: #ffffff;
+    color: #dadada;
   }
 
   [data-theme="dark"] .openAdd i {
-    color: #ffffff;
+    color: #dadada;
   }
 
   /*Editar y perfil*/
