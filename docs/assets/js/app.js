@@ -742,3 +742,9 @@ window.addEventListener("online", () => {
   Toast.showInferior("Conexión restablecida", "recoverWifi");
   UI.renderPerfile(this.profile);
 });
+
+const btnRender = document.querySelector(".btnCargarPagina");
+
+btnRender.addEventListener("click", () => {
+  location.reload();
+});

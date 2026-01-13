@@ -8,6 +8,7 @@ export const Toast = {
   elSeond: null,
   iconSecond: null,
   textSecond: null,
+  renderPage: null,
   timer: null,
 
   init() {
@@ -17,6 +18,7 @@ export const Toast = {
     this.elSeond = document.querySelector(".contentMsgInferior");
     this.textSecond = document.getElementById("msgSystemSecond");
     this.iconSecond = document.querySelector(".iconoSuccesInferior");
+    this.renderPage = document.querySelector(".btnCargarPagina");
   },
 
   show(msg, type = "success", options = {}) {
@@ -61,17 +63,19 @@ export const Toast = {
     this.textSecond.textContent = msg;
 
     if (type === "error") {
-      this.iconSecond.className = "fa fa-xmark";
+      this.iconSecond.className = "fa fa-xmark iconMsgInf";
     } else if (type === "deleElement") {
-      this.iconSecond.className = "far fa-trash-can";
+      this.iconSecond.className = "far fa-trash-can iconMsgInf";
     } else if (type === "offline") {
       this.iconSecond.className = "material-symbols-outlined";
       this.iconSecond.textContent = "wifi_off";
+      this.renderPage.classList.add("show");
     } else if (type === "recoverWifi") {
-      this.iconSecond.className = "fa-solid fa-wifi iconWifi";
+      this.iconSecond.className = "fa-solid fa-wifi iconWifi iconMsgInf";
       this.iconSecond.textContent = "";
+      this.renderPage.classList.remove("show");
     } else {
-      this.iconSecond.className = "fa fa-check";
+      this.iconSecond.className = "fa fa-check iconMsgInf";
     }
 
     if (sound) Sound.play(type);

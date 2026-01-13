@@ -243,8 +243,13 @@ html[data-theme="light"] {
 }
 [data-theme="dark"] .contentMsgInferior {
   box-shadow: 0 8px 30px rgb(34, 34, 34);
-  background: var(--bg-modal-dark);
-  border: 1px solid grey;
+  background: white;
+  color: #000000;
+  border: 1px solid rgb(219, 219, 219);
+}
+
+[data-theme="dark"] .material-symbols-outlined {
+  color: #000000;
 }
 
 /*Contenedores main*/

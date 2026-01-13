@@ -260,10 +260,10 @@
   align-items: center;
 }
 .ContentVisualizarHeder {
-  padding-top: 60px;
+  padding-top: 100px;
   position: relative;
-  width: 600px;
-  height: 500px;
+  width: 700px;
+  height: 600px;
   background: transparent;
 }
 .ImgVisualizarHeader {
@@ -350,6 +350,11 @@
   scale: 1.02;
   background: rgb(218, 230, 247);
 }
+.formInputFile {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
 .btnAceptar {
   margin-top: 50px;
   display: grid;
@@ -359,14 +364,14 @@
 }
 .btnAceptar button {
   padding: 10px;
-  width: 120px;
+  width: 180px;
   display: flex;
   justify-content: center;
   gap: 10px;
 
   font-family: "Poppins", sans-serif;
   font-weight: bold;
-  background: #3700ff;
+  background: #3401eb;
   color: white;
   border-radius: 12px;
   border: none;
@@ -375,6 +380,9 @@
   opacity: 0.5;
 }
 .btnAceptar button:hover {
+  background: #3700fd;
+}
+.btnAceptar button:active {
   scale: 0.98;
 }
 .btnAceptar button.active {
@@ -1158,6 +1166,7 @@
 
   .btnAceptar button {
     padding: 10px 70px;
+    width: 200px;
   }
 
   .actionSheet {
@@ -1209,7 +1218,8 @@
   }
 
   .ContentVisualizarHeder {
-    width: 340px;
+    padding-top: 80px;
+    width: 380px;
     height: 300px;
   }
   .btnsOpiconesVisualizar {
