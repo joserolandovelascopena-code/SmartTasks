@@ -165,27 +165,6 @@ export function applyTheme(theme) {
 
     if (contenidoEditarPerfil) {
       contenidoEditarPerfil.style.background = COLORS.black;
-      BottonSheetPerfil.style.background = COLORS.blackSoft;
-      opcionesSheetPerfil.style.background = COLORS.blackSoft;
-      opcionesSheetPerfil.style.color = COLORS.white;
-    }
-
-    if (OpcionesShetBackgroud) {
-      OpcionesShetBackgroud.forEach((op) => {
-        op.style.background = COLORS.gray;
-      });
-    }
-
-    if (iconOpcionesShet) {
-      iconOpcionesShet.forEach((icon) => {
-        icon.style.color = COLORS.whiteDark;
-      });
-    }
-
-    if (textOpcionesShet) {
-      textOpcionesShet.forEach((op) => {
-        op.style.color = COLORS.whiteDark;
-      });
     }
 
     if (closeEditarPerfil) {

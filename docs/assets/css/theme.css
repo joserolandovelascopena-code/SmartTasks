@@ -94,10 +94,32 @@ html[data-theme="light"] {
 }
 
 /*Modal editar*/
-
+[data-theme="dark"] .ContentSheet {
+  width: 400px;
+}
+[data-theme="dark"] .opcionesEditarfoto {
+  background: #383838ff;
+}
+[data-theme="dark"] .opcionesEditarfoto:hover {
+  background: rgb(109, 109, 109);
+}
+[data-theme="dark"] .ContentSheet {
+  background: #000f16;
+}
 [data-theme="dark"] .btnCancelarAccionSheet {
   background: var(--border-dark);
-  margin: 0 15px;
+  margin: 0 13px;
+}
+[data-theme="dark"] .AccionesAvanzadasEditarFoto {
+  background: #000f16;
+  color: white;
+}
+[data-theme="dark"] .opcionesEditarfoto i {
+  color: #b9b9b9;
+}
+
+[data-theme="dark"] .opcionesEditarfoto p {
+  color: #d3d3d3;
 }
 
 [data-theme="dark"] .cuerpo_modal {

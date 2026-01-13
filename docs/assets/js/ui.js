@@ -1,6 +1,8 @@
 // ui.js
 import { App } from "./app.js";
 import { Toast } from "./toastManager/toast.js";
+import { OverlayManager } from "./overlayManager/overlayManager.js";
+
 let lastCantidadTasks = null;
 
 document.addEventListener("click", (e) => {
@@ -309,18 +311,16 @@ export const UI = {
       });
 
       // eliminar tarea
-      li.querySelector(".opentAviso").addEventListener("click", (e) => {
-        e.stopPropagation();
+      const btnDeleteTasks = li.querySelector(".delete-btn");
+      const btnCancelarDelete = li.querySelector(".CerrarAvisoDelete");
+      const avisoDelete = li.querySelector(".advertenciaDelete");
+      const avisofondo = li.querySelector(".backgrundAviso");
+      const contenidoAviso = li.querySelector(".ContentAvisoDelete");
+      const contenedorEditarTasks = li.querySelector(".editar_item");
 
-        const btnDeleteTasks = li.querySelector(".delete-btn");
-        const btnCancelarDelete = li.querySelector(".CerrarAvisoDelete");
-        const avisoDelete = li.querySelector(".advertenciaDelete");
-        const avisofondo = li.querySelector(".backgrundAviso");
-        const contenidoAviso = li.querySelector(".ContentAvisoDelete");
-        const contenedorEditar = li.querySelector(".editar_item");
-
+      function openAvisoDelete() {
         li.querySelector(".btnGuardarCambios").addEventListener("click", () => {
-          contenedorEditar.classList.remove("active");
+          contenedorEditarTasks.classList.remove("active");
           modalEditar.classList.remove("active");
         });
 
@@ -345,31 +345,46 @@ export const UI = {
             avisoDelete.classList.remove("active");
             avisofondo.classList.remove("hide");
             contenidoAviso.classList.remove("hide");
-            contenedorEditar.classList.remove("active");
+            contenedorEditarTasks.classList.remove("active");
 
             App.deleteTask(task.id);
           }, 400);
         };
-        // ===== CANCELAR =====
-        btnCancelarDelete.onclick = (e) => {
+
+        history.pushState({ Eliminar_Tarea: true }, "", "#eliminarTarea");
+        OverlayManager.push("deleteTasks", cancelarDeleteTarea);
+      }
+
+      function cancelarDeleteTarea() {
+        avisofondo.classList.remove("show");
+        contenidoAviso.classList.remove("show");
+
+        void avisofondo.offsetWidth;
+        void contenidoAviso.offsetWidth;
+
+        avisofondo.classList.add("hide");
+        contenidoAviso.classList.add("hide");
+
+        setTimeout(() => {
+          avisoDelete.classList.remove("active");
+          avisofondo.classList.remove("hide");
+          contenidoAviso.classList.remove("hide");
+        }, 400);
+      }
+
+      li.querySelector(".opentAviso").addEventListener(
+        "click",
+        openAvisoDelete,
+        (e) => {
           e.stopPropagation();
+        }
+      );
 
-          avisofondo.classList.remove("show");
-          contenidoAviso.classList.remove("show");
-
-          void avisofondo.offsetWidth;
-          void contenidoAviso.offsetWidth;
-
-          avisofondo.classList.add("hide");
-          contenidoAviso.classList.add("hide");
-
-          setTimeout(() => {
-            avisoDelete.classList.remove("active");
-            avisofondo.classList.remove("hide");
-            contenidoAviso.classList.remove("hide");
-          }, 400);
-        };
-      });
+      // ===== CANCELAR =====
+      btnCancelarDelete.onclick = (e) => {
+        e.stopPropagation();
+        history.back();
+      };
 
       li.addEventListener("click", (e) => {
         if (
@@ -387,9 +402,8 @@ export const UI = {
       const contenedorEditar = li.querySelector(".editar_item");
       const modalEditar = li.querySelector(".Editar_targeta");
       const closeEditar = li.querySelector(".Closeeditar");
-      li.querySelector(".openEditar").addEventListener("click", (e) => {
-        e.stopPropagation();
 
+      function openEditarTasks() {
         App.currentEditTaskId = task.id;
         App.currentEditTask = { ...task };
 
@@ -403,12 +417,27 @@ export const UI = {
 
         const contPrioridad = li.querySelector(".ProridadEditar");
         cargarPrioridadEdit(contPrioridad, task.prioridad);
-      });
+
+        history.pushState({ Editar_Tarea: true }, "", "#editar_tarea");
+        OverlayManager.push("editarTask", closeEditarWindow);
+      }
+
+      function closeEditarWindow() {
+        contenedorEditar.classList.remove("active");
+        modalEditar.classList.remove("active");
+      }
+
+      li.querySelector(".openEditar").addEventListener(
+        "click",
+        openEditarTasks,
+        (e) => {
+          e.stopPropagation();
+        }
+      );
 
       closeEditar.addEventListener("click", (e) => {
         e.stopPropagation();
-        contenedorEditar.classList.remove("active");
-        modalEditar.classList.remove("active");
+        history.back();
       });
 
       //Estilo Proridad

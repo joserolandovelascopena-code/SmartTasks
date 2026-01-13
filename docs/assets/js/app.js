@@ -456,6 +456,7 @@ openVisualizarFotoUser.addEventListener("click", () => {
   lightBox.classList.add("show");
   contenidoLightBox.classList.add("show");
 });
+
 btnCerrarLightBox.addEventListener("click", () => {
   contenidoLightBox.classList.remove("show");
   setTimeout(() => {
@@ -464,7 +465,6 @@ btnCerrarLightBox.addEventListener("click", () => {
 });
 
 // editar fotos
-// Modal
 const editorPerfil = document.querySelector(".EditarPerfilHeader");
 const btnCerrarEditor = document.querySelector(".CerrarEditor_Foto");
 
@@ -651,13 +651,10 @@ btnAceptarHeader.addEventListener("click", async () => {
       });
     }, 1500);
 
-    // 2. Guardar en profiles
     await Storage.updateHeaderUrl(avatarUrl_header);
 
-    // 3. Actualizar estado local
     App.profile.header_url = avatarUrl_header;
 
-    // 4. Re-render perfil
     UI.renderPerfile(App.profile);
   } catch (err) {
     console.error(err);
@@ -671,6 +668,7 @@ btnAceptarHeader.addEventListener("click", async () => {
   }
 });
 
+//===========================================================
 const actionSheet = document.querySelector(".actionSheet");
 const ContentSheet = document.querySelector(".ContentSheet");
 const btnOpenSheet = document.querySelector(".btnOpenSheet");
@@ -678,20 +676,28 @@ const btnCancelarAccionSheet = document.querySelector(
   ".btnCancelarAccionSheet"
 );
 
-btnOpenSheet.addEventListener("click", () => {
+function openBtnSheetPerfile() {
   actionSheet.classList.add("active");
   ContentSheet.classList.add("active");
-});
 
-btnCancelarAccionSheet.addEventListener("click", () => {
+  history.pushState({ btnSheet_editorFotos: true }, "", "#sheetEditor_fotos");
+  OverlayManager.push("btneSheet_Editar_perfil", closebtnPerfileEditor);
+}
+
+function closebtnPerfileEditor() {
   ContentSheet.classList.remove("active");
   setTimeout(() => {
     actionSheet.classList.remove("active");
   }, 400);
+}
+
+btnOpenSheet.addEventListener("click", openBtnSheetPerfile);
+
+btnCancelarAccionSheet.addEventListener("click", () => {
+  history.back();
 });
 
 //Themes
-
 document.addEventListener("DOMContentLoaded", () => {
   const themes = document.querySelector(".content_theme");
   const animation = document.querySelector(".nav_themes");
