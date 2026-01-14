@@ -3,6 +3,16 @@ import { App } from "./app.js";
 import { Toast } from "./toastManager/toast.js";
 import { OverlayManager } from "./overlayManager/overlayManager.js";
 
+const bodyScroll = document.body;
+
+function disableBodyScroll() {
+  bodyScroll.style.overflow = "hidden";
+}
+
+function enableBodyScroll() {
+  bodyScroll.style.overflow = "auto";
+}
+
 let lastCantidadTasks = null;
 
 document.addEventListener("click", (e) => {
@@ -404,6 +414,7 @@ export const UI = {
       const closeEditar = li.querySelector(".Closeeditar");
 
       function openEditarTasks() {
+        disableBodyScroll();
         App.currentEditTaskId = task.id;
         App.currentEditTask = { ...task };
 
@@ -423,6 +434,7 @@ export const UI = {
       }
 
       function closeEditarWindow() {
+        enableBodyScroll();
         contenedorEditar.classList.remove("active");
         modalEditar.classList.remove("active");
       }

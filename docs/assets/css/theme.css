@@ -299,4 +299,7 @@ html[data-theme="light"] {
   [data-theme="dark"] .Closeeditar {
     color: white;
   }
+  [data-theme="dark"] .EditarPerfilHeader {
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
