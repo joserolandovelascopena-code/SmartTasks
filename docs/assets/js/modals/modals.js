@@ -3,17 +3,7 @@ import { Storage } from "../storage.js";
 import { UI } from "../ui.js";
 import { Toast } from "../toastManager/toast.js";
 import { OverlayManager } from "../overlayManager/overlayManager.js";
-
-//scroll main
-const bodyScroll = document.body;
-
-function disableBodyScroll() {
-  bodyScroll.style.overflow = "hidden";
-}
-
-function enableBodyScroll() {
-  bodyScroll.style.overflow = "auto";
-}
+import { ScrollBody } from "./scrollModals.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.querySelectorAll(".openAdd");
@@ -29,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openAddTask() {
     perfilContainer.classList.remove("show");
-    disableBodyScroll();
+
+    ScrollBody.disableBodyScroll(); // SOLO móvil
+
     contenAdd.classList.add("show");
     backgraudAnimation.classList.add("show");
     bodycontenedor.classList.add("show");
@@ -37,12 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
     infoTarea.classList.add("show");
 
     history.pushState({ addTask: true }, "", "#add-task");
-
     OverlayManager.push("closeAddTasks", closeAddTask);
   }
 
   function closeAddTask() {
-    enableBodyScroll();
+    // SOLO móvil
+    ScrollBody.enableBodyScroll();
     contenAdd.classList.remove("show");
     backgraudAnimation.classList.remove("show");
     bodycontenedor.classList.remove("show");
@@ -87,7 +79,7 @@ const contenAdd = document.querySelector(".subir_tarea");
 function openPerfil() {
   perfilContainer.classList.add("show");
   contenAdd.classList.remove("show");
-  disableBodyScroll();
+  ScrollBody.disableBodyScroll();
 
   cantidadTkasPerfile.classList.remove("active");
   void cantidadTkasPerfile.offsetWidth;
@@ -100,7 +92,7 @@ function openPerfil() {
 }
 
 function closePerfilView() {
-  enableBodyScroll();
+  ScrollBody.enableBodyScroll();
   perfilContainer.classList.remove("show");
 }
 
@@ -301,7 +293,7 @@ btnAceptar.addEventListener("click", async () => {
     const avatarUrl = await Storage.uploadAvatar(file);
 
     setTimeout(() => {
-      editorPerfil.classList.remove("show");
+      history.back();
       BtnLoaderCambiarFoto.classList.remove("active");
 
       Toast.show("Se actualizo la foto de perfil ", "success", {
@@ -347,7 +339,7 @@ btnAceptarHeader.addEventListener("click", async () => {
     const avatarUrl_header = await Storage.uploadHeader(file);
 
     setTimeout(() => {
-      editorPerfil.classList.remove("show");
+      history.back();
       BtnLoaderCambiarFoto.classList.remove("active");
 
       Toast.show("Se cambio el header correctamente", "success", {

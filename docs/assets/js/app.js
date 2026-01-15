@@ -4,6 +4,7 @@ import { UI } from "./ui.js";
 import { supabaseClient } from "./supabase.js";
 import { Toast } from "./toastManager/toast.js";
 import { Sound } from "./toastManager/sound.js";
+import { ScrollBody } from "./modals/scrollModals.js";
 
 document.addEventListener(
   "pointerdown",
@@ -65,13 +66,11 @@ export const App = {
     const input = document.getElementById("newTask");
     const btnGuardar = document.querySelectorAll(".Guadar-btn");
     const contenAdd = document.querySelector(".subir_tarea");
-    const bodycontenedor = document.querySelector(".contenedor");
     const backgraudAnimation = document.querySelector(".backgraud-tasks");
 
     input.addEventListener("focus", () => {
       if (!input.value.trim()) {
         categoria.classList.add("active");
-        bodycontenedor.style.overflow = "hidden";
       }
     });
 
@@ -81,8 +80,8 @@ export const App = {
 
         const success = await App.addTask();
         if (!success) return;
+        ScrollBody.enableBodyScroll();
 
-        bodycontenedor.style.overflowY = "auto";
         document.querySelector(".List_check").classList.remove("show");
         document.querySelector(".info_tarea").classList.remove("show");
         contenAdd.classList.remove("show");
@@ -95,6 +94,7 @@ export const App = {
 
       e.stopPropagation();
       await App.editeTasks();
+      ScrollBody.enableBodyScroll();
     });
   },
 

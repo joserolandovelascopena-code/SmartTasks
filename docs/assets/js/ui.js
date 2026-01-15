@@ -2,16 +2,7 @@
 import { App } from "./app.js";
 import { Toast } from "./toastManager/toast.js";
 import { OverlayManager } from "./overlayManager/overlayManager.js";
-
-const bodyScroll = document.body;
-
-function disableBodyScroll() {
-  bodyScroll.style.overflow = "hidden";
-}
-
-function enableBodyScroll() {
-  bodyScroll.style.overflow = "auto";
-}
+import { ScrollBody } from "./modals/scrollModals.js";
 
 let lastCantidadTasks = null;
 
@@ -326,13 +317,15 @@ export const UI = {
       const avisoDelete = li.querySelector(".advertenciaDelete");
       const avisofondo = li.querySelector(".backgrundAviso");
       const contenidoAviso = li.querySelector(".ContentAvisoDelete");
-      const contenedorEditarTasks = li.querySelector(".editar_item");
 
       function openAvisoDelete() {
-        li.querySelector(".btnGuardarCambios").addEventListener("click", () => {
-          contenedorEditarTasks.classList.remove("active");
-          modalEditar.classList.remove("active");
-        });
+        li.querySelector(".btnGuardarCambios").addEventListener(
+          "click",
+          (e) => {
+            e.stopPropagation();
+            history.back();
+          }
+        );
 
         // abrir
         avisoDelete.classList.add("active");
@@ -352,11 +345,7 @@ export const UI = {
           avisofondo.classList.add("hide");
           contenidoAviso.classList.add("hide");
           setTimeout(() => {
-            avisoDelete.classList.remove("active");
-            avisofondo.classList.remove("hide");
-            contenidoAviso.classList.remove("hide");
-            contenedorEditarTasks.classList.remove("active");
-
+            history.back();
             App.deleteTask(task.id);
           }, 400);
         };
@@ -414,7 +403,7 @@ export const UI = {
       const closeEditar = li.querySelector(".Closeeditar");
 
       function openEditarTasks() {
-        disableBodyScroll();
+        ScrollBody.disableBodyScroll();
         App.currentEditTaskId = task.id;
         App.currentEditTask = { ...task };
 
@@ -434,7 +423,7 @@ export const UI = {
       }
 
       function closeEditarWindow() {
-        enableBodyScroll();
+        ScrollBody.enableBodyScroll();
         contenedorEditar.classList.remove("active");
         modalEditar.classList.remove("active");
       }

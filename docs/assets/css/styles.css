@@ -2352,6 +2352,7 @@ h5 {
     position: relative;
   }
   .tasksProyecAll {
+    display: none;
     grid-column: 1 / span 2;
   }
   /*Perfil*/
@@ -2381,10 +2382,9 @@ h5 {
   .add_persons_notificaciones {
     display: none;
   }
-  .tasksProyecAll {
-    margin-top: 40px;
-  }
+
   .Saludo_noticias {
+    margin-top: 60px;
     grid-template-columns: 64% auto;
     grid-column: 1 / span 2;
     height: 180px;

@@ -6,8 +6,9 @@ function push(type, onClose) {
 }
 
 function pop() {
+  if (overlayStack.length === 0) return;
   const last = overlayStack.pop();
-  if (last?.onClose) last.onClose();
+  last?.onClose?.();
 }
 
 function handlePopState() {
