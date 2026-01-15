@@ -132,7 +132,7 @@ html[data-theme="light"] {
 /*Editar tarea*/
 
 [data-theme="dark"] .cuerpo_modal {
-  background: black;
+  background: rgb(9, 9, 10);
   border: 1px solid var(--border-dark);
 }
 
@@ -143,7 +143,7 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .footer-editar {
-  background: black;
+  background: rgb(9, 9, 10);
   border-top: 0px;
 }
 
@@ -208,17 +208,26 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .opentAviso {
-  background: #ffdedef6;
+  background: #2c314e63;
+  border: none;
+  color: white;
 }
 [data-theme="dark"] .backgrauEditar {
   background: rgba(52, 52, 68, 0.26);
   backdrop-filter: blur(10px);
 }
 
-/*Agregar*/
+/*Add tareas*/
+[data-theme="dark"] .subir_tarea {
+  background: #000000;
+}
+[data-theme="dark"] .contenido_main {
+  background: #000000;
+}
 
 [data-theme="dark"] .agregar {
-  background: var(--bg-modal-dark);
+  background: #000000;
+  border-top: 1px solid var(--bordes-nav);
 }
 
 /*Lista tareas*/
@@ -277,7 +286,11 @@ html[data-theme="light"] {
 [data-theme="dark"] .List_check {
   background: rgb(44, 44, 44);
 }
-
+/*Animaciones*/
+.modal {
+  background: rgba(3, 1, 27, 0.6);
+  backdrop-filter: blur(20px);
+}
 @media (max-width: 700px) {
   [data-theme="dark"] .cuerpo_modal {
     border: 0px solid var(--border-dark);

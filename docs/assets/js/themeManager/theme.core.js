@@ -172,8 +172,6 @@ export function applyTheme(theme) {
     }
 
     if (addTareasContenedor) {
-      addTareasContenedor.style.background = COLORS.blackSoft;
-      contenidoAddTarea.style.background = COLORS.blackSoft;
       navAddTasks.style.color = COLORS.white;
       sectionAddTkas.style.background = "#1f1f1f";
 

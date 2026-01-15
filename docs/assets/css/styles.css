@@ -301,6 +301,8 @@ h5 {
 }
 /*Barra superior principal*/
 .Barra_Superior_principal {
+  margin-top: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 3px gainsboro;
   z-index: 28;
   padding: 6px 10px;
@@ -755,7 +757,7 @@ h5 {
   grid-template-columns: 59.8% auto;
   position: relative;
   gap: 12px;
-  padding: 20px 20px 20px 4px;
+  padding: 10px 10px 10px 0px;
   height: 72vh;
   overflow-y: auto;
 }
@@ -1541,11 +1543,11 @@ h5 {
   z-index: 32;
   position: relative;
   overflow: hidden;
-  margin-top: 50px;
+  margin-top: 20px;
   padding: 12px;
   padding-top: 40px;
   width: 600px;
-  height: 530px;
+  height: 600px;
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
   animation: introApp 0.4s ease-in-out;
@@ -2120,6 +2122,7 @@ h5 {
     top: 30px;
     right: auto;
     width: 100%;
+    padding: 0 10px;
   }
   .MSGS_SECOND_INFERIOR {
     width: 100%;
@@ -2365,6 +2368,7 @@ h5 {
     position: fixed;
     width: 100%;
     left: 0;
+    top: 0;
     z-index: 40;
   }
   .foto_perfil {
@@ -2384,7 +2388,7 @@ h5 {
   }
 
   .Saludo_noticias {
-    margin-top: 60px;
+    margin-top: 52px;
     grid-template-columns: 64% auto;
     grid-column: 1 / span 2;
     height: 180px;

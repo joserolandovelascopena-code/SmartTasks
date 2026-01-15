@@ -162,7 +162,7 @@ export const App = {
     const descripcionNew = textarea ? textarea.value.trim() : "";
 
     if (!text) {
-      Toast.show("Campo vacío, tarea sin nombre", "error", {
+      Toast.show("Por favor, escribe un nombre", "error", {
         sound: true,
         haptic: true,
       });
@@ -197,7 +197,7 @@ export const App = {
   async getProfile() {
     const { data: sessionData } = await supabaseClient.auth.getSession();
     if (!sessionData.session) {
-      Toast.show("Error: No hay sesión activa", "error");
+      Toast.show("No hay sesión activa", "error");
       return;
     }
 
