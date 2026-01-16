@@ -2,6 +2,7 @@
 import { Sound } from "../../toastManager/sound.js";
 import { Haptic } from "../../toastManager/haptic.js";
 import { Toast } from "../../toastManager/toast.js";
+import { OverlayManager } from "../../overlayManager/overlayManager.js";
 
 const el = document.querySelector(".WarningMessagesSystem");
 const cont = document.querySelector(".contenidoMensaje");
@@ -27,6 +28,9 @@ export const WarnningMessage = {
 
     el.classList.add("active");
     cont.classList.add("show");
+
+    history.pushState({ warging: true }, "", "#warning_message");
+    OverlayManager.push("closeWarning", closeWarning);
   },
 };
 
@@ -77,13 +81,16 @@ btnAceptar?.addEventListener("click", () => {
     })
   );
 
-  closeWarning();
+  if (history.state?.warging) {
+    history.back();
+  }
   delete el.dataset.pendingAction;
 });
 
 function closeWarning() {
   el.classList.remove("active");
   cont.classList.remove("show");
+  delete el.dataset.pendingAction;
 }
 
 const btnCancelar = document.querySelector(".cerrarMensageSystem");
@@ -91,6 +98,6 @@ const btnCancelar = document.querySelector(".cerrarMensageSystem");
 btnCancelar?.addEventListener("click", () => {
   cont.classList.remove("show");
   setTimeout(() => {
-    el.classList.remove("active");
+    history.back();
   }, 300);
 });
