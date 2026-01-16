@@ -28,6 +28,16 @@
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
@@ -94,6 +104,30 @@
             </div>
             <div class="ImagenLightBoxUser">
               <img src="" alt="Imagen de perfil" />
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="WarningMessagesSystem">
+        <article class="contenidoMensaje">
+          <div class="header_Message">
+            <div class="iconMessageEmergente">
+              <div class="iconCaja">
+                <i class="fa-regular fa-trash-can iconoWarning"></i>
+              </div>
+            </div>
+          </div>
+          <div class="contenidoMesajeVentana">
+            <h3 class="title_message_advertencia">Eliminar foto de perfil</h3>
+            <div>
+              <p class="info_mensage">
+                Tu foto actual será borrada y volveras al avatar por defecto.
+              </p>
+            </div>
+            <div class="footer_messageEmergente">
+              <button type="button" class="cerrarMensageSystem">Cancelar</button
+              ><button type="button" class="eliminarObleto">Aceptar</button>
             </div>
           </div>
         </article>
@@ -735,13 +769,23 @@
           <article class="ContenedorSheet">
             <div class="CajaSheet">
               <div class="ContentSheet">
-                <div class="AccionesAvanzadasEditarFoto">
+                <div class="AccionesAvanzadasEditarFoto ventanaLLamado">
                   <h5>Opciones</h5>
-                  <div class="opcionesEditarfoto">
+                  <div
+                    class="opcionesEditarfoto optEjecucion"
+                    data-callWindow="eliminar_foto_perfil"
+                  >
                     <div><i class="fa-regular fa-trash-can"></i></div>
                     <p>Eliminar foto de perfil</p>
                   </div>
-                  <div class="opcionesEditarfoto">
+                  <div
+                    class="opcionesEditarfoto optEjecucion"
+                    data-callWindow="eliminar_foto_header"
+                  >
+                    <div><i class="fa-regular fa-trash-can"></i></div>
+                    <p>Eliminar header</p>
+                  </div>
+                  <div class="opcionesEditarfoto optEjecucion">
                     <div><i class="fa-regular fa-image"></i></div>
                     <p>Ver recomendaciones</p>
                   </div>
@@ -784,6 +828,11 @@
     <script type="module" src="assets/js/ui.js"></script>
     <script type="module" src="assets/js/app.js"></script>
     <script type="module" src="assets/js/modals/modals.js"></script>
+    <script
+      type="module"
+      src="assets/js/modals/warning_messages/warningMessages.js"
+    ></script>
+
     <script type="module" src="assets/js/themeManager/theme.js"></script>
 
     <script type="module">
