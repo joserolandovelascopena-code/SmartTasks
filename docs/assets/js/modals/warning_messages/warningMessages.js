@@ -10,7 +10,7 @@ const textInfo = document.querySelector(".info_mensage");
 const icon = document.querySelector(".iconoWarning");
 
 export const WarnningMessage = {
-  mensagePush(title, msg, type = "delete", options = {}) {
+  mensagePush(title, msg, type = "warning", options = {}) {
     if (!el) return;
 
     const { sound = false, haptic = false } = options;
@@ -18,20 +18,30 @@ export const WarnningMessage = {
     ti.textContent = title;
     textInfo.textContent = msg;
     icon.className =
-      type === "delete"
+      type === "warning"
         ? "fa-regular fa-trash-can"
         : "fa-solid fa-triangle-exclamation";
 
-    if (sound) {
-      Sound.play(type);
-    }
-
-    if (haptic) {
-      Haptic.vibrate(type);
-    }
+    if (sound) Sound.play(type);
+    if (haptic) Haptic.vibrate(type);
 
     el.classList.add("active");
     cont.classList.add("show");
+  },
+};
+
+const MESSAGE_MAP = {
+  eliminar_foto_perfil: {
+    title: "¿Eliminar foto de perfil?",
+    msg: "Tu foto actual será borrada y volverás al avatar por defecto.",
+    type: "warning",
+    action: "DELETE_AVATAR",
+  },
+  eliminar_foto_header: {
+    title: "¿Eliminar header?",
+    msg: "El header actual será borrado y volverás al fondo por defecto.",
+    type: "warning",
+    action: "DELETE_HEADER",
   },
 };
 
@@ -39,43 +49,48 @@ document.addEventListener("click", (e) => {
   const option = e.target.closest(".optEjecucion");
   if (!option) return;
 
-  const selected = option.dataset.callwindow;
-  windowEjecute(selected);
-});
+  const key = option.dataset.callwindow;
+  const config = MESSAGE_MAP[key];
 
-function windowEjecute(option) {
-  if (!option) {
+  if (!config) {
     Toast.show("Esta opción aún no tiene acción asignada");
     return;
   }
 
-  switch (option) {
-    case "eliminar_foto_perfil":
-      WarnningMessage.mensagePush(
-        "¿Eliminar foto de perfil?",
-        "Tu foto actual será borrada y volverás al avatar por defecto.",
-        "delete",
-        { sound: true, haptic: true }
-      );
-      break;
+  WarnningMessage.mensagePush(config.title, config.msg, config.type, {
+    sound: true,
+    haptic: true,
+  });
 
-    case "eliminar_foto_header":
-      WarnningMessage.mensagePush(
-        "¿Eliminar header?",
-        "El header actual será borrado y volverás al fondo por defecto.",
-        "delete",
-        { sound: true, haptic: true }
-      );
-      break;
+  el.dataset.pendingAction = config.action;
+});
 
-    default:
-      Toast.show("Acción no reconocida");
-  }
+const btnAceptar = document.querySelector(".eliminarObleto");
+
+btnAceptar?.addEventListener("click", () => {
+  const action = el.dataset.pendingAction;
+  if (!action) return;
+
+  document.dispatchEvent(
+    new CustomEvent("warning:confirm", {
+      detail: { action },
+    })
+  );
+
+  closeWarning();
+  delete el.dataset.pendingAction;
+});
+
+function closeWarning() {
+  el.classList.remove("active");
+  cont.classList.remove("show");
 }
 
 const btnCancelar = document.querySelector(".cerrarMensageSystem");
 
 btnCancelar?.addEventListener("click", () => {
-  el.classList.remove("active");
   cont.classList.remove("show");
+  setTimeout(() => {
+    el.classList.remove("active");
+  }, 300);
 });

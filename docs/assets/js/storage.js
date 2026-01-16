@@ -30,21 +30,17 @@ const Storage = {
 
     if (!user || !file) throw new Error("No hay sesión o archivo");
 
-    const fileExt = file.name.split(".").pop();
-    const fileName = `avatar.${fileExt}`;
-    const filePath = `${user.id}/${fileName}`;
+    const filePath = `${user.id}/avatar`; // 👈 PATH FIJO
 
-    // 1. Subir archivo
-    const { error: uploadError } = await supabaseClient.storage
+    const { error } = await supabaseClient.storage
       .from("avatars")
       .upload(filePath, file, {
         upsert: true,
         contentType: file.type,
       });
 
-    if (uploadError) throw uploadError;
+    if (error) throw error;
 
-    // 2. Obtener URL pública
     const { data } = supabaseClient.storage
       .from("avatars")
       .getPublicUrl(filePath);
@@ -57,8 +53,7 @@ const Storage = {
     const user = sessionData?.session?.user;
     if (!user || !file) throw new Error("No hay sesión o archivo");
 
-    const fileExt = file.name.split(".").pop();
-    const filePath = `${user.id}/header.${fileExt}`;
+    const filePath = `${user.id}/header`;
 
     const { error } = await supabaseClient.storage
       .from("avatars")
@@ -217,6 +212,22 @@ const Storage = {
     }
 
     return taskName;
+  },
+
+  async deleteAvatarFile(userId) {
+    const { error } = await supabaseClient.storage
+      .from("avatars")
+      .remove([`${userId}/avatar`]);
+
+    if (error) throw error;
+  },
+
+  async deleteHeaderFile(userId) {
+    const { error } = await supabaseClient.storage
+      .from("avatars")
+      .remove([`${userId}/header`]);
+
+    if (error) throw error;
   },
 
   async cantidadTasksPorUsuario(userId) {

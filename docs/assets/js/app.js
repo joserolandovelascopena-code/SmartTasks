@@ -18,6 +18,11 @@ if (!history.state) {
   history.replaceState({ base: true }, "", location.pathname);
 }
 
+document.addEventListener("warning:confirm", async (e) => {
+  const { action } = e.detail;
+  await App.executeGlobalAction(action);
+});
+
 export const App = {
   tasks: [],
   profile: null,
@@ -269,6 +274,57 @@ export const App = {
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
     UI.renderPerfile(this.profile);
+  },
+
+  async executeGlobalAction(action) {
+    const ACTIONS = {
+      DELETE_AVATAR: async () => {
+        await this.deleteAvatar();
+      },
+      DELETE_HEADER: async () => {
+        await this.deleteHeader();
+      },
+    };
+
+    const fn = ACTIONS[action];
+    if (!fn) {
+      Toast.show("Acción no implementada", "error");
+      return;
+    }
+
+    await fn();
+  },
+
+  async deleteAvatar() {
+    const { data } = await supabaseClient.auth.getSession();
+    const user = data?.session?.user;
+    if (!user) throw new Error("No hay sesión");
+
+    await Storage.updateAvatarUrl(null);
+    await Storage.deleteAvatarFile(user.id);
+
+    this.profile.avatar_url = null;
+    UI.renderPerfile(this.profile);
+
+    Toast.show("Foto de perfil eliminada", "success", {
+      haptic: true,
+    });
+  },
+
+  async deleteHeader() {
+    const { data } = await supabaseClient.auth.getSession();
+    const user = data?.session?.user;
+    if (!user) throw new Error("No hay sesión");
+
+    await Storage.updateHeaderUrl(null);
+    await Storage.deleteHeaderFile(user.id);
+
+    this.profile.header_url = null;
+    UI.renderPerfile(this.profile);
+
+    Toast.show("Se eliminó el header", "success", {
+      haptic: true,
+    });
   },
 
   async cantidadTasksPorUsuario(userId) {

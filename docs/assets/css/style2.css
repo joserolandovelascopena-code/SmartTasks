@@ -26,6 +26,7 @@
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
+
 .WarningMessagesSystem.active {
   opacity: 1;
   pointer-events: auto;
@@ -1200,7 +1201,45 @@
 }
 
 /*responsing*/
+@media (max-width: 400px) {
+  .WarningMessagesSystem {
+    align-items: normal;
+    opacity: 0;
+  }
 
+  .contenidoMensaje {
+    position: absolute;
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    bottom: 0;
+
+    transform: translateY(400px);
+  }
+  .contenidoMensaje.show {
+    transform: translateY(0);
+  }
+
+  .header_Message {
+    height: 130px;
+  }
+
+  .contenidoMensaje h3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    text-align: center;
+  }
+  .info_mensage {
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  .footer_messageEmergente button {
+    padding: 15px;
+  }
+  .footer_messageEmergente {
+    margin-bottom: 20px;
+  }
+}
 @media (max-width: 700px) {
   .Perfile {
     position: fixed;
