@@ -5,6 +5,11 @@ import { supabaseClient } from "./supabase.js";
 import { Toast } from "./toastManager/toast.js";
 import { Sound } from "./toastManager/sound.js";
 import { ScrollBody } from "./modals/scrollModals.js";
+import {
+  sanitizeAndValidate,
+  sanitizeText,
+  normalizeText,
+} from "./security/inputSanitizer.js";
 
 document.addEventListener(
   "pointerdown",
@@ -22,6 +27,8 @@ document.addEventListener("warning:confirm", async (e) => {
   const { action } = e.detail;
   await App.executeGlobalAction(action);
 });
+
+let isAddingTask = false;
 
 export const App = {
   tasks: [],
@@ -104,49 +111,65 @@ export const App = {
   },
 
   async addTask() {
-    const input = document.getElementById("newTask");
-    const text = input.value.trim();
+    if (isAddingTask) {
+      console.warn("Bloqueado: ya se está agregando una tarea");
+      return false;
+    }
 
-    const descriptionTextarea = document.getElementById("descripcion");
-    const descriptionText = descriptionTextarea?.value.trim() || "";
+    isAddingTask = true;
 
-    if (!text) {
-      Toast.show("Por favor, introduce un nombre a la tarea", "error", {
-        sound: true,
-        haptic: true,
+    try {
+      const input = document.getElementById("newTask");
+      const descriptionTextarea = document.getElementById("descripcion");
+
+      const result = sanitizeAndValidate(input.value, {
+        min: 3,
+        max: 120,
       });
 
+      if (result.error) {
+        Toast.show(result.error, "error");
+        return false;
+      }
+
+      const safeText = result.value;
+
+      const description = descriptionTextarea
+        ? sanitizeText(normalizeText(descriptionTextarea.value))
+        : "";
+
+      const { data } = await supabaseClient.auth.getSession();
+      if (!data.session) {
+        Toast.show("Sesión inválida", "error");
+        return false;
+      }
+
+      const nuevaTarea = {
+        text: safeText,
+        descripcion: description,
+        categoria: this.categoriaSeleccionada || "Ninguna",
+        prioridad: this.prioridadSeleccionada || "Ninguna",
+        done: false,
+        user_id: data.session.user.id,
+        created_at: new Date().toISOString(),
+      };
+
+      await Storage.saveTask(nuevaTarea);
+      await this.loadTasks();
+
+      UI.renderTasks(this.tasks);
+
+      input.value = "";
+      if (descriptionTextarea) descriptionTextarea.value = "";
+
+      return true;
+    } catch (err) {
+      console.error("Error en addTask:", err);
+      Toast.show("Error inesperado", "error");
       return false;
+    } finally {
+      isAddingTask = false;
     }
-
-    const { data: sessionData } = await supabaseClient.auth.getSession();
-    if (!sessionData.session) {
-      Toast.show("Error: No hay sesión activa", "error");
-      return false;
-    }
-
-    const nuevaTarea = {
-      text,
-      categoria: this.categoriaSeleccionada || "Ninguna",
-      prioridad: this.prioridadSeleccionada || "Ninguna",
-      descripcion: descriptionText,
-      done: false,
-      user_id: sessionData.session.user.id,
-    };
-
-    await Storage.saveTask(nuevaTarea);
-    await this.loadTasks();
-
-    this.profile.totalTasks = this.tasks.length;
-
-    UI.renderTasks(this.tasks);
-    UI.renderTarjetas(this.tasks, true);
-    UI.renderPerfile(this.profile);
-
-    input.value = "";
-    if (descriptionTextarea) descriptionTextarea.value = "";
-
-    return true;
   },
 
   async editeTasks() {
@@ -161,10 +184,27 @@ export const App = {
     const inputEdite = modalActivo.querySelector(".InputEditarTasks");
     if (!inputEdite) return false;
 
+    const result = sanitizeAndValidate(inputEdite.value, {
+      min: 3,
+      max: 120,
+    });
+
+    if (result.error) {
+      Toast.show(result.error, "error", {
+        sound: true,
+        haptic: true,
+      });
+      return false;
+    }
+
+    const safeText = result.value;
+
     const text = inputEdite.value.trim();
 
     const textarea = modalActivo.querySelector(".EditarDescripcion");
-    const descripcionNew = textarea ? textarea.value.trim() : "";
+    const safeDescription = textarea
+      ? sanitizeText(normalizeText(textarea.value))
+      : "";
 
     if (!text) {
       Toast.show("Por favor, escribe un nombre", "error", {
@@ -177,10 +217,10 @@ export const App = {
     const taskActual = this.tasks.find((t) => t.id === this.currentEditTaskId);
 
     const fields = {
-      text,
+      text: safeText,
       categoria: this.categoriaSeleccionada || taskActual.categoria,
       prioridad: this.prioridadSeleccionada || taskActual.prioridad,
-      descripcion: descripcionNew,
+      descripcion: safeDescription,
     };
 
     await Storage.SaveUpdateTask(this.currentEditTaskId, fields);
