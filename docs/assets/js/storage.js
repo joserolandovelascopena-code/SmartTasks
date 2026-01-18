@@ -178,24 +178,18 @@ const Storage = {
     try {
       const { data: sessionData } = await supabaseClient.auth.getSession();
       const userId = sessionData?.session?.user?.id;
-
-      if (!userId) {
-        console.error("No hay sesión activa");
-        return null;
-      }
+      if (!userId) throw new Error("No hay sesión");
 
       const { data, error } = await supabaseClient
         .from("tasks")
         .update(fields)
         .eq("id", id)
-        .select();
+        .eq("user_id", userId)
+        .select()
+        .single();
 
-      if (error) {
-        console.error("Error editando tarea:", error);
-        return null;
-      }
-
-      return data?.[0] ?? null;
+      if (error) throw error;
+      return data;
     } catch (err) {
       console.error("Exception SaveUpdateTask:", err);
       return null;

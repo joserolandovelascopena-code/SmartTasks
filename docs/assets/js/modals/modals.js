@@ -255,6 +255,14 @@ inputFotoPerfil.addEventListener("change", (e) => {
     return;
   }
 
+  const allowed = ["image/png", "image/jpeg", "image/webp"];
+  if (!allowed.includes(file.type)) {
+    Toast.show("Imagen no válida", "error", {
+      haptic: true,
+    });
+    e.target.value = "";
+  }
+
   selectedAvatarFile = file;
 
   const reader = new FileReader();
@@ -280,6 +288,14 @@ inputFotoHeader.addEventListener("change", (e) => {
     });
     e.target.value = "";
     return;
+  }
+
+  const allowed = ["image/png", "image/jpeg", "image/webp"];
+  if (!allowed.includes(file.type)) {
+    Toast.show("Imagen no válida", "error", {
+      haptic: true,
+    });
+    e.target.value = "";
   }
 
   const MAX_SIZE = 2 * 1024 * 1024;

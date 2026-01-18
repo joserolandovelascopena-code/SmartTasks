@@ -199,18 +199,14 @@ export const App = {
 
     const safeText = result.value;
 
-    const text = inputEdite.value.trim();
-
     const textarea = modalActivo.querySelector(".EditarDescripcion");
-    const safeDescription = textarea
-      ? sanitizeText(normalizeText(textarea.value))
-      : "";
+    const descResult = sanitizeAndValidate(textarea?.value || "", {
+      min: 0,
+      max: 500,
+    });
 
-    if (!text) {
-      Toast.show("Por favor, escribe un nombre", "error", {
-        sound: true,
-        haptic: true,
-      });
+    if (descResult.error) {
+      Toast.show(descResult.error, "error");
       return false;
     }
 
@@ -220,7 +216,7 @@ export const App = {
       text: safeText,
       categoria: this.categoriaSeleccionada || taskActual.categoria,
       prioridad: this.prioridadSeleccionada || taskActual.prioridad,
-      descripcion: safeDescription,
+      descripcion: descResult.value,
     };
 
     await Storage.SaveUpdateTask(this.currentEditTaskId, fields);
