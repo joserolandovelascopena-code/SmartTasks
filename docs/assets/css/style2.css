@@ -8,116 +8,161 @@
 }
 
 /*Mesajes del sistema de advertencias*/
-
 .WarningMessagesSystem {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: 55;
-  width: 100%;
-  height: 100%;
-  background: rgb(0, 0, 0, 0.1);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
   display: grid;
-  justify-content: center;
-  align-items: center;
+  place-items: center;
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
 }
 
 .WarningMessagesSystem.active {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* CONTENEDOR */
 .contenidoMensaje {
   position: relative;
   width: 400px;
-  border-radius: 24px;
-  background: white;
+  background: #ffffff;
+  border-radius: 26px;
   overflow: hidden;
-  transform: scale(0.92);
-  transition: 0.4s;
+
+  transform: scale(0.94);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
+
 .contenidoMensaje.show {
   transform: scale(1);
+  opacity: 1;
 }
+
+/* HEADER */
+.header_Message {
+  background: #f4f5fa;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+/* ICONO */
+.iconMessageEmergente {
+  display: grid;
+  place-items: center;
+}
+
+.iconCaja {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2px solid #d0d4ff;
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(55, 0, 253, 0.18);
+  transition: 0.3s ease;
+}
+
+.iconCaja i {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #3700fd;
+  color: white;
+  font-size: 24px;
+}
+
+/* ESTADO WARNING */
+.iconCaja.show {
+  border-color: #ffb3b3;
+  box-shadow: 0 10px 22px rgba(255, 0, 55, 0.25);
+}
+
+.iconCaja.show i {
+  background: #ff0037;
+}
+
+/* CONTENIDO */
+.contenidoMesajeVentana {
+  padding: 22px;
+}
+
 .contenidoMensaje h3 {
   font-family: "Roboto", sans-serif;
-  font-size: 21px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1c1c;
 }
-.header_Message {
-  background: #f0f1f8;
-  padding: 8px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  height: 120px;
-}
-.iconMessageEmergente {
-  position: relative;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-}
-.iconCaja i {
-  width: 60px;
-  height: 60px;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  background: #3700fd;
-  border-radius: 50%;
-  font-size: 26px;
-  color: white;
-}
-.iconCaja {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 2px solid #7582ff;
-  box-shadow: 0 0 10px #3401eb3f;
-}
-.contenidoMesajeVentana {
-  padding: 20px;
-}
+
 .info_mensage {
-  padding-top: 5px;
-  padding-bottom: 20px;
-  color: #575757;
+  margin-top: 6px;
+  padding-bottom: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5f5f5f;
 }
+
+/* FOOTER */
 .footer_messageEmergente {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 14px;
 }
+
 .footer_messageEmergente button {
-  padding: 12px;
-  border-radius: 25px;
+  padding: 14px;
+  border-radius: 28px;
   border: none;
   font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s linear;
   font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
 }
+
 .footer_messageEmergente button:active {
-  scale: 0.98;
+  transform: scale(0.97);
 }
+
+/* BOTONES */
 .cerrarMensageSystem {
-  background: #f0f1f8;
+  background: #f1f2f6;
+  color: #333;
+}
+
+.cerrarMensageSystem:hover {
+  background: #e6e7ec;
 }
 
 .eliminarObleto {
   background: #3700fd;
   color: white;
 }
+
+.eliminarObleto:hover {
+  background: #2d00d6;
+}
+
+.eliminarObleto.show {
+  background: #ff0037;
+}
+
+.eliminarObleto.show:hover {
+  background: #e60032;
+}
+
 /*Categorias y proridades*/
 .task-pro.styleNinguna {
   background: linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff);
@@ -640,7 +685,7 @@
 }
 .contenidoVisualizarOpciones {
   position: relative;
-  width: 260px;
+  width: 240px;
   height: 98px;
   border-radius: 8px;
   background: white;
@@ -662,7 +707,7 @@
   border-radius: 5px;
 }
 .listaOpcionesModalVisualizar:hover {
-  background: #e0eff5;
+  background: #ececec;
 }
 .listaOpcionesModalVisualizar:active {
   scale: 0.98;
@@ -673,7 +718,6 @@
 }
 .textoOp {
   text-align: left;
-  font-weight: bold;
   font-size: 15px;
 }
 
@@ -1203,19 +1247,22 @@
 /*responsing*/
 @media (max-width: 400px) {
   .WarningMessagesSystem {
-    align-items: normal;
-    opacity: 0;
+    align-items: end;
   }
 
   .contenidoMensaje {
-    position: absolute;
     width: 100%;
+    bottom: 0;
+    position: absolute;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    bottom: 0;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
 
-    transform: translateY(400px);
+    transform: translateY(100%);
+    opacity: 1;
   }
+
   .contenidoMensaje.show {
     transform: translateY(0);
   }
@@ -1225,21 +1272,24 @@
   }
 
   .contenidoMensaje h3 {
-    font-family: "Roboto", sans-serif;
     font-size: 18px;
     text-align: center;
   }
+
   .info_mensage {
-    padding-bottom: 30px;
     text-align: center;
+    padding-bottom: 26px;
   }
-  .footer_messageEmergente button {
-    padding: 15px;
-  }
+
   .footer_messageEmergente {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+  }
+
+  .footer_messageEmergente button {
+    padding: 16px;
   }
 }
+
 @media (max-width: 700px) {
   .Perfile {
     position: fixed;
@@ -1328,13 +1378,13 @@
   .AccionesAvanzadasEditarFoto {
     position: relative;
     background: white;
-    height: 74%;
+    height: 80%;
     padding: 12px;
     border-radius: 12px;
   }
   .btnCancelarAccionSheet {
     margin-top: 10px;
-    height: 16%;
+    height: 13%;
     background: white;
     border-radius: 12px;
     display: grid;

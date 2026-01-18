@@ -10,6 +10,10 @@ const ti = document.querySelector(".title_message_advertencia");
 const textInfo = document.querySelector(".info_mensage");
 const icon = document.querySelector(".iconoWarning");
 
+const iconStyle = document.querySelector(".iconCaja i");
+const iconCajaStyle = document.querySelector(".iconCaja");
+const buttonApcentarStyle = document.querySelector(".eliminarObleto");
+
 export const WarnningMessage = {
   mensagePush(title, msg, type = "warning", options = {}) {
     if (!el) return;
@@ -55,6 +59,16 @@ document.addEventListener("click", (e) => {
 
   const key = option.dataset.callwindow;
   const config = MESSAGE_MAP[key];
+
+  if (key === "eliminar_foto_perfil" || key === "eliminar_foto_header") {
+    iconStyle.classList.add("show");
+    iconCajaStyle.classList.add("show");
+    buttonApcentarStyle.classList.add("show");
+  } else {
+    iconStyle.classList.remove("show");
+    iconCajaStyle.classList.remove("show");
+    buttonApcentarStyle.classList.remove("show");
+  }
 
   if (!config) {
     Toast.show("Esta opción aún no tiene acción asignada");
