@@ -259,6 +259,9 @@ html[data-theme="light"] {
 }
 
 /*Mensajes System*/
+[data-theme="dark"] .title_message_advertencia {
+  color: #141414;
+}
 [data-theme="dark"] .contentMsg {
   box-shadow: 0 8px 30px rgb(110, 110, 110);
 }
