@@ -1,4 +1,5 @@
 import { supabaseClient } from "./supabase.js";
+import { sanitizeTask } from "./security/inputSanitizer.js";
 
 const Storage = {
   async getProfile() {
@@ -30,7 +31,7 @@ const Storage = {
 
     if (!user || !file) throw new Error("No hay sesión o archivo");
 
-    const filePath = `${user.id}/avatar`; // 👈 PATH FIJO
+    const filePath = `${user.id}/avatar`;
 
     const { error } = await supabaseClient.storage
       .from("avatars")
@@ -121,24 +122,29 @@ const Storage = {
 
     return data ?? [];
   },
+
   async saveTask(task) {
     try {
+      const cleanTask = sanitizeTask(task);
+
       const { data, error } = await supabaseClient
         .from("tasks")
-        .insert(task)
-        .select();
+        .insert(cleanTask)
+        .select()
+        .single();
 
       if (error) {
         console.error("Error guardando tarea:", error);
         return null;
       }
 
-      return data?.[0] ?? null;
+      return data;
     } catch (err) {
       console.error("Exception en saveTask:", err);
       return null;
     }
   },
+
   async updateTask(id, fields) {
     try {
       const { data: sessionData } = await supabaseClient.auth.getSession();
@@ -170,6 +176,14 @@ const Storage = {
   },
   async SaveUpdateTask(id, fields) {
     try {
+      const { data: sessionData } = await supabaseClient.auth.getSession();
+      const userId = sessionData?.session?.user?.id;
+
+      if (!userId) {
+        console.error("No hay sesión activa");
+        return null;
+      }
+
       const { data, error } = await supabaseClient
         .from("tasks")
         .update(fields)
@@ -190,6 +204,9 @@ const Storage = {
 
   // Eliminar tarea
   async deleteTask(id) {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const userId = sessionData?.session?.user?.id;
+
     const { data, error: selectError } = await supabaseClient
       .from("tasks")
       .select("text")
@@ -205,7 +222,8 @@ const Storage = {
     const { error: deleteError } = await supabaseClient
       .from("tasks")
       .delete()
-      .eq("id", id);
+      .eq("id", id)
+      .eq("user_id", userId);
 
     if (deleteError) {
       throw new Error(deleteError.message);

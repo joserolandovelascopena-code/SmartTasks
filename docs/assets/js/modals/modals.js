@@ -232,6 +232,9 @@ btnCancelarHeder.addEventListener("click", () => {
   }, 200);
 });
 
+let selectedAvatarFile = null;
+let selectedHeaderFile = null;
+
 inputFotoPerfil.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -241,16 +244,26 @@ inputFotoPerfil.addEventListener("change", (e) => {
       sound: true,
       haptic: true,
     });
+    e.target.value = "";
     return;
   }
 
-  const reader = new FileReader();
+  const MAX_SIZE = 2 * 1024 * 1024;
+  if (file.size > MAX_SIZE) {
+    Toast.show("La imagen es muy pesada", "error");
+    e.target.value = "";
+    return;
+  }
 
+  selectedAvatarFile = file;
+
+  const reader = new FileReader();
   reader.onload = () => {
     previewImg.src = reader.result;
   };
 
   reader.readAsDataURL(file);
+
   VisualizarFotoBorder.classList.add("show");
   btnAceptarCambiosFoto.classList.add("active");
 });
@@ -265,6 +278,14 @@ inputFotoHeader.addEventListener("change", (e) => {
       sound: true,
       haptic: true,
     });
+    e.target.value = "";
+    return;
+  }
+
+  const MAX_SIZE = 2 * 1024 * 1024;
+  if (file.size > MAX_SIZE) {
+    Toast.show("La imagen es muy pesada", "error");
+    e.target.value = "";
     return;
   }
 
@@ -289,7 +310,6 @@ btnAceptar.addEventListener("click", async () => {
 
     Toast.show("Subiendo foto...", "info");
 
-    // 1. Subir a Supabase
     const avatarUrl = await Storage.uploadAvatar(file);
 
     setTimeout(() => {
@@ -302,13 +322,10 @@ btnAceptar.addEventListener("click", async () => {
       });
     }, 1500);
 
-    // 2. Guardar en profiles
     await Storage.updateAvatarUrl(avatarUrl);
 
-    // 3. Actualizar estado local
     App.profile.avatar_url = avatarUrl;
 
-    // 4. Re-render perfil
     UI.renderPerfile(App.profile);
   } catch (err) {
     console.error(err);

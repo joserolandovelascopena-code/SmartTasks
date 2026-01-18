@@ -10,6 +10,24 @@ export function sanitizeText(text = "") {
   return div.innerHTML;
 }
 
+export function sanitizeTask(input) {
+  return {
+    text: String(input.text).slice(0, 300).replace(/[<>]/g, ""),
+    descripcion: String(input.descripcion ?? "")
+      .slice(0, 500)
+      .replace(/[<>]/g, ""),
+    categoria: String(input.categoria ?? "Ninguna")
+      .slice(0, 50)
+      .replace(/[<>]/g, ""),
+    prioridad: String(input.prioridad ?? "Ninguna")
+      .slice(0, 30)
+      .replace(/[<>]/g, ""),
+    done: Boolean(input.done),
+    user_id: input.user_id,
+    created_at: input.created_at,
+  };
+}
+
 // Validación genérica de texto
 export function validateTextLength(text, { min = 3, max = 120 } = {}) {
   if (text.length < min) return `El texto es muy corto (mín ${min})`;
