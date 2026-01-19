@@ -1,3 +1,5 @@
+//modals.js
+
 import { App } from "../app.js";
 import { Storage } from "../storage.js";
 import { UI } from "../ui.js";
@@ -64,6 +66,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
   openRepeticion.addEventListener("click", () => {
     repeticion_tasks.classList.toggle("show");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const fechaBox = document.getElementById("fecha");
+  const datePicker = document.getElementById("datePicker");
+  const openCanlendar = document.getElementById("fecha");
+  const closeCanlendario = document.querySelector(".cancelarDate");
+  const calendario = document.querySelector(".contenedorCalendario");
+  const contenidoCalendario = document.querySelector(".calendar");
+
+  if (!fechaBox || !datePicker) return;
+
+  const fechaText = fechaBox.querySelector(".programacionTasks");
+
+  fechaBox.addEventListener("click", () => {
+    datePicker.showPicker ? datePicker.showPicker() : datePicker.click();
+  });
+
+  datePicker.addEventListener("change", () => {
+    App.selectedDate = datePicker.value;
+
+    const fecha = new Date(datePicker.value);
+    fechaText.textContent = fecha.toLocaleDateString("es-ES", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    });
+  });
+
+  openCanlendar.addEventListener("click", () => {
+    calendario.classList.add("show");
+
+    contenidoCalendario.classList.add("show");
+  });
+
+  closeCanlendario.addEventListener("click", () => {
+    contenidoCalendario.classList.remove("show");
+    setTimeout(() => {
+      calendario.classList.remove("show");
+    }, 200);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const horaBox = document.getElementById("hora");
+  const timePicker = document.getElementById("timePicker");
+
+  if (!horaBox || !timePicker) return;
+
+  const horaText = horaBox.querySelector(".programacionTasks");
+
+  horaBox.addEventListener("click", () => {
+    timePicker.showPicker ? timePicker.showPicker() : timePicker.click();
+  });
+
+  timePicker.addEventListener("change", () => {
+    App.selectedTime = timePicker.value;
+    horaText.textContent = timePicker.value;
   });
 });
 
@@ -426,6 +487,77 @@ btnOpenSheet.addEventListener("click", openBtnSheetPerfile);
 btnCancelarAccionSheet.addEventListener("click", () => {
   history.back();
 });
+
+/*======================================= */
+const monthNames = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
+
+let currentDate = new Date();
+let selectedDate = null;
+
+const monthYear = document.getElementById("monthYear");
+const daysContainer = document.getElementById("calendarDays");
+
+function renderCalendar() {
+  daysContainer.innerHTML = "";
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  monthYear.textContent = `${monthNames[month]} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const startDay = firstDay === 0 ? 6 : firstDay - 1;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // espacios vacíos
+  for (let i = 0; i < startDay; i++) {
+    daysContainer.appendChild(document.createElement("div"));
+  }
+
+  // días reales
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayEl = document.createElement("div");
+    dayEl.textContent = day;
+
+    dayEl.addEventListener("click", () => {
+      document
+        .querySelectorAll(".calendar-days .selected")
+        .forEach((d) => d.classList.remove("selected"));
+
+      dayEl.classList.add("selected");
+
+      selectedDate = new Date(year, month, day);
+      console.log("Fecha seleccionada:", selectedDate);
+    });
+
+    daysContainer.appendChild(dayEl);
+  }
+}
+
+document.getElementById("prevMonth").onclick = () => {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+};
+
+document.getElementById("nextMonth").onclick = () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+};
+
+renderCalendar();
 
 //Themes
 document.addEventListener("DOMContentLoaded", () => {

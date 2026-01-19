@@ -91,6 +91,7 @@ function cargarPrioridadEdit(container, prioridadGuardada) {
   aplicarPrioridad(btn, prioridadGuardada);
 }
 
+// ui.js
 export const UI = {
   hasClickedTask: false,
 
@@ -716,6 +717,20 @@ export const UI = {
 
       container.appendChild(tarjeta);
     });
+  },
+
+  resetFechaHoraUI() {
+    const fechaText = document.querySelector("#fecha .programacionTasks");
+    const horaText = document.querySelector("#hora .programacionTasks");
+
+    if (fechaText) fechaText.textContent = "Fecha/Día";
+    if (horaText) horaText.textContent = "Hora";
+
+    const datePicker = document.getElementById("datePicker");
+    const timePicker = document.getElementById("timePicker");
+
+    if (datePicker) datePicker.value = "";
+    if (timePicker) timePicker.value = "";
   },
 
   initCarousel() {

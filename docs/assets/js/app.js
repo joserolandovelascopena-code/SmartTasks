@@ -35,8 +35,12 @@ export const App = {
   profile: null,
   currentEditTaskId: null,
   currentEditTask: null,
+
   categoriaSeleccionada: null,
   prioridadSeleccionada: null,
+
+  selectedDate: null,
+  selectedTime: null,
 
   async loadTasks() {
     this.tasks = await Storage.getTasks();
@@ -144,6 +148,12 @@ export const App = {
         return false;
       }
 
+      const datePicker = document.getElementById("datePicker");
+      const timePicker = document.getElementById("timePicker");
+
+      const dueDate = datePicker?.value || null;
+      const dueTime = timePicker?.value || null;
+
       const nuevaTarea = {
         text: safeText,
         descripcion: description,
@@ -152,6 +162,12 @@ export const App = {
         done: false,
         user_id: data.session.user.id,
         created_at: new Date().toISOString(),
+
+        due_date: dueDate,
+        due_time: dueTime,
+        notify: false,
+        notify_before: null,
+        repeat_type: null,
       };
 
       await Storage.saveTask(nuevaTarea);
@@ -161,6 +177,11 @@ export const App = {
 
       input.value = "";
       if (descriptionTextarea) descriptionTextarea.value = "";
+
+      this.selectedDate = null;
+      this.selectedTime = null;
+
+      UI.resetFechaHoraUI();
 
       return true;
     } catch (err) {

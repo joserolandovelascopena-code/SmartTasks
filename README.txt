@@ -13,18 +13,45 @@ Estructura de SmartatTasks
 │     │   │   └── icon-512.png (igual logo app)
 │     │   └── /js
 │     │       ├── app.js (app se encarga de las peticiones backend)
-│     │       ├── charts.js (aun vacio pero la idea es para las graficas)
+│     │       ├── charts.js ← (futuro V2)
 │     │       ├── storage.js 
 │     │       ├── supabase.js
 │     │       ├── auth.js 
-│     │       ├── theme.js (Funcion de temas por botones de prefencia de stylo Claro, Oscuro, Sistema)
 │     │       ├── ui.js (se ecarga delo visual en la app, pinta las peticiones del usuario) toastManager
+│     │       │
+│     │       ├── /scheduler
+│     │       │   ├── scheduler.js       ← lógica de fechas y cálculos
+│     │       │   ├── reminders.js       ← notificaciones
+│     │       │   └── repeat.engine.js   ← (futuro V2)
+│     │       │
+│     │       │
+│     │       ├── /modals
+│     │       │   ├── /warning_messages
+│     │       │   │   └── warningMessages.js
+│     │       │   ├── modals.js
+│     │       │   └── scrollModals.js
+│     │       │ 
+│     │       ├── /overlayManager
+│     │       │   └── overlayManager.js
+│     │       │ 
+│     │       ├── /security
+│     │       │   └── inputSanitizer.js
+│     │       │
+│     │       ├── /themeManager
+│     │       │   ├── theme.helpers.js
+│     │       │   ├── theme.js
+│     │       │   ├── theme.orchestrator.js
+│     │       │   └── theme.core.js
+│     │       │ 
 │     │       └── /toastManager
 │     │           ├── /sunsSystem
 │     │           │   ├── errorMsg.wav
+│     │           │   ├── warning.mp3
 │     │           │   └── succes.mp3
+│     │           ├── haptic.js
 │     │           ├── sound.js
 │     │           └── toast.js
+│     │ 
 │     ├── /pages
 │     │   ├── /autentication
 │     │   │   ├── login.html
@@ -34,10 +61,11 @@ Estructura de SmartatTasks
 │     │   │ 
 │     │   ├──sttings.html
 │     │   └──stats.html
-│     │ 
-│     ├── manifest.json
+│     │
+│     ├── index.html 
 │     ├── ofiline.html
-│     └── sw.js
+│     ├── manifest.json
+│     └── sw.js 
 │     
 ├── .env (Aún no tiene nada)
 │  

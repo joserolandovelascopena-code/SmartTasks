@@ -273,27 +273,35 @@
                     <div class="CuadroContendorAgTasks">
                       <h4 id="TituloProgamació">Programación</h4>
                       <div class="horaio_día">
-                        <div class="tiempo" id="fecha">
+                        <label class="tiempo" id="fecha" for="datePicker">
                           <div class="Progmacion">
                             <i class="fa-regular fa-calendar-days"></i>
                             <p>Fecha/Día</p>
                           </div>
 
                           <p class="programacionTasks">Seleccionar</p>
+
                           <div id="openCalandar">
                             <i class="fa-solid fa-chevron-down"></i>
                           </div>
-                        </div>
-                        <div class="tiempo" id="hora">
+                        </label>
+
+                        <label class="tiempo" id="hora" for="timePicker">
                           <div class="Progmacion">
                             <i class="fa-regular fa-clock"></i>
-                            <p>Duracion</p>
+                            <p>Duración</p>
                           </div>
-                          <p class="programacionTasks">00:00:00</p>
+
+                          <p class="programacionTasks">00:00</p>
+
                           <div id="openReloj">
                             <i class="fa-solid fa-chevron-down"></i>
                           </div>
-                        </div>
+                        </label>
+
+                        <input type="date" id="datePicker" />
+                        <input type="time" id="timePicker" />
+
                         <div class="tiempo" id="openOpiciones">
                           <div class="Progmacion">
                             <i class="fa-solid fa-rotate-right"></i>
@@ -375,6 +383,30 @@
             <button type="button" class="Guadar-btn" title="Guardar">
               Guardar Tarea
             </button>
+          </div>
+          <div class="contenedorCalendario">
+            <div class="calendar">
+              <div class="calendar-header">
+                <button id="prevMonth">‹</button>
+                <span id="monthYear"></span>
+                <button id="nextMonth">›</button>
+              </div>
+
+              <div class="calendar-weekdays">
+                <span>L</span><span>M</span><span>X</span> <span>J</span
+                ><span>V</span><span>S</span><span>D</span>
+              </div>
+
+              <div class="calendar-days" id="calendarDays"></div>
+
+              <div class="btnsOpcionesCanlndar">
+                <div>
+                  <button class="cancelarDate">Cancelar</button>
+                </div>
+                <div><button class="aceptarDate">Aceptar</button></div>
+              </div>
+            </div>
+            >
           </div>
         </main>
 

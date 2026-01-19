@@ -1200,6 +1200,110 @@
   font-family: "Poppins", sans-serif;
 }
 
+/*=============================*/
+.contenedorCalendario {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+.contenedorCalendario.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+.calendar {
+  width: 100%;
+  max-width: 350px;
+  background: #ffffff;
+  color: #2b2b2b;
+  border-radius: 16px;
+  padding: 16px;
+  font-family: "Roboto", sans-serif;
+
+  scale: 0.94;
+  transition: 0.3s ease-in;
+}
+.calendar.show {
+  scale: 1;
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+#monthYear {
+  color: #000000;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+.calendar-header button {
+  background: none;
+  border: none;
+  color: #0026ff;
+  font-size: 26px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 4px;
+}
+
+.calendar-weekdays span {
+  opacity: 0.6;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.calendar-days div {
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+  transition: 0.3s ease;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.calendar-days div:hover {
+  border: 2px solid rgb(0, 119, 255);
+}
+.calendar-days div:active {
+  color: rgb(0, 119, 255);
+}
+.calendar-days .selected {
+  background: rgb(0, 119, 255);
+  color: rgb(255, 255, 255);
+}
+
+.btnsOpcionesCanlndar {
+  display: flex;
+  justify-content: right;
+}
+.btnsOpcionesCanlndar button {
+  font-size: 15px;
+  padding: 14px;
+  border: none;
+  font-weight: bold;
+  background: transparent;
+  color: rgb(0, 119, 255);
+  border-radius: 16px;
+  cursor: pointer;
+}
 /* Animaciones */
 
 @keyframes popUp {
