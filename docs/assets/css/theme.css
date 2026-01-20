@@ -330,6 +330,4 @@ html[data-theme="light"] {
   [data-theme="dark"] .EditarPerfilHeader {
     background: rgba(0, 0, 0, 0.5);
   }
-  [data-theme="dark"] .ContentSheet {
-  }
 }
