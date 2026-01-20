@@ -2426,6 +2426,9 @@ h5 {
   .cantidadTareas p {
     font-size: 12px;
   }
+  .dateNow {
+    grid-template-columns: 20% auto;
+  }
   .contanier_settinRigth {
     grid-column: 1 / span 2;
   }
