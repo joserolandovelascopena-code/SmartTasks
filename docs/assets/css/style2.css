@@ -1212,7 +1212,10 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgb(0, 0, 0, 0.2);
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1228,16 +1231,20 @@
 .calendar {
   width: 100%;
   max-width: 350px;
+  height: 400px;
   background: #ffffff;
   color: #2b2b2b;
   border-radius: 16px;
   padding: 16px;
   font-family: "Roboto", sans-serif;
+  position: relative;
 
-  scale: 0.94;
-  transition: 0.3s ease-in;
+  scale: 0.98;
+  transform: translateY(10px);
+  transition: 0.3s ease;
 }
 .calendar.show {
+  transform: translateY(0);
   scale: 1;
 }
 .calendar-header {
@@ -1267,7 +1274,9 @@
   text-align: center;
   gap: 4px;
 }
-
+.calendar-weekdays {
+  margin-top: 20px;
+}
 .calendar-weekdays span {
   opacity: 0.6;
   font-size: 15px;
@@ -1279,7 +1288,7 @@
   border-radius: 8px;
   cursor: pointer;
   color: #000;
-  font-weight: bold;
+  font-weight: bolder;
   transition: 0.3s ease;
   border: 2px solid transparent;
   border-radius: 50%;
@@ -1290,6 +1299,7 @@
 }
 .calendar-days div:active {
   color: rgb(0, 119, 255);
+  box-shadow: 0 0 40px rgb(0, 119, 255);
 }
 .calendar-days .selected {
   background: rgb(0, 119, 255);
@@ -1299,14 +1309,17 @@
 .btnsOpcionesCanlndar {
   display: flex;
   justify-content: right;
+  position: absolute;
+  right: 15px;
+  bottom: 12px;
 }
 .btnsOpcionesCanlndar button {
-  font-size: 15px;
+  font-size: 16px;
   padding: 14px;
   border: none;
   font-weight: bold;
   background: transparent;
-  color: rgb(0, 119, 255);
+  color: rgb(0, 89, 255);
   border-radius: 16px;
   cursor: pointer;
 }
@@ -1835,5 +1848,11 @@
     width: 100%;
     height: auto;
     object-fit: contain;
+  }
+
+  /*==================*/
+
+  .calendar {
+    margin-left: 12px;
   }
 }

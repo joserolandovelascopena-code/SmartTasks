@@ -6,6 +6,7 @@ import { UI } from "../ui.js";
 import { Toast } from "../toastManager/toast.js";
 import { OverlayManager } from "../overlayManager/overlayManager.js";
 import { ScrollBody } from "./scrollModals.js";
+import { Haptic } from "../toastManager/haptic.js";
 
 App.selectedDate = null;
 
@@ -121,6 +122,7 @@ function renderCalendar() {
 
       dayEl.classList.add("selected");
       selectedDate = new Date(year, month, day);
+      Haptic.vibrateUi("success");
     };
 
     daysContainer.appendChild(dayEl);
@@ -168,11 +170,13 @@ function cerrarCalendario() {
 document.getElementById("prevMonth").onclick = () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar();
+  Haptic.vibrateUi("success");
 };
 
 document.getElementById("nextMonth").onclick = () => {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar();
+  Haptic.vibrateUi("success");
 };
 
 renderCalendar();
