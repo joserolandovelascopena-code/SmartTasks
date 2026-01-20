@@ -148,11 +148,8 @@ export const App = {
         return false;
       }
 
-      const datePicker = document.getElementById("datePicker");
-      const timePicker = document.getElementById("timePicker");
-
-      const dueDate = datePicker?.value || null;
-      const dueTime = timePicker?.value || null;
+      const dueDate = App.selectedDate || null;
+      const dueTime = App.selectedTime ? `${App.selectedTime}:00` : null;
 
       const nuevaTarea = {
         text: safeText,

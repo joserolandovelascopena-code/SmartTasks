@@ -7,6 +7,8 @@ import { Toast } from "../toastManager/toast.js";
 import { OverlayManager } from "../overlayManager/overlayManager.js";
 import { ScrollBody } from "./scrollModals.js";
 
+App.selectedDate = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.querySelectorAll(".openAdd");
   const contenAdd = document.querySelector(".subir_tarea");
@@ -69,64 +71,191 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fechaBox = document.getElementById("fecha");
-  const datePicker = document.getElementById("datePicker");
-  const openCanlendar = document.getElementById("fecha");
-  const closeCanlendario = document.querySelector(".cancelarDate");
-  const calendario = document.querySelector(".contenedorCalendario");
-  const contenidoCalendario = document.querySelector(".calendar");
+// fecha
+/*======================================= */
+const monthNames = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
 
-  if (!fechaBox || !datePicker) return;
+let currentDate = new Date();
+let selectedDate = null;
 
-  const fechaText = fechaBox.querySelector(".programacionTasks");
+const monthYear = document.getElementById("monthYear");
+const daysContainer = document.getElementById("calendarDays");
 
-  fechaBox.addEventListener("click", () => {
-    datePicker.showPicker ? datePicker.showPicker() : datePicker.click();
-  });
+function renderCalendar() {
+  daysContainer.innerHTML = "";
 
-  datePicker.addEventListener("change", () => {
-    App.selectedDate = datePicker.value;
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
 
-    const fecha = new Date(datePicker.value);
-    fechaText.textContent = fecha.toLocaleDateString("es-ES", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    });
-  });
+  monthYear.textContent = `${monthNames[month]} ${year}`;
 
-  openCanlendar.addEventListener("click", () => {
-    calendario.classList.add("show");
+  const firstDay = new Date(year, month, 1).getDay();
+  const startDay = firstDay === 0 ? 6 : firstDay - 1;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    contenidoCalendario.classList.add("show");
-  });
+  for (let i = 0; i < startDay; i++) {
+    daysContainer.appendChild(document.createElement("div"));
+  }
 
-  closeCanlendario.addEventListener("click", () => {
-    contenidoCalendario.classList.remove("show");
-    setTimeout(() => {
-      calendario.classList.remove("show");
-    }, 200);
-  });
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayEl = document.createElement("div");
+    dayEl.textContent = day;
+
+    dayEl.onclick = () => {
+      document
+        .querySelectorAll(".calendar-days .selected")
+        .forEach((d) => d.classList.remove("selected"));
+
+      dayEl.classList.add("selected");
+      selectedDate = new Date(year, month, day);
+    };
+
+    daysContainer.appendChild(dayEl);
+  }
+}
+
+document.getElementById("fecha").addEventListener("click", () => {
+  document.querySelector(".contenedorCalendario").classList.add("show");
+  document.querySelector(".calendar").classList.add("show");
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const horaBox = document.getElementById("hora");
-  const timePicker = document.getElementById("timePicker");
+document.querySelector(".aceptarDate").addEventListener("click", () => {
+  if (!selectedDate) return;
 
-  if (!horaBox || !timePicker) return;
+  App.selectedDate = selectedDate.toISOString().split("T")[0];
 
-  const horaText = horaBox.querySelector(".programacionTasks");
+  const fechaText = document
+    .getElementById("fecha")
+    .querySelector(".programacionTasks");
 
-  horaBox.addEventListener("click", () => {
-    timePicker.showPicker ? timePicker.showPicker() : timePicker.click();
+  fechaText.textContent = selectedDate.toLocaleDateString("es-ES", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
   });
 
-  timePicker.addEventListener("change", () => {
-    App.selectedTime = timePicker.value;
-    horaText.textContent = timePicker.value;
-  });
+  cerrarCalendario();
 });
+
+document.querySelector(".cancelarDate").addEventListener("click", () => {
+  selectedDate = null;
+  document
+    .querySelectorAll(".calendar-days .selected")
+    .forEach((d) => d.classList.remove("selected"));
+  cerrarCalendario();
+});
+
+function cerrarCalendario() {
+  document.querySelector(".calendar").classList.remove("show");
+  setTimeout(() => {
+    document.querySelector(".contenedorCalendario").classList.remove("show");
+  }, 200);
+}
+
+document.getElementById("prevMonth").onclick = () => {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+};
+
+document.getElementById("nextMonth").onclick = () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+};
+
+renderCalendar();
+
+//=============================
+const hourSelect = document.getElementById("hourSelect");
+const minuteSelect = document.getElementById("minuteSelect");
+
+let tempHour = null;
+let tempMinute = null;
+
+/* CREAR HORAS */
+for (let h = 0; h < 24; h++) {
+  const div = document.createElement("div");
+  div.className = "opcionHora";
+  div.textContent = h.toString().padStart(2, "0");
+
+  div.onclick = () => {
+    tempHour = div.textContent;
+    activarSeleccion(hourSelect, div);
+  };
+
+  hourSelect.appendChild(div);
+}
+
+/* CREAR MINUTOS */
+for (let m = 0; m < 60; m++) {
+  const div = document.createElement("div");
+  div.className = "opcionHora";
+  div.textContent = m.toString().padStart(2, "0");
+
+  div.onclick = () => {
+    tempMinute = div.textContent;
+    activarSeleccion(minuteSelect, div);
+  };
+
+  minuteSelect.appendChild(div);
+}
+
+/* ACTIVAR SELECCIÓN VISUAL */
+function activarSeleccion(contenedor, elemento) {
+  contenedor
+    .querySelectorAll(".opcionHora")
+    .forEach((o) => o.classList.remove("active"));
+  elemento.classList.add("active");
+}
+
+/* ABRIR */
+document.getElementById("hora").addEventListener("click", () => {
+  document.querySelector(".contenedorReloj").classList.add("show");
+  document.querySelector(".reloj").classList.add("show");
+});
+
+/* CANCELAR */
+document.querySelector(".cancelarHora").onclick = () => {
+  tempHour = null;
+  tempMinute = null;
+  cerrarReloj();
+};
+
+/* ACEPTAR */
+document.querySelector(".aceptarHora").onclick = () => {
+  if (tempHour === null || tempMinute === null) {
+    console.warn("Hora incompleta");
+    return;
+  }
+
+  const finalTime = `${tempHour}:${tempMinute}`;
+  App.selectedTime = finalTime;
+
+  document
+    .getElementById("hora")
+    .querySelector(".programacionTasks").textContent = finalTime;
+
+  cerrarReloj();
+};
+
+function cerrarReloj() {
+  document.querySelector(".reloj").classList.remove("show");
+  setTimeout(() => {
+    document.querySelector(".contenedorReloj").classList.remove("show");
+  }, 200);
+}
 
 //perfil
 const openPerfile = document.querySelectorAll(".openPerfil");
@@ -487,77 +616,6 @@ btnOpenSheet.addEventListener("click", openBtnSheetPerfile);
 btnCancelarAccionSheet.addEventListener("click", () => {
   history.back();
 });
-
-/*======================================= */
-const monthNames = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-];
-
-let currentDate = new Date();
-let selectedDate = null;
-
-const monthYear = document.getElementById("monthYear");
-const daysContainer = document.getElementById("calendarDays");
-
-function renderCalendar() {
-  daysContainer.innerHTML = "";
-
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-
-  monthYear.textContent = `${monthNames[month]} ${year}`;
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const startDay = firstDay === 0 ? 6 : firstDay - 1;
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  // espacios vacíos
-  for (let i = 0; i < startDay; i++) {
-    daysContainer.appendChild(document.createElement("div"));
-  }
-
-  // días reales
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dayEl = document.createElement("div");
-    dayEl.textContent = day;
-
-    dayEl.addEventListener("click", () => {
-      document
-        .querySelectorAll(".calendar-days .selected")
-        .forEach((d) => d.classList.remove("selected"));
-
-      dayEl.classList.add("selected");
-
-      selectedDate = new Date(year, month, day);
-      console.log("Fecha seleccionada:", selectedDate);
-    });
-
-    daysContainer.appendChild(dayEl);
-  }
-}
-
-document.getElementById("prevMonth").onclick = () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar();
-};
-
-document.getElementById("nextMonth").onclick = () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar();
-};
-
-renderCalendar();
 
 //Themes
 document.addEventListener("DOMContentLoaded", () => {

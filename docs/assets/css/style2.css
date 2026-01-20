@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 
+:root {
+  --blue-main: #2563eb; /* azul vivo */
+  --blue-soft: #eaf0ff;
+  --text-dark: #1f2937;
+  --bg-white: #ffffff;
+}
+
 .renderIcons {
   position: fixed;
   opacity: 0;
@@ -1304,6 +1311,152 @@
   border-radius: 16px;
   cursor: pointer;
 }
+.contenedorReloj {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.contenedorReloj.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* CARD */
+.reloj {
+  width: 320px;
+  background: var(--bg-white);
+  border-radius: 18px;
+  padding: 30px 16px 30px;
+
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+
+  transform: translateY(10px) scale(0.98);
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.reloj.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* HEADER */
+.reloj-header {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+/* BODY */
+.reloj-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 18px;
+}
+
+.reloj-body span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* SELECT NATIVO */
+.reloj-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.listaHora,
+.listaMinuto {
+  width: 88px;
+  max-height: 50px; /* 🔥 NO se sale */
+  overflow-y: auto;
+
+  border-radius: 14px;
+  border: 1.8px solid #cbd5e1;
+  background: #f8fafc;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.listaHora::-webkit-scrollbar,
+.listaMinuto::-webkit-scrollbar {
+  width: 0;
+}
+
+.opcionHora {
+  padding: 14px 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.opcionHora:hover {
+  background: #e0f2fe;
+}
+
+.opcionHora.active {
+  background: var(--blue-main);
+  color: #fff;
+}
+
+/* BOTONES */
+.btnsOpcionesReloj {
+  display: flex;
+  gap: 10px;
+}
+
+.btnsOpcionesReloj button {
+  flex: 1;
+  padding: 12px 0;
+
+  border-radius: 12px;
+  border: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+/* Cancelar */
+.cancelarHora {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* Aceptar */
+.aceptarHora {
+  background: var(--blue-main);
+  color: #ffffff;
+}
+
+.btnsOpcionesReloj button:active {
+  transform: scale(0.97);
+}
+
+/*===================================*/
 /* Animaciones */
 
 @keyframes popUp {
@@ -1349,6 +1502,22 @@
 }
 
 /*responsing*/
+@media (max-width: 480px) {
+  .contenedorReloj {
+    align-items: flex-end;
+  }
+
+  .reloj {
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+  }
+
+  .reloj.show {
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 400px) {
   .WarningMessagesSystem {
     align-items: end;
@@ -1428,9 +1597,9 @@
   }
   /*Editar========*/
   .ContentEditar {
-    position: relative;
+    position: fixed;
     padding: 14px;
-
+    width: 100%;
     height: 100%;
     background: rgb(217, 229, 240);
     border-radius: 0;
