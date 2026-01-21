@@ -27,7 +27,7 @@ export const Haptic = {
 
     switch (type) {
       case "success":
-        navigator.vibrate([20, 30]);
+        navigator.vibrate([40, 50]);
         break;
 
       case "tap":
