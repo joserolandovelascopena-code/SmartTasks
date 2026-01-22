@@ -142,7 +142,7 @@ export const UI = {
     </div>
         <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
       
-       <div class="editar_item">
+      <div class="editar_item">
         <section class="Editar_targeta">
           <div class="backgrauEditar">
             <div class="cuerpo_modal">
@@ -162,6 +162,24 @@ export const UI = {
                     class="input editar InputEditarTasks"
                     placeholder="Actividad"
                   />
+                </article>
+
+                <article class="tarea-completada">
+                  <label class="check-completada" for="MarcarTask-${task.id}">
+                    <input type="checkbox" class="check-completada__input" id="MarcarTask-${
+                      task.id
+                    }" />
+
+                    <span class="check-completada__box">
+                      <svg viewBox="0 0 24 24" class="check-completada__icon">
+                        <path d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                  </label>
+
+                  <h4 class="tarea-completada__texto">
+                    Marcar esta tarea como completada
+                  </h4>
                 </article>
 
                 <article class="Configuracion">
@@ -346,6 +364,7 @@ export const UI = {
           avisofondo.classList.add("hide");
           contenidoAviso.classList.add("hide");
           setTimeout(() => {
+            ScrollBody.enableBodyScroll();
             history.back();
             App.deleteTask(task.id);
           }, 400);

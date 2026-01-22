@@ -47,6 +47,7 @@ html[data-theme="light"] {
 
   html[data-theme="dark"] {
     --color-bg: #00020f;
+    --bordes-nav: #1e2141;
   }
 }
 :root {
@@ -162,7 +163,13 @@ html[data-theme="light"] {
   background: transparent;
   color: var(--text-dark);
 }
-
+[data-theme="dark"] .tarea-completada {
+  background: #1d1f4dc9;
+}
+[data-theme="dark"] .check-completada__box {
+  border: 2px solid #007bff;
+  background: #1d1f4dc9;
+}
 [data-theme="dark"] .btnEditarProgrmacion {
   color: rgb(255, 255, 255);
   background: #00091d;
@@ -229,6 +236,7 @@ html[data-theme="light"] {
   background: #00091d;
   border: none;
   color: white;
+  font-weight: normal;
 }
 [data-theme="dark"] .backgrauEditar {
   background: rgba(52, 52, 68, 0.26);
@@ -388,6 +396,12 @@ html[data-theme="light"] {
 }
 /*==============*/
 @media (max-width: 700px) {
+  [data-theme="dark"] .calendar {
+    background: #00063f;
+  }
+  [data-theme="dark"] .reloj {
+    background: #00063f;
+  }
   [data-theme="dark"] .contenedorReloj {
     background: rgba(22, 22, 22, 0.199);
   }

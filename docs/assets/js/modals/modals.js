@@ -668,17 +668,13 @@ btnRender.addEventListener("click", () => {
 function dateNow() {
   const fecha = new Date();
 
-  // Día (solo número)
   const dia = fecha.getDate();
 
-  // Texto SIN el día
   const fechaTexto = fecha.toLocaleDateString("es-ES", {
     month: "long",
     year: "numeric",
   });
 
-  // Resultado: "enero de 2026"
-  // Le agregamos el "de" manualmente
   document.getElementById("day").textContent = dia;
   document.querySelector(".DATE_HOME").textContent = `de ${fechaTexto}`;
 }

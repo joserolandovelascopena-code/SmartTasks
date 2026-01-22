@@ -45,13 +45,13 @@ h5 {
   border: 1px solid rgb(189, 186, 186);
 
   opacity: 0;
-  transform: translateY(-40px);
+  transform: translateX(40px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .contentMsg.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 .contSuccesSystem {
   display: flex;
@@ -1024,6 +1024,7 @@ h5 {
   transition: 0.5s ease-in-out;
   justify-content: center;
 }
+
 .options p {
   margin: 0;
   font-size: 15px;
@@ -1066,7 +1067,9 @@ h5 {
 .options:hover {
   background-color: #020580;
   color: #f5fdff;
-  transform: scale(1.03);
+}
+.options:active {
+  scale: 0.95;
 }
 .contentCatPro {
   position: relative;
@@ -1543,6 +1546,7 @@ h5 {
   backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   animation: intro2 0.5s ease-in-out;
@@ -1553,7 +1557,7 @@ h5 {
   z-index: 32;
   position: relative;
   overflow: hidden;
-  margin-top: 20px;
+
   padding: 12px;
   padding-top: 40px;
   width: 600px;
@@ -1580,10 +1584,9 @@ h5 {
 .Closeeditar {
   font-size: 25px;
   cursor: pointer;
-  display: inline-block;
+
   transition: transform 0.5s ease;
   transform-origin: center;
-  padding: 0 6px;
   display: flex;
   border-radius: 50%;
   align-items: center;
@@ -1591,7 +1594,6 @@ h5 {
 }
 
 .Closeeditar:hover {
-  transform: rotateY(180deg);
   color: rgb(0, 26, 255);
   background: #dae0ff;
   border-radius: 50%;
@@ -1621,7 +1623,76 @@ h5 {
 .input-editar input:focus {
   outline: none;
   border-radius: 8px;
-  border: 2px solid rgb(119, 0, 255);
+  border: 2px solid rgb(0, 174, 255);
+}
+
+.tarea-completada {
+  display: grid;
+  grid-template-columns: 32px auto;
+  align-items: center;
+  padding: 16px 10px;
+  background: #eaebff;
+  margin-top: 14px;
+  border-radius: 8px;
+}
+
+.tarea-completada h4 {
+  font-size: 14px;
+}
+
+.check-completada {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.check-completada__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.check-completada__box {
+  width: 23px;
+  height: 23px;
+  border-radius: 6px;
+  border: 2px solid #8a8a8a69;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, border-color 0.25s ease,
+    transform 0.15s ease;
+}
+
+/* icono */
+.check-completada__icon {
+  width: 18px;
+  height: 18px;
+  stroke: white;
+  stroke-width: 3.5;
+  fill: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* estado marcado */
+.check-completada__input:checked + .check-completada__box {
+  background: #007bff;
+  border-color: #007bff;
+}
+
+.check-completada__input:checked
+  + .check-completada__box
+  .check-completada__icon {
+  opacity: 1;
+}
+
+/* feedback premium */
+.check-completada:active .check-completada__box {
+  transform: scale(0.92);
 }
 
 .contenedor_Editar {
@@ -1656,6 +1727,10 @@ h5 {
 .options2:hover {
   background-color: #020580;
   color: #f5fdff;
+}
+
+.options2:active {
+  scale: 0.98;
 }
 
 .contentSeccionesEditar {
@@ -1782,7 +1857,7 @@ h5 {
 .descripcionEditar textarea:focus {
   outline: none;
   border-radius: 8px;
-  border: 2px solid rgb(119, 0, 255);
+  border: 2px solid rgb(0, 174, 255);
 }
 .eliminarTasks {
   box-shadow: 0 0 8px gainsboro;
@@ -1803,14 +1878,12 @@ h5 {
 }
 
 .opentAviso {
-  background: #fcf2f6cc;
+  background: transparent;
   padding: 12px 5px;
-  border: 1px solid rgb(253, 222, 218);
-  border-bottom: 3px solid rgba(231, 71, 71, 0.842);
+  border: none;
   border-radius: 5px;
 
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
   color: rgb(255, 0, 64);
   transition: 0.3s ease-in-out;
@@ -1982,7 +2055,7 @@ h5 {
   padding: 40px 50px;
   border-radius: 20px;
   text-align: center;
-  background: linear-gradient(100deg, #0026ff, #f7186a, #020580);
+  background: linear-gradient(100deg, #000135, #001bb1, #00012e);
   background-size: 600% 600%;
   animation: mover 4s ease infinite;
   border: 1px solid #02048077;
@@ -2012,7 +2085,7 @@ h5 {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 6px solid #0084ff;
+  border: 5px solid #7100da;
   position: relative;
   margin: auto;
 }
@@ -2096,7 +2169,7 @@ h5 {
   border-radius: 12px;
   font-size: 24px;
   font-weight: bold;
-  color: #2ed5ff;
+  color: #00d9ff;
   animation: Titulo-fade 0.8s ease-in-out;
 }
 /*=================================================*/

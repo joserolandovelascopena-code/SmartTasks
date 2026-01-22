@@ -1285,7 +1285,7 @@
 }
 
 .calendar-days div {
-  padding: 10px;
+  padding: 6px;
   border-radius: 8px;
   cursor: pointer;
   color: #000;
@@ -1293,6 +1293,7 @@
   transition: 0.3s ease;
   border: 2px solid transparent;
   border-radius: 50%;
+  font-family: "Poppins", sans-serif;
 }
 
 .calendar-days div:hover {
@@ -1315,7 +1316,7 @@
   bottom: 12px;
 }
 .btnsOpcionesCanlndar button {
-  font-size: 16px;
+  font-size: 14px;
   padding: 14px;
   border: none;
   font-weight: bold;
