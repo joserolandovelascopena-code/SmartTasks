@@ -725,6 +725,7 @@
 .textoOp {
   text-align: left;
   font-size: 15px;
+  font-weight: bold;
 }
 
 /*Box mostrar*/
@@ -1299,7 +1300,7 @@
 }
 .calendar-days div:active {
   color: rgb(0, 119, 255);
-  box-shadow: 0 0 40px rgb(0, 119, 255);
+  box-shadow: 0 0 90px rgb(0, 119, 255);
 }
 .calendar-days .selected {
   background: rgb(0, 119, 255);

@@ -3,9 +3,9 @@
   --color-text: #0f172a;
   --color-primary: #1e88e5;
   --card-bg: #f5f5f5;
-  --navBar: rgb(9, 9, 10);
-  --bordes-nav: rgb(32, 32, 32);
-  --blackfondo: #00010a;
+  --navBar: #00020f;
+  --bordes-nav: #121427;
+  --blackfondo: #00031b;
 }
 
 body {
@@ -27,7 +27,7 @@ body {
 
 /*Modo manual*/
 html[data-theme="dark"] {
-  --color-bg: rgb(32, 32, 32);
+  --color-bg: #00020f;
   --color-text: #ffffff;
   --color-primary: #90caf9;
   --card-bg: #1e1e1e;
@@ -46,7 +46,7 @@ html[data-theme="light"] {
   }
 
   html[data-theme="dark"] {
-    --color-bg: rgb(9, 9, 10);
+    --color-bg: #00020f;
   }
 }
 :root {
@@ -132,7 +132,7 @@ html[data-theme="light"] {
 /*Editar tarea*/
 
 [data-theme="dark"] .cuerpo_modal {
-  background: rgb(9, 9, 10);
+  background: #00020f;
   border: 1px solid var(--border-dark);
 }
 
@@ -143,13 +143,19 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .footer-editar {
-  background: rgb(9, 9, 10);
+  background: #00020f;
   border-top: 0px;
+}
+[data-theme="dark"] .CuadroContendorAgTasks {
+  box-shadow: none;
+  border: 0px solid var(--bordes-nav);
+  padding: 0;
 }
 
 [data-theme="dark"] .descripcionEditar textarea {
   background: #01010a;
   color: var(--text-dark);
+  border: 2px solid var(--bordes-nav);
 }
 
 [data-theme="dark"] .input-editar input {
@@ -158,12 +164,12 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .btnEditarProgrmacion {
-  color: rgb(0, 74, 97);
-  background: #0099ff;
-  border-color: #87c1f0;
+  color: rgb(255, 255, 255);
+  background: #00091d;
+  border: none;
 }
 [data-theme="dark"] .btnEditarProgrmacion i {
-  color: rgb(0, 74, 97);
+  color: rgb(0, 132, 255);
 }
 
 [data-theme="dark"] .contenedor_categoria .options.selected {
@@ -184,31 +190,43 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .options {
-  box-shadow: 0 0 0 0px var(--border-dark);
-  border: 1px solid #2788dd;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+
   color: white;
   background: #0c1025;
 }
-
+[data-theme="dark"] .contentSeccionesEditar h5 {
+  margin-top: 0px;
+  box-shadow: none;
+  border-bottom: 1px solid var(--bordes-nav);
+}
+[data-theme="dark"] .descripcionEditar label {
+  box-shadow: none;
+  border-bottom: 1px solid var(--bordes-nav);
+}
 [data-theme="dark"] .options2 {
-  box-shadow: 0 0 0 0px var(--border-dark);
-  border: 1px solid #2788dd;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+
   color: white;
   background: #0c1025;
 }
 
 [data-theme="dark"] .cajaSeccionEditar {
-  box-shadow: 0 0 0 1px var(--bg-footer-dark);
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
   background: #18181800;
   overflow: hidden;
 }
 
 [data-theme="dark"] .eliminarTasks {
-  box-shadow: 0 0 0 1px var(--border-dark);
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
 }
 
 [data-theme="dark"] .opentAviso {
-  background: #2c314e63;
+  background: #00091d;
   border: none;
   color: white;
 }
@@ -219,20 +237,38 @@ html[data-theme="light"] {
 
 /*Add tareas*/
 [data-theme="dark"] .subir_tarea {
-  background: #000000;
+  background: #00020f;
 }
 [data-theme="dark"] .contenido_main {
-  background: #000000;
+  background: #00020f;
 }
 
 [data-theme="dark"] .agregar {
-  background: #000000;
+  background: #00020f;
   border-top: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .Categoria {
+  background: #00020f;
+  box-shadow: none;
+  border: 1.5px solid var(--bordes-nav);
+}
+[data-theme="dark"] .contenedor_categoria {
+  background: #00020f;
+  box-shadow: none;
+  border: 1.5px solid var(--bordes-nav);
+}
+[data-theme="dark"] .descrition_box {
+  background: #00020f;
+  box-shadow: none;
+  border: 1.5px solid var(--bordes-nav);
 }
 
 /*Lista tareas*/
 [data-theme="dark"] .task-item {
-  background: #242424;
+  background: #00020f;
+  box-shadow: none;
+  border: 1.5px solid var(--bordes-nav);
 }
 
 [data-theme="dark"] .task-pro.styleBaja {
@@ -253,11 +289,17 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .task-cat {
-  background: linear-gradient(40deg, rgb(51, 51, 51));
+  background: #0b0e22;
   color: #00c3ff;
   border-bottom: 0px;
 }
 
+/*Perfil*/
+[data-theme="dark"] .Perfile {
+  margin-top: 0;
+  background: #00020f;
+  border-color: var(--bordes-nav);
+}
 /*Mensajes System*/
 [data-theme="dark"] .title_message_advertencia {
   color: #141414;
@@ -281,13 +323,13 @@ html[data-theme="light"] {
   background: transparent;
 }
 [data-theme="dark"] .grafiaca_progreso {
-  background: rgb(44, 44, 44);
+  background: #00020f;
 }
 [data-theme="dark"] .proyects {
-  background: rgb(44, 44, 44);
+  background: #00020f;
 }
 [data-theme="dark"] .List_check {
-  background: rgb(44, 44, 44);
+  background: #00020f;
 }
 /*Animaciones*/
 .modal {
@@ -296,7 +338,7 @@ html[data-theme="light"] {
 }
 /*==============*/
 [data-theme="dark"] .calendar {
-  background: #00010a;
+  background: #00031d;
 }
 [data-theme="dark"] #monthYear {
   color: #fff;
@@ -310,9 +352,15 @@ html[data-theme="light"] {
 [data-theme="dark"] .calendar-days div {
   color: #fff;
 }
+[data-theme="dark"] .calendar-header button {
+  color: #0099ff;
+}
+[data-theme="dark"] .btnsOpcionesCanlndar button {
+  color: #0099ff;
+}
 
 [data-theme="dark"] .reloj {
-  background: #00010a;
+  background: #00031d;
 }
 
 [data-theme="dark"] .listaHora {

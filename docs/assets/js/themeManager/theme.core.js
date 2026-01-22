@@ -153,11 +153,6 @@ export function applyTheme(theme) {
       titleNameApp.style.color = COLORS.white;
     }
 
-    if (perfil) {
-      perfil.style.background = COLORS.blackSoft;
-      perfil.style.borderLeftColor = " rgb(58, 58, 58)";
-    }
-
     if (editarModalPerfil) {
       editarModalPerfil.style.background = COLORS.blackSoft;
       editarModalPerfil.style.color = COLORS.white;
@@ -173,10 +168,6 @@ export function applyTheme(theme) {
 
     if (addTareasContenedor) {
       navAddTasks.style.color = COLORS.white;
-      sectionAddTkas.style.background = "#1f1f1f";
-
-      sectionAddTkas1.style.background = "#1f1f1f";
-      sectionAddTkas2.style.background = "#1f1f1f";
     }
 
     if (descripcionTasks) {
