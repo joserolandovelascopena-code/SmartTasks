@@ -230,11 +230,16 @@ export const App = {
 
     const taskActual = this.tasks.find((t) => t.id === this.currentEditTaskId);
 
+    const checkboxEditar = modalActivo.querySelector(
+      `#MarcarTask-${this.currentEditTaskId}`
+    );
+
     const fields = {
       text: safeText,
       categoria: this.categoriaSeleccionada || taskActual.categoria,
       prioridad: this.prioridadSeleccionada || taskActual.prioridad,
       descripcion: descResult.value,
+      done: checkboxEditar ? checkboxEditar.checked : taskActual.done,
     };
 
     await Storage.SaveUpdateTask(this.currentEditTaskId, fields);
@@ -292,21 +297,22 @@ export const App = {
     UI.renderTasks(this.tasks);
   },
 
-  async toggleCleck(id) {
-    this.tasks = this.tasks.map((c) =>
-      c.id === id ? { ...c, cleck: !c.cleck } : c
-    );
+  async toggleTask(id) {
+    let newDone = false;
 
-    const tarea = this.tasks.find((t) => t.id === id);
-    try {
-      await Storage.updateTask(id, {
-        cleck: tarea.cleck,
-        updated_at: new Date().toISOString(),
-      });
-    } catch (err) {
-      console.error("Error actualizando cleck en BD:", err);
+    this.tasks = this.tasks.map((t) => {
+      if (t.id === id) {
+        newDone = !t.done;
+        return { ...t, done: newDone };
+      }
+      return t;
+    });
+
+    if (newDone) {
+      mostrarModalCompletado();
     }
 
+    await Storage.updateTask(id, { done: newDone });
     UI.renderTasks(this.tasks);
   },
 

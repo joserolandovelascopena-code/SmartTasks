@@ -110,11 +110,13 @@ export const UI = {
         li.style.background = " #7998ff38";
       }
 
-      const desc = task.descripcion?.trim()
-        ? task.descripcion
-        : "No hay descripción";
+      document.addEventListener("change", (e) => {
+        if (e.target.matches(".check[data-id]")) {
+          const id = Number(e.target.dataset.id);
+          App.toggleTask(id);
+        }
+      });
 
-      // texto + estilo de completada
       li.innerHTML = `
     <div class="box_tasks_text">
       <input
@@ -166,9 +168,12 @@ export const UI = {
 
                 <article class="tarea-completada">
                   <label class="check-completada" for="MarcarTask-${task.id}">
-                    <input type="checkbox" class="check-completada__input" id="MarcarTask-${
-                      task.id
-                    }" />
+                 <input
+  type="checkbox"
+  class="check-completada__input"
+  id="MarcarTask-${task.id}"
+  ${task.done ? "checked" : ""}
+/>
 
                     <span class="check-completada__box">
                       <svg viewBox="0 0 24 24" class="check-completada__icon">

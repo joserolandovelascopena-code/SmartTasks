@@ -1113,9 +1113,6 @@
   gap: 8px;
   margin-bottom: 6px;
 }
-.Item_proyectPerfil {
-  background: rgb(255, 255, 255);
-}
 
 .btnAgregarProyect {
   display: flex;
