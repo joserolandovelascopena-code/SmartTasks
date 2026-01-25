@@ -31,6 +31,8 @@ body {
   height: 100%;
   z-index: 20;
   display: none;
+  left: 0;
+  top: 0;
 }
 .container_loader.show {
   display: block;
@@ -58,7 +60,7 @@ body {
 .loader samp {
   width: 12px;
   height: 12px;
-  background-color: #00ffb3;
+  background-color: #96deff;
   border-radius: 50%;
   animation: loader 0.7s ease infinite alternate;
 }
@@ -118,7 +120,7 @@ body {
   }
   to {
     opacity: 0.2;
-    scale: 1;
+    scale: 0.6;
   }
 }
 @keyframes fadeUp {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -31,10 +31,9 @@
   </head>
   <body>
     <div class="container_loader">
-      <div class="rederigir_login">
+      <div class="rederigir_app">
         <div class="conten_loader">
-          <div class="loader"></div>
-          <h3 id="mnj">Creado cuenta...</h3>
+          <div class="loader"><samp></samp><samp></samp><samp></samp></div>
         </div>
       </div>
     </div>
@@ -186,18 +185,13 @@
           const loader = document.querySelector(".container_loader");
           const textLoader = document.getElementById("mnj");
           loader.classList.add("show");
-          setTimeout(() => {
-            textLoader.textContent = "Cuneta creada";
-          }, 1000);
-          setTimeout(() => {
-            textLoader.textContent = "Revisa tu correo y comfima tu edentidad";
-          }, 1500);
+
           setTimeout(() => {
             textLoader.textContent = "Redirigiendo...";
-          }, 4000);
+          }, 2000);
           setTimeout(() => {
             window.location.href = "./login.html";
-          }, 5000);
+          }, 4000);
         } catch (e) {
           msg.textContent = e.message;
           msg.classList.add("active");
