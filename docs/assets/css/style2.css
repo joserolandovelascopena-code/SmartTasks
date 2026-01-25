@@ -783,11 +783,10 @@
   transition: 0.2s ease;
   cursor: pointer;
 }
-.opcionesCerrar i:hover {
-  color: #004458;
-}
+
 .opcionesCerrar i:active {
-  background: white;
+  background: rgb(255, 254, 243);
+  color: #000000;
   scale: 0.9;
 }
 .ImagenLightBoxUser {

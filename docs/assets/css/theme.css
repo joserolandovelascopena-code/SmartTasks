@@ -373,6 +373,28 @@ html[data-theme="light"] {
   color: #0099ff;
 }
 
+[data-theme="dark"] .calendarEditar {
+  background: #00031d;
+}
+[data-theme="dark"] .monthYearEditar {
+  color: #fff;
+}
+
+[data-theme="dark"] .calendar-weekdaysEditar span {
+  opacity: 0.8;
+  color: #8f8f8f;
+}
+
+[data-theme="dark"] .calendar-daysEditar div {
+  color: #fff;
+}
+[data-theme="dark"] .calendar-headerEditar button {
+  color: #0099ff;
+}
+[data-theme="dark"] .btnsOpcionesCanlndarEditar button {
+  color: #0099ff;
+}
+
 [data-theme="dark"] .reloj {
   background: #00031d;
 }
@@ -403,6 +425,9 @@ html[data-theme="light"] {
 /*==============*/
 @media (max-width: 700px) {
   [data-theme="dark"] .calendar {
+    background: #000429;
+  }
+  [data-theme="dark"] .calendarEditar {
     background: #000429;
   }
   [data-theme="dark"] .reloj {
