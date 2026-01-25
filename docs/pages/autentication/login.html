@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -64,10 +64,7 @@
               </div>
               <h4>Gestiona actividades</h4>
               <div class="text">
-                <p>
-                  Mantén tus metas claras y organizadas de tu día a día, con un
-                  diseño minimalista y una interfaz facil de usar.
-                </p>
+                <p>Mantén tus metas claras y organizadas de tu día a día.</p>
               </div>
             </div>
             <div class="funciones_descrition right_box">
@@ -91,30 +88,39 @@
           </p>
         </div>
         <section class="credenciales">
-          <div class="inputs-layout">
+          <form class="inputs-layout" id="loginForm">
             <label for="email" id="in1">Email</label>
             <div class="inputs">
-              <input id="email" type="email" placeholder="Correo" /><i
-                class="fa-regular fa-envelope"
-              ></i>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Correo"
+                autocomplete="email"
+              />
+              <i class="fa-regular fa-envelope"></i>
             </div>
+
             <label for="password">Password</label>
             <div class="inputs">
-              <input id="password" type="password" placeholder="Contraseña" /><i
-                class="fa-regular fa-eye-slash"
-                id="eyePassword"
-              ></i>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Contraseña"
+                autocomplete="current-password"
+              />
+              <i class="fa-regular fa-eye-slash" id="eyePassword"></i>
             </div>
-          </div>
-          <button id="loginBtn">Entrar</button>
+
+            <button type="submit" id="loginBtn">Entrar</button>
+          </form>
         </section>
 
         <p id="resetPassword">
           Recuperar contraseña <a href="recover.html">Click aquí</a>
         </p>
         <p id="msgs"></p>
-
-        <p><a href="#" id="AppSmartTansks">SmartTansks App</a></p>
       </main>
       <div class="container_movil">
         <div class="Cuadro_info">
@@ -141,10 +147,7 @@
               </div>
               <h4>Gestiona actividades</h4>
               <div class="text">
-                <p>
-                  Mantén tus metas claras y organizadas de tu día a día, con un
-                  diseño minimalista y una interfaz facil de usar.
-                </p>
+                <p>Mantén tus metas claras y organizadas de tu día a día.</p>
               </div>
             </div>
             <div class="funciones_descrition right_box">
@@ -157,9 +160,7 @@
               </div>
             </div>
           </div>
-          <footer class="footer">
-            <p><a href="#" id="SmartTansks">SmartTansks App 2025</a></p>
-          </footer>
+          <footer class="footer"></footer>
         </div>
       </div>
     </div>
@@ -169,6 +170,7 @@
       let wasOffline = false;
       const msgEl = document.getElementById("msgs");
       const recover = document.querySelector(".conexion_recover");
+      const loginBtn = document.getElementById("loginBtn");
 
       window.addEventListener("offline", () => {
         msgEl.textContent = "No hay conexión a internet";
@@ -188,33 +190,41 @@
         wasOffline = false;
       });
 
-      document.getElementById("loginBtn").onclick = async () => {
-        const email = document.getElementById("email").value;
+      loginBtn.onclick = async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
         const pass = document.getElementById("password").value;
 
         if (!navigator.onLine) {
           msgEl.textContent = "En este momento no hay conexión a internet";
+          msgEl.classList.add("active");
           return;
         }
 
         try {
+          loginBtn.disabled = true;
           await login(email, pass);
+
           msgEl.classList.remove("active");
           document.querySelector(".container_loader").classList.add("show");
 
           setTimeout(() => {
             document.getElementById("mnj").textContent = "Redirigiendo app...";
-          }, 800);
+          }, 2000);
 
           setTimeout(() => {
             window.location.href = "../../index.html";
-          }, 2000);
+          }, 3000);
         } catch (e) {
           msgEl.textContent = e.message;
           msgEl.classList.add("active");
+        } finally {
+          loginBtn.disabled = false;
         }
       };
 
+      // Mostrar / ocultar contraseña
       document.addEventListener("DOMContentLoaded", () => {
         const eyePassword = document.getElementById("eyePassword");
         const inputPass = document.getElementById("password");
@@ -222,6 +232,7 @@
         eyePassword.addEventListener("click", () => {
           const isPass = inputPass.type === "password";
           inputPass.type = isPass ? "text" : "password";
+
           eyePassword.classList.toggle("fa-eye", isPass);
           eyePassword.classList.toggle("fa-eye-slash", !isPass);
         });

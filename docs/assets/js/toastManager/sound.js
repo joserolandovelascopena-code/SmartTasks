@@ -11,7 +11,7 @@ export const Sound = {
 
     this.success.volume = 0.1;
     this.error.volume = 0.1;
-    this.warning.volume = 0.1;
+    this.warning.volume = 0.2;
   },
 
   unlock() {

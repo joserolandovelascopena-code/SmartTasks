@@ -21,7 +21,7 @@ h1 {
   font-optical-sizing: auto;
 }
 body {
-  background: #04002b;
+  background: #ffffff;
   background-size: 600% 600%;
 }
 /*Redirigir*/
@@ -39,7 +39,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #020c3af1;
+  background-color: #00020f;
   backdrop-filter: blur(5px);
   display: grid;
   justify-content: center;
@@ -47,7 +47,7 @@ body {
   animation: intro 0.4s ease;
 }
 .rederigir_app h3 {
-  color: #00ffb3;
+  color: #ffffff;
   margin-block-end: 20px;
 }
 .loader {
@@ -56,8 +56,8 @@ body {
   gap: 8px;
 }
 .loader samp {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background-color: #00ffb3;
   border-radius: 50%;
   animation: loader 0.7s ease infinite alternate;
@@ -113,12 +113,12 @@ body {
 
 @keyframes loader {
   from {
-    transform: translateY(0);
-    opacity: 0.3;
+    opacity: 1;
+    scale: 1.12;
   }
   to {
-    opacity: 1;
-    transform: translateY(5px);
+    opacity: 0.2;
+    scale: 1;
   }
 }
 @keyframes fadeUp {
@@ -143,23 +143,23 @@ body {
 }
 .Cuadro_info {
   padding: 38px;
-  background: url(../icons/svg/layered-waves-haikei.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+
+  background: linear-gradient(to bottom, #e8e8ff, #fcfcff);
   height: 77vh;
-  border-top-left-radius: 6px;
-  border-end-start-radius: 6px;
-  box-shadow: 0px 0px 5px #6057e6;
-  color: white;
+  border-top-left-radius: 25px;
+  border-end-start-radius: 25px;
+  color: rgb(94, 94, 94);
+  box-shadow: 0 0 10px gainsboro;
 }
 .Cuadro_info h1 {
-  background: linear-gradient(90deg, #00e1ff, #ff0095, #92c5ff);
+  background: linear-gradient(90deg, #00e1ff, #ff0095ad, #92c5ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 46px;
   background-size: 300% 300%;
-  animation: mover 10s ease infinite, zoom 0.5s ease-out;
+  animation:
+    mover 10s ease infinite,
+    zoom 0.5s ease-out;
 }
 .description {
   margin-top: 10px;
@@ -210,12 +210,13 @@ body {
   background: #dffaf8;
 }
 .funciones_descrition {
-  background: rgba(19, 0, 37, 0.836);
+  background: rgb(255, 255, 255);
   border-radius: 10px;
   height: 200px;
   transition: 0.4s ease-in-out;
   padding: 8px;
   position: relative;
+  box-shadow: 0 0 10px gainsboro;
 }
 .funciones_descrition h4 {
   color: #0585fd;
@@ -224,17 +225,14 @@ body {
 
 .letf_box {
   animation: zoomfade2 1.1s ease-in;
-  box-shadow: 0 0 14px blue;
 }
 .right_box {
   animation: zoomfade2 1.1s ease-in;
-  box-shadow: 0 0 14px blue;
 }
 .center_box {
   height: 240px;
   margin-top: -20px;
   animation: zoomfade 0.4s ease-in;
-  box-shadow: 0 0 14px blue;
 }
 .letf_box:hover,
 .right_box:hover {
@@ -245,7 +243,7 @@ body {
 }
 .text {
   padding-top: 5px;
-  color: #c2c1c1;
+  color: #7a7a7a;
   font-size: 14px;
   text-align: center;
 }
@@ -253,9 +251,9 @@ body {
 .login_contenedor {
   padding: 30px 50px;
   background: rgb(255, 255, 255);
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  box-shadow: 1px 1px 5px #6057e6;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 0 0 5px rgb(211, 211, 211);
   position: relative;
 }
 #header_login {
@@ -265,14 +263,14 @@ body {
   color: #a8a7a7;
 }
 .signup a {
-  color: #03b9b0;
+  color: #00021d;
   font-weight: bold;
   text-decoration: underline;
 }
 .login_contenedor h2 {
-  color: #38bdf8;
+  color: #00021d;
   padding: 10px 0;
-  font-size: 28px;
+  font-size: 22px;
 }
 
 .login_contenedor p {
@@ -312,13 +310,15 @@ body {
 .inputs {
   display: flex;
   width: 100%;
-  box-shadow: inset 0 0 0 1px 12px;
+
   transition: 0.25s ease;
   border-radius: 12px;
   font-family: "Poppins", sans-serif;
 }
 .inputs:focus-within {
-  box-shadow: 0 0 0 2px rgba(34, 197, 175, 0.918), inset 0 0 0 1px #22c5af;
+  box-shadow:
+    0 0 0 1.5px rgba(0, 10, 29, 0.61),
+    inset 0 0 0 1px rgba(0, 10, 29, 0.61);
 }
 
 .inputs-layout label {
@@ -331,7 +331,7 @@ body {
   margin-top: 20px;
 }
 .inputs-layout input {
-  padding: 10px 16px;
+  padding: 15px 16px;
   width: 90%;
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
@@ -348,7 +348,7 @@ body {
 }
 
 .inputs-layout i {
-  padding: 14px;
+  padding: 14px 30px;
   font-size: 20px;
   background: #e8efff;
   color: rgb(179, 177, 177);
@@ -362,26 +362,27 @@ body {
   font-weight: bold;
 }
 #resetPassword a {
-  color: #03b9b0;
+  color: #00021d;
   font-weight: bold;
   text-decoration: underline;
 }
 #loginBtn {
-  margin-top: 30px;
-  padding: 15px 0px;
+  grid-column: 1 / span 2;
+  padding: 16px 0px;
+  margin-top: 14px;
   width: 100%;
   border: none;
-  color: #02135e;
-  background: linear-gradient(135deg, #22c5af, #38bdf8);
+  color: #ffffff;
+  background: #000e1f;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
   transition: 0.4s ease-in-out;
   margin-block-end: 20px;
   border-radius: 20px;
 }
-#loginBtn:hover {
-  transform: scale(1.01);
+#loginBtn:active {
+  transform: scale(0.98);
 }
 #eyePassword {
   cursor: pointer;
@@ -485,7 +486,7 @@ body {
 }
 
 /*reponsing*/
-@media (max-width: 470px) {
+@media (max-width: 700px) {
   .contenedor {
     padding: 0 0;
     display: grid;
@@ -507,11 +508,7 @@ body {
     justify-content: center;
   }
   .login_contenedor h2 {
-    background: linear-gradient(40deg, #4c00ff, #4123eb, #ff00b3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     padding: 3px 0;
-    font-size: 28px;
   }
   .Cuadro_info h1 {
     background: linear-gradient(80deg, #00e1ff, #ff0095, #92c5ff);
@@ -540,9 +537,6 @@ body {
     gap: 50px;
     border-radius: 5px;
   }
-  .funciones_descrition {
-    background: rgba(25, 0, 56, 0.774);
-  }
 
   .letf_box,
   .center_box,
@@ -566,7 +560,7 @@ body {
 
   .text {
     padding-top: 10px;
-    color: #f7f7f7;
+    color: #2e2e2e;
     font-size: 14px;
     text-align: center;
   }

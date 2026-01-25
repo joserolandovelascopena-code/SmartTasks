@@ -82,7 +82,7 @@ function cargarPrioridadEdit(container, prioridadGuardada) {
   if (!container || !prioridadGuardada) return;
 
   const btn = container.querySelector(
-    `.btnProridadEdit[data-prioridad="${prioridadGuardada}"]`
+    `.btnProridadEdit[data-prioridad="${prioridadGuardada}"]`,
   );
   if (!btn) return;
 
@@ -127,7 +127,7 @@ document.addEventListener("change", (e) => {
   li.classList.toggle("done", editCheckbox.checked);
   li.querySelector(".task-text")?.classList.toggle(
     "done",
-    editCheckbox.checked
+    editCheckbox.checked,
   );
 
   App.toggleTask(id, editCheckbox.checked);
@@ -413,7 +413,7 @@ export const UI = {
           "FECHA:",
           task.fecha,
           "PARSED:",
-          selectedDate
+          selectedDate,
         );
 
         let currentDate = selectedDate ? new Date(selectedDate) : new Date();
@@ -464,10 +464,6 @@ export const UI = {
 
             dayEl.onclick = (e) => {
               e.stopPropagation();
-
-              daysContainer
-                .querySelectorAll(".selected")
-                .forEach((d) => d.classList.remove("selected"));
 
               dayEl.classList.add("selected");
               selectedDate = new Date(year, month, day);
@@ -532,7 +528,7 @@ export const UI = {
           (e) => {
             e.stopPropagation();
             history.back();
-          }
+          },
         );
 
         // abrir
@@ -585,7 +581,7 @@ export const UI = {
         openAvisoDelete,
         (e) => {
           e.stopPropagation();
-        }
+        },
       );
 
       // ===== CANCELAR =====
@@ -651,7 +647,7 @@ export const UI = {
         openEditarTasks,
         (e) => {
           e.stopPropagation();
-        }
+        },
       );
 
       closeEditar.addEventListener("click", (e) => {
@@ -855,7 +851,7 @@ export const UI = {
 
   renderCategoria() {
     const opciones = document.querySelectorAll(
-      ".contenedor_categoria .options"
+      ".contenedor_categoria .options",
     );
 
     opciones.forEach((op) => {
