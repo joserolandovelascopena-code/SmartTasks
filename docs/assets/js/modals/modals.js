@@ -265,7 +265,7 @@ function cerrarReloj() {
 //perfil
 const openPerfile = document.querySelectorAll(".openPerfil");
 const closePerfil = document.getElementById("Hogar");
-const closePerfilFlecha = document.querySelector(".salirPerfil");
+const closePerfilFlecha = document.querySelectorAll(".salirPerfil");
 
 const perfilContainer = document.querySelector(".Perfile");
 const cantidadTkasPerfile = document.querySelector(".cantidadTasksPerfile");
@@ -299,8 +299,17 @@ closePerfil.addEventListener("click", () => {
   history.back();
 });
 
-closePerfilFlecha.addEventListener("click", () => {
-  history.back();
+closePerfilFlecha.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    history.back();
+  });
+});
+
+const layout = document.querySelector(".loyoutPerfile");
+const header = document.querySelector(".header_perfil_scroll");
+
+layout.addEventListener("scroll", () => {
+  header.classList.toggle("show", layout.scrollTop > 40);
 });
 
 //============================================

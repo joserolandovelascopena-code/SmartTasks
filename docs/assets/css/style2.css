@@ -272,6 +272,11 @@
   overflow-y: auto;
 }
 
+.loyoutPerfile {
+  scroll-timeline-name: --perfil-scroll;
+  scroll-timeline-axis: block;
+}
+
 /*Editar Perfil========================*/
 .EditarPerfilHeader {
   position: fixed;
@@ -1168,6 +1173,59 @@
   gap: 10px;
   align-items: center;
 }
+
+.header_perfil_scroll {
+  position: absolute;
+  top: 0;
+  background: white;
+  z-index: 30;
+  width: 100%;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  border-bottom: 1.5px solid gainsboro;
+}
+
+.header_perfil_scroll.show {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contenidoHeader_perfilScroll {
+  position: relative;
+  padding: 6px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 10% auto 10%;
+  align-items: center;
+}
+.contenidoHeader_perfilScroll i {
+  padding-left: 22px;
+  font-size: 18px;
+  padding-top: 4px;
+}
+.nameUserScroll {
+  height: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  justify-items: center;
+  gap: 8px;
+}
+.nameUserScroll h5 {
+  margin-top: 10px;
+}
+.contenidoHeader_perfilScroll img {
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgb(240, 230, 221);
+  object-fit: cover;
+  border-radius: 50%;
+}
 /*Ajustes Acceso Rapido*/
 .ajustesAccesoRapido {
   border-radius: 12px;
@@ -1645,6 +1703,13 @@
   }
   to {
     scale: 1;
+  }
+}
+
+@keyframes enhance_header {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

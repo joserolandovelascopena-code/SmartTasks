@@ -310,6 +310,11 @@ html[data-theme="light"] {
   background: #00020f;
   border-color: var(--bordes-nav);
 }
+[data-theme="dark"] .header_perfil_scroll {
+  background: #00020f;
+  border-color: var(--bordes-nav);
+  color: white;
+}
 /*Ajustes Acceso Rapido*/
 [data-theme="dark"] .lineDivSoriaGears {
   background: var(--bordes-nav);
@@ -471,6 +476,10 @@ html[data-theme="light"] {
   }
   [data-theme="dark"] .EditarPerfilHeader {
     background: rgba(0, 0, 0, 0.5);
+  }
+
+  [data-theme="dark"] .btnEditarProgrmacion {
+    background: #1d1f4dc9;
   }
 
   [data-theme="dark"] .options {

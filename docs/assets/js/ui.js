@@ -728,22 +728,25 @@ export const UI = {
     //NOMBRES
     const nameMainUser = document.getElementById("MainNameUser");
     const nameSecondUser = document.getElementById("name_user");
-    const namePerfil = document.querySelector(".namePerfil");
+    const namePerfil = document.querySelectorAll(".namePerfil");
     const nameMsgs = document.querySelector(".NameUserMsg");
 
     const name = perfile.full_name ?? "User SmartTasks";
 
     if (nameMainUser) nameMainUser.textContent = "Hola, " + name;
     if (nameSecondUser) nameSecondUser.textContent = name;
-    if (namePerfil) namePerfil.textContent = name;
+    if (namePerfil) {
+      namePerfil.forEach((n) => {
+        n.textContent = name;
+      });
+    }
     if (nameMsgs) nameMsgs.textContent = name;
 
     const avatarImg = document.querySelector(".fotoPerfil img");
     const avatarBarraNav = document.querySelectorAll(".foto_perfil img");
     const avatarMsg = document.querySelector(".imgAppPerfil img");
     const previewImg = document.querySelector(".VisualizarFotoPerfil img");
-    const avatarLigtBox = document.querySelector(".ImagenLightBoxUser img ");
-
+    const imgAppPerfilGlobal = document.querySelectorAll(".ImgUserGlobal");
     const headerPerfileIMG = document.querySelector(".headerPerfil");
 
     if (avatarImg) {
@@ -752,10 +755,12 @@ export const UI = {
         : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
     }
 
-    if (avatarLigtBox) {
-      avatarLigtBox.src = perfile.avatar_url
-        ? `${perfile.avatar_url}?t=${Date.now()}`
-        : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+    if (imgAppPerfilGlobal) {
+      imgAppPerfilGlobal.forEach((im) => {
+        im.src = perfile.avatar_url
+          ? `${perfile.avatar_url}?t=${Date.now()}`
+          : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+      });
     }
 
     if (previewImg) {
