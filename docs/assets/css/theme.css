@@ -101,10 +101,8 @@ html[data-theme="light"] {
 #tasksOptions button i {
   color: rgb(190, 190, 190);
 }
+
 /*Modal editar perfil*/
-[data-theme="dark"] .ContentSheet {
-  width: 400px;
-}
 [data-theme="dark"] .opcionesEditarfoto {
   background: transparent;
 }
@@ -277,6 +275,10 @@ html[data-theme="light"] {
   background: #00020f;
   box-shadow: none;
   border: 1.5px solid var(--bordes-nav);
+}
+[data-theme="dark"] .task-item.done {
+  background: #7998ff38;
+  transition: background 0.25s ease;
 }
 
 [data-theme="dark"] .task-pro.styleBaja {

@@ -9,6 +9,7 @@ import { ScrollBody } from "./scrollModals.js";
 import { Haptic } from "../toastManager/haptic.js";
 
 App.selectedDate = null;
+App.selectedDateEditar = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.querySelectorAll(".openAdd");
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // fecha
 /*======================================= */
-const monthNames = [
+export const monthNames = [
   "Enero",
   "Febrero",
   "Marzo",

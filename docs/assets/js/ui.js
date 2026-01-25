@@ -3,6 +3,8 @@ import { App } from "./app.js";
 import { Toast } from "./toastManager/toast.js";
 import { OverlayManager } from "./overlayManager/overlayManager.js";
 import { ScrollBody } from "./modals/scrollModals.js";
+import { monthNames } from "./modals/modals.js";
+import { Haptic } from "./toastManager/haptic.js";
 
 let lastCantidadTasks = null;
 
@@ -91,6 +93,46 @@ function cargarPrioridadEdit(container, prioridadGuardada) {
   aplicarPrioridad(btn, prioridadGuardada);
 }
 
+/*marcar completada*/
+document.addEventListener("change", (e) => {
+  if (!e.target.classList.contains("check")) return;
+
+  const checkbox = e.target;
+  const li = checkbox.closest("li");
+  const id = Number(checkbox.dataset.id);
+
+  li.classList.toggle("done", checkbox.checked);
+  li.querySelector(".task-text")?.classList.toggle("done", checkbox.checked);
+
+  const editCheckbox = li.querySelector(".check-completada__input");
+  if (editCheckbox) {
+    editCheckbox.checked = checkbox.checked;
+  }
+
+  App.toggleTask(id, checkbox.checked);
+});
+
+document.addEventListener("change", (e) => {
+  if (!e.target.classList.contains("check-completada__input")) return;
+
+  const editCheckbox = e.target;
+  const li = editCheckbox.closest("li");
+  const listCheckbox = li.querySelector(".check");
+  const id = Number(li.dataset.id);
+
+  if (listCheckbox) {
+    listCheckbox.checked = editCheckbox.checked;
+  }
+
+  li.classList.toggle("done", editCheckbox.checked);
+  li.querySelector(".task-text")?.classList.toggle(
+    "done",
+    editCheckbox.checked
+  );
+
+  App.toggleTask(id, editCheckbox.checked);
+});
+
 // ui.js
 export const UI = {
   hasClickedTask: false,
@@ -107,44 +149,24 @@ export const UI = {
       li.dataset.id = task.id;
 
       if (task.done) {
-        li.style.background = " #7998ff38";
+        li.classList.add("done");
       }
-
-      document.addEventListener("change", (e) => {
-        if (e.target.matches(".check[data-id]")) {
-          const id = Number(e.target.dataset.id);
-          App.toggleTask(id);
-        }
-      });
 
       li.innerHTML = `
     <div class="box_tasks_text">
-      <input
-        type="checkbox"
-        name="taskDone"
-        class="check ${task.done ? "done" : ""}"
-        ${task.done ? "checked" : ""}
-        data-id="${task.id}"
-      >
-        <span class="task-text ${task.done ? "done" : ""}">
-          ${task.text}
-        </span>
+     <input
+  type="checkbox"
+  class="check"
+  data-id="${task.id}"
+  ${task.done ? "checked" : ""}
+/>
+      <span class="task-text ${task.done ? "done" : ""}">
+       ${task.text}
+      </span>
+
     </div>
 
-    <div class="CategoriasProridad">
-     <section class="contentCatPro">
-       <span class="task-cat">
-         ${task.categoria} <i class="CateIcons"></i>
-       </span>
-     </section>
-
-      <section class="contentCatPro">
-        <span class="task-pro">${task.prioridad}</span>
-       </section>
-    </div>
-        <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
-      
-      <div class="editar_item">
+     <div class="editar_item">
         <section class="Editar_targeta">
           <div class="backgrauEditar">
             <div class="cuerpo_modal">
@@ -168,12 +190,8 @@ export const UI = {
 
                 <article class="tarea-completada">
                   <label class="check-completada" for="MarcarTask-${task.id}">
-                 <input
-  type="checkbox"
-  class="check-completada__input"
-  id="MarcarTask-${task.id}"
-  ${task.done ? "checked" : ""}
-/>
+                    <input type="checkbox" class="check-completada__input"
+                    id="MarcarTask-${task.id}" ${task.done ? "checked" : ""} />
 
                     <span class="check-completada__box">
                       <svg viewBox="0 0 24 24" class="check-completada__icon">
@@ -236,7 +254,7 @@ export const UI = {
                 <div class="contentSeccionesEditar cajaSeccionEditar">
                   <h5>Programación de la Tarea</h5>
                   <div class="ProgramacionEditar">
-                    <article class="días btnEditarProgrmacion">
+                    <article class="días btnEditarProgrmacion fechaEditar">
                       <i class="fa-regular fa-calendar-days"></i>
                       <p>Día/Fecha</p>
                     </article>
@@ -298,11 +316,53 @@ export const UI = {
                     </button>
                   </div>
                 </article>
+                <section class="contenedorCalendarioEditar">
+                  <article>
+                    <div class="calendarEditar">
+                      <div class="calendar-headerEditar">
+                        <button class="prevMonthEditar">‹</button>
+                        <span class="monthYearEditar"></span>
+                        <button class="nextMonthEditar">›</button>
+                      </div>
+
+                      <div class="calendar-weekdaysEditar">
+                        <span>L</span><span>M</span><span>X</span> <span>J</span
+                        ><span>V</span><span>S</span><span>D</span>
+                      </div>
+
+                      <div class="calendar-daysEditar"></div>
+
+                      <div class="btnsOpcionesCanlndarEditar">
+                        <div>
+                          <button class="cancelarDateEditar">CANCELAR</button>
+                        </div>
+                        <div>
+                          <button class="aceptarDateEditar">ACEPTAR</button>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </section>
               </div>
             </div>
           </div>
         </section>
       </div>
+
+    <div class="CategoriasProridad">
+     <section class="contentCatPro">
+       <span class="task-cat">
+         ${task.categoria} <i class="CateIcons"></i>
+       </span>
+     </section>
+
+      <section class="contentCatPro">
+        <span class="task-pro">${task.prioridad}</span>
+       </section>
+    </div>
+        <i class="fa-solid fa-ellipsis-vertical openEditar"></i>
+      
+       
 
       <section class="advertenciaDelete">
         <div class="backgrundAviso">
@@ -326,14 +386,138 @@ export const UI = {
       </section>
      `;
 
-      // marcar completada
-      li.querySelector(".check").addEventListener("click", () => {
-        App.toggleTask(task.id);
-      });
+      function initCalendarEditar(li) {
+        const monthYear = li.querySelector(".monthYearEditar");
+        const daysContainer = li.querySelector(".calendar-daysEditar");
+        const calendar = li.querySelector(".calendarEditar");
+        const contenedor = li.querySelector(".contenedorCalendarioEditar");
 
-      li.querySelector(".task-text").addEventListener("click", () => {
-        App.toggleTask(task.id);
-      });
+        if (!monthYear || !daysContainer) return;
+
+        function parseLocalDate(dateStr) {
+          if (!dateStr) return null;
+
+          const clean = dateStr.includes("T") ? dateStr.split("T")[0] : dateStr;
+
+          const [y, m, d] = clean.split("-").map(Number);
+          if (!y || !m || !d) return null;
+
+          return new Date(y, m - 1, d);
+        }
+
+        let selectedDate = task.due_date ? parseLocalDate(task.due_date) : null;
+
+        console.log(
+          "TASK ID:",
+          task.id,
+          "FECHA:",
+          task.fecha,
+          "PARSED:",
+          selectedDate
+        );
+
+        let currentDate = selectedDate ? new Date(selectedDate) : new Date();
+
+        function renderCalendar() {
+          daysContainer.innerHTML = "";
+
+          const year = currentDate.getFullYear();
+          const month = currentDate.getMonth();
+
+          monthYear.textContent = `${monthNames[month]} ${year}`;
+
+          const firstDay = new Date(year, month, 1).getDay();
+          const startDay = firstDay === 0 ? 6 : firstDay - 1;
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+          for (let i = 0; i < startDay; i++) {
+            daysContainer.appendChild(document.createElement("div"));
+          }
+
+          for (let day = 1; day <= daysInMonth; day++) {
+            const dayEl = document.createElement("div");
+            dayEl.textContent = day;
+
+            if (selectedDate) {
+              const sameDay =
+                selectedDate.getFullYear() === year &&
+                selectedDate.getMonth() === month &&
+                selectedDate.getDate() === day;
+
+              if (sameDay) {
+                dayEl.classList.add("selected");
+              }
+            }
+
+            // Marcar hoy
+            const today = new Date();
+
+            const isToday =
+              today.getFullYear() === year &&
+              today.getMonth() === month &&
+              today.getDate() === day;
+
+            if (isToday) {
+              dayEl.classList.add("today");
+              dayEl.title = "Hoy";
+            }
+
+            dayEl.onclick = (e) => {
+              e.stopPropagation();
+
+              daysContainer
+                .querySelectorAll(".selected")
+                .forEach((d) => d.classList.remove("selected"));
+
+              dayEl.classList.add("selected");
+              selectedDate = new Date(year, month, day);
+              Haptic.vibrateUi("success");
+            };
+
+            daysContainer.appendChild(dayEl);
+          }
+        }
+
+        li.querySelector(".fechaEditar").onclick = (e) => {
+          e.stopPropagation();
+          contenedor.classList.add("show");
+          calendar.classList.add("show");
+
+          if (selectedDate) {
+            currentDate = new Date(selectedDate);
+          }
+
+          renderCalendar();
+        };
+
+        li.querySelector(".cancelarDateEditar").onclick = (e) => {
+          e.stopPropagation();
+          cerrar();
+        };
+
+        li.querySelector(".aceptarDateEditar").onclick = (e) => {
+          e.stopPropagation();
+          if (!selectedDate) return;
+
+          App.selectedDateEditar = selectedDate.toISOString().split("T")[0];
+          cerrar();
+        };
+
+        li.querySelector(".prevMonthEditar").onclick = () => {
+          currentDate.setMonth(currentDate.getMonth() - 1);
+          renderCalendar();
+        };
+
+        li.querySelector(".nextMonthEditar").onclick = () => {
+          currentDate.setMonth(currentDate.getMonth() + 1);
+          renderCalendar();
+        };
+
+        function cerrar() {
+          calendar.classList.remove("show");
+          setTimeout(() => contenedor.classList.remove("show"), 200);
+        }
+      }
 
       // eliminar tarea
       const btnDeleteTasks = li.querySelector(".delete-btn");
@@ -412,10 +596,14 @@ export const UI = {
 
       li.addEventListener("click", (e) => {
         if (
-          e.target.closest(".opentAviso") ||
-          e.target.closest(".openEditar") ||
-          e.target.closest(".check")
-        )
+          e.target.closest(".check") ||
+          e.target.closest("input") ||
+          e.target.closest("label")
+        ) {
+          return;
+        }
+
+        if (e.target.closest(".opentAviso") || e.target.closest(".openEditar"))
           return;
 
         UI.hasClickedTask = true;
@@ -439,6 +627,11 @@ export const UI = {
         modalEditar.classList.add("active");
 
         UI.fillEditModal(li, App.currentEditTask);
+
+        const calendarState = li._calendarState;
+        if (calendarState && task.fecha) {
+          calendarState.setDate(task.fecha);
+        }
 
         const contPrioridad = li.querySelector(".ProridadEditar");
         cargarPrioridadEdit(contPrioridad, task.prioridad);
@@ -526,6 +719,7 @@ export const UI = {
       }
 
       list.appendChild(li);
+      initCalendarEditar(li);
     });
   },
   renderPerfile(perfile) {

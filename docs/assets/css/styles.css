@@ -1401,6 +1401,11 @@ h5 {
   animation: popCkeck2 0.4s ease-in-out;
 }
 
+.task-item.done {
+  background: #7998ff38;
+  transition: background 0.25s ease;
+}
+
 .check {
   appearance: none; /* Quita el estilo del sistema */
   -webkit-appearance: none;

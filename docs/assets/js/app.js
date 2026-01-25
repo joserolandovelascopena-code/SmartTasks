@@ -40,6 +40,7 @@ export const App = {
   prioridadSeleccionada: null,
 
   selectedDate: null,
+  selectedDateEditar: null,
   selectedTime: null,
 
   async loadTasks() {
@@ -234,12 +235,16 @@ export const App = {
       `#MarcarTask-${this.currentEditTaskId}`
     );
 
+    const dueDate = App.selectedDateEditar || null;
+
     const fields = {
       text: safeText,
       categoria: this.categoriaSeleccionada || taskActual.categoria,
       prioridad: this.prioridadSeleccionada || taskActual.prioridad,
       descripcion: descResult.value,
       done: checkboxEditar ? checkboxEditar.checked : taskActual.done,
+
+      due_date: dueDate,
     };
 
     await Storage.SaveUpdateTask(this.currentEditTaskId, fields);
@@ -276,44 +281,14 @@ export const App = {
     UI.renderPerfile(loaderUser);
   },
 
-  async toggleTask(id) {
-    let newDone = false;
-    let tareaCambiada = null;
+  async toggleTask(id, done) {
+    this.tasks = this.tasks.map((t) => (t.id === id ? { ...t, done } : t));
 
-    this.tasks = this.tasks.map((t) => {
-      if (t.id === id) {
-        newDone = !t.done;
-        tareaCambiada = !t.done;
-        return { ...t, done: newDone };
-      }
-      return t;
-    });
-
-    if (tareaCambiada === true) {
+    if (done) {
       mostrarModalCompletado();
     }
 
-    await Storage.updateTask(id, { done: newDone });
-    UI.renderTasks(this.tasks);
-  },
-
-  async toggleTask(id) {
-    let newDone = false;
-
-    this.tasks = this.tasks.map((t) => {
-      if (t.id === id) {
-        newDone = !t.done;
-        return { ...t, done: newDone };
-      }
-      return t;
-    });
-
-    if (newDone) {
-      mostrarModalCompletado();
-    }
-
-    await Storage.updateTask(id, { done: newDone });
-    UI.renderTasks(this.tasks);
+    await Storage.updateTask(id, { done });
   },
 
   async deleteTask(id) {
