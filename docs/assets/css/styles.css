@@ -46,7 +46,9 @@ h5 {
 
   opacity: 0;
   transform: translateX(40px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .contentMsg.show {
@@ -105,7 +107,9 @@ h5 {
   pointer-events: none;
 
   transform: translateY(500px);
-  transition: opacity 0.2s ease, transform 0.3s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.3s ease;
 }
 
 .contentMsgInferior.show {
@@ -779,7 +783,9 @@ h5 {
   opacity: 0;
   pointer-events: none;
   transform: translateY(5%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .subir_tarea.show {
@@ -856,7 +862,10 @@ h5 {
   padding: 20px;
   border-radius: 18px;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease,
+    filter 0.4s ease;
 }
 
 /* estados */
@@ -1670,7 +1679,9 @@ h5 {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.25s ease, border-color 0.25s ease,
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
     transform 0.15s ease;
 }
 
@@ -2182,6 +2193,7 @@ h5 {
 /*=================================================*/
 
 /*Resposing*/
+
 @media (max-width: 700px) {
   #Calendario,
   #settings,
@@ -2195,8 +2207,7 @@ h5 {
   .Root-taks {
     display: none;
   }
-}
-@media (max-width: 700px) {
+
   /*Avisos del sistema*/
   .contentMsg {
     transform: translateY(-40px);
@@ -2663,8 +2674,16 @@ h5 {
     height: 100%;
     border-radius: 0;
   }
+
   .options2 {
     flex: 0 0 10.4rem;
+  }
+
+  .ProgramacionEditar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .repetir {
+    grid-column: 1 / span 2;
   }
   .eliminarTasks {
     grid-template-columns: 6% 60% auto;
@@ -2681,5 +2700,11 @@ h5 {
   .titulo-modal {
     margin-top: 10px;
     font-size: 19px;
+  }
+}
+@media (max-width: 480px) {
+  .eliminarTasks {
+    grid-template-columns: 6% 50% auto;
+    margin-bottom: 10px;
   }
 }

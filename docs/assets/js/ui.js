@@ -464,6 +464,9 @@ export const UI = {
 
             dayEl.onclick = (e) => {
               e.stopPropagation();
+              daysContainer
+                .querySelectorAll(".selected")
+                .forEach((d) => d.classList.remove("selected"));
 
               dayEl.classList.add("selected");
               selectedDate = new Date(year, month, day);

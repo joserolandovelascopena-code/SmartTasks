@@ -153,11 +153,6 @@ export function applyTheme(theme) {
       titleNameApp.style.color = COLORS.white;
     }
 
-    if (editarModalPerfil) {
-      editarModalPerfil.style.background = COLORS.blackSoft;
-      editarModalPerfil.style.color = COLORS.white;
-    }
-
     if (contenidoEditarPerfil) {
       contenidoEditarPerfil.style.background = COLORS.black;
     }
@@ -211,7 +206,7 @@ export function applyTheme(theme) {
 
     document.documentElement.setAttribute(
       "data-theme",
-      systemPrefersDark() ? "dark" : "light"
+      systemPrefersDark() ? "dark" : "light",
     );
   }
 

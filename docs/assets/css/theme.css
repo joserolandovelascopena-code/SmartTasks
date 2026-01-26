@@ -315,6 +315,10 @@ html[data-theme="light"] {
   border-color: var(--bordes-nav);
   color: white;
 }
+[data-theme="dark"] .ContentEditar {
+  background: #00020f;
+  color: #ffffff;
+}
 /*Ajustes Acceso Rapido*/
 [data-theme="dark"] .lineDivSoriaGears {
   background: var(--bordes-nav);
