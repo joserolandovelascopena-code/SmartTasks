@@ -217,6 +217,62 @@ for (let m = 0; m < 60; m++) {
   minuteSelect.appendChild(div);
 }
 
+function activarPorScroll(contenedor, tipo) {
+  let ticking = false;
+
+  contenedor.addEventListener("scroll", () => {
+    if (ticking) return;
+
+    window.requestAnimationFrame(() => {
+      const opciones = [...contenedor.children];
+      const centro = contenedor.scrollTop + contenedor.clientHeight / 2;
+
+      let seleccionado = opciones[0];
+
+      opciones.forEach((op) => {
+        const opCentro = op.offsetTop + op.offsetHeight / 2;
+        if (
+          Math.abs(opCentro - centro) <
+          Math.abs(
+            seleccionado.offsetTop + seleccionado.offsetHeight / 2 - centro,
+          )
+        ) {
+          seleccionado = op;
+        }
+      });
+
+      activarSeleccion(contenedor, seleccionado);
+
+      if (tipo === "hora") tempHour = seleccionado.textContent;
+      if (tipo === "minuto") tempMinute = seleccionado.textContent;
+
+      actualizarHoraFormada();
+      ticking = false;
+    });
+
+    ticking = true;
+  });
+}
+
+activarPorScroll(hourSelect, "hora");
+activarPorScroll(minuteSelect, "minuto");
+
+function formato12h(hora24, minuto) {
+  let h = parseInt(hora24, 10);
+  const ampm = h >= 12 ? "p.m." : "a.m.";
+  h = h % 12 || 12;
+  return `${h} : ${minuto} ${ampm}`;
+}
+
+function actualizarHoraFormada() {
+  if (tempHour === null || tempMinute === null) return;
+
+  document.querySelector(".horaFormada h5").textContent = formato12h(
+    tempHour,
+    tempMinute,
+  );
+}
+
 /* ACTIVAR SELECCIÓN VISUAL */
 function activarSeleccion(contenedor, elemento) {
   contenedor
@@ -315,7 +371,7 @@ layout.addEventListener("scroll", () => {
 //============================================
 
 const modalOpcionesClickFoto = document.querySelector(
-  ".modalOpcionesClickImagePerfil"
+  ".modalOpcionesClickImagePerfil",
 );
 const openModalOpcionesClickFoto = document.querySelector(".fotoPerfil img");
 const contenidoModal = document.querySelector(".contenidoVisualizarOpciones");
@@ -337,7 +393,7 @@ document.addEventListener("click", (e) => {
 });
 
 const openVisualizarFotoUser = document.querySelector(
-  ".openVisualizarFotoUser"
+  ".openVisualizarFotoUser",
 );
 const btnCerrarLightBox = document.querySelector(".btnCerrarLightBox");
 const lightBox = document.querySelector(".LightBox");
@@ -607,7 +663,7 @@ const actionSheet = document.querySelector(".actionSheet");
 const ContentSheet = document.querySelector(".ContentSheet");
 const btnOpenSheet = document.querySelector(".btnOpenSheet");
 const btnCancelarAccionSheet = document.querySelector(
-  ".btnCancelarAccionSheet"
+  ".btnCancelarAccionSheet",
 );
 
 function openBtnSheetPerfile() {
@@ -657,7 +713,7 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("offline", () => {
   Toast.showInferior(
     "En este momento no tienes conexión a internet",
-    "offline"
+    "offline",
   );
 });
 

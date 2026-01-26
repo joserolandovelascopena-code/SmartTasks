@@ -259,6 +259,17 @@ html[data-theme="light"] {
   box-shadow: none;
   border: 1.5px solid var(--bordes-nav);
 }
+
+[data-theme="dark"] #task-input input {
+  box-shadow: none;
+  border: 2px solid #222a3b;
+}
+[data-theme="dark"] #task-input input::placeholder {
+  color: #999999;
+}
+[data-theme="dark"] #task-input input:focus {
+  border-color: #007bff;
+}
 [data-theme="dark"] .contenedor_categoria {
   background: #00020f;
   box-shadow: none;
@@ -268,6 +279,12 @@ html[data-theme="light"] {
   background: #00020f;
   box-shadow: none;
   border: 1.5px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .tiempo {
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+  color: white;
 }
 
 /*Lista tareas*/
@@ -408,7 +425,7 @@ html[data-theme="light"] {
   background: #00031d;
 }
 [data-theme="dark"] .reloj-body {
-  background: #070c1a;
+  background: #131b30;
   box-shadow: none;
 }
 [data-theme="dark"] .horaFormada h5 {
@@ -429,7 +446,7 @@ html[data-theme="light"] {
   color: #fff;
 }
 [data-theme="dark"] .cancelarHora {
-  background: #070c1a;
+  background: #151b2c;
   color: #a7a7a7;
 }
 [data-theme="dark"] .reloj-header {

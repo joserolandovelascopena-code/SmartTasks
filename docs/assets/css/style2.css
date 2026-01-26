@@ -1454,7 +1454,7 @@
 }
 .horaFormada h5 {
   padding: 8px;
-  width: 90px;
+  width: 100px;
   text-align: center;
   background: #f1f5ff;
   border-radius: 10px;
@@ -1486,7 +1486,7 @@
   flex-direction: column;
 }
 .punt p {
-  margin-top: -20px;
+  margin-top: 0px;
 }
 .listaHora::-webkit-scrollbar,
 .listaMinuto::-webkit-scrollbar {
@@ -1502,13 +1502,42 @@
   cursor: pointer;
 }
 
+.listaHora,
+.listaMinuto {
+  position: relative;
+  height: 54px; /* zona visible (1 item) */
+  scroll-snap-type: y mandatory;
+}
+
+.opcionHora {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  opacity: 0.5;
+}
+
+/* Línea central (glosor visual) */
+.listaHora::after,
+.listaMinuto::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  right: 6px;
+  height: 54px;
+  transform: translateY(-50%);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
 .opcionHora:hover {
   background: #e0f2fe;
 }
 
 .opcionHora.active {
-  background: var(--blue-main);
-  color: #fff;
+  opacity: 1;
 }
 
 /* BOTONES */

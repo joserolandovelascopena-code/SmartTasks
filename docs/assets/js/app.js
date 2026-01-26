@@ -16,7 +16,7 @@ document.addEventListener(
   () => {
     Sound.unlock();
   },
-  { once: true }
+  { once: true },
 );
 
 if (!history.state) {
@@ -232,7 +232,7 @@ export const App = {
     const taskActual = this.tasks.find((t) => t.id === this.currentEditTaskId);
 
     const checkboxEditar = modalActivo.querySelector(
-      `#MarcarTask-${this.currentEditTaskId}`
+      `#MarcarTask-${this.currentEditTaskId}`,
     );
 
     const dueDate = App.selectedDateEditar || null;
@@ -281,10 +281,10 @@ export const App = {
     UI.renderPerfile(loaderUser);
   },
 
-  async toggleTask(id, done) {
+  async toggleTask(id, done, fromEdit = false) {
     this.tasks = this.tasks.map((t) => (t.id === id ? { ...t, done } : t));
 
-    if (done) {
+    if (done && !fromEdit) {
       mostrarModalCompletado();
     }
 

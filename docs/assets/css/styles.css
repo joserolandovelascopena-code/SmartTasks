@@ -175,13 +175,13 @@ h5 {
   justify-content: center;
   align-items: center;
   padding: 50px;
-  background: rgba(0, 3, 34, 0.76);
+  background: rgba(0, 0, 0, 0.37);
   perspective: 1000px;
 }
 .ContentAvisoDelete {
-  width: 400px;
+  width: 350px;
   background: white;
-  border-radius: 8px;
+  border-radius: 25px;
   position: relative;
 
   transform-style: preserve-3d;
@@ -219,14 +219,14 @@ h5 {
   justify-content: center;
 }
 .textAviso {
-  padding: 16px;
+  padding: 20px;
 }
 .textAviso h3 {
-  font-weight: bold;
-  font-size: 15px;
+  font-weight: normal;
+  font-size: 16px;
   color: #000000;
   text-align: center;
-  font-family: "Inter", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .textAviso p {
   font-size: 14px;
@@ -241,11 +241,12 @@ h5 {
   text-align: center;
   margin: 20px 0 0px 0;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   font-size: 26px;
-  border: 2px solid salmon;
-  color: salmon;
+
+  background: #ff0037;
+  color: #ffffff;
 }
 .botonAviso {
   margin-top: 20px;
@@ -256,21 +257,22 @@ h5 {
 }
 .botonAviso button {
   padding: 10px 30px;
-  border-radius: 8px;
+  font-size: 14px;
+  border-radius: 15px;
   border: none;
   transition: 0.4s ease;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
 }
-.botonAviso button:hover {
-  scale: 1.04;
+.botonAviso button:active {
+  scale: 0.98;
 }
 .CerrarAvisoDelete {
   background: #dedfff;
   color: #464545;
 }
 .delete-btn {
-  background: rgb(255, 77, 57);
+  background: #ff0037;
   color: rgb(255, 255, 255);
 }
 /*Contenido pricipal INICIO*/
@@ -1768,6 +1770,7 @@ h5 {
 .ProgramacionEditar {
   position: relative;
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
   gap: 9px;
@@ -2240,7 +2243,7 @@ h5 {
     padding: 20px;
   }
   .ContentAvisoDelete {
-    width: 400px;
+    width: 350px;
   }
 
   .ContentAvisoDelete i {
@@ -2252,9 +2255,7 @@ h5 {
     padding: 8px 18px;
     font-size: 13px;
   }
-  .textAviso {
-    padding: 16px;
-  }
+
   /*==================*/
   body {
     overflow: auto;
