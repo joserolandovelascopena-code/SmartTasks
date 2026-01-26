@@ -403,6 +403,13 @@ html[data-theme="light"] {
 [data-theme="dark"] .reloj {
   background: #00031d;
 }
+[data-theme="dark"] .reloj-body {
+  background: #070c1a;
+  box-shadow: none;
+}
+[data-theme="dark"] .horaFormada h5 {
+  background: #1e2136b2;
+}
 
 [data-theme="dark"] .listaHora {
   background: #0c1025;
@@ -432,14 +439,15 @@ html[data-theme="light"] {
   [data-theme="dark"] .calendar {
     background: #000429;
   }
+
   [data-theme="dark"] .calendarEditar {
     background: #000429;
   }
   [data-theme="dark"] .reloj {
-    background: #000429;
+    background: #00020f;
   }
   [data-theme="dark"] .contenedorReloj {
-    background: rgba(22, 22, 22, 0.199);
+    background: rgba(53, 53, 53, 0.473);
   }
   /*==============*/
   [data-theme="dark"] .cuerpo_modal {
