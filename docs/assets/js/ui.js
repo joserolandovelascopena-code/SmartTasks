@@ -289,7 +289,7 @@ export const UI = {
                   </div>
 
                   <div class="contentSeccionesEditar cajaSeccionEditar">
-                    <h5>Proridad de la tarea</h5>
+                    <h5>Prioridad de la tarea</h5>
                     <div class="ProridadEditar">
                       <article class="EditarProridad">
                         <button data-prioridad="Baja" class="btnProridadEdit">
@@ -906,6 +906,7 @@ export const UI = {
         </div>
       </article>
     `;
+
       containerList.innerHTML = `
       <article class="viso_caja_vacia">
         <div class="caja">
@@ -941,7 +942,9 @@ export const UI = {
       tarjeta.classList.add("cont_tarjetas");
 
       tarjeta.innerHTML = `
+      <div class="contenEmoji"> 
       <div class="emoji"></div>
+      </div>
       <h4 class="nombre_actividad">${task.text}</h4>
       <div class="editar">
         <i class="fa-solid fa-pen-to-square editar"></i>

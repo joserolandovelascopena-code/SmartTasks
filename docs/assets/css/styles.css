@@ -1459,11 +1459,11 @@ h5 {
 }
 .body_tarea {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 .viso_boxVacia {
-  grid-column: 2 / span 2;
+  grid-column: 1 / span 3;
   height: 80px;
   display: grid;
   justify-content: center;
@@ -1505,18 +1505,22 @@ h5 {
 
 /*stylo gobal de targetas*/
 .cont_tarjetas {
-  background: linear-gradient(90deg, #a9f2ff, #a8adff);
-  height: 220px;
+  background: white;
   border-radius: 12px;
-  padding: 6px;
+  padding: 10px;
+
+  position: relative;
+}
+.contenEmoji {
+  display: grid;
+  justify-content: center;
 }
 .emoji {
   width: 70px;
   height: 70px;
   border: 2px solid gainsboro;
   border-radius: 50%;
-  margin-left: 15px;
-  background-color: #020580;
+  background-color: #e5e5ff;
 }
 .editar {
   background-color: #ffffff;
@@ -1525,7 +1529,7 @@ h5 {
   border-radius: 6px;
 }
 .editar i {
-  color: #e52e71;
+  color: #0099ff;
   padding: 6px 4px;
 }
 .editar p {
