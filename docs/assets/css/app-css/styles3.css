@@ -78,9 +78,78 @@
   border: 1.5px solid #c9ceec;
   position: relative;
 }
-.CardsTareas {
+
+/* ===== SECCIONES ===== */
+.seccion-tareas {
+  margin-bottom: 28px;
+  padding: 14px 18px 18px;
+  border-radius: 18px;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 20px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(248, 251, 255, 0.9),
+    rgba(240, 245, 255, 0.6)
+  );
+
+  border: 1.5px solid #c9ceec;
+  box-shadow: 0 6px 20px rgba(0, 40, 120, 0.08);
+}
+
+/* ===== TITULO SECCION ===== */
+.titulo-seccion {
+  margin: 0 0 16px 0;
+  padding-left: 14px;
+  grid-column: 1 / span 2;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* línea decorativa */
+.titulo-seccion::before {
+  content: "";
+  width: 6px;
+  height: 24px;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #38bdf8, #0284c7);
+}
+
+/* ===== GRID INTERNO DE CARDS ===== */
+.seccion-tareas .cards-grid {
+  padding: 0;
+  gap: 16px;
+}
+
+/* ===== EFECTO APARICIÓN ===== */
+.seccion-tareas {
+  animation: aparecerSeccion 0.35s ease both;
+}
+
+@keyframes aparecerSeccion {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*===================*/
+.CardsTareas {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   position: relative;
   width: 100%;
   overflow-y: auto;
@@ -90,6 +159,7 @@
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  max-height: 270px;
   gap: 18px;
   padding: 16px;
   position: relative;
@@ -122,6 +192,37 @@
   align-items: center;
 }
 
+.estadoProridad {
+  display: flex;
+  gap: 10px;
+}
+
+.estadoTarea {
+  padding: 9px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgb(243, 243, 243);
+  color: rgb(65, 65, 65);
+}
+.estadoTarea.estado {
+  background: linear-gradient(145deg, #38bdf8, #0284c7);
+  color: white;
+}
+
+.seccion-tareas.completadas {
+  background: linear-gradient(
+    180deg,
+    rgba(226, 253, 242, 0.9),
+    rgba(220, 252, 231, 0.6)
+  );
+  border-color: #86efac;
+}
+
+.seccion-tareas.completadas .titulo-seccion::before {
+  background: linear-gradient(145deg, #22c55e, #16a34a);
+}
+
 .card-objeto__emoji {
   width: 52px;
   height: 52px;
@@ -137,7 +238,7 @@
 
 /* ===== PRIORIDAD ===== */
 .card-objeto__prioridad {
-  padding: 6px 12px;
+  padding: 9px 12px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
@@ -160,6 +261,7 @@
 
 /* ===== TITULO ===== */
 .card-objeto__titulo {
+  margin: 8px 0 0 0;
   font-size: 15px;
   font-weight: 600;
   color: #0f172a;
@@ -248,5 +350,12 @@
     grid-template-columns: auto;
     overflow: hidden;
     height: auto;
+  }
+  .cards-grid {
+    margin-bottom: 20px;
+  }
+  .seccion-tareas {
+    display: block;
+    grid-template-columns: none;
   }
 }

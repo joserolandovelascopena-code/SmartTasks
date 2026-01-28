@@ -122,8 +122,7 @@ h5 {
 }
 
 .contentMsgInferior h5 {
-  font-weight: normal;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 .iconMsgInf {
   font-size: 18px;
@@ -2298,9 +2297,7 @@ h5 {
 
   .info_tarea {
   }
-  .CardsTareas {
-    grid-template-columns: auto;
-  }
+
   .viso_boxVacia {
     grid-column: 1 / span 3;
   }

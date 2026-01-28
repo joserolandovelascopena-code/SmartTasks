@@ -70,21 +70,6 @@ document.addEventListener("click", (e) => {
   UI.setPrioridad(btn.dataset.prioridad, container);
 });
 
-function cargarPrioridadEdit(container, prioridadGuardada) {
-  if (!container || !prioridadGuardada) return;
-
-  const btn = container.querySelector(
-    `.btnProridadEdit[data-prioridad="${prioridadGuardada}"]`,
-  );
-  if (!btn) return;
-
-  container
-    .querySelectorAll(".btnProridadEdit")
-    .forEach((b) => b.classList.remove("baja", "media", "alta"));
-
-  aplicarPrioridad(btn, prioridadGuardada);
-}
-
 /*marcar completada*/
 document.addEventListener("change", (e) => {
   if (!e.target.classList.contains("check")) return;
@@ -124,6 +109,152 @@ document.addEventListener("change", (e) => {
 
   App.toggleTask(id, editCheckbox.checked, true);
 });
+
+function formatFechaPlano(dateStr) {
+  if (!dateStr) return "Sin fecha";
+
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+
+  const dias = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vier", "Sáb"];
+  const meses = [
+    "ene",
+    "feb",
+    "mar",
+    "abr",
+    "may",
+    "jun",
+    "jul",
+    "ago",
+    "sep",
+    "oct",
+    "nov",
+    "dic",
+  ];
+
+  const diaSemana = dias[date.getDay()];
+  const dia = String(date.getDate()).padStart(2, "0");
+  const mes = meses[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${diaSemana}, ${dia} ${mes} ${year}`;
+}
+
+function formatHoraPlano(timeStr) {
+  if (!timeStr) return "Sin hora";
+
+  const [h, m] = timeStr.split(":");
+  const date = new Date();
+  date.setHours(h, m);
+
+  return date.toLocaleTimeString("es-ES", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
+function prioridadValor(prioridad) {
+  if (!prioridad) return 0;
+  if (prioridad === "Alta") return 3;
+  if (prioridad === "Media") return 2;
+  if (prioridad === "Baja") return 1;
+  return 0;
+}
+
+function fechaValor(task) {
+  if (!task.due_date) return Infinity;
+  return new Date(task.due_date).getTime();
+}
+
+function ordenarPorPrioridadYFecha(a, b) {
+  const pDiff = prioridadValor(b.prioridad) - prioridadValor(a.prioridad);
+  if (pDiff !== 0) return pDiff;
+
+  return fechaValor(a) - fechaValor(b);
+}
+
+function crearTarjeta(task) {
+  const tarjeta = document.createElement("article");
+  tarjeta.classList.add("cards-grid");
+  tarjeta.dataset.id = task.id;
+
+  tarjeta.innerHTML = `
+    <div class="card-objeto">
+      <div class="card-objeto__top">
+        <div class="card-objeto__emoji">
+          <i class="objetoEmoji"></i>
+        </div>
+
+        <div class="estadoProridad">
+          <div class="card-objeto__prioridad ${task.prioridad?.toLowerCase()}">
+            ${task.prioridad || ""}
+          </div>
+          <div><p class="estadoTarea">${task.done ? "Completada" : "Pendiente"}</p></div>
+        </div>
+      </div>
+
+      <h4 class="card-objeto__titulo">${task.text}</h4>
+
+      <div class="card-objeto__info">
+        <div class="card-objeto__item">
+          <i class="fa-regular fa-clock"></i>
+          <span>${formatHoraPlano(task.due_time)}</span>
+        </div>
+
+        <div class="card-objeto__item">
+          <i class="fa-regular fa-calendar"></i>
+          <span>${formatFechaPlano(task.due_date)}</span>
+        </div>
+      </div>
+
+      <button class="card-objeto__editar">
+        <i class="fa-solid fa-pen-to-square"></i>
+        Editar
+      </button>
+    </div>
+  `;
+
+  const CATEGORIAS = {
+    Trabajo: "fa-briefcase",
+    Estudio: "fa-book",
+    Dieta: "fa-apple-whole",
+    Marketing: "fa-chart-line",
+    "Rutina diaria": "fa-person-running",
+    Fitness: "fa-dumbbell",
+    Festividades: "fa-church",
+    Vacaciones: "fa-umbrella-beach",
+  };
+
+  const icon = tarjeta.querySelector(".objetoEmoji");
+  if (task.categoria && CATEGORIAS[task.categoria]) {
+    icon.className = `objetoEmoji fa-solid ${CATEGORIAS[task.categoria]}`;
+  }
+
+  function getEstadoTarea(btnEstado, done) {
+    if (!btnEstado) return;
+
+    if (done) {
+      btnEstado.classList.add("estado");
+    } else {
+      btnEstado.classList.remove("estado");
+    }
+  }
+
+  const estado = tarjeta.querySelector(".estadoTarea");
+  getEstadoTarea(estado, task.done);
+
+  return tarjeta;
+}
+
+function crearSeccion(titulo) {
+  const section = document.createElement("section");
+  section.classList.add("seccion-tareas");
+
+  section.innerHTML = `<h3 class="titulo-seccion">${titulo}</h3>`;
+
+  return section;
+}
 
 // ui.js
 export const UI = {
@@ -720,43 +851,44 @@ export const UI = {
       // ---------------- ICONOS POR CATEGORÍA ----------------- //
 
       const icon = li.querySelector(".CateIcons");
-      if (!icon) return;
 
-      // Limpiar clases anteriores
-      icon.className = "CateIcons fa-solid";
+      if (icon) {
+        // limpiar clases
+        icon.className = "CateIcons fa-solid";
 
-      switch (task.categoria) {
-        case "Trabajo":
-          icon.classList.add("cate-trabajo", "fa-briefcase");
-          break;
+        switch (task.categoria) {
+          case "Trabajo":
+            icon.classList.add("cate-trabajo", "fa-briefcase");
+            break;
 
-        case "Estudio":
-          icon.classList.add("cate-estudio", "fa-book");
-          break;
+          case "Estudio":
+            icon.classList.add("cate-estudio", "fa-book");
+            break;
 
-        case "Dieta":
-          icon.classList.add("cate-dieta", "fa-apple-whole");
-          break;
+          case "Dieta":
+            icon.classList.add("cate-dieta", "fa-apple-whole");
+            break;
 
-        case "Marketing":
-          icon.classList.add("cate-marketing", "fa-chart-line");
-          break;
+          case "Marketing":
+            icon.classList.add("cate-marketing", "fa-chart-line");
+            break;
 
-        case "Rutina diaria":
-          icon.classList.add("cate-rutina", "fa-person-running");
-          break;
+          case "Rutina diaria":
+            icon.classList.add("cate-rutina", "fa-person-running");
+            break;
 
-        case "Fitness":
-          icon.classList.add("cate-fitness", "fa-dumbbell");
-          break;
+          case "Fitness":
+            icon.classList.add("cate-fitness", "fa-dumbbell");
+            break;
 
-        case "Festividades":
-          icon.classList.add("cate-festividades", "fa-church");
-          break;
+          case "Festividades":
+            icon.classList.add("cate-festividades", "fa-church");
+            break;
 
-        case "Vacaciones":
-          icon.classList.add("cate-vacaciones", "fa-umbrella-beach");
-          break;
+          case "Vacaciones":
+            icon.classList.add("cate-vacaciones", "fa-umbrella-beach");
+            break;
+        }
       }
 
       list.appendChild(li);
@@ -965,52 +1097,66 @@ export const UI = {
       return;
     }
 
-    function getClasePrioridad(prioridad) {
-      if (!prioridad) return "";
-      return prioridad.toLowerCase(); // alta | media | baja
+    /* =========================
+     SECCIÓN 1 – PENDIENTES
+  ========================= */
+    const pendientes = tasks
+      .filter((t) => !t.done)
+      .sort(ordenarPorPrioridadYFecha);
+
+    if (pendientes.length) {
+      const secPendientes = crearSeccion("Pendientes");
+      secPendientes.classList.add("pendientes");
+
+      pendientes.forEach((task) =>
+        secPendientes.appendChild(crearTarjeta(task)),
+      );
+
+      container.appendChild(secPendientes);
     }
 
-    const primerasVeite = tasks.slice(0, 20);
+    /* =========================
+     SECCIÓN 2 – COMPLETADAS
+  ========================= */
+    const completadas = tasks
+      .filter((t) => t.done)
+      .sort(ordenarPorPrioridadYFecha);
 
-    primerasVeite.forEach((task) => {
-      const tarjeta = document.createElement("article");
-      tarjeta.classList.add("cards-grid");
-      tarjeta.dataset.id = task.id;
+    if (completadas.length) {
+      const secCompletadas = crearSeccion("Completadas");
+      secCompletadas.classList.add("completadas");
 
-      tarjeta.innerHTML = `
-            <div class="card-objeto">
-              <div class="card-objeto__top">
-                <div class="card-objeto__emoji">📌</div>
-                 <div class="card-objeto__prioridad ${getClasePrioridad(task.prioridad)}">
-                 ${task.prioridad}
-                 </div>
-              </div>
+      completadas.forEach((task) =>
+        secCompletadas.appendChild(crearTarjeta(task)),
+      );
 
-              <h4 class="card-objeto__titulo">
-                ${task.text}
-              </h4>
+      container.appendChild(secCompletadas);
+    }
 
-              <div class="card-objeto__info">
-                <div class="card-objeto__item">
-                  <i class="fa-regular fa-clock"></i>
-                  <span>08:30 AM</span>
-                </div>
+    /* =========================
+     SECCIÓN 3 – POR CATEGORÍA
+  ========================= */
+    const conCategoria = tasks.filter((t) => t.categoria);
 
-                <div class="card-objeto__item">
-                  <i class="fa-regular fa-calendar"></i>
-                  <span>12 Sep 2026</span>
-                </div>
-              </div>
+    if (conCategoria.length) {
+      const agrupadas = {};
 
-              <button class="card-objeto__editar">
-                <i class="fa-solid fa-pen-to-square"></i>
-                Editar
-              </button>
-            </div>
-    `;
+      conCategoria.forEach((task) => {
+        if (!agrupadas[task.categoria]) {
+          agrupadas[task.categoria] = [];
+        }
+        agrupadas[task.categoria].push(task);
+      });
 
-      container.appendChild(tarjeta);
-    });
+      Object.entries(agrupadas).forEach(([categoria, lista]) => {
+        const secCat = crearSeccion(categoria);
+        lista
+          .sort(ordenarPorPrioridadYFecha)
+          .forEach((task) => secCat.appendChild(crearTarjeta(task)));
+
+        container.appendChild(secCat);
+      });
+    }
   },
 
   openEditarDesdeTarjeta(task) {
