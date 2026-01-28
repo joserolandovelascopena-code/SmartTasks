@@ -37,21 +37,28 @@ document.addEventListener("click", (e) => {
   prioridad.classList.add("selected");
 });
 
+document.addEventListener("click", (e) => {
+  const btnEditar = e.target.closest(".card-objeto__editar");
+  if (!btnEditar) return;
+
+  e.stopPropagation();
+
+  const card = btnEditar.closest(".cards-grid");
+  if (!card) return;
+
+  const taskId = Number(card.dataset.id);
+  const task = App.tasks.find((t) => t.id === taskId);
+  if (!task) return;
+
+  UI.openEditarDesdeTarjeta(task);
+});
+
 // PRIORIDAD – AGREGAR
 document.addEventListener("click", (e) => {
   const element = e.target.closest(".options-prioridad");
   if (!element) return;
 
-  const selected = element.dataset.prioridad;
-  App.prioridadSeleccionada = selected;
-
-  document.querySelectorAll(".options-prioridad").forEach((el) => {
-    el.classList.remove("active-baja", "active-media", "active-alta");
-  });
-
-  if (selected === "Baja") element.classList.add("active-baja");
-  if (selected === "Media") element.classList.add("active-media");
-  if (selected === "Alta") element.classList.add("active-alta");
+  UI.setPrioridad(element.dataset.prioridad);
 });
 
 // PRIORIDAD – EDITAR
@@ -59,25 +66,9 @@ document.addEventListener("click", (e) => {
   const btn = e.target.closest(".btnProridadEdit");
   if (!btn) return;
 
-  const prioridad = btn.dataset.prioridad;
-  App.prioridadSeleccionada = prioridad;
-
   const container = btn.closest(".ProridadEditar");
-
-  container.querySelectorAll(".btnProridadEdit").forEach((el) => {
-    el.classList.remove("baja", "media", "alta");
-  });
-
-  aplicarPrioridad(btn, prioridad);
+  UI.setPrioridad(btn.dataset.prioridad, container);
 });
-
-function aplicarPrioridad(element, prioridad) {
-  element.classList.remove("baja", "media", "alta");
-
-  if (prioridad === "Baja") element.classList.add("baja");
-  if (prioridad === "Media") element.classList.add("media");
-  if (prioridad === "Alta") element.classList.add("alta");
-}
 
 function cargarPrioridadEdit(container, prioridadGuardada) {
   if (!container || !prioridadGuardada) return;
@@ -137,6 +128,32 @@ document.addEventListener("change", (e) => {
 // ui.js
 export const UI = {
   hasClickedTask: false,
+
+  setPrioridad(prioridad, container = document) {
+    if (!prioridad) return;
+
+    container
+      .querySelectorAll(".options-prioridad, .btnProridadEdit")
+      .forEach((el) => {
+        el.classList.remove(
+          "active-baja",
+          "active-media",
+          "active-alta",
+          "baja",
+          "media",
+          "alta",
+          "selected",
+        );
+
+        if (el.dataset.prioridad === prioridad) {
+          el.classList.add("selected");
+          el.classList.add(prioridad.toLowerCase());
+          el.classList.add(`active-${prioridad.toLowerCase()}`);
+        }
+      });
+
+    App.prioridadSeleccionada = prioridad;
+  },
 
   renderTasks(tasks) {
     const list = document.getElementById("taskList");
@@ -484,8 +501,15 @@ export const UI = {
           }
         }
 
-        li.querySelector(".fechaEditar").onclick = (e) => {
-          e.stopPropagation();
+        li.querySelector(".fechaEditar").addEventListener(
+          "click",
+          openCalendarEditar,
+          (e) => {
+            e.stopPropagation();
+          },
+        );
+
+        function openCalendarEditar() {
           contenedor.classList.add("show");
           calendar.classList.add("show");
 
@@ -494,12 +518,15 @@ export const UI = {
           }
 
           renderCalendar();
-        };
+
+          history.pushState({ calendar_editar: true }, "", "#calendar-system");
+          OverlayManager.push("close-CalendarEditar", cerrarCalendarEditar);
+        }
 
         li.querySelector(".cancelarDateEditar").onclick = (e) => {
           e.stopPropagation();
           restaurarFechaOriginal();
-          cerrar();
+          history.back();
         };
 
         li.querySelector(".aceptarDateEditar").onclick = (e) => {
@@ -507,20 +534,22 @@ export const UI = {
           if (!selectedDate) return;
 
           App.selectedDateEditar = selectedDate.toISOString().split("T")[0];
-          cerrar();
+          history.back();
         };
 
         li.querySelector(".prevMonthEditar").onclick = () => {
           currentDate.setMonth(currentDate.getMonth() - 1);
           renderCalendar();
+          Haptic.vibrateUi("success");
         };
 
         li.querySelector(".nextMonthEditar").onclick = () => {
           currentDate.setMonth(currentDate.getMonth() + 1);
           renderCalendar();
+          Haptic.vibrateUi("success");
         };
 
-        function cerrar() {
+        function cerrarCalendarEditar() {
           calendar.classList.remove("show");
           setTimeout(() => contenedor.classList.remove("show"), 200);
         }
@@ -627,6 +656,7 @@ export const UI = {
 
         App.currentEditTaskId = task.id;
         App.currentEditTask = { ...task };
+        App.prioridadSeleccionada = task.prioridad;
 
         App.categoriaSeleccionada = task.categoria;
         App.prioridadSeleccionada = task.prioridad;
@@ -642,7 +672,7 @@ export const UI = {
         }
 
         const contPrioridad = li.querySelector(".ProridadEditar");
-        cargarPrioridadEdit(contPrioridad, task.prioridad);
+        UI.setPrioridad(task.prioridad, contPrioridad);
 
         history.pushState({ Editar_Tarea: true }, "", "#editar_tarea");
         OverlayManager.push("editarTask", closeEditarWindow);
@@ -894,7 +924,7 @@ export const UI = {
   renderTarjetas(tasks, force = false) {
     if (this.hasClickedTask && !force) return;
 
-    const container = document.querySelector(".body_tarea");
+    const container = document.querySelector(".CardsTareas");
     const containerList = document.getElementById("taskList");
     container.innerHTML = "";
 
@@ -935,25 +965,59 @@ export const UI = {
       return;
     }
 
-    const primerasTres = tasks.slice(0, 4);
+    function getClasePrioridad(prioridad) {
+      if (!prioridad) return "";
+      return prioridad.toLowerCase(); // alta | media | baja
+    }
 
-    primerasTres.forEach((task) => {
+    const primerasVeite = tasks.slice(0, 20);
+
+    primerasVeite.forEach((task) => {
       const tarjeta = document.createElement("article");
-      tarjeta.classList.add("cont_tarjetas");
+      tarjeta.classList.add("cards-grid");
+      tarjeta.dataset.id = task.id;
 
       tarjeta.innerHTML = `
-      <div class="contenEmoji"> 
-      <div class="emoji"></div>
-      </div>
-      <h4 class="nombre_actividad">${task.text}</h4>
-      <div class="editar">
-        <i class="fa-solid fa-pen-to-square editar"></i>
-        <p>Editar la actividad</p>
-      </div>
+            <div class="card-objeto">
+              <div class="card-objeto__top">
+                <div class="card-objeto__emoji">📌</div>
+                 <div class="card-objeto__prioridad ${getClasePrioridad(task.prioridad)}">
+                 ${task.prioridad}
+                 </div>
+              </div>
+
+              <h4 class="card-objeto__titulo">
+                ${task.text}
+              </h4>
+
+              <div class="card-objeto__info">
+                <div class="card-objeto__item">
+                  <i class="fa-regular fa-clock"></i>
+                  <span>08:30 AM</span>
+                </div>
+
+                <div class="card-objeto__item">
+                  <i class="fa-regular fa-calendar"></i>
+                  <span>12 Sep 2026</span>
+                </div>
+              </div>
+
+              <button class="card-objeto__editar">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Editar
+              </button>
+            </div>
     `;
 
       container.appendChild(tarjeta);
     });
+  },
+
+  openEditarDesdeTarjeta(task) {
+    const li = document.querySelector(`li[data-id="${task.id}"]`);
+    if (!li) return;
+
+    li.querySelector(".openEditar")?.click();
   },
 
   resetFechaHoraUI() {

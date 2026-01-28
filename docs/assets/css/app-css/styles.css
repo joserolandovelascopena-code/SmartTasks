@@ -732,13 +732,17 @@ h5 {
 .openAdd:active {
   scale: 0.98;
 }
-#Proyectos {
+#VistaGeneral {
   display: flex;
   gap: 8px;
 }
 #Calendario {
   display: flex;
   gap: 8px;
+}
+#Calendario span {
+  color: rgb(184, 182, 182);
+  font-size: 22px;
 }
 #cuenta {
   display: flex;
@@ -798,16 +802,7 @@ h5 {
 
 /* Fondo */
 .backgraud-tasks {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
   padding: 20px;
-}
-
-.backgraud-tasks.show {
-  opacity: 1;
-  pointer-events: auto;
-  position: relative;
 }
 
 .contenido_main {
@@ -1447,21 +1442,7 @@ h5 {
   top: -2px;
   left: 4px;
 }
-.info_tarea {
-  box-shadow: 0 0 3px gainsboro;
-  padding: 10px;
-  opacity: 1;
-  transition: 0.1s ease;
-  border-radius: 12px;
-}
-.info_tarea.show {
-  opacity: 0;
-}
-.body_tarea {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
+
 .viso_boxVacia {
   grid-column: 1 / span 3;
   height: 80px;
@@ -1503,38 +1484,6 @@ h5 {
   margin-top: 26px;
 }
 
-/*stylo gobal de targetas*/
-.cont_tarjetas {
-  background: white;
-  border-radius: 12px;
-  padding: 10px;
-
-  position: relative;
-}
-.contenEmoji {
-  display: grid;
-  justify-content: center;
-}
-.emoji {
-  width: 70px;
-  height: 70px;
-  border: 2px solid gainsboro;
-  border-radius: 50%;
-  background-color: #e5e5ff;
-}
-.editar {
-  background-color: #ffffff;
-  display: flex;
-  gap: 5px;
-  border-radius: 6px;
-}
-.editar i {
-  color: #0099ff;
-  padding: 6px 4px;
-}
-.editar p {
-  margin: 5px;
-}
 /*=================================*/
 
 .openEditar {
@@ -2348,17 +2297,9 @@ h5 {
   }
 
   .info_tarea {
-    display: grid;
-    grid-auto-rows: 50%;
-
-    padding: 8px;
-    border-radius: 8px;
-    margin-block-end: 50px;
   }
-  .body_tarea {
-    display: grid;
+  .CardsTareas {
     grid-template-columns: auto;
-    gap: 10px;
   }
   .viso_boxVacia {
     grid-column: 1 / span 3;
@@ -2434,7 +2375,7 @@ h5 {
     background: transparent;
     color: #8a8a8a;
   }
-  #Proyectos {
+  #VistaGeneral {
     display: grid;
     gap: 0px;
   }
@@ -2442,6 +2383,10 @@ h5 {
   #Calendario {
     display: grid;
     gap: 0px;
+  }
+  #Calendario span {
+    color: rgb(184, 182, 182);
+    font-size: 25px;
   }
 
   .agregarCompu {

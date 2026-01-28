@@ -333,7 +333,7 @@ html[data-theme="light"] {
   color: white;
 }
 [data-theme="dark"] .ContentEditar {
-  background: #00020f;
+  background: #232627ff;
   color: #ffffff;
 }
 /*Ajustes Acceso Rapido*/
@@ -454,6 +454,36 @@ html[data-theme="light"] {
 }
 [data-theme="dark"] .opcionHora:hover {
   background: #262647;
+}
+
+/*stylo gobal de targetas*/
+[data-theme="dark"] .info_tarea {
+  box-shadow: 0 0 0 1.5px rgb(33, 30, 48);
+  background: #00020f;
+}
+[data-theme="dark"] .headerInfo_Tarea {
+  border-color: var(--bordes-nav);
+  background: #00020f;
+}
+
+[data-theme="dark"] .optInfo_Tarea span {
+  color: #e6e6e6;
+}
+[data-theme="dark"] .optInfo_Tarea i {
+  color: #e6e6e6;
+}
+
+[data-theme="dark"] .promandaTarea {
+  border-color: var(--bordes-nav);
+}
+
+[data-theme="dark"] .card-objeto {
+  background: #00020f;
+  border: 1px solid rgb(95, 101, 121);
+  color: white;
+}
+[data-theme="dark"] .card-objeto__titulo {
+  color: white;
 }
 /*==============*/
 @media (max-width: 700px) {

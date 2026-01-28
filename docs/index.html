@@ -17,9 +17,10 @@
 
     <link rel="icon" href="assets/icons/icon-192.png" type="image/png" />
     <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/theme.css" />
-    <link rel="stylesheet" href="assets/css/style2.css" />
+    <link rel="stylesheet" href="assets/css/app-css/styles.css" />
+    <link rel="stylesheet" href="assets/css/app-css/theme.css" />
+    <link rel="stylesheet" href="assets/css/app-css/style2.css" />
+    <link rel="stylesheet" href="assets/css/app-css/styles3.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -151,7 +152,7 @@
               </form>
             </li>
             <li class="titu">
-              <p class="nav0">Smart opciones</p>
+              <p class="nav0">Opciones</p>
             </li>
             <li class="funciones_smart" id="Hogar">
               <i class="fa-solid fa-house"></i>
@@ -159,10 +160,9 @@
               <h5 class="nav2">Inicio</h5>
             </li>
 
-            <li class="funciones_smart" id="Proyectos">
+            <li class="funciones_smart" id="VistaGeneral">
               <i class="fa-regular fa-folder"></i>
-              <p class="nav0">Tus proyectos</p>
-              <h5 class="nav2">Proyectos</h5>
+              <p class="nav0">Vista general</p>
             </li>
             <div class="agregarMovil">
               <li class="openAdd">
@@ -172,7 +172,7 @@
               </li>
             </div>
             <li class="funciones_smart" id="Calendario">
-              <i class="fa-regular fa-calendar"></i>
+              <span class="material-symbols-outlined"> calendar_month </span>
               <p class="nav0">Calendario</p>
               <h5 class="nav2">Calendario</h5>
             </li>
@@ -410,7 +410,7 @@
               <div class="reloj-header">
                 <h3>Seleccionar hora</h3>
               </div>
-              <div class="horaFormada"><h5>7 : 30 a.m.</h5></div>
+              <div class="horaFormada"><h5>00 : 00 a.m.</h5></div>
               <div class="reloj-body">
                 <div class="selectedHora">
                   <div class="listaHora" id="hourSelect"></div>
@@ -637,6 +637,30 @@
             </article>
           </div>
         </section>
+
+        <section class="info_tarea">
+          <article class="headerInfo_Tarea">
+            <h4>Vista general</h4>
+            <ul class="opcionesNav_info_tarea">
+              <li class="optInfo_Tarea">
+                <span class="material-symbols-outlined"> fact_check </span
+                >Acciones
+              </li>
+              <li class="optInfo_Tarea">
+                <span class="material-symbols-outlined"> filter_alt </span>
+                Organizar
+              </li>
+              <li class="optInfo_Tarea"><i class="fa-solid fa-gear"></i></li>
+            </ul>
+          </article>
+          <div class="layaut-InfoTask">
+            <div class="CardsTareas"></div>
+            <div>
+              <div class="promandaTarea"></div>
+            </div>
+          </div>
+        </section>
+
         <section class="Barra_Superior_principal">
           <article class="NavMovil">
             <div class="foto_perfil openPerfil">
@@ -751,20 +775,6 @@
 
           <section class="grafiaca_progreso"><h4>Graficas</h4></section>
           <section class="proyects"><h4>Proyectos</h4></section>
-          <section class="info_tarea">
-            <div class="body_tarea">
-              <article class="cont_tarjetas">
-                <div class="contenEmoji">
-                  <div class="emoji"></div>
-                </div>
-                <h4 class="nombre_actividad">Esta es una prueva</h4>
-                <div class="editar">
-                  <i class="fa-solid fa-pen-to-square editar"></i>
-                  <p>Editar la actividad</p>
-                </div>
-              </article>
-            </div>
-          </section>
         </div>
       </div>
       <div class="targetas_info">
@@ -775,11 +785,6 @@
           <div class="card">Tarjeta 4</div>
         </div>
       </div>
-    </div>
-
-    <div class="dateCard">
-      <span id="day">Lunes</span>
-      <p class="DATE_HOME">19 de enero de 2026</p>
     </div>
 
     <!--Modales editar Fotos-->
@@ -908,6 +913,7 @@
     <script type="module" src="assets/js/ui.js"></script>
     <script type="module" src="assets/js/app.js"></script>
     <script type="module" src="assets/js/modals/modals.js"></script>
+    <script type="module" src="assets/js/ui/TaskCalendar.js"></script>
     <script
       type="module"
       src="assets/js/modals/warning_messages/warningMessages.js"

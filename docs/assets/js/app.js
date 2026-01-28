@@ -172,6 +172,7 @@ export const App = {
       await this.loadTasks();
 
       UI.renderTasks(this.tasks);
+      UI.renderTarjetas(this.tasks, true);
 
       input.value = "";
       if (descriptionTextarea) descriptionTextarea.value = "";

@@ -16,23 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const contenAdd = document.querySelector(".subir_tarea");
 
   const perfilContainer = document.querySelector(".Perfile");
-  const bodycontenedor = document.querySelector(".contenedor");
 
   const closeAddTaks = document.getElementById("CloseAddTasks");
-  const backgraudAnimation = document.querySelector(".backgraud-tasks");
-  const listCheck = document.querySelector(".List_check");
-  const infoTarea = document.querySelector(".info_tarea");
 
   function openAddTask() {
     perfilContainer.classList.remove("show");
+    Overview.classList.remove("show");
 
     ScrollBody.disableBodyScroll(); // SOLO móvil
 
     contenAdd.classList.add("show");
-    backgraudAnimation.classList.add("show");
-    bodycontenedor.classList.add("show");
-    listCheck.classList.add("show");
-    infoTarea.classList.add("show");
 
     history.pushState({ addTask: true }, "", "#add-task");
     OverlayManager.push("closeAddTasks", closeAddTask);
@@ -42,10 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // SOLO móvil
     ScrollBody.enableBodyScroll();
     contenAdd.classList.remove("show");
-    backgraudAnimation.classList.remove("show");
+
     bodycontenedor.classList.remove("show");
-    listCheck.classList.remove("show");
-    infoTarea.classList.remove("show");
   }
 
   openAdd.forEach((op) => {
@@ -130,10 +121,15 @@ function renderCalendar() {
   }
 }
 
-document.getElementById("fecha").addEventListener("click", () => {
+document.getElementById("fecha").addEventListener("click", openCalendar);
+
+function openCalendar() {
   document.querySelector(".contenedorCalendario").classList.add("show");
   document.querySelector(".calendar").classList.add("show");
-});
+
+  history.pushState({ calendarEditar: true }, "", "#calendar-system");
+  OverlayManager.push("close-calendar", cerrarCalendario);
+}
 
 document.querySelector(".aceptarDate").addEventListener("click", () => {
   if (!selectedDate) return;
@@ -150,7 +146,7 @@ document.querySelector(".aceptarDate").addEventListener("click", () => {
     month: "short",
   });
 
-  cerrarCalendario();
+  history.back();
 });
 
 document.querySelector(".cancelarDate").addEventListener("click", () => {
@@ -158,7 +154,7 @@ document.querySelector(".cancelarDate").addEventListener("click", () => {
   document
     .querySelectorAll(".calendar-days .selected")
     .forEach((d) => d.classList.remove("selected"));
-  cerrarCalendario();
+  history.back();
 });
 
 function cerrarCalendario() {
@@ -273,7 +269,6 @@ function actualizarHoraFormada() {
   );
 }
 
-/* ACTIVAR SELECCIÓN VISUAL */
 function activarSeleccion(contenedor, elemento) {
   contenedor
     .querySelectorAll(".opcionHora")
@@ -282,16 +277,22 @@ function activarSeleccion(contenedor, elemento) {
 }
 
 /* ABRIR */
-document.getElementById("hora").addEventListener("click", () => {
+
+document.getElementById("hora").addEventListener("click", openReloj);
+
+function openReloj() {
   document.querySelector(".contenedorReloj").classList.add("show");
   document.querySelector(".reloj").classList.add("show");
-});
+
+  history.pushState({ openReloj: true }, "", "#reloj-system");
+  OverlayManager.push("close-Reloj", cerrarReloj);
+}
 
 /* CANCELAR */
 document.querySelector(".cancelarHora").onclick = () => {
   tempHour = null;
   tempMinute = null;
-  cerrarReloj();
+  history.back();
 };
 
 /* ACEPTAR */
@@ -308,7 +309,7 @@ document.querySelector(".aceptarHora").onclick = () => {
     .getElementById("hora")
     .querySelector(".programacionTasks").textContent = finalTime;
 
-  cerrarReloj();
+  history.back();
 };
 
 function cerrarReloj() {
@@ -330,6 +331,7 @@ const contenAdd = document.querySelector(".subir_tarea");
 function openPerfil() {
   perfilContainer.classList.add("show");
   contenAdd.classList.remove("show");
+  Overview.classList.remove("show");
   ScrollBody.disableBodyScroll();
 
   cantidadTkasPerfile.classList.remove("active");
@@ -684,6 +686,31 @@ function closebtnPerfileEditor() {
 btnOpenSheet.addEventListener("click", openBtnSheetPerfile);
 
 btnCancelarAccionSheet.addEventListener("click", () => {
+  history.back();
+});
+
+const Overview = document.querySelector(".info_tarea");
+const btnOpenOverview = document.getElementById("VistaGeneral");
+const btnCloseOverview = document.getElementById("Hogar");
+
+btnOpenOverview.addEventListener("click", openOverviewTasks);
+
+function openOverviewTasks() {
+  Overview.classList.add("show");
+  perfilContainer.classList.remove("show");
+  contenAdd.classList.remove("show");
+  ScrollBody.disableBodyScroll();
+
+  history.pushState({ vista_general: true }, "", "#vista-general-tareas");
+  OverlayManager.push("closeOverview", closeOverview);
+}
+
+function closeOverview() {
+  Overview.classList.remove("show");
+  ScrollBody.enableBodyScroll();
+}
+
+btnCloseOverview.addEventListener("click", () => {
   history.back();
 });
 
