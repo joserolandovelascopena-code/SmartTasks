@@ -494,9 +494,6 @@ btnCancelarHeder.addEventListener("click", () => {
   }, 200);
 });
 
-let selectedAvatarFile = null;
-let selectedHeaderFile = null;
-
 inputFotoPerfil.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;

@@ -259,7 +259,7 @@ function crearSeccion(titulo) {
 //Click card tarea=======
 function getPromandaElements() {
   return {
-    container: document.querySelector(".promandaTarea"),
+    container: document.querySelector(".progamadaTarea"),
     empty: document.querySelector(".panel-vacio"),
     panel: document.querySelector(".panel-detalle"),
   };
@@ -316,12 +316,29 @@ function renderPromandaTarea(task) {
       <button class="btn-accion completar" data-id="${task.id}">
         <i class="fa-solid fa-check"></i> Completar
       </button>
-      <button class="btn-accion editar" data-id="${task.id}">
+      <button class="btn-accion removerCompletar" data-id="${task.id}">
+        <span class="material-symbols-outlined"> radio_button_unchecked </span> Remover
+      </button>
+       <button class="btn-accion editar" data-id="${task.id}">
         <i class="fa-solid fa-pen"></i> Editar
       </button>
     </footer>
   `;
 }
+
+document.addEventListener("click", (e) => {
+  const { container, empty, panel } = getPromandaElements();
+  if (!container || !panel || !empty) return;
+
+  if (
+    empty.classList.contains("hidden") &&
+    !container.contains(e.target) &&
+    !empty.contains(e.target)
+  ) {
+    empty.classList.remove("hidden");
+    panel.classList.add("hidden");
+  }
+});
 
 function getIconCategoria(categoria) {
   const icons = {
@@ -342,7 +359,6 @@ document.addEventListener("click", (e) => {
   const tarjeta = e.target.closest(".cards-grid");
   if (!tarjeta) return;
 
-  // bloquear clicks internos
   if (
     e.target.closest(".card-objeto__editar") ||
     e.target.closest("input") ||
@@ -369,11 +385,18 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".btn-accion.completar");
+  const btn = e.target.closest(".btn-accion");
   if (!btn) return;
 
   const id = Number(btn.dataset.id);
-  App.toggleTask(id, true, true);
+
+  if (btn.classList.contains("completar")) {
+    App.toggleTask(id, true, true);
+  }
+
+  if (btn.classList.contains("removerCompletar")) {
+    App.toggleTask(id, false, true);
+  }
 
   const task = App.tasks.find((t) => t.id === id);
   if (task) renderPromandaTarea(task);
