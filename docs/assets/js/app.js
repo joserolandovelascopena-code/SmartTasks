@@ -290,6 +290,8 @@ export const App = {
     }
 
     await Storage.updateTask(id, { done });
+
+    UI.renderTarjetas(this.tasks, true);
   },
 
   async deleteTask(id) {

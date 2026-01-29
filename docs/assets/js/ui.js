@@ -256,6 +256,129 @@ function crearSeccion(titulo) {
   return section;
 }
 
+//Click card tarea=======
+function getPromandaElements() {
+  return {
+    container: document.querySelector(".promandaTarea"),
+    empty: document.querySelector(".panel-vacio"),
+    panel: document.querySelector(".panel-detalle"),
+  };
+}
+
+function renderPromandaTarea(task) {
+  const { empty, panel } = getPromandaElements();
+  if (!panel || !empty || !task) return;
+
+  empty.classList.add("hidden");
+  panel.classList.remove("hidden");
+
+  panel.innerHTML = `
+    <header class="panel-header">
+      <div class="panel-emoji">
+        <i class="fa-solid ${getIconCategoria(task.categoria)}"></i>
+      </div>
+      <div class="panel-titulo">
+        <h4>${task.text}</h4>
+        <p class="panel-sub">${task.categoria || "Sin categoría"} · ${
+          task.prioridad || "Sin prioridad"
+        }</p>
+      </div>
+    </header>
+
+    <section class="panel-info">
+      <div class="panel-item">
+        <i class="fa-regular fa-calendar"></i>
+        <span>${formatFechaPlano(task.due_date)}</span>
+      </div>
+
+      <div class="panel-item">
+        <i class="fa-regular fa-clock"></i>
+        <span>${formatHoraPlano(task.due_time)}</span>
+      </div>
+
+      <div class="panel-item">
+        <i class="fa-solid fa-flag"></i>
+        <span>Prioridad: ${task.prioridad || "—"}</span>
+      </div>
+
+      <div class="panel-item">
+        <i class="fa-solid fa-check"></i>
+        <span>Estado: ${task.done ? "Completada" : "Pendiente"}</span>
+      </div>
+    </section>
+
+    <section class="panel-notas">
+      <h5>Notas</h5>
+      <p>${task.descripcion || "Sin descripción."}</p>
+    </section>
+
+    <footer class="panel-acciones">
+      <button class="btn-accion completar" data-id="${task.id}">
+        <i class="fa-solid fa-check"></i> Completar
+      </button>
+      <button class="btn-accion editar" data-id="${task.id}">
+        <i class="fa-solid fa-pen"></i> Editar
+      </button>
+    </footer>
+  `;
+}
+
+function getIconCategoria(categoria) {
+  const icons = {
+    Trabajo: "fa-briefcase",
+    Estudio: "fa-book",
+    Dieta: "fa-apple-whole",
+    Marketing: "fa-chart-line",
+    "Rutina diaria": "fa-person-running",
+    Fitness: "fa-dumbbell",
+    Festividades: "fa-church",
+    Vacaciones: "fa-umbrella-beach",
+  };
+
+  return icons[categoria] || "fa-layer-group";
+}
+
+document.addEventListener("click", (e) => {
+  const tarjeta = e.target.closest(".cards-grid");
+  if (!tarjeta) return;
+
+  // bloquear clicks internos
+  if (
+    e.target.closest(".card-objeto__editar") ||
+    e.target.closest("input") ||
+    e.target.closest("button")
+  )
+    return;
+
+  const id = Number(tarjeta.dataset.id);
+  const task = App.tasks.find((t) => t.id === id);
+  if (!task) return;
+
+  renderPromandaTarea(task);
+});
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-accion.editar");
+  if (!btn) return;
+
+  const taskId = Number(btn.dataset.id);
+  const task = App.tasks.find((t) => t.id === taskId);
+  if (!task) return;
+
+  UI.openEditarDesdeTarjeta(task);
+});
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-accion.completar");
+  if (!btn) return;
+
+  const id = Number(btn.dataset.id);
+  App.toggleTask(id, true, true);
+
+  const task = App.tasks.find((t) => t.id === id);
+  if (task) renderPromandaTarea(task);
+});
+
 // ui.js
 export const UI = {
   hasClickedTask: false,

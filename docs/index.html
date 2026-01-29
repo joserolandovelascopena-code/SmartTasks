@@ -656,7 +656,68 @@
           <div class="layaut-InfoTask">
             <div class="CardsTareas"></div>
             <div>
-              <div class="promandaTarea"></div>
+              <div class="promandaTarea">
+                <!-- Estado vacío -->
+                <div class="panel-vacio">
+                  <i class="fa-regular fa-hand-pointer"></i>
+                  <p>Selecciona una tarea</p>
+                  <span>Haz clic en una tarjeta para ver los detalles</span>
+                </div>
+
+                <!-- Panel activo (oculto por defecto) -->
+                <div class="panel-detalle hidden">
+                  <!-- Header -->
+                  <header class="panel-header">
+                    <div class="panel-emoji">🔥</div>
+                    <div class="panel-titulo">
+                      <h4>Título de la tarea</h4>
+                      <p class="panel-sub">Categoría · Prioridad</p>
+                    </div>
+                  </header>
+
+                  <!-- Info -->
+                  <section class="panel-info">
+                    <div class="panel-item">
+                      <i class="fa-regular fa-calendar"></i>
+                      <span>Fecha: Lun, 29 ene 2026</span>
+                    </div>
+
+                    <div class="panel-item">
+                      <i class="fa-regular fa-clock"></i>
+                      <span>Hora: 08:30 AM</span>
+                    </div>
+
+                    <div class="panel-item">
+                      <i class="fa-solid fa-flag"></i>
+                      <span>Prioridad: Alta</span>
+                    </div>
+
+                    <div class="panel-item">
+                      <i class="fa-solid fa-check"></i>
+                      <span>Estado: Pendiente</span>
+                    </div>
+                  </section>
+
+                  <!-- Notas -->
+                  <section class="panel-notas">
+                    <h5>Notas</h5>
+                    <p>
+                      Aquí puedes mostrar una descripción corta o notas
+                      adicionales relacionadas con la tarea seleccionada.
+                    </p>
+                  </section>
+
+                  <!-- Acciones -->
+                  <footer class="panel-acciones">
+                    <button class="btn-accion completar">
+                      <i class="fa-solid fa-check"></i> Completar
+                    </button>
+                    <button class="btn-accion editar">
+                      <i class="fa-solid fa-pen"></i> Editar
+                    </button>
+                  </footer>
+                </div>
+              </div>
             </div>
           </div>
         </section>

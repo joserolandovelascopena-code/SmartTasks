@@ -72,11 +72,163 @@
   overflow: hidden;
   gap: 15px;
 }
+
 .promandaTarea {
   height: 86vh;
   border-radius: 10px;
   border: 1.5px solid #c9ceec;
-  position: relative;
+  background: #f9fbff;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== ESTADO VACÍO ===== */
+.panel-vacio {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #64748b;
+  gap: 8px;
+}
+
+.panel-vacio i {
+  font-size: 28px;
+  color: #94a3b8;
+}
+
+/* ===== PANEL DETALLE ===== */
+.panel-detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: aparecerPanel 0.3s ease;
+}
+
+@keyframes aparecerPanel {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== HEADER ===== */
+.panel-header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.panel-emoji {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+
+  background: linear-gradient(145deg, #38bdf8, #0284c7);
+  color: white;
+}
+
+.panel-titulo h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.panel-sub {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ===== INFO ===== */
+.panel-info {
+  display: grid;
+  gap: 10px;
+}
+
+.panel-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+
+  font-size: 13px;
+  color: #334155;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.panel-item i {
+  color: #0284c7;
+}
+
+/* ===== NOTAS ===== */
+.panel-notas h5 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.panel-notas p {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* ===== ACCIONES ===== */
+.panel-acciones {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-accion {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease;
+}
+
+.btn-accion.completar {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.btn-accion.editar {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.btn-accion:hover {
+  transform: scale(1.03);
+}
+
+/* ===== UTIL ===== */
+.hidden {
+  display: none;
 }
 
 /* ===== SECCIONES ===== */
@@ -356,6 +508,5 @@
   }
   .seccion-tareas {
     display: block;
-    grid-template-columns: none;
   }
 }
