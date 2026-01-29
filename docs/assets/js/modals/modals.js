@@ -535,6 +535,9 @@ inputFotoPerfil.addEventListener("change", (e) => {
   btnAceptarCambiosFoto.classList.add("active");
 });
 
+let selectedAvatarFile = null;
+let selectedHeaderFile = null;
+
 inputFotoHeader.addEventListener("change", (e) => {
   previewImgHeader.classList.add("show");
   const file = e.target.files[0];

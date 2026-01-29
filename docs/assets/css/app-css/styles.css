@@ -1442,22 +1442,6 @@ h5 {
   left: 4px;
 }
 
-.viso_boxVacia {
-  grid-column: 1 / span 3;
-  height: 80px;
-  display: grid;
-  justify-content: center;
-  justify-items: center;
-  text-align: center;
-  border-radius: 8px;
-  border: 2px dashed rgb(0, 140, 255);
-  background-color: #8cc7d41e;
-  position: relative;
-  overflow: hidden;
-}
-.caja2 {
-  margin-top: 15%;
-}
 .viso_caja_vacia {
   grid-column: 2 / span 2;
   height: 360px;

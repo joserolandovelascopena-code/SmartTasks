@@ -1208,11 +1208,15 @@ export const UI = {
 
     if (tasks.length === 0) {
       container.innerHTML = `
-      <article class="viso_boxVacia">
-        <div class="caja2">
-               <p>No hay actividades aún.</p>
-        </div>
-      </article>
+        <article class="panel-sinTareas">
+          <div class="contenedor-panel-sinTareas">
+            <div class="contenido-sinTareas">
+            <div>
+            </div>
+              <p>No hay actividades aún.</p>
+            </div>
+          </div>
+        </article>
     `;
 
       containerList.innerHTML = `
