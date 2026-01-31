@@ -5,7 +5,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
       return cache.addAll([
-        "/",
+        "./",
         "index.html",
         "offline.html",
 
@@ -68,7 +68,6 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// ACTIVACIÓN (limpiar caches viejos)
 self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
 });
@@ -87,7 +86,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Assets
   event.respondWith(
     caches.match(req).then((cached) => {
       return cached || fetch(req);
