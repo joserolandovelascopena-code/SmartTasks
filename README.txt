@@ -19,6 +19,8 @@ Estructura de SmartatTasks
 │     │       ├── auth.js 
 │     │       ├── ui.js (se ecarga delo visual en la app, pinta las peticiones del usuario) toastManager
 │     │       │
+│     │       ├── /ui
+│     │       │
 │     │       ├── /scheduler
 │     │       │   ├── scheduler.js       ← lógica de fechas y cálculos
 │     │       │   ├── reminders.js       ← notificaciones

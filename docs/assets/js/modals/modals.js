@@ -1,6 +1,6 @@
 //modals.js
 
-import { App } from "../app.js";
+import { App } from "../core/app.js";
 import { Storage } from "../storage.js";
 import { UI } from "../ui.js";
 import { Toast } from "../toastManager/toast.js";

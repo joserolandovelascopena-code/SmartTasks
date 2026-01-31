@@ -1,5 +1,5 @@
 // ui.js
-import { App } from "./app.js";
+import { App } from "./core/app.js";
 import { Toast } from "./toastManager/toast.js";
 import { OverlayManager } from "./overlayManager/overlayManager.js";
 import { ScrollBody } from "./modals/scrollModals.js";

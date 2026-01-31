@@ -1,15 +1,15 @@
 // app.js
-import { Storage } from "./storage.js";
-import { UI } from "./ui.js";
-import { supabaseClient } from "./supabase.js";
-import { Toast } from "./toastManager/toast.js";
-import { Sound } from "./toastManager/sound.js";
-import { ScrollBody } from "./modals/scrollModals.js";
+import { Storage } from "../storage.js";
+import { UI } from "../ui.js";
+import { supabaseClient } from "../supabase.js";
+import { Toast } from "../toastManager/toast.js";
+import { Sound } from "../toastManager/sound.js";
+import { ScrollBody } from "../modals/scrollModals.js";
 import {
   sanitizeAndValidate,
   sanitizeText,
   normalizeText,
-} from "./security/inputSanitizer.js";
+} from "../security/inputSanitizer.js";
 
 document.addEventListener(
   "pointerdown",
