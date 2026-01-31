@@ -8,9 +8,6 @@ import { OverlayManager } from "../overlayManager/overlayManager.js";
 import { ScrollBody } from "./scrollModals.js";
 import { Haptic } from "../toastManager/haptic.js";
 
-App.selectedDate = null;
-App.selectedDateEditar = null;
-
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.querySelectorAll(".openAdd");
   const contenAdd = document.querySelector(".subir_tarea");

@@ -1,6 +1,8 @@
 // app.js
 import { Storage } from "../storage.js";
 import { UI } from "../ui.js";
+import { UIST } from "../ui/ui.selectors.js";
+
 import { supabaseClient } from "../supabase.js";
 import { Toast } from "../toastManager/toast.js";
 import { Sound } from "../toastManager/sound.js";
@@ -46,9 +48,15 @@ export const App = {
   async loadTasks() {
     this.tasks = await Storage.getTasks();
   },
+
   async init() {
+    this.selectedDate = null;
+    this.selectedDateEditar = null;
+    this.selectedTime = null;
+
     await this.loadTasks();
 
+    UIST.init();
     Sound.init();
     Toast.init();
 

@@ -6,20 +6,50 @@ Estructura de SmartatTasks
 ├── /docs
 │     ├── /assets
 │     │   ├── /css
-│     │   │   ├── styles.css
-│     │   │   └── theme.css (Temas de index ya configurado)
+│     │   │   ├── /app-css
+│     │   │   │   ├── styles.css
+│     │   │   │   ├── style2.css
+│     │   │   │   └── styles3.css
+│     │   │   │ 
+│     │   │   └── /autentication-css
+│     │   │       ├── login.css
+│     │   │       ├── recover.css 
+│     │   │       ├── resetPass.css
+│     │   │       ├── signup.css
+│     │   │       └── verify.css
+│     │   │  
 │     │   ├── /icons
 │     │   │   ├── icon-192.png (logo app) 
 │     │   │   └── icon-512.png (igual logo app)
+│     │   │
 │     │   └── /js
-│     │       ├── app.js (app se encarga de las peticiones backend)
+│     │       ├── main.js (entrada del DOM)
 │     │       ├── charts.js ← (futuro V2)
 │     │       ├── storage.js 
 │     │       ├── supabase.js
 │     │       ├── auth.js 
-│     │       ├── ui.js (se ecarga delo visual en la app, pinta las peticiones del usuario) toastManager
+│     │       ├── ui.js (esta ui estoy modulado en /ui) en proceso de migración
+│     │       │
+│     │       ├── /core  
+│     │       │   ├── app.js (esta app esta en proceso de migración) aqui esta todo ahora mismo( vamos apasarlo)
+│     │       │   ├── auth.service.js
+│     │       │   ├── scheduler.service.js
+│     │       │   ├── ui.selectors.js
+│     │       │   └── task.service.js
 │     │       │
 │     │       ├── /ui
+│     │       │   ├── /templates 
+│     │       │   │   ├── empty.states.js
+│     │       │   │   ├── modals.templates.js
+│     │       │   │   ├── task.card.js
+│     │       │   │   └── task.details.js
+│     │       │   │  
+│     │       │   ├── events.js
+│     │       │   ├── render.details.js
+│     │       │   ├── render.tasks.js
+│     │       │   ├── ui.selectors.js
+│     │       │   └── TaskCalendar.js
+│     │       │
 │     │       │
 │     │       ├── /scheduler
 │     │       │   ├── scheduler.js       ← lógica de fechas y cálculos
@@ -50,6 +80,7 @@ Estructura de SmartatTasks
 │     │           │   ├── errorMsg.wav
 │     │           │   ├── warning.mp3
 │     │           │   └── succes.mp3
+│     │           │ 
 │     │           ├── haptic.js
 │     │           ├── sound.js
 │     │           └── toast.js

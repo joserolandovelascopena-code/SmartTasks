@@ -1,6 +1,5 @@
 import { supabaseClient } from "./supabase.js";
 
-
 //SIGN UP
 export async function signup(fullName, email, password) {
   const { data, error } = await supabaseClient.auth.signUp({
@@ -10,9 +9,9 @@ export async function signup(fullName, email, password) {
       emailRedirectTo:
         "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/verify.html",
       data: {
-        full_name: fullName
-      }
-    }
+        full_name: fullName,
+      },
+    },
   });
 
   if (error) throw error;
@@ -20,25 +19,22 @@ export async function signup(fullName, email, password) {
   return data.user;
 }
 
-
-//LOGIN 
+//LOGIN
 export async function login(email, password) {
   const { data, error } = await supabaseClient.auth.signInWithPassword({
     email,
-    password
+    password,
   });
 
-    if (error) {
-
+  if (error) {
     if (error.message.includes("Invalid login credentials")) {
       throw new Error("Correo o contraseña incorrectos");
     }
 
     throw error;
-}
+  }
 
   const user = data.user;
-
 
   const { data: profile } = await supabaseClient
     .from("profiles")
@@ -46,39 +42,37 @@ export async function login(email, password) {
     .eq("id", user.id)
     .single();
 
- 
   if (!profile) {
     await supabaseClient.from("profiles").insert({
       id: user.id,
       full_name: user.user_metadata.full_name ?? null,
-      avatar_url: null
+      avatar_url: null,
     });
   }
 
   return user;
 }
 
-
 export async function createProfile(userId, email) {
   const { error } = await supabaseClient.from("profiles").insert({
     id: userId,
     email,
     nombre: null,
-    foto_url: null
+    foto_url: null,
   });
 
   if (error) throw error;
 }
-
 
 export async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "./pages/autentication/login.html";
 }
 
-
 export async function protectRoute() {
-  const { data: { user } } = await supabaseClient.auth.getUser();
+  const {
+    data: { user },
+  } = await supabaseClient.auth.getUser();
 
   if (!user) {
     //window.location.href = "./pages/autentication/login.html";
@@ -91,12 +85,10 @@ export async function protectRoute() {
   }
 }
 
-
-
 export async function recoverPassword(email) {
   const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
     redirectTo:
-      "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/reset-password.html"
+      "https://joserolandovelascopena-code.github.io/SmartTasks/pages/autentication/reset-password.html",
   });
 
   if (error) throw error;
