@@ -5,7 +5,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
       return cache.addAll([
-        "./",
+        "/",
         "index.html",
         "offline.html",
 
@@ -77,14 +77,22 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
-  // Si es un documento HTML → NETWORK FIRST
-  if (req.destination === "document") {
-    event.respondWith(networkFirst(req));
+  // INTERCEPTAR NAVEGACIÓN SIEMPRE
+  if (req.mode === "navigate") {
+    event.respondWith(
+      caches.match("/index.html").then((cached) => {
+        return cached || fetch(req);
+      }),
+    );
     return;
   }
 
-  // Si es CSS/JS/IMG → CACHE FIRST
-  event.respondWith(cacheFirst(req));
+  // Assets
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      return cached || fetch(req);
+    }),
+  );
 });
 
 // NETWORK FIRST (para páginas)
