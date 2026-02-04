@@ -1,7 +1,10 @@
 // app.js
 import { Storage } from "../storage.js";
-import { UI } from "../ui.js";
+import { UI, initUIEvents } from "../ui.js";
 import { UIST } from "../ui/ui.selectors.js";
+import { TaskService } from "./task.service.js";
+import { AuthService } from "./auth.service.js";
+import { SchedulerService } from "./scheduler.service.js";
 
 import { supabaseClient } from "../supabase.js";
 import { Toast } from "../toastManager/toast.js";
@@ -59,19 +62,12 @@ export const App = {
     UIST.init();
     Sound.init();
     Toast.init();
+    initUIEvents(this);
 
-    const { data: sessionData } = await supabaseClient.auth.getSession();
-    if (!sessionData.session) return;
+    const user = await AuthService.getSessionUser();
+    if (!user) return;
 
-    const userId = sessionData.session.user.id;
-
-    const profile = await Storage.getProfile();
-    const totalTasks = await Storage.cantidadTasksPorUsuario(userId);
-
-    this.profile = {
-      ...profile,
-      totalTasks,
-    };
+    this.profile = await AuthService.buildProfile(user.id);
 
     // Render inicial
     UI.renderPerfile(this.profile);
@@ -132,56 +128,28 @@ export const App = {
     isAddingTask = true;
 
     try {
+      // 1. DOM (esto SÍ es responsabilidad de App)
       const input = document.getElementById("newTask");
       const descriptionTextarea = document.getElementById("descripcion");
 
-      const result = sanitizeAndValidate(input.value, {
-        min: 3,
-        max: 120,
+      // 2. Llamada al service
+      await TaskService.createTask({
+        text: input.value,
+        descripcion: descriptionTextarea?.value || "",
+        categoria: this.categoriaSeleccionada,
+        prioridad: this.prioridadSeleccionada,
+        selectedDate: this.selectedDate,
+        selectedTime: this.selectedTime,
       });
 
-      if (result.error) {
-        Toast.show(result.error, "error");
-        return false;
-      }
-
-      const safeText = result.value;
-
-      const description = descriptionTextarea
-        ? sanitizeText(normalizeText(descriptionTextarea.value))
-        : "";
-
-      const { data } = await supabaseClient.auth.getSession();
-      if (!data.session) {
-        Toast.show("Sesión inválida", "error");
-        return false;
-      }
-
-      const dueDate = App.selectedDate || null;
-      const dueTime = App.selectedTime ? `${App.selectedTime}:00` : null;
-
-      const nuevaTarea = {
-        text: safeText,
-        descripcion: description,
-        categoria: this.categoriaSeleccionada || "Ninguna",
-        prioridad: this.prioridadSeleccionada || "Ninguna",
-        done: false,
-        user_id: data.session.user.id,
-        created_at: new Date().toISOString(),
-
-        due_date: dueDate,
-        due_time: dueTime,
-        notify: false,
-        notify_before: null,
-        repeat_type: null,
-      };
-
-      await Storage.saveTask(nuevaTarea);
+      // 3. Estado
       await this.loadTasks();
 
+      // 4. UI
       UI.renderTasks(this.tasks);
       UI.renderTarjetas(this.tasks, true);
 
+      // 5. Reset UI
       input.value = "";
       if (descriptionTextarea) descriptionTextarea.value = "";
 
@@ -192,8 +160,8 @@ export const App = {
 
       return true;
     } catch (err) {
-      console.error("Error en addTask:", err);
-      Toast.show("Error inesperado", "error");
+      console.error("Error en addTask:", err.message);
+      Toast.show(err.message || "Error inesperado", "error");
       return false;
     } finally {
       isAddingTask = false;
@@ -244,7 +212,7 @@ export const App = {
       `#MarcarTask-${this.currentEditTaskId}`,
     );
 
-    const dueDate = App.selectedDateEditar || null;
+    const dueDate = SchedulerService.normalizeDueDate(App.selectedDateEditar);
 
     const fields = {
       text: safeText,
@@ -273,18 +241,19 @@ export const App = {
   },
 
   async getProfile() {
-    const { data: sessionData } = await supabaseClient.auth.getSession();
-    if (!sessionData.session) {
-      Toast.show("No hay sesión activa", "error");
+    const user = await AuthService.getSessionUser();
+    if (!user) {
+      Toast.show("No hay sesi??n activa", "error");
       return;
     }
 
-    const user_id = sessionData.session.user.id;
+    const user_id = user.id;
+    const profile = await AuthService.loadProfile();
+    this.profile = profile || this.profile;
 
-    const full_name = this.userProfile.full_name;
-    const avatar_url = this.userProfile.avatar_url;
-    const avatarHeader_url = this.userProfile.header_url;
-
+    const full_name = profile?.full_name || "";
+    const avatar_url = profile?.avatar_url || null;
+    const avatarHeader_url = profile?.header_url || null;
     const loaderUser = { full_name, avatar_url, avatarHeader_url, user_id };
 
     UI.renderPerfile(loaderUser);
@@ -342,12 +311,8 @@ export const App = {
   },
 
   async deleteAvatar() {
-    const { data } = await supabaseClient.auth.getSession();
-    const user = data?.session?.user;
-    if (!user) throw new Error("No hay sesión");
-
-    await Storage.updateAvatarUrl(null);
-    await Storage.deleteAvatarFile(user.id);
+    const user = await AuthService.requireSessionUser();
+    await AuthService.deleteAvatar(user.id);
 
     this.profile.avatar_url = null;
     UI.renderPerfile(this.profile);
@@ -358,12 +323,8 @@ export const App = {
   },
 
   async deleteHeader() {
-    const { data } = await supabaseClient.auth.getSession();
-    const user = data?.session?.user;
-    if (!user) throw new Error("No hay sesión");
-
-    await Storage.updateHeaderUrl(null);
-    await Storage.deleteHeaderFile(user.id);
+    const user = await AuthService.requireSessionUser();
+    await AuthService.deleteHeader(user.id);
 
     this.profile.header_url = null;
     UI.renderPerfile(this.profile);
