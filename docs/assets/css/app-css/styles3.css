@@ -66,7 +66,8 @@
 
 .headerInfo_Tarea {
   position: relative;
-  padding: 12px;
+  padding: 8px;
+  padding-right: 14px;
   background: #f9f9ff;
   display: grid;
   grid-template-columns: 50% auto;
@@ -90,21 +91,63 @@
 .optInfo_Tarea {
   display: flex;
   gap: 4px;
+  justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 0 2px rgb(201, 201, 201);
-  padding: 5px 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgb(116, 116, 116);
+  padding: 15px;
+  position: relative;
 }
 .optInfo_Tarea span {
-  color: #000138;
-  font-size: 20px;
+  color: rgb(146, 146, 146);
+  font-size: 18px;
+  position: absolute;
 }
 .optInfo_Tarea i {
-  color: #000138;
+  position: absolute;
+  color: rgb(146, 146, 146);
   padding: 0 6px;
-  font-size: 15px;
+  font-size: 13px;
+}
+
+.bubble-container {
+  position: absolute;
+  bottom: -40px; /* ajusta según tu UI */
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.bubble-title {
+  background: #ffffff;
+  color: #858484;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(2px) scale(0.95);
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px gainsboro;
+}
+
+/* Flechita */
+.bubble-title::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #f0f0f0;
+}
+
+.optInfo_Tarea:hover .bubble-title {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .layaut-InfoTask {
@@ -315,7 +358,6 @@
   margin: 0 0 16px 0;
   padding-left: 14px;
   grid-column: 1 / span 2;
-  font-size: 16px;
   font-weight: 700;
   color: #0f172a;
 

@@ -80,7 +80,7 @@ function crearSeccion(titulo) {
   const section = document.createElement("section");
   section.classList.add("seccion-tareas");
 
-  section.innerHTML = `<h3 class="titulo-seccion">${titulo}</h3>`;
+  section.innerHTML = `<h4 class="titulo-seccion">${titulo}</h4>`;
 
   return section;
 }
@@ -508,7 +508,7 @@ export function renderTarjetas(tasks, force = false) {
   }
 
   /* =========================
-     SECCIÃ“N 1 â€“ PENDIENTES
+     SECCION 1 DE PENDIENTES
   ========================= */
   const pendientes = tasks
     .filter((t) => !t.done)
