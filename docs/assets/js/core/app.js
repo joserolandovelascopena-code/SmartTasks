@@ -243,7 +243,7 @@ export const App = {
   async getProfile() {
     const user = await AuthService.getSessionUser();
     if (!user) {
-      Toast.show("No hay sesi??n activa", "error");
+      Toast.show("No hay sesión activa", "error");
       return;
     }
 

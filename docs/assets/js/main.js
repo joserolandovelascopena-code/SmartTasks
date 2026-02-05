@@ -38,4 +38,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const btn = document.getElementById("logoutBtn");
   if (btn) btn.onclick = () => logout();
+
+  if ("serviceWorker" in navigator) {
+    try {
+      await navigator.serviceWorker.register("./sw.js");
+    } catch (err) {
+      // Registro fallÃ³, no bloquea la app
+      console.warn("Service Worker no registrado:", err);
+    }
+  }
 });

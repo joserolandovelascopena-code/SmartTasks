@@ -1,0 +1,112 @@
+:root {
+  color-scheme: light;
+  --bg-1: #0f172a;
+  --bg-2: #1e293b;
+  --card: #0b1220;
+  --text: #f8fafc;
+  --muted: #cbd5f5;
+  --accent: #38bdf8;
+  --accent-dark: #0ea5e9;
+  --shadow: rgba(15, 23, 42, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(1200px 800px at 15% 10%, var(--bg-2), var(--bg-1));
+  color: var(--text);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.offline {
+  width: min(560px, 100%);
+}
+
+.offline__card {
+  background: linear-gradient(160deg, #0b1326 0%, #0b1220 70%);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 18px 40px var(--shadow);
+  text-align: center;
+}
+
+.offline__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.offline__title {
+  margin: 0 0 12px;
+  font-size: 28px;
+  letter-spacing: 0.2px;
+}
+
+.offline__subtitle {
+  margin: 0 0 24px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.offline__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.offline__btn {
+  border: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #03101a;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.25);
+}
+
+.offline__btn:active {
+  transform: translateY(1px);
+}
+
+.offline__link {
+  color: var(--text);
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+.offline__link:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  color: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .offline__card {
+    padding: 24px;
+  }
+
+  .offline__title {
+    font-size: 24px;
+  }
+}

@@ -7,7 +7,10 @@ import { UIState } from "./ui.state.js";
 import { initCalendarEditar } from "./TaskCalendar.js";
 import { getTaskListItemHtml } from "./templates/modals.templates.js";
 import { createTaskCard } from "./templates/task.card.js";
-import { getEmptyCardsHtml, getEmptyListHtml } from "./templates/empty.states.js";
+import {
+  getEmptyCardsHtml,
+  getEmptyListHtml,
+} from "./templates/empty.states.js";
 
 export function formatFechaPlano(dateStr) {
   if (!dateStr) return "Sin fecha";
@@ -15,7 +18,7 @@ export function formatFechaPlano(dateStr) {
   const [y, m, d] = dateStr.split("-").map(Number);
   const date = new Date(y, m - 1, d);
 
-  const dias = ["Dom", "Lun", "Mar", "MiÃ©", "Jue", "Vier", "SÃ¡b"];
+  const dias = ["Dom", "Lun", "Mar", "Mier", "Jue", "Vier", "Sab"];
   const meses = [
     "ene",
     "feb",
@@ -134,13 +137,10 @@ export function renderTasks(tasks) {
     const contenidoAviso = li.querySelector(".ContentAvisoDelete");
 
     function openAvisoDelete() {
-      li.querySelector(".btnGuardarCambios").addEventListener(
-        "click",
-        (e) => {
-          e.stopPropagation();
-          history.back();
-        },
-      );
+      li.querySelector(".btnGuardarCambios").addEventListener("click", (e) => {
+        e.stopPropagation();
+        history.back();
+      });
 
       // abrir
       avisoDelete.classList.add("active");
@@ -458,7 +458,7 @@ export function fillEditModal(li, task) {
   if (input) input.value = task.text;
   if (textarea) {
     textarea.value = task.descripcion ?? "";
-    textarea.placeholder = "No hay descripciÃ³n aÃºn.";
+    textarea.placeholder = "No hay descripción.";
   }
   li.querySelectorAll(".options2").forEach((o) => {
     o.classList.toggle("selected", o.dataset.categoria === task.categoria);
@@ -470,9 +470,7 @@ export function fillEditModal(li, task) {
 }
 
 export function renderCategoria() {
-  const opciones = document.querySelectorAll(
-    ".contenedor_categoria .options",
-  );
+  const opciones = document.querySelectorAll(".contenedor_categoria .options");
 
   opciones.forEach((op) => {
     op.addEventListener("click", () => {
@@ -533,7 +531,7 @@ export function renderTarjetas(tasks, force = false) {
   }
 
   /* =========================
-     SECCIÃ“N 2 â€“ COMPLETADAS
+     SECCION 2  COMPLETADAS
   ========================= */
   const completadas = tasks
     .filter((t) => t.done)
@@ -572,16 +570,14 @@ export function renderTarjetas(tasks, force = false) {
 
     Object.entries(agrupadas).forEach(([categoria, lista]) => {
       const secCat = crearSeccion(categoria);
-      lista
-        .sort(ordenarPorPrioridadYFecha)
-        .forEach((task) =>
-          secCat.appendChild(
-            createTaskCard(task, {
-              formatHoraPlano,
-              formatFechaPlano,
-            }),
-          ),
-        );
+      lista.sort(ordenarPorPrioridadYFecha).forEach((task) =>
+        secCat.appendChild(
+          createTaskCard(task, {
+            formatHoraPlano,
+            formatFechaPlano,
+          }),
+        ),
+      );
 
       container.appendChild(secCat);
     });
@@ -599,7 +595,7 @@ export function resetFechaHoraUI() {
   const fechaText = document.querySelector("#fecha .programacionTasks");
   const horaText = document.querySelector("#hora .programacionTasks");
 
-  if (fechaText) fechaText.textContent = "Fecha/DÃ­a";
+  if (fechaText) fechaText.textContent = "Fecha/Dí­a";
   if (horaText) horaText.textContent = "Hora";
 
   const datePicker = document.getElementById("datePicker");

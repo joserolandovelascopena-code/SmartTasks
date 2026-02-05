@@ -14,6 +14,7 @@ self.addEventListener("install", (event) => {
         "assets/css/app-css/style2.css",
         "assets/css/app-css/styles3.css",
         "assets/css/theme.css",
+        "assets/css/offline-css/styleOffline.css",
 
         // Core JS
         "assets/js/core/app.js",
@@ -66,6 +67,7 @@ self.addEventListener("install", (event) => {
       ]);
     }),
   );
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -79,17 +81,20 @@ self.addEventListener("fetch", (event) => {
   // INTERCEPTAR NAVEGACIÓN SIEMPRE
   if (req.mode === "navigate") {
     event.respondWith(
-      caches.match("/index.html").then((cached) => {
-        return cached || fetch(req);
-      }),
+      (async () => {
+        try {
+          return await fetch(req);
+        } catch (err) {
+          const cached = await caches.match("index.html");
+          return cached || caches.match("offline.html");
+        }
+      })(),
     );
     return;
   }
 
   event.respondWith(
-    caches.match(req).then((cached) => {
-      return cached || fetch(req);
-    }),
+    caches.match(req).then((cached) => cached || fetch(req)),
   );
 });
 

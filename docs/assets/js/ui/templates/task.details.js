@@ -9,9 +9,9 @@ export function getTaskDetailsHtml(task, helpers) {
       </div>
       <div class="panel-titulo">
         <h4>${task.text}</h4>
-        <p class="panel-sub">${task.categoria || "Sin categorÃ­a"} Â· ${
-    task.prioridad || "Sin prioridad"
-  }</p>
+        <p class="panel-sub">${task.categoria || "Sin categoría"} · ${
+          task.prioridad || "Sin prioridad"
+        }</p>
       </div>
     </header>
 
@@ -28,7 +28,7 @@ export function getTaskDetailsHtml(task, helpers) {
 
       <div class="panel-item">
         <i class="fa-solid fa-flag"></i>
-        <span>Prioridad: ${task.prioridad || "â€”"}</span>
+        <span>Prioridad: ${task.prioridad || "Sin prioridad"}</span>
       </div>
 
       <div class="panel-item">
@@ -39,7 +39,7 @@ export function getTaskDetailsHtml(task, helpers) {
 
     <section class="panel-notas">
       <h5>Notas</h5>
-      <p>${task.descripcion || "Sin descripciÃ³n."}</p>
+      <p>${task.descripcion || "Sin descripción."}</p>
     </section>
 
     <footer class="panel-acciones">

@@ -1,12 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Offiline</title>
+    <title>Offline | SmartTasks</title>
+    <link rel="stylesheet" href="assets/css/offline-css/styleOffline.css" />
+    <link rel="icon" href="assets/icons/icon-192.png" type="image/png" />
   </head>
   <body>
-    <h1>Sin conexión</h1>
-    <p>La app no pudo cargar contenido nuevo.</p>
+    <main class="offline">
+      <section class="offline__card">
+        <div class="offline__icon" aria-hidden="true">!</div>
+        <h1 class="offline__title">Sin conexion</h1>
+        <p class="offline__subtitle">
+          No hay internet en este momento. Puedes volver a intentarlo o revisar
+          tus tareas guardadas.
+        </p>
+        <div class="offline__actions">
+          <button
+            class="offline__btn"
+            type="button"
+            onclick="location.reload()"
+          >
+            Reintentar
+          </button>
+          <a class="offline__link" href="index.html">Ir al inicio</a>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

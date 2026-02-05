@@ -19,12 +19,24 @@
 }
 
 .contenedor-panel-sinTareas {
+  display: grid;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-
   height: 300px;
   width: 400px;
 
-  border: 1.5px solid #c9ceec;
+  border-radius: 8px;
+}
+
+.contenido-sinTareas svg {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+.contenido-sinTareas p {
+  color: #b9b9b9;
+  font-size: 14px;
 }
 
 .info_tarea {
@@ -563,5 +575,16 @@
   }
   .seccion-tareas {
     display: block;
+  }
+
+  .contenedor-panel-sinTareas {
+    width: 100%;
+
+    border-radius: 8px;
+  }
+  .contenido-sinTareas svg {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
   }
 }
