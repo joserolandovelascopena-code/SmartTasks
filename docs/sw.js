@@ -57,6 +57,7 @@ self.addEventListener("install", (event) => {
         "pages/autentication/signup.html",
         "pages/autentication/reset-password.html",
         "pages/autentication/recover.html",
+        "pages/calendarTasks/calendar.html",
         "pages/sttings.html",
         "pages/stats.html",
 
@@ -93,9 +94,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  event.respondWith(
-    caches.match(req).then((cached) => cached || fetch(req)),
-  );
+  event.respondWith(caches.match(req).then((cached) => cached || fetch(req)));
 });
 
 // NETWORK FIRST (para páginas)

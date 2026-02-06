@@ -285,7 +285,6 @@ h5 {
 #Titulo_app {
   margin: 0 0 0px 0px;
   font-size: 19px;
-  animation: aparecer 0.6s ease-in-out;
   text-align: center;
   color: #535353;
 }
@@ -306,7 +305,7 @@ h5 {
 }
 /*Barra superior principal*/
 .Barra_Superior_principal {
-  margin-top: 5px;
+  margin-top: 4px;
   border-radius: 10px;
   box-shadow: 0 0 3px gainsboro;
   z-index: 28;

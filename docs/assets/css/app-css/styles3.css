@@ -10,8 +10,8 @@
 
   background: linear-gradient(
     180deg,
-    rgba(248, 251, 255, 0.9),
-    rgba(240, 245, 255, 0.6)
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.6)
   );
 
   border: 1.5px solid #c9ceec;
@@ -67,7 +67,7 @@
 .headerInfo_Tarea {
   position: relative;
   padding: 8px;
-  padding-right: 14px;
+  padding-right: 25px;
   background: #f9f9ff;
   display: grid;
   grid-template-columns: 50% auto;
@@ -114,7 +114,7 @@
 
 .bubble-container {
   position: absolute;
-  bottom: -40px; /* ajusta según tu UI */
+  bottom: -44px;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
@@ -122,15 +122,16 @@
 }
 
 .bubble-title {
-  background: #ffffff;
-  color: #858484;
+  background: #000000;
+  color: #ffffff;
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 7px;
   font-size: 12px;
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(2px) scale(0.95);
+  transform: translateY(-2px) scale(0.95);
   transition: all 0.25s ease;
+  border: 1px solid gainsboro;
   box-shadow: 0 2px 10px gainsboro;
 }
 
@@ -138,14 +139,24 @@
 .bubble-title::after {
   content: "";
   position: absolute;
-  top: -6px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-bottom-color: #f0f0f0;
+  border-bottom-color: #000000;
 }
 
 .optInfo_Tarea:hover .bubble-title {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.iconheaderPerfil .bubble-container {
+  position: absolute;
+  bottom: -30px;
+}
+
+.iconheaderPerfil:hover .bubble-title {
   opacity: 1;
   transform: translateY(0) scale(1);
 }

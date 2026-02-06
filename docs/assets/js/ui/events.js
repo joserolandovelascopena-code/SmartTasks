@@ -163,4 +163,8 @@ export function registerUIEvents({ App, UI }) {
     const task = App.tasks.find((t) => t.id === id);
     if (task) renderPromandaTarea(task);
   });
+
+  document.getElementById("Calendario").addEventListener("click", () => {
+    window.location.href = "./pages/calendarTasks/calendar.html";
+  });
 }
