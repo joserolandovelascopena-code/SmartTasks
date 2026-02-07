@@ -6,6 +6,10 @@
     <title>SmartTasks | Calendario</title>
     <link rel="icon" href="../../assets/icons/icon-192.png" type="image/png" />
     <link rel="stylesheet" href="../../assets/css/app-css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/css/app-css/calendar-main-css/calendar-main.css"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,16 +63,35 @@
             <li class="titu">
               <p class="nav0">Opciones</p>
             </li>
-            <li class="funciones_smart" id="Hogar">
+            <li class="GoHome">
               <i class="fa-solid fa-house"></i>
               <p class="nav0">Inicio</p>
-              <h5 class="nav2">Inicio</h5>
             </li>
           </ul>
         </nav>
       </div>
 
-      <div class="contenFlooat"><p>hola</p></div>
+      <div class="contenFlooat">
+        <main class="contendorCalendarioTaks">
+          <header class="nav-calendar-main">
+            <h4>Calendario de tareas</h4>
+          </header>
+          <section class="contenedor-contenidoCalendario">
+            <article class="calendario-interfaz">
+              <div class="header-calendar">
+                <span><i class="fa-solid fa-angle-left"></i></span>
+                <h4>Febrero 2026</h4>
+                <span><i class="fa-solid fa-angle-right"></i></span>
+              </div>
+            </article>
+            <article class="lista-tareas-interfaz-calendar"></article>
+          </section>
+        </main>
+      </div>
     </div>
+    <script
+      type="module"
+      src="../../assets/js/ui/calendarMain/eventsCalendar.js"
+    ></script>
   </body>
 </html>

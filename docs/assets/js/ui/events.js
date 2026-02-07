@@ -54,7 +54,7 @@ export function registerUIEvents({ App, UI }) {
     UI.setPrioridad(element.dataset.prioridad);
   });
 
-  // PRIORIDAD â€“ EDITAR
+  // PRIORIDAD  EDITAR
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".btnProridadEdit");
     if (!btn) return;

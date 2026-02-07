@@ -629,7 +629,8 @@ h5 {
   grid-template-columns: 1fr;
   gap: 14px;
 }
-.funciones_smart {
+.funciones_smart,
+.GoHome {
   cursor: pointer;
   text-align: center;
   transition: 0.2s linear;
@@ -648,13 +649,15 @@ h5 {
   justify-content: center;
   padding: 3px;
 }
-.funciones_smart:hover {
+.funciones_smart:hover,
+.GoHome:hover {
   background: #1e2ce91a;
 }
 .funciones_smart p {
   margin: 0px 0;
 }
-.funciones_smart i {
+.funciones_smart i,
+.GoHome i {
   font-size: 15px;
   color: rgb(184, 182, 182);
 }
@@ -665,6 +668,10 @@ h5 {
 }
 /*Funciones por separado*/
 #Hogar {
+  display: flex;
+  gap: 8px;
+}
+.GoHome {
   display: flex;
   gap: 8px;
 }
@@ -2316,7 +2323,8 @@ h5 {
     width: 28px;
     height: 28px;
   }
-  .funciones_smart p {
+  .funciones_smart p,
+  .GoHome p {
     font-size: 13px;
   }
   .funciones_smart h5 {
@@ -2343,6 +2351,11 @@ h5 {
     padding-bottom: 0;
   }
   #Hogar {
+    display: grid;
+    gap: 2px;
+    margin-left: 0;
+  }
+  .GoHome {
     display: grid;
     gap: 2px;
     margin-left: 0;

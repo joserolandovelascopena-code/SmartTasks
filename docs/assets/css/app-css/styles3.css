@@ -47,7 +47,7 @@
   height: 98.7%;
   box-shadow: 0 0 3px gainsboro;
   transition: 0.1s ease;
-  border-radius: 12px;
+  border-radius: 7px;
   background: white;
   overflow: hidden;
 
@@ -73,6 +73,9 @@
   grid-template-columns: 50% auto;
   align-items: center;
   border-bottom: 1.5px solid #c9ceec;
+}
+.headerInfo_Tarea h4 {
+  font-weight: 600;
 }
 .btnOptInfo_Tarea {
   display: none;
@@ -369,7 +372,7 @@
   margin: 0 0 16px 0;
   padding-left: 14px;
   grid-column: 1 / span 2;
-  font-weight: 700;
+  font-weight: 600;
   color: #0f172a;
 
   position: relative;
