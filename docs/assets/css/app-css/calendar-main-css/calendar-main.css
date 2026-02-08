@@ -1,5 +1,6 @@
 body {
   background: #f5f4f8;
+  overflow: hidden;
 }
 .contendorCalendarioTaks {
   margin: 4px 0 4px 0;
@@ -94,8 +95,9 @@ body {
 
 .days {
   width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
-  border-spacing: 10px;
+  border-spacing: 11px;
 }
 
 .days td {
@@ -106,6 +108,9 @@ body {
   cursor: pointer;
   transition: 0.2s ease;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .days td.day-cell {
@@ -118,10 +123,19 @@ body {
   background: #dbe7ff;
 }
 
-.day-active {
-  background: #2facff !important;
+.days td.day-active {
+  background: #2facff;
   color: white;
   font-weight: 600;
+}
+
+.days td.TodayDate {
+  box-shadow: 0 0 0 2px #2facff;
+  color: #2facff;
+}
+
+.days td.TodayDate.day-active {
+  color: #ffffff;
 }
 
 .lista-tareas-interfaz-calendar {
@@ -166,6 +180,35 @@ body {
   display: grid;
   grid-template-columns: 5% auto;
   overflow: hidden;
+}
+
+.item-tarea {
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px gainsboro;
+  width: 99.3%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 5% auto;
+  overflow: hidden;
+}
+
+.item-tarea::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+
+  background: linear-gradient(90deg, #eef1ff 0%, #dbe7ff 45%, #eef1ff 90%);
+  background-size: 200% 100%;
+  animation: calendar-shimmer 0.8s ease-in-out infinite;
+
+  transition: opacity 0.2s ease;
+}
+
+.item-tarea.loading::before {
+  opacity: 1;
 }
 
 .item-tarea span {
@@ -230,12 +273,14 @@ body {
   }
 
   .contenedor-contenidoCalendario {
-    padding: 16px;
+    padding: 8px 0;
   }
 
   .calendario-interfaz {
     height: auto;
     padding: 12px;
+    height: 46vh;
+    box-shadow: 0 2px 2px gainsboro;
   }
 
   .header-calendar {
@@ -257,19 +302,25 @@ body {
     border-spacing: 6px;
   }
 
+  .days {
+    margin-top: 10px;
+  }
+
   .days th {
     font-size: 0.85rem;
     font-weight: 600;
   }
 
   .days td {
+    background: #f6faff;
     padding: 10px 0;
     border-radius: 7px;
     font-size: 0.92rem;
   }
 
   .lista-tareas-interfaz-calendar {
-    height: 46vh;
+    height: 38vh;
+    padding: 16px;
   }
 
   .lista-tareas-interfaz-calendar::-webkit-scrollbar {

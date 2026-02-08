@@ -637,6 +637,12 @@ h5 {
   padding: 4px;
   border-radius: 5px;
 }
+.Calendario {
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s linear;
+  border-radius: 5px;
+}
 .titu {
   padding: 3px;
 }
@@ -650,7 +656,8 @@ h5 {
   padding: 3px;
 }
 .funciones_smart:hover,
-.GoHome:hover {
+.GoHome:hover,
+.Calendario:hover {
   background: #1e2ce91a;
 }
 .funciones_smart p {
@@ -748,6 +755,8 @@ h5 {
 #Calendario span {
   color: rgb(184, 182, 182);
   font-size: 22px;
+  margin: 0;
+  padding: 0;
 }
 #cuenta {
   display: flex;
@@ -2285,9 +2294,6 @@ h5 {
     gap: 8px;
   }
 
-  .info_tarea {
-  }
-
   .viso_boxVacia {
     grid-column: 1 / span 3;
   }
@@ -2309,9 +2315,9 @@ h5 {
   }
   .nav-main {
     background: white;
-    border-top: 2px solid rgba(187, 187, 187, 0.699);
     border-radius: 0;
-    box-shadow: 0 0 0 rgb(0, 0, 0);
+    border-top: 1px solid rgb(238, 238, 238);
+    box-shadow: none;
     z-index: 20;
     position: fixed;
     bottom: 0;
@@ -2343,17 +2349,35 @@ h5 {
     margin-bottom: 0;
     padding-bottom: 0;
   }
-  .funciones_smart i {
+  .funciones_smart i,
+  .GoHome i {
     font-size: 22px;
     color: rgb(31, 31, 31);
     padding-top: 5px;
     margin-bottom: 0;
     padding-bottom: 0;
   }
+
+  #Calendario span {
+    color: rgb(31, 31, 31);
+    padding-top: 5px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+  }
+
   #Hogar {
     display: grid;
     gap: 2px;
     margin-left: 0;
+  }
+  #cuenta {
+    display: grid;
+    gap: 0px;
+    justify-content: center;
   }
   .GoHome {
     display: grid;
@@ -2376,10 +2400,6 @@ h5 {
   #Calendario {
     display: grid;
     gap: 0px;
-  }
-  #Calendario span {
-    color: rgb(184, 182, 182);
-    font-size: 25px;
   }
 
   .agregarCompu {

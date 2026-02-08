@@ -70,22 +70,24 @@ export function createTaskCard(task, { formatHoraPlano, formatFechaPlano }) {
 
 export function createTaskCalendar(task) {
   const item_task_list = document.createElement("div");
-  item_task_list.classList.add("item-tarea");
+  item_task_list.classList.add("item-tarea", "loading");
   item_task_list.dataset.id = task.id;
 
   item_task_list.innerHTML = `
-        <span></span>
-          <div class="contenido-item-tarea">
-            <h5>${task.text}</h5>
-            <div class="detalles-item">
-              <div><p>${task.categoria || "Sin categoría"} · ${
-                task.prioridad || "Sin prioridad"
-              }</p></div>
-              <div class="Icon-categoria">
-                <i class="Emoji-task"></i>
-              </div>
-            </div>
-          </div>
+    <span></span>
+    <div class="contenido-item-tarea">
+      <h5>${task.text}</h5>
+      <div class="detalles-item">
+        <div>
+          <p>${task.categoria || "Sin categoría"} · ${
+            task.prioridad || "Sin prioridad"
+          }</p>
+        </div>
+        <div class="Icon-categoria">
+          <i class="Emoji-task"></i>
+        </div>
+      </div>
+    </div>
   `;
 
   const icon = item_task_list.querySelector(".Emoji-task");
@@ -93,6 +95,13 @@ export function createTaskCalendar(task) {
   if (task.categoria && CATEGORIAS[task.categoria]) {
     icon.className = `Emoji-task fa-solid ${CATEGORIAS[task.categoria]}`;
   }
+
+  //
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      item_task_list.classList.remove("loading");
+    }, 200);
+  });
 
   return item_task_list;
 }

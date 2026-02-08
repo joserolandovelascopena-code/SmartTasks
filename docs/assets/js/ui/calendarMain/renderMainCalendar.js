@@ -42,18 +42,27 @@ function renderEmptyList(container, titleEl, dayLabel) {
 }
 
 function renderListForDate(container, titleEl, tasks, dateStr) {
-  if (!container) return;
+  if (!container || !titleEl) return;
+
   container.innerHTML = "";
 
-  const dayNumber = Number(dateStr.split("-")[2]);
-  const titleText = `Lista de tareas para dia ${dayNumber}`;
+  const [year, month, day] = dateStr.split("-").map(Number);
+
+  const titleText = `Lista de tareas para día ${day}`;
 
   if (!tasks || tasks.length === 0) {
     renderEmptyList(container, titleEl, titleText);
     return;
   }
 
-  if (titleEl) titleEl.textContent = titleText;
+  const today = new Date();
+
+  const isToday =
+    today.getFullYear() === year &&
+    today.getMonth() === month - 1 &&
+    today.getDate() === day;
+
+  titleEl.textContent = isToday ? "Lista de tareas para hoy" : titleText;
 
   tasks.forEach((task) => {
     container.appendChild(createTaskCalendar(task));

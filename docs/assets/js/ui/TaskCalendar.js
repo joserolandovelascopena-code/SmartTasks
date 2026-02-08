@@ -69,9 +69,20 @@ export function initCalendarMain(itemCalendar, options = {}) {
           }
 
           cell.onclick = () => {
-            Haptic.vibrateUi("success");
             if (onDaySelect) onDaySelect(dateStr);
           };
+
+          const today = new Date();
+
+          const isToday =
+            today.getFullYear() === year &&
+            today.getMonth() === month &&
+            today.getDate() === day;
+
+          if (isToday) {
+            cell.classList.add("TodayDate");
+            cell.title = "Hoy";
+          }
           day++;
         } else {
           cell.textContent = "";

@@ -97,6 +97,11 @@ html[data-theme="light"] {
 [data-theme="dark"] .funciones_smart p {
   color: #cacaca;
 }
+
+[data-theme="dark"] .Calendario {
+  color: #cacaca;
+}
+
 [data-theme="dark"] #tasksOptions button,
 #tasksOptions button i {
   color: rgb(190, 190, 190);
@@ -526,6 +531,10 @@ html[data-theme="light"] {
   }
 
   [data-theme="dark"] .openAdd i {
+    color: #dadada;
+  }
+
+  #Calendario span {
     color: #dadada;
   }
 
