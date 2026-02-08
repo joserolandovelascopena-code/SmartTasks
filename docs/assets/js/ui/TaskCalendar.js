@@ -5,13 +5,14 @@ import { monthNames } from "../utils/monthNames.js";
 import { Haptic } from "../toastManager/haptic.js";
 import { UIState } from "./ui.state.js";
 
-export function initCalendarMain(itemCalendar) {
+export function initCalendarMain(itemCalendar, options = {}) {
   const month_calendar_Year = itemCalendar.querySelector("#month-year");
   const daysContainer = itemCalendar.querySelector(".Container_days");
   const prevBtn = itemCalendar.querySelector(".prev-month");
   const nextBtn = itemCalendar.querySelector(".next-month");
   const headerCells = itemCalendar.querySelectorAll("thead th");
   const headerCalendar = itemCalendar.querySelector(".header-calendar");
+  const { hasTasksOnDate, onDaySelect, onMonthChange } = options;
 
   if (!month_calendar_Year || !daysContainer) return;
 
@@ -32,7 +33,7 @@ export function initCalendarMain(itemCalendar) {
     month_calendar_Year.textContent = `${monthNames[month]} ${year}`;
 
     const firstDay = new Date(year, month, 1).getDay();
-    const startDay = (firstDay + 6) % 7; // Monday = 0
+    const startDay = (firstDay + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     if (headerCells.length === 7) {
@@ -52,14 +53,24 @@ export function initCalendarMain(itemCalendar) {
 
       for (let i = 0; i < 7; i++) {
         const cell = document.createElement("td");
+        const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(
+          day,
+        ).padStart(2, "0")}`;
 
         cell.classList.add("day-cell");
         cell.style.animationDelay = `${dayIndex * 18}ms`;
 
         if (day <= daysInMonth) {
           cell.textContent = day;
+          cell.dataset.date = dateStr;
+
+          if (hasTasksOnDate?.(dateStr)) {
+            cell.classList.add("day-active");
+          }
+
           cell.onclick = () => {
             Haptic.vibrateUi("success");
+            if (onDaySelect) onDaySelect(dateStr);
           };
           day++;
         } else {
@@ -67,11 +78,14 @@ export function initCalendarMain(itemCalendar) {
         }
 
         dayIndex++;
+
         row.appendChild(cell);
       }
 
       daysContainer.appendChild(row);
     }
+
+    if (onMonthChange) onMonthChange({ year, month });
   }
 
   if (prevBtn) {

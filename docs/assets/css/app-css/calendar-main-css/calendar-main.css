@@ -105,6 +105,7 @@ body {
   padding: 12px 0;
   cursor: pointer;
   transition: 0.2s ease;
+  font-weight: 600;
 }
 
 .days td.day-cell {
@@ -128,12 +129,32 @@ body {
   overflow-y: auto;
   height: 23vh;
   margin-top: 10px;
+  padding-bottom: 20px;
 }
 
 .lista-tareas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  row-gap: 40px;
+  width: 99.4%;
+}
+
+.empty-calendar {
+  grid-column: 1 / span 3;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  position: relative;
+}
+
+.empy-content {
+  text-align: center;
+  color: #7c7f8c;
+  padding: 18px;
+  background: #f6f7fb;
+  border-radius: 10px;
 }
 
 .item-tarea {
@@ -160,6 +181,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.Icon-categoria {
+  padding-right: 8px;
 }
 
 .Icon-categoria i {
@@ -244,7 +269,11 @@ body {
   }
 
   .lista-tareas-interfaz-calendar {
-    height: 26vh;
+    height: 46vh;
+  }
+
+  .lista-tareas-interfaz-calendar::-webkit-scrollbar {
+    display: none;
   }
 
   .lista-tareas {
@@ -253,6 +282,11 @@ body {
   }
 
   .item-tarea {
+    width: 100%;
+  }
+
+  .empy-content {
+    position: absolute;
     width: 100%;
   }
 
