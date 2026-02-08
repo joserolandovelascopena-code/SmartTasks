@@ -1,9 +1,101 @@
 // TaskCalendar.js
 import { App } from "../core/app.js";
 import { OverlayManager } from "../overlayManager/overlayManager.js";
-import { monthNames } from "../modals/modals.js";
+import { monthNames } from "../utils/monthNames.js";
 import { Haptic } from "../toastManager/haptic.js";
 import { UIState } from "./ui.state.js";
+
+export function initCalendarMain(itemCalendar) {
+  const month_calendar_Year = itemCalendar.querySelector("#month-year");
+  const daysContainer = itemCalendar.querySelector(".Container_days");
+  const prevBtn = itemCalendar.querySelector(".prev-month");
+  const nextBtn = itemCalendar.querySelector(".next-month");
+  const headerCells = itemCalendar.querySelectorAll("thead th");
+  const headerCalendar = itemCalendar.querySelector(".header-calendar");
+
+  if (!month_calendar_Year || !daysContainer) return;
+
+  let currentDate = new Date();
+  const baseWeekdays = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+
+  function setHeaderLoading(isLoading) {
+    if (!headerCalendar) return;
+    headerCalendar.classList.toggle("loading", isLoading);
+  }
+
+  function renderMainCalendar() {
+    daysContainer.innerHTML = "";
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    month_calendar_Year.textContent = `${monthNames[month]} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const startDay = (firstDay + 6) % 7; // Monday = 0
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    if (headerCells.length === 7) {
+      const rotated = baseWeekdays
+        .slice(startDay)
+        .concat(baseWeekdays.slice(0, startDay));
+      headerCells.forEach((th, i) => {
+        th.textContent = rotated[i];
+      });
+    }
+
+    let day = 1;
+    let dayIndex = 0;
+
+    while (day <= daysInMonth) {
+      const row = document.createElement("tr");
+
+      for (let i = 0; i < 7; i++) {
+        const cell = document.createElement("td");
+
+        cell.classList.add("day-cell");
+        cell.style.animationDelay = `${dayIndex * 18}ms`;
+
+        if (day <= daysInMonth) {
+          cell.textContent = day;
+          cell.onclick = () => {
+            Haptic.vibrateUi("success");
+          };
+          day++;
+        } else {
+          cell.textContent = "";
+        }
+
+        dayIndex++;
+        row.appendChild(cell);
+      }
+
+      daysContainer.appendChild(row);
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      setHeaderLoading(true);
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderMainCalendar();
+      Haptic.vibrateUi("success");
+      window.setTimeout(() => setHeaderLoading(false), 320);
+    };
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      setHeaderLoading(true);
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderMainCalendar();
+      Haptic.vibrateUi("success");
+      window.setTimeout(() => setHeaderLoading(false), 320);
+    };
+  }
+
+  renderMainCalendar();
+}
 
 export function initCalendarEditar(li, task) {
   const monthYear = li.querySelector(".monthYearEditar");

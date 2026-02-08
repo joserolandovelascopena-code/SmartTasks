@@ -79,12 +79,120 @@
           <section class="contenedor-contenidoCalendario">
             <article class="calendario-interfaz">
               <div class="header-calendar">
-                <span><i class="fa-solid fa-angle-left"></i></span>
-                <h4>Febrero 2026</h4>
-                <span><i class="fa-solid fa-angle-right"></i></span>
+                <span class="prev-month" id="prev-month"
+                  ><i class="fa-solid fa-angle-left"></i
+                ></span>
+                <h4 id="month-year">Febrero 2026</h4>
+                <span class="next-month" id="next-month"
+                  ><i class="fa-solid fa-angle-right"></i
+                ></span>
               </div>
+
+              <table class="days">
+                <thead>
+                  <tr>
+                    <th>Lun</th>
+                    <th>Mar</th>
+                    <th>Mié</th>
+                    <th>Jue</th>
+                    <th>Vie</th>
+                    <th>Sáb</th>
+                    <th>Dom</th>
+                  </tr>
+                </thead>
+
+                <tbody class="Container_days">
+                  <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                  </tr>
+
+                  <tr>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                  </tr>
+
+                  <tr>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                  </tr>
+
+                  <tr>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                  </tr>
+                </tbody>
+              </table>
             </article>
-            <article class="lista-tareas-interfaz-calendar"></article>
+            <article class="lista-tareas-interfaz-calendar">
+              <h4>Lista de tareas</h4>
+              <dv class="lista-tareas">
+                <div class="item-tarea">
+                  <span></span>
+                  <div class="contenido-item-tarea">
+                    <h5>Leer libro de matematicas para mañana</h5>
+                    <div class="detalles-item">
+                      <div><p>Estudio . Baja</p></div>
+                      <div class="Icon-categoria">
+                        <i class="Emoji-task fa solid fa-apple-whole"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item-tarea">
+                  <span></span>
+                  <div class="contenido-item-tarea">
+                    <h5>Leer libro de matematicas para mañana</h5>
+                    <div class="detalles-item">
+                      <div><p>Estudio . Baja</p></div>
+                      <div class="Icon-categoria">
+                        <i class="Emoji-task fa solid fa-apple-whole"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item-tarea">
+                  <span></span>
+                  <div class="contenido-item-tarea">
+                    <h5>Leer libro de matematicas para mañana</h5>
+                    <div class="detalles-item">
+                      <div><p>Estudio . Baja</p></div>
+                      <div class="Icon-categoria">
+                        <i class="Emoji-task fa solid fa-apple-whole"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </dv>
+            </article>
           </section>
         </main>
       </div>
@@ -92,6 +200,10 @@
     <script
       type="module"
       src="../../assets/js/ui/calendarMain/eventsCalendar.js"
+    ></script>
+    <script
+      type="module"
+      src="../../assets/js/ui/calendarMain/renderMainCalendar.js"
     ></script>
   </body>
 </html>

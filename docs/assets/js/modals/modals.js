@@ -7,6 +7,7 @@ import { Toast } from "../toastManager/toast.js";
 import { OverlayManager } from "../overlayManager/overlayManager.js";
 import { ScrollBody } from "./scrollModals.js";
 import { Haptic } from "../toastManager/haptic.js";
+import { monthNames } from "../utils/monthNames.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.querySelectorAll(".openAdd");
@@ -63,21 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // fecha
 /*======================================= */
-export const monthNames = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-];
-
 let currentDate = new Date();
 let selectedDate = null;
 

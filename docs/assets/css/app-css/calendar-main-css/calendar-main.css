@@ -35,18 +35,32 @@ body {
 
 .calendario-interfaz {
   position: relative;
-  height: 55vh;
+  height: 62vh;
   box-shadow: 0 0 5px gainsboro;
   border-radius: 8px;
   padding: 10px;
 }
 
 .header-calendar {
-  width: 100%;
   display: grid;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: 40px 1fr 40px;
   align-items: center;
-  padding: 10px;
+  padding: 10px 15px;
+}
+
+.header-calendar h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.header-calendar.loading h4 {
+  color: transparent;
+  display: inline-block;
+  min-width: 140px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #eef1ff 0%, #dbe7ff 45%, #eef1ff 90%);
+  background-size: 200% 100%;
+  animation: calendar-shimmer 0.8s ease-in-out infinite;
 }
 
 .header-calendar span:first-child {
@@ -63,10 +77,14 @@ body {
 }
 
 .header-calendar span {
-  background: #e8e8fc;
-  padding: 5px 10px;
-  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: #eef1ff;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
   cursor: pointer;
+
   transition: 0.2s ease;
 }
 
@@ -74,7 +92,173 @@ body {
   scale: 0.95;
 }
 
+.days {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+
+.days td {
+  text-align: center;
+  background: #f1f3f9;
+  border-radius: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.days td.day-cell {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: calendar-day-in 240ms ease forwards;
+}
+
+.days td:hover {
+  background: #dbe7ff;
+}
+
+.day-active {
+  background: #2facff !important;
+  color: white;
+  font-weight: 600;
+}
+
 .lista-tareas-interfaz-calendar {
-  height: 28vh;
+  position: relative;
+  overflow-y: auto;
+  height: 23vh;
   margin-top: 10px;
+}
+
+.lista-tareas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.item-tarea {
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px gainsboro;
+  width: 99.3%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 5% auto;
+  overflow: hidden;
+}
+
+.item-tarea span {
+  background: #2facff !important;
+}
+.contenido-item-tarea {
+  padding: 9px;
+}
+
+.detalles-item {
+  font-size: 13px;
+  padding-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Icon-categoria i {
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+  background: #dbe7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes calendar-day-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes calendar-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .contendorCalendarioTaks {
+    margin: 0;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .nav-calendar-main {
+    padding: 10px 16px;
+    border-bottom-width: 1px;
+  }
+
+  .contenedor-contenidoCalendario {
+    padding: 16px;
+  }
+
+  .calendario-interfaz {
+    height: auto;
+    padding: 12px;
+  }
+
+  .header-calendar {
+    grid-template-columns: 34px 1fr 34px;
+    padding: 8px 6px;
+  }
+
+  .header-calendar h4 {
+    font-size: 1rem;
+  }
+
+  .header-calendar span {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+
+  .days {
+    border-spacing: 6px;
+  }
+
+  .days th {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .days td {
+    padding: 10px 0;
+    border-radius: 7px;
+    font-size: 0.92rem;
+  }
+
+  .lista-tareas-interfaz-calendar {
+    height: 26vh;
+  }
+
+  .lista-tareas {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .item-tarea {
+    width: 100%;
+  }
+
+  .Icon-categoria i {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+  }
 }

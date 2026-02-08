@@ -11,7 +11,7 @@ export const AuthService = {
   async requireSessionUser() {
     const user = await this.getSessionUser();
     if (!user) {
-      throw new Error("No hay sesiÃ³n");
+      throw new Error("No hay sesión");
     }
     return user;
   },

@@ -18,9 +18,6 @@ import "./ui.js";
 import "./ui/events.js";
 import "./ui/render.tasks.js";
 
-// Componentes
-import "./ui/TaskCalendar.js";
-
 // Modales y mensajes
 import "./modals/modals.js";
 import "./modals/warning_messages/warningMessages.js";

@@ -16,11 +16,16 @@ import {
   updateCarousel,
 } from "./ui/render.tasks.js";
 
+import { renderCalendar } from "./ui/calendarMain/renderMainCalendar.js";
+//import { renderTasksMainCalendar } from "./ui/calendarMain/renderMainCalendar.js";
+
 export const UI = {
   hasClickedTask: false,
 
   setPrioridad,
   renderTasks,
+  renderCalendar,
+  //renderTasksMainCalendar,
   renderTarjetas,
   renderPerfile,
   fillEditModal,

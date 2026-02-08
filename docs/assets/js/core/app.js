@@ -74,6 +74,7 @@ export const App = {
 
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks);
+    //UI.renderTasksMainCalendar(this.tasks);
     UI.initCarousel();
     UI.renderCategoria();
     UI.renderPrioridad();
