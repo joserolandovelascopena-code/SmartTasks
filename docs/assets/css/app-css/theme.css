@@ -490,6 +490,230 @@ html[data-theme="light"] {
 [data-theme="dark"] .card-objeto__titulo {
   color: white;
 }
+
+/* Panel info_tarea (dark) */
+[data-theme="dark"] .info_tarea {
+  background: #00020f;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .headerInfo_Tarea h4 {
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .optInfo_Tarea {
+  box-shadow: 0 0 0 1px var(--bordes-nav);
+  background: #0c1025;
+}
+
+[data-theme="dark"] .bubble-title {
+  background: #0c1025;
+  color: #e6e6e6;
+  border: 1px solid var(--bordes-nav);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .bubble-title::after {
+  border-bottom-color: #0c1025;
+}
+
+[data-theme="dark"] .progamadaTarea {
+  background: #0b0e22;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .panel-vacio {
+  color: #a8b3c7;
+}
+
+[data-theme="dark"] .panel-vacio i {
+  color: #7f8aa3;
+}
+
+[data-theme="dark"] .panel-detalle {
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .panel-emoji {
+  background: linear-gradient(145deg, #2a3b7a, #0a0f2a);
+  box-shadow: 0 6px 14px rgba(15, 25, 70, 0.45);
+}
+
+[data-theme="dark"] .panel-titulo h4 {
+  color: #e6e9f2;
+}
+
+[data-theme="dark"] .panel-sub {
+  color: #95a3b8;
+}
+
+[data-theme="dark"] .panel-item {
+  background: #0c1025;
+  color: #cdd6e3;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .panel-item i {
+  color: #68c1ff;
+}
+
+[data-theme="dark"] .panel-notas h5 {
+  color: #e6e9f2;
+}
+
+[data-theme="dark"] .panel-notas p {
+  color: #a8b3c7;
+}
+
+[data-theme="dark"] .btn-accion.completar {
+  background: #123b2a;
+  color: #a7f3d0;
+}
+
+[data-theme="dark"] .btn-accion.editar {
+  background: #0b2a3d;
+  color: #7dd3fc;
+}
+
+[data-theme="dark"] .card-objeto {
+  box-shadow: none;
+}
+
+[data-theme="dark"] .card-objeto__emoji {
+  background: linear-gradient(145deg, #38bdf8, #0284c7);
+  box-shadow: 0 6px 14px rgba(2, 132, 199, 0.35);
+}
+
+[data-theme="dark"] .card-objeto__info {
+  color: #cdd6e3;
+}
+
+[data-theme="dark"] .card-objeto__item {
+  background: #0c1025;
+  color: #cdd6e3;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .card-objeto__item i {
+  color: #68c1ff;
+}
+
+[data-theme="dark"] .card-objeto__editar {
+  background: #0b2a3d;
+  color: #7dd3fc;
+}
+
+/* Empty state cards (info_tarea) */
+[data-theme="dark"] .panel-sinTareas {
+  background: linear-gradient(180deg, #0b1026, #0b102680);
+  border: 1px solid var(--bordes-nav);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .contenedor-panel-sinTareas {
+  color: #a8b3c7;
+}
+
+[data-theme="dark"] .contenido-sinTareas p {
+  color: #8f9ab0;
+}
+
+/* Empty list (taskList) */
+[data-theme="dark"] .viso_caja_vacia {
+  background: linear-gradient(180deg, #0b1026, #0b102680);
+  border: 1px solid var(--bordes-nav);
+  box-shadow: none;
+  border-radius: 10px;
+}
+
+[data-theme="dark"] .viso_caja_vacia p {
+  color: #a8b3c7;
+}
+
+[data-theme="dark"] .caja {
+  background: transparent;
+}
+
+/* Calendario principal */
+[data-theme="dark"] .contendorCalendarioTaks {
+  background: #00020f;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .nav-calendar-main {
+  background: #00020f;
+  border-bottom: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .nav-calendar-main h4 {
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .calendario-interfaz {
+  background: #00020f;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .header-calendar span {
+  background: #0c1025;
+  color: #9dbfff;
+}
+
+[data-theme="dark"] .header-calendar.loading h4 {
+  background: linear-gradient(90deg, #1b223a 0%, #2b3350 45%, #1b223a 90%);
+}
+
+[data-theme="dark"] .days td {
+  background: #0c1025;
+  color: #e6e6e6;
+}
+
+[data-theme="dark"] .days td:hover {
+  background: #1a2447;
+}
+
+[data-theme="dark"] .days td.day-active {
+  background: #2facff;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .days td.TodayDate {
+  box-shadow: 0 0 0 2px #2facff;
+  color: #2facff;
+}
+
+[data-theme="dark"] .lista-tareas-interfaz-calendar h4 {
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .empy-content {
+  background: #0c1025;
+  color: #a9b0c0;
+}
+
+[data-theme="dark"] .item-tarea {
+  background: #00020f;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .item-tarea span {
+  background: #2facff !important;
+}
+
+[data-theme="dark"] .Icon-categoria i {
+  background: #0c1025;
+}
+
+[data-theme="dark"] .item-tarea::before {
+  background: linear-gradient(90deg, #020b36 0%, #0e192e 45%, #00051d 90%);
+}
+
 /*==============*/
 @media (max-width: 700px) {
   [data-theme="dark"] .calendar {

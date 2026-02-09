@@ -1,6 +1,6 @@
 body {
   background: #f5f4f8;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .contendorCalendarioTaks {
   margin: 4px 0 4px 0;
@@ -101,6 +101,7 @@ body {
 }
 
 .days td {
+  text-align: center;
   background: #f1f3f9;
   border-radius: 8px;
   padding: 12px 0;
@@ -111,16 +112,19 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
+.contenido-cell {
+  display: none;
+}
 .contenido-cell {
   display: flex;
-  gap: 8px;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.contenido-cell i {
+.emoji-calendar {
   font-size: 12px;
+  margin-right: 4px;
 }
 
 .days td.day-cell {
@@ -277,6 +281,7 @@ body {
   .contendorCalendarioTaks {
     margin: 0;
     height: 100vh;
+    overflow-y: auto;
     border-radius: 0;
   }
 
@@ -292,7 +297,6 @@ body {
   .calendario-interfaz {
     height: auto;
     padding: 12px;
-    height: 46vh;
     box-shadow: 0 2px 2px gainsboro;
   }
 
@@ -332,7 +336,7 @@ body {
   }
 
   .lista-tareas-interfaz-calendar {
-    height: 46vh;
+    height: 50vh;
     padding: 16px;
   }
 

@@ -132,10 +132,11 @@ export function initCalendarMain(itemCalendar, options = {}) {
           const frequent = getCategoryFrequently(tasksForDay);
 
           if (frequent && CATEGORIAS[frequent.categoria]) {
-            emoji.className = `fa-solid ${CATEGORIAS[frequent.categoria]}`;
+            emoji.className = `emoji-calendar fa-solid ${CATEGORIAS[frequent.categoria]}`;
             emoji.title = `${frequent.categoria} (${frequent.count})`;
           } else {
             emoji.className = "";
+            emoji.style.display = "none";
             emoji.removeAttribute("title");
           }
 

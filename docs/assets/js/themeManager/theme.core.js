@@ -31,10 +31,9 @@ export function applyTheme(theme) {
 
   if (!lightBtn || !darkBtn || !systemBtn) {
     console.warn("applyTheme: botones del theme no encontrados.");
-    return;
+  } else {
+    resetButtonStyles(lightBtn, darkBtn, systemBtn);
   }
-
-  resetButtonStyles(lightBtn, darkBtn, systemBtn);
 
   const navMain = qs(".nav-main");
   const iconsNav = qsa(".funciones_smart i");
