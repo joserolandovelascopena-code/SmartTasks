@@ -87,6 +87,7 @@ export async function renderCalendar() {
 
   initCalendarMain(CONTENEDOR_CALEDARIO_PRINCIPAL, {
     hasTasksOnDate: (dateStr) => tasksByDate.has(dateStr),
+    getTasksForDate: (dateStr) => tasksByDate.get(dateStr) || [],
     onDaySelect: (dateStr) => {
       const tasksForDay = tasksByDate.get(dateStr) || [];
       renderListForDate(

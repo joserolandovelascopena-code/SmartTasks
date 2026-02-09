@@ -12,16 +12,52 @@ export function initCalendarMain(itemCalendar, options = {}) {
   const nextBtn = itemCalendar.querySelector(".next-month");
   const headerCells = itemCalendar.querySelectorAll("thead th");
   const headerCalendar = itemCalendar.querySelector(".header-calendar");
-  const { hasTasksOnDate, onDaySelect, onMonthChange } = options;
+  const { hasTasksOnDate, getTasksForDate, onDaySelect, onMonthChange } =
+    options;
 
   if (!month_calendar_Year || !daysContainer) return;
 
   let currentDate = new Date();
   const baseWeekdays = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
+  const CATEGORIAS = {
+    Trabajo: "fa-briefcase",
+    Estudio: "fa-book",
+    Dieta: "fa-apple-whole",
+    Marketing: "fa-chart-line",
+    "Rutina diaria": "fa-person-running",
+    Fitness: "fa-dumbbell",
+    Festividades: "fa-church",
+    Vacaciones: "fa-umbrella-beach",
+  };
+
   function setHeaderLoading(isLoading) {
     if (!headerCalendar) return;
     headerCalendar.classList.toggle("loading", isLoading);
+  }
+
+  function getCategoryFrequently(tasksForDay) {
+    if (!Array.isArray(tasksForDay) || tasksForDay.length === 0) return null;
+
+    const counts = {};
+    tasksForDay.forEach((task) => {
+      const categoria = task?.categoria || "Ninguna";
+      counts[categoria] = (counts[categoria] || 0) + 1;
+    });
+
+    let maxCategoria = null;
+    let maxCount = 0;
+
+    Object.entries(counts).forEach(([categoria, count]) => {
+      if (count > maxCount) {
+        maxCategoria = categoria;
+        maxCount = count;
+      }
+    });
+
+    if (maxCount < 3) return null;
+
+    return { categoria: maxCategoria, count: maxCount };
   }
 
   function renderMainCalendar() {
@@ -53,6 +89,14 @@ export function initCalendarMain(itemCalendar, options = {}) {
 
       for (let i = 0; i < 7; i++) {
         const cell = document.createElement("td");
+
+        const div = document.createElement("div");
+        div.classList.add("contenido-cell");
+
+        const emoji = document.createElement("i");
+
+        const dayNumber = document.createElement("p");
+
         const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(
           day,
         ).padStart(2, "0")}`;
@@ -61,7 +105,7 @@ export function initCalendarMain(itemCalendar, options = {}) {
         cell.style.animationDelay = `${dayIndex * 18}ms`;
 
         if (day <= daysInMonth) {
-          cell.textContent = day;
+          dayNumber.textContent = day;
           cell.dataset.date = dateStr;
 
           if (hasTasksOnDate?.(dateStr)) {
@@ -83,6 +127,18 @@ export function initCalendarMain(itemCalendar, options = {}) {
             cell.classList.add("TodayDate");
             cell.title = "Hoy";
           }
+
+          const tasksForDay = getTasksForDate?.(dateStr) || [];
+          const frequent = getCategoryFrequently(tasksForDay);
+
+          if (frequent && CATEGORIAS[frequent.categoria]) {
+            emoji.className = `fa-solid ${CATEGORIAS[frequent.categoria]}`;
+            emoji.title = `${frequent.categoria} (${frequent.count})`;
+          } else {
+            emoji.className = "";
+            emoji.removeAttribute("title");
+          }
+
           day++;
         } else {
           cell.textContent = "";
@@ -91,6 +147,10 @@ export function initCalendarMain(itemCalendar, options = {}) {
         dayIndex++;
 
         row.appendChild(cell);
+
+        cell.appendChild(div);
+        div.appendChild(emoji);
+        div.appendChild(dayNumber);
       }
 
       daysContainer.appendChild(row);

@@ -101,7 +101,6 @@ body {
 }
 
 .days td {
-  text-align: center;
   background: #f1f3f9;
   border-radius: 8px;
   padding: 12px 0;
@@ -111,6 +110,17 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.contenido-cell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenido-cell i {
+  font-size: 12px;
 }
 
 .days td.day-cell {
@@ -261,6 +271,9 @@ body {
 }
 
 @media (max-width: 700px) {
+  .nav-main {
+    display: none;
+  }
   .contendorCalendarioTaks {
     margin: 0;
     height: 100vh;
@@ -319,7 +332,7 @@ body {
   }
 
   .lista-tareas-interfaz-calendar {
-    height: 38vh;
+    height: 46vh;
     padding: 16px;
   }
 
