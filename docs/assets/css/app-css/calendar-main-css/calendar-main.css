@@ -160,6 +160,25 @@ body {
   padding-bottom: 20px;
 }
 
+.lista-tareas-interfaz-calendar::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+  margin-left: 4px;
+}
+
+.lista-tareas-interfaz-calendar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.lista-tareas-interfaz-calendar::-webkit-scrollbar-thumb {
+  background: #adc1cc;
+  border-radius: 10px;
+}
+.lista-tareas-interfaz-calendar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .lista-tareas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

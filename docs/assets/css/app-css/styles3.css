@@ -421,6 +421,26 @@
   overflow-y: auto;
   height: 86vh;
 }
+
+.CardsTareas::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+  margin-left: 4px;
+}
+
+.CardsTareas::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.CardsTareas::-webkit-scrollbar-thumb {
+  background: #adc1cc;
+  border-radius: 10px;
+}
+.CardsTareas::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 /* ===== GRID ===== */
 .cards-grid {
   display: grid;
