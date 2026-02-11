@@ -597,6 +597,11 @@ html[data-theme="light"] {
   box-shadow: none;
 }
 
+[data-theme="dark"] .estadoTarea {
+  background: #0c1025;
+  color: rgb(212, 212, 212);
+}
+
 [data-theme="dark"] .card-objeto__emoji {
   background: linear-gradient(145deg, #38bdf8, #0284c7);
   box-shadow: 0 6px 14px rgba(2, 132, 199, 0.35);

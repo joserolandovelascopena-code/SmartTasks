@@ -93,6 +93,17 @@ body {
   scale: 0.95;
 }
 
+.day-tasks-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.day-tasks-header p {
+  font-size: 13px;
+  color: #7c7f8c;
+}
+
 .days {
   width: 100%;
   table-layout: fixed;
@@ -354,6 +365,9 @@ body {
     font-size: 0.92rem;
   }
 
+  .day-tasks-header {
+    display: grid;
+  }
   .lista-tareas-interfaz-calendar {
     height: 50vh;
     padding: 16px;

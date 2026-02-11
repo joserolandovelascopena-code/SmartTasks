@@ -69,6 +69,47 @@ function renderListForDate(container, titleEl, tasks, dateStr) {
   });
 }
 
+function buildResumenDesdeTareas(tasksForDay) {
+  if (!Array.isArray(tasksForDay) || tasksForDay.length === 0) return [];
+
+  const counts = new Map();
+  tasksForDay.forEach((task) => {
+    if (task?.done) return;
+    const categoria = task?.categoria || "Sin categoria";
+    counts.set(categoria, (counts.get(categoria) || 0) + 1);
+  });
+
+  return Array.from(counts.entries()).map(([categoria, total]) => ({
+    categoria,
+    total,
+  }));
+}
+
+function normalizeResumenRows(resumen) {
+  if (Array.isArray(resumen)) return resumen;
+  if (resumen && typeof resumen === "object") return [resumen];
+  return [];
+}
+
+function formatResumenDetalle(resumenRows) {
+  if (!Array.isArray(resumenRows) || resumenRows.length === 0)
+    return "0 tareas";
+
+  const total = resumenRows.reduce(
+    (acc, item) => acc + Number(item?.total || 0),
+    0,
+  );
+  const detalle = resumenRows
+    .map(
+      (item) =>
+        `${item?.categoria || "Sin categoria"} ${Number(item?.total || 0)}`,
+    )
+    .join(", ");
+
+  const label = total === 1 ? "tarea" : "tareas";
+  return `${total} ${label}: ${detalle}`;
+}
+
 export async function renderCalendar() {
   const CONTENEDOR_CALEDARIO_PRINCIPAL = document.querySelector(
     ".calendario-interfaz",
@@ -88,7 +129,7 @@ export async function renderCalendar() {
   initCalendarMain(CONTENEDOR_CALEDARIO_PRINCIPAL, {
     hasTasksOnDate: (dateStr) => tasksByDate.has(dateStr),
     getTasksForDate: (dateStr) => tasksByDate.get(dateStr) || [],
-    onDaySelect: (dateStr) => {
+    onDaySelect: async (dateStr) => {
       const tasksForDay = tasksByDate.get(dateStr) || [];
       renderListForDate(
         CONTENEDOR_LISTA_TAREAS,
@@ -96,6 +137,28 @@ export async function renderCalendar() {
         tasksForDay,
         dateStr,
       );
+
+      const detallesLista = document.querySelector(".day-tasks-detalles-dia");
+      if (detallesLista) detallesLista.textContent = "Cargando resumen...";
+
+      const userId = await Storage.getCurrentUserId();
+      if (!userId) {
+        if (detallesLista)
+          detallesLista.textContent = "Ocurrio un error inesperado";
+        return;
+      }
+
+      const resumenDb = await Storage.obtenerResumenPorDia(userId, dateStr);
+      const resumenRows = normalizeResumenRows(resumenDb);
+      const resumenFinal =
+        resumenRows.length > 0
+          ? resumenRows
+          : buildResumenDesdeTareas(tasksForDay);
+
+      if (detallesLista) {
+        detallesLista.textContent =
+          "(" + formatResumenDetalle(resumenFinal) + ")";
+      }
     },
     onMonthChange: () => {
       if (tituloLista) tituloLista.textContent = "Lista de tareas";

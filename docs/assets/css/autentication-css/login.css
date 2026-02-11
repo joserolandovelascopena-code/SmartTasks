@@ -151,7 +151,7 @@ body {
   border-top-left-radius: 25px;
   border-end-start-radius: 25px;
   color: rgb(94, 94, 94);
-  box-shadow: 0 0 10px gainsboro;
+  box-shadow: 0 0 5px rgb(168, 168, 168);
 }
 .Cuadro_info h1 {
   background: linear-gradient(90deg, #00e1ff, #ff0095ad, #92c5ff);
@@ -255,7 +255,7 @@ body {
   background: rgb(255, 255, 255);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  box-shadow: 0 0 5px rgb(211, 211, 211);
+  box-shadow: 0 0 5px rgb(168, 168, 168);
   position: relative;
 }
 #header_login {

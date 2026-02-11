@@ -123,6 +123,11 @@ const Storage = {
     return data ?? [];
   },
 
+  async getCurrentUserId() {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    return sessionData?.session?.user?.id ?? null;
+  },
+
   async saveTask(task) {
     try {
       const cleanTask = sanitizeTask(task);
@@ -259,6 +264,20 @@ const Storage = {
       console.error("Exception cantidadTasks:", err);
       return null;
     }
+  },
+
+  async obtenerResumenPorDia(userId, fecha) {
+    const { data, error } = await supabaseClient.rpc("resumen_tareas_por_dia", {
+      p_user_id: userId,
+      p_dia: fecha,
+    });
+
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data;
   },
 };
 export { Storage };

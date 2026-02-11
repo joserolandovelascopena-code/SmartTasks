@@ -55,7 +55,7 @@ export function initCalendarMain(itemCalendar, options = {}) {
       }
     });
 
-    if (maxCount < 3) return null;
+    if (maxCount < 2) return null;
 
     return { categoria: maxCategoria, count: maxCount };
   }
