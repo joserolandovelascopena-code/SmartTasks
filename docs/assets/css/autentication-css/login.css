@@ -375,7 +375,7 @@ body {
   width: 100%;
   border: none;
   color: #ffffff;
-  background: #000e1f;
+  background: linear-gradient(120deg, #0c1b3a, #1a2a6c 55%, #0c4a6e);
   font-weight: bold;
   font-size: 15px;
   cursor: pointer;
