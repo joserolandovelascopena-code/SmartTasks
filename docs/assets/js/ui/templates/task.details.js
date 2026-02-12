@@ -3,6 +3,12 @@ export function getTaskDetailsHtml(task, helpers) {
   const { formatFechaPlano, formatHoraPlano, getIconCategoria } = helpers;
 
   return `
+    <div class="panel-mobile-sheet-header">
+      <button type="button" class="panel-mobile-close" aria-label="Cerrar detalle">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
     <header class="panel-header">
       <div class="panel-emoji">
         <i class="fa-solid ${getIconCategoria(task.categoria)}"></i>

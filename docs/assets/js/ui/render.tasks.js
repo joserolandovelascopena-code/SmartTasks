@@ -227,6 +227,10 @@ export function renderTasks(tasks) {
 
       App.currentEditTaskId = task.id;
       App.currentEditTask = { ...task };
+      App.selectedDateEditar = task.due_date || null;
+      App.selectedTimeEditar = task.due_time
+        ? String(task.due_time).split(":").slice(0, 2).join(":")
+        : null;
       App.prioridadSeleccionada = task.prioridad;
 
       App.categoriaSeleccionada = task.categoria;
@@ -255,6 +259,7 @@ export function renderTasks(tasks) {
       ScrollBody.enableBodyScroll();
 
       li?._restoreDate?.();
+      li?._restoreTime?.();
 
       contenedorEditar.classList.remove("active");
       modalEditar.classList.remove("active");

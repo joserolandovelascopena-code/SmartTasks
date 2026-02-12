@@ -155,6 +155,7 @@ body {
 }
 .Cuadro_info h1 {
   background: linear-gradient(90deg, #00e1ff, #ff0095ad, #92c5ff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 46px;
@@ -514,12 +515,17 @@ body {
   }
   .Cuadro_info h1 {
     background: linear-gradient(80deg, #00e1ff, #ff0095, #92c5ff);
+
+    background-clip: text;
     -webkit-background-clip: text;
+
     -webkit-text-fill-color: transparent;
+
     font-size: 38px;
     background-size: 300% 300%;
     animation: mover 10s ease infinite;
   }
+
   .Cuadro_info {
     padding: 28px;
   }

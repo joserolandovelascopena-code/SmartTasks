@@ -210,6 +210,29 @@ export function getTaskListItemHtml(task) {
                       </div>
                     </article>
                   </section>
+
+                  <section class="contenedorRelojEditar">
+                    <article class="relojEditar">
+                      <header class="reloj-headerEditar">
+                        Seleccionar hora
+                      </header>
+
+                      <div class="reloj-bodyEditar">
+                        <div class="horaFormadaEditar"><h5>00 : 00 a.m.</h5></div>
+
+                        <div class="selectedHoraEditar">
+                          <div class="listaHoraEditar"></div>
+                          <span>:</span>
+                          <div class="listaMinutoEditar"></div>
+                        </div>
+                      </div>
+
+                      <div class="btnsOpcionesRelojEditar">
+                        <button class="cancelarHoraEditar">Cancelar</button>
+                        <button class="aceptarHoraEditar">Aceptar</button>
+                      </div>
+                    </article>
+                  </section>
                 </div>
               </div>
             </div>

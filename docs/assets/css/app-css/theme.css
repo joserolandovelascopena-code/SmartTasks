@@ -432,15 +432,29 @@ html[data-theme="light"] {
 [data-theme="dark"] .reloj {
   background: #00031d;
 }
+[data-theme="dark"] .relojEditar {
+  background: #00031d;
+}
 [data-theme="dark"] .reloj-body {
+  background: #131b30;
+  box-shadow: none;
+}
+[data-theme="dark"] .reloj-bodyEditar {
   background: #131b30;
   box-shadow: none;
 }
 [data-theme="dark"] .horaFormada h5 {
   background: #1e2136b2;
 }
+[data-theme="dark"] .horaFormadaEditar h5 {
+  background: #1e2136b2;
+}
 
 [data-theme="dark"] .listaHora {
+  background: #0c1025;
+  border: 1.8px solid #0f172a;
+}
+[data-theme="dark"] .listaHoraEditar {
   background: #0c1025;
   border: 1.8px solid #0f172a;
 }
@@ -449,18 +463,35 @@ html[data-theme="light"] {
   background: #0c1025;
   border: 1.8px solid #0f172a;
 }
+[data-theme="dark"] .listaMinutoEditar {
+  background: #0c1025;
+  border: 1.8px solid #0f172a;
+}
 
 [data-theme="dark"] .opcionHora {
+  color: #fff;
+}
+[data-theme="dark"] .opcionHoraEditar {
   color: #fff;
 }
 [data-theme="dark"] .cancelarHora {
   background: #151b2c;
   color: #a7a7a7;
 }
+[data-theme="dark"] .cancelarHoraEditar {
+  background: #151b2c;
+  color: #a7a7a7;
+}
 [data-theme="dark"] .reloj-header {
   color: #ffffff;
 }
+[data-theme="dark"] .reloj-headerEditar {
+  color: #ffffff;
+}
 [data-theme="dark"] .opcionHora:hover {
+  background: #262647;
+}
+[data-theme="dark"] .opcionHoraEditar:hover {
   background: #262647;
 }
 
@@ -581,6 +612,25 @@ html[data-theme="light"] {
 
 [data-theme="dark"] .panel-notas p {
   color: #a8b3c7;
+}
+
+[data-theme="dark"] .task-sheet-modal__backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .task-sheet-modal__content {
+  background: #00020f;
+  border-top: 1px solid var(--bordes-nav);
+}
+
+[data-theme="dark"] .task-sheet-modal__handle {
+  background: #334155;
+}
+
+[data-theme="dark"] .panel-mobile-close {
+  background: #111827;
+  color: #d1d5db;
+  border: 1px solid var(--bordes-nav);
 }
 
 [data-theme="dark"] .btn-accion.completar {
@@ -771,6 +821,9 @@ html[data-theme="light"] {
     background: #00020f;
   }
   [data-theme="dark"] .contenedorReloj {
+    background: rgba(53, 53, 53, 0.473);
+  }
+  [data-theme="dark"] .contenedorRelojEditar {
     background: rgba(53, 53, 53, 0.473);
   }
   /*==============*/

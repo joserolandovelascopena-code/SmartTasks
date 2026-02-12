@@ -107,6 +107,8 @@ export function registerUIEvents({ App, UI }) {
     const { container, empty, panel } = getPromandaElements();
     if (!container || !panel || !empty) return;
 
+    if (e.target.closest(".task-sheet-modal__content")) return;
+
     if (
       empty.classList.contains("hidden") &&
       !container.contains(e.target) &&

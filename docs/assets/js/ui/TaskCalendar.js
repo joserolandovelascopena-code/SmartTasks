@@ -3,7 +3,6 @@ import { App } from "../core/app.js";
 import { OverlayManager } from "../overlayManager/overlayManager.js";
 import { monthNames } from "../utils/monthNames.js";
 import { Haptic } from "../toastManager/haptic.js";
-import { UIState } from "./ui.state.js";
 
 export function initCalendarMain(itemCalendar, options = {}) {
   const month_calendar_Year = itemCalendar.querySelector("#month-year");
@@ -188,6 +187,13 @@ export function initCalendarEditar(li, task) {
   const daysContainer = li.querySelector(".calendar-daysEditar");
   const calendar = li.querySelector(".calendarEditar");
   const contenedor = li.querySelector(".contenedorCalendarioEditar");
+  const relojContenedor = li.querySelector(".contenedorRelojEditar");
+  const reloj = li.querySelector(".relojEditar");
+  const hourSelect = li.querySelector(".listaHoraEditar");
+  const minuteSelect = li.querySelector(".listaMinutoEditar");
+  const horaFormadaText = li.querySelector(".horaFormadaEditar h5");
+  const duracionBtn = li.querySelector(".duracion");
+  const duracionLabel = li.querySelector(".duracion p");
 
   if (!monthYear || !daysContainer) return;
 
@@ -202,20 +208,201 @@ export function initCalendarEditar(li, task) {
     return new Date(y, m - 1, d);
   }
 
+  function parseLocalTime(timeStr) {
+    if (!timeStr) return null;
+
+    const [h, m] = timeStr.split(":");
+    const hour = Number(h);
+    const minute = Number(m);
+
+    if (!Number.isInteger(hour) || !Number.isInteger(minute)) return null;
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) return null;
+
+    return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  }
+
+  function formatTime12h(hour24, minute) {
+    let hour = Number(hour24);
+    const ampm = hour >= 12 ? "p.m." : "a.m.";
+    hour = hour % 12 || 12;
+    return `${hour} : ${minute} ${ampm}`;
+  }
+
   let selectedDate = task.due_date ? parseLocalDate(task.due_date) : null;
-  UIState.originalSelectedDate = selectedDate ? new Date(selectedDate) : null;
+  const originalSelectedDate = selectedDate ? new Date(selectedDate) : null;
+  let selectedTime = parseLocalTime(task.due_time);
+  const originalSelectedTime = selectedTime;
 
   let currentDate = selectedDate ? new Date(selectedDate) : new Date();
+  let tempHour = selectedTime ? selectedTime.split(":")[0] : null;
+  let tempMinute = selectedTime ? selectedTime.split(":")[1] : null;
 
   function restaurarFechaOriginal() {
-    selectedDate = UIState.originalSelectedDate
-      ? new Date(UIState.originalSelectedDate)
+    selectedDate = originalSelectedDate ? new Date(originalSelectedDate) : null;
+    App.selectedDateEditar = selectedDate
+      ? selectedDate.toISOString().split("T")[0]
       : null;
 
     renderCalendar();
   }
 
+  function actualizarTextoHoraEditar() {
+    if (!duracionLabel) return;
+    duracionLabel.textContent = selectedTime || "Duracion";
+  }
+
+  function actualizarHoraFormada() {
+    if (!horaFormadaText) return;
+    if (tempHour === null || tempMinute === null) {
+      horaFormadaText.textContent = "00 : 00 a.m.";
+      return;
+    }
+
+    horaFormadaText.textContent = formatTime12h(tempHour, tempMinute);
+  }
+
+  function activarSeleccionHora(contenedor, elemento) {
+    if (!contenedor || !elemento) return;
+    contenedor
+      .querySelectorAll(".opcionHoraEditar")
+      .forEach((o) => o.classList.remove("active"));
+    elemento.classList.add("active");
+  }
+
+  function centrarElemento(contenedor, elemento) {
+    if (!contenedor || !elemento) return;
+    const target =
+      elemento.offsetTop - contenedor.clientHeight / 2 + elemento.clientHeight / 2;
+    contenedor.scrollTo({ top: target, behavior: "auto" });
+  }
+
+  function activarPorScroll(contenedor, tipo) {
+    if (!contenedor || contenedor.dataset.scrollReady === "1") return;
+
+    let ticking = false;
+    contenedor.addEventListener("scroll", () => {
+      if (ticking) return;
+
+      window.requestAnimationFrame(() => {
+        const opciones = [...contenedor.children];
+        if (!opciones.length) {
+          ticking = false;
+          return;
+        }
+
+        const centro = contenedor.scrollTop + contenedor.clientHeight / 2;
+        let seleccionado = opciones[0];
+
+        opciones.forEach((op) => {
+          const opCentro = op.offsetTop + op.offsetHeight / 2;
+          const seleccionadoCentro =
+            seleccionado.offsetTop + seleccionado.offsetHeight / 2;
+          if (Math.abs(opCentro - centro) < Math.abs(seleccionadoCentro - centro)) {
+            seleccionado = op;
+          }
+        });
+
+        activarSeleccionHora(contenedor, seleccionado);
+
+        if (tipo === "hora") tempHour = seleccionado.textContent;
+        if (tipo === "minuto") tempMinute = seleccionado.textContent;
+
+        actualizarHoraFormada();
+        ticking = false;
+      });
+
+      ticking = true;
+    });
+
+    contenedor.dataset.scrollReady = "1";
+  }
+
+  function crearOpcionesHora() {
+    if (!hourSelect || !minuteSelect) return;
+    if (hourSelect.dataset.ready === "1") return;
+
+    for (let h = 0; h < 24; h++) {
+      const div = document.createElement("div");
+      div.className = "opcionHoraEditar";
+      div.textContent = String(h).padStart(2, "0");
+      div.onclick = () => {
+        tempHour = div.textContent;
+        activarSeleccionHora(hourSelect, div);
+        actualizarHoraFormada();
+        Haptic.vibrateUi("success");
+      };
+      hourSelect.appendChild(div);
+    }
+
+    for (let m = 0; m < 60; m++) {
+      const div = document.createElement("div");
+      div.className = "opcionHoraEditar";
+      div.textContent = String(m).padStart(2, "0");
+      div.onclick = () => {
+        tempMinute = div.textContent;
+        activarSeleccionHora(minuteSelect, div);
+        actualizarHoraFormada();
+        Haptic.vibrateUi("success");
+      };
+      minuteSelect.appendChild(div);
+    }
+
+    activarPorScroll(hourSelect, "hora");
+    activarPorScroll(minuteSelect, "minuto");
+
+    hourSelect.dataset.ready = "1";
+    minuteSelect.dataset.ready = "1";
+  }
+
+  function syncSelectorTiempo() {
+    if (!hourSelect || !minuteSelect) return;
+
+    const hourOption = tempHour
+      ? [...hourSelect.children].find((el) => el.textContent === tempHour)
+      : null;
+    const minuteOption = tempMinute
+      ? [...minuteSelect.children].find((el) => el.textContent === tempMinute)
+      : null;
+
+    if (hourOption) {
+      activarSeleccionHora(hourSelect, hourOption);
+      centrarElemento(hourSelect, hourOption);
+    } else {
+      hourSelect
+        .querySelectorAll(".opcionHoraEditar")
+        .forEach((o) => o.classList.remove("active"));
+      hourSelect.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    if (minuteOption) {
+      activarSeleccionHora(minuteSelect, minuteOption);
+      centrarElemento(minuteSelect, minuteOption);
+    } else {
+      minuteSelect
+        .querySelectorAll(".opcionHoraEditar")
+        .forEach((o) => o.classList.remove("active"));
+      minuteSelect.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }
+
+  function restaurarHoraOriginal() {
+    selectedTime = originalSelectedTime;
+    App.selectedTimeEditar = selectedTime;
+
+    if (selectedTime) {
+      [tempHour, tempMinute] = selectedTime.split(":");
+    } else {
+      tempHour = null;
+      tempMinute = null;
+    }
+
+    syncSelectorTiempo();
+    actualizarHoraFormada();
+    actualizarTextoHoraEditar();
+  }
+
   li._restoreDate = restaurarFechaOriginal;
+  li._restoreTime = restaurarHoraOriginal;
 
   function renderCalendar() {
     daysContainer.innerHTML = "";
@@ -275,13 +462,10 @@ export function initCalendarEditar(li, task) {
     }
   }
 
-  li.querySelector(".fechaEditar").addEventListener(
-    "click",
-    openCalendarEditar,
-    (e) => {
-      e.stopPropagation();
-    },
-  );
+  li.querySelector(".fechaEditar")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openCalendarEditar();
+  });
 
   function openCalendarEditar() {
     contenedor.classList.add("show");
@@ -311,6 +495,30 @@ export function initCalendarEditar(li, task) {
     history.back();
   };
 
+  duracionBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    crearOpcionesHora();
+    syncSelectorTiempo();
+    actualizarHoraFormada();
+    openRelojEditar();
+  });
+
+  li.querySelector(".cancelarHoraEditar")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    restaurarHoraOriginal();
+    history.back();
+  });
+
+  li.querySelector(".aceptarHoraEditar")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (tempHour === null || tempMinute === null) return;
+
+    selectedTime = `${tempHour}:${tempMinute}`;
+    App.selectedTimeEditar = selectedTime;
+    actualizarTextoHoraEditar();
+    history.back();
+  });
+
   li.querySelector(".prevMonthEditar").onclick = () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar();
@@ -327,4 +535,24 @@ export function initCalendarEditar(li, task) {
     calendar.classList.remove("show");
     setTimeout(() => contenedor.classList.remove("show"), 200);
   }
+
+  function openRelojEditar() {
+    if (!relojContenedor || !reloj) return;
+
+    relojContenedor.classList.add("show");
+    reloj.classList.add("show");
+
+    history.pushState({ reloj_editar: true }, "", "#reloj-editar");
+    OverlayManager.push("close-RelojEditar", cerrarRelojEditar);
+  }
+
+  function cerrarRelojEditar() {
+    if (!relojContenedor || !reloj) return;
+
+    reloj.classList.remove("show");
+    setTimeout(() => relojContenedor.classList.remove("show"), 200);
+  }
+
+  actualizarTextoHoraEditar();
+  actualizarHoraFormada();
 }

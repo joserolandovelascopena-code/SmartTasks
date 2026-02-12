@@ -47,6 +47,7 @@ export const App = {
   selectedDate: null,
   selectedDateEditar: null,
   selectedTime: null,
+  selectedTimeEditar: null,
 
   async loadTasks() {
     this.tasks = await Storage.getTasks();
@@ -56,6 +57,7 @@ export const App = {
     this.selectedDate = null;
     this.selectedDateEditar = null;
     this.selectedTime = null;
+    this.selectedTimeEditar = null;
 
     await this.loadTasks();
 
@@ -213,7 +215,10 @@ export const App = {
       `#MarcarTask-${this.currentEditTaskId}`,
     );
 
-    const dueDate = SchedulerService.normalizeDueDate(App.selectedDateEditar);
+    const { due_date, due_time } = SchedulerService.normalizeDueDateTime(
+      App.selectedDateEditar,
+      App.selectedTimeEditar,
+    );
 
     const fields = {
       text: safeText,
@@ -222,13 +227,16 @@ export const App = {
       descripcion: descResult.value,
       done: checkboxEditar ? checkboxEditar.checked : taskActual.done,
 
-      due_date: dueDate,
+      due_date,
+      due_time,
     };
 
     await Storage.SaveUpdateTask(this.currentEditTaskId, fields);
 
     this.currentEditTaskId = null;
     this.currentEditTask = null;
+    this.selectedDateEditar = null;
+    this.selectedTimeEditar = null;
 
     await this.loadTasks();
     UI.renderTasks(this.tasks);
