@@ -431,8 +431,10 @@ const VisualizarFotoBorder = document.querySelector(".borderActiveImg");
 const btnAceptarCambiosFoto = document.querySelector(".btnAceptar button");
 const BtnLoaderCambiarFoto = document.querySelector(".cajaBtnLoader");
 const trasitionPreviewHeader = document.querySelector(".ImgVisualizarHeader");
+const DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
 function openEditorFotos() {
+  syncEditorPreviewFromProfile();
   editorPerfil.classList.add("show");
   contenidoEditarFotos.classList.add("show");
 
@@ -448,6 +450,20 @@ function closeEditorFotos() {
   btnAceptarCambiosFoto.classList.remove("active");
 }
 
+function syncEditorPreviewFromProfile() {
+  const cache = `?t=${Date.now()}`;
+  const avatarUrl = App.profile?.avatar_url;
+  const headerUrl = App.profile?.header_url;
+
+  if (previewImg) {
+    previewImg.src = avatarUrl ? `${avatarUrl}${cache}` : DEFAULT_AVATAR;
+  }
+
+  if (previewImgHeader) {
+    previewImgHeader.src = headerUrl ? `${headerUrl}${cache}` : "";
+  }
+}
+
 openEditarFotos.forEach((op) => {
   op.addEventListener("click", openEditorFotos);
 });
@@ -460,11 +476,17 @@ btnCerrarEditor.addEventListener("click", (e) => {
 });
 
 inputFotoPerfil.addEventListener("click", () => {
+  inputFotoPerfil.value = "";
+  selectedAvatarFile = null;
   VisualizarFotoBorder.classList.remove("show");
   btnAceptarCambiosFoto.classList.remove("active");
+  syncEditorPreviewFromProfile();
 });
 
 inputFotoHeader.addEventListener("click", () => {
+  inputFotoHeader.value = "";
+  selectedHeaderFile = null;
+  syncEditorPreviewFromProfile();
   previewHeader.classList.add("show");
   trasitionPreviewHeader.classList.add("show");
 });
