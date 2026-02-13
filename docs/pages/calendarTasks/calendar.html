@@ -76,6 +76,14 @@
         <main class="contendorCalendarioTaks">
           <header class="nav-calendar-main">
             <h4>Calendario de tareas</h4>
+            <div class="herramientas-utils">
+              <div class="OpenbusadorTareasCalendario">
+                <div>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+              </div>
+              <i class="fa-solid fa-ellipsis-vertical openMod"></i>
+            </div>
           </header>
           <section class="contenedor-contenidoCalendario">
             <article class="calendario-interfaz">
@@ -157,6 +165,20 @@
                 <p class="day-tasks-detalles-dia"></p>
               </div>
               <dv class="lista-tareas"> </dv>
+            </article>
+          </section>
+
+          <section
+            class="buscador___conenedor"
+            data-overlay-close="history-back"
+            aria-hidden="true"
+          >
+            <article class="contenido___buscador" role="dialog" aria-modal="true">
+              <div class="buscador__input">
+                <form>
+                  <input type="search" placeholder="Busca una tarea" />
+                </form>
+              </div>
             </article>
           </section>
         </main>
