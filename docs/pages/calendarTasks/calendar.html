@@ -173,11 +173,22 @@
             data-overlay-close="history-back"
             aria-hidden="true"
           >
-            <article class="contenido___buscador" role="dialog" aria-modal="true">
+            <article
+              class="contenido___buscador"
+              role="dialog"
+              aria-modal="true"
+            >
               <div class="buscador__input">
-                <form>
-                  <input type="search" placeholder="Busca una tarea" />
+                <form class="form-buscador-calendario">
+                  <input
+                    id="search-task-calendar"
+                    type="search"
+                    placeholder="Busca una tarea"
+                  />
                 </form>
+              </div>
+              <div class="resul_buscar">
+                <div class="contenedor_card_resul_busqueda"></div>
               </div>
             </article>
           </section>
