@@ -910,7 +910,7 @@ html[data-theme="light"] {
 }
 
 [data-theme="dark"] .search-card-editor {
-  background: #08122f;
+  background: #050a1f;
   border-color: #203560;
 }
 
@@ -1022,5 +1022,21 @@ html[data-theme="light"] {
   }
   [data-theme="dark"] .options2 {
     background: #1d1f4dc9;
+  }
+
+  /*Calendario*/
+  [data-theme="dark"] .calendario-interfaz {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid var(--bordes-nav);
+  }
+  [data-theme="dark"] .days th {
+    opacity: 0.5;
+  }
+
+  [data-theme="dark"] .days td {
+    background: transparent;
+    color: #e6e6e6;
   }
 }

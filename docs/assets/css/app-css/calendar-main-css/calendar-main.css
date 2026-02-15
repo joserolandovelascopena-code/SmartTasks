@@ -282,6 +282,10 @@ body {
   min-height: 58px;
   resize: vertical;
 }
+.search-card-editor textarea:focus {
+  outline: none;
+  border-color: #2facff;
+}
 
 .search-card-editor label {
   font-size: 12px;
@@ -658,23 +662,20 @@ body {
   }
 
   .days {
-    border-spacing: 6px;
-  }
-
-  .days {
+    border-spacing: 6px 10px;
     margin-top: 10px;
   }
 
   .days th {
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: normal;
   }
 
   .days td {
     background: #f6faff;
     padding: 10px 0;
     border-radius: 7px;
-    font-size: 0.92rem;
+    font-size: 13px;
   }
 
   .day-tasks-header {
