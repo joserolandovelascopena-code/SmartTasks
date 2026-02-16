@@ -832,69 +832,6 @@ h5 {
   padding: 5px;
 }
 
-.targetas_info {
-  height: 46vh;
-  position: relative;
-}
-
-.carousel-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  justify-content: center;
-}
-
-/* carrusel */
-.carousel {
-  margin-left: 30%;
-  width: 240px;
-  height: 410px;
-  display: flex;
-  gap: 30px;
-  padding: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  perspective: 1200px;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* tarjetas */
-.card {
-  min-width: 200px;
-  height: 240px;
-  cursor: pointer;
-  background: #fff;
-  padding: 20px;
-  border-radius: 18px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-  transition:
-    transform 0.4s ease,
-    opacity 0.4s ease,
-    filter 0.4s ease;
-}
-
-/* estados */
-.card.inactive-left {
-  transform: scale(0.8) rotateY(22deg);
-  opacity: 0.5;
-  filter: blur(1px);
-}
-.card.inactive-right {
-  transform: scale(0.8) rotateY(-22deg);
-  opacity: 0.5;
-  filter: blur(1px);
-}
-.card.active {
-  transform: scale(0.9) translateY(-20px);
-  opacity: 1;
-}
-
 /* Agregar tareas*/
 .Nav_addTasks {
   display: grid;
@@ -1096,37 +1033,46 @@ h5 {
   height: 34px;
 }
 .CateIcons {
-  padding: 4px;
-  border-radius: 6px;
+  position: relative;
+  font-size: 12px;
+  padding-top: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef3ff;
+  color: #2e4e92;
 }
-.CateIcons {
-  font-size: 13px;
-}
+
 .task-cat {
-  background: linear-gradient(
-    40deg,
-    rgb(250, 252, 255),
-    rgb(236, 236, 236),
-    rgb(247, 247, 248)
-  );
-  border-bottom: 3px solid rgb(217, 222, 233);
-  font-size: 14px;
-  border-radius: 8px;
-  color: #069caf;
+  background: #f7f9ff;
+  border: 1px solid #e1e8fb;
+  font-size: 13px;
+  border-radius: 999px;
+  color: #2d487f;
   text-align: center;
-  font-size: 14px;
   position: absolute;
   width: 100%;
-  padding: 6px 6px;
+  padding: 5px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 .task-pro {
-  font-size: 14px;
-  padding: 6px 6px;
-  border-radius: 8px;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 999px;
   text-align: center;
-  border-bottom: 3px solid rgb(217, 222, 233);
+  border: 1px solid #e1e8fb;
+  background: #f8fafc;
+  color: #475569;
   position: absolute;
   width: 100%;
+  font-weight: 700;
 }
 
 /*Horario*/
@@ -1383,69 +1329,99 @@ h5 {
   opacity: 0;
 }
 .List_check h4 {
-  font-weight: bold;
+  font-weight: normal;
 }
 .task-item {
   display: grid;
   grid-template-columns: 48% auto 2%;
-  box-shadow: 0 0 5px rgba(170, 170, 170, 0.781);
-  gap: 20px;
-  transition: 0.9s ease-out;
-  padding: 12px;
-  font-size: 18px;
-  margin-bottom: 8px;
-  border-radius: 8px;
+
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.08);
+  border: 1px solid #e5ecff;
+  gap: 16px;
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease,
+    opacity 0.24s ease;
+  padding: 14px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border-radius: 16px;
   margin-block-end: 15px;
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+  position: relative;
+}
+.task-item:hover {
+  transform: none;
+  box-shadow: 0 14px 34px rgba(30, 64, 175, 0.14);
+  border-color: #c8d8ff;
 }
 .CategoriasProridad {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 10px;
+  align-items: center;
 }
 .task-text {
   cursor: pointer;
 
-  padding-top: 6px;
-  margin-left: 8px;
+  padding-top: 3px;
+  margin-left: 2px;
   font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.35;
+  font-family: "Inter", sans-serif;
 }
 .box_tasks_text {
   display: grid;
-  grid-template-columns: 5% auto;
+  grid-template-columns: 22px minmax(0, 1fr);
   gap: 8px;
+  align-items: start;
 }
 
 .task-text.done {
   text-decoration: line-through;
-  opacity: 0.6;
+  opacity: 0.65;
   animation: popCkeck2 0.4s ease-in-out;
 }
 
 .task-item.done {
-  background: #7998ff38;
-  transition: background 0.25s ease;
+  background: #e7efff;
+  border-color: #bfd2ff;
+}
+
+.task-item.completing {
+  border-color: #60a5fa;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+}
+
+.task-item.remove-complete {
+  animation: taskItemDismiss 0.36s ease forwards;
 }
 
 .check {
-  appearance: none; /* Quita el estilo del sistema */
+  appearance: none;
   -webkit-appearance: none;
   width: 22px;
   height: 22px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
+  border: 2px solid #bfccf3;
+  border-radius: 7px;
   cursor: pointer;
-  transition: 0.25s ease;
+  transition: 0.2s ease;
   position: relative;
-  margin-top: 6px;
+  margin-top: 2px;
+  background: #fff;
 }
 
 .check:hover {
-  border-color: #4a60de;
+  border-color: #5f81d8;
+  transform: translateY(-1px);
 }
 
 .check:checked {
-  background: #4a59de;
-  border-color: #4ad9de;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  border-color: #2563eb;
 }
 
 .check:checked::before {
@@ -1455,6 +1431,44 @@ h5 {
   position: absolute;
   top: -2px;
   left: 4px;
+}
+
+.check:checked::before {
+  content: "\2713";
+  color: white;
+  font-size: 13px;
+  position: absolute;
+  top: 1px;
+  left: 5px;
+}
+
+.task-item .openEditar {
+  color: #6b7ba6;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.task-item .openEditar:hover {
+  color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+@keyframes taskItemDismiss {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    max-height: 140px;
+    margin-bottom: 10px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(12px) scale(0.96);
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .viso_caja_vacia {
@@ -1492,6 +1506,7 @@ h5 {
 }
 .editar_item {
   position: fixed;
+  inset: 0;
   display: none;
   z-index: 50;
 }
@@ -1607,6 +1622,7 @@ h5 {
 
 .tarea-completada h4 {
   font-size: 14px;
+  font-weight: bold;
 }
 
 .check-completada {
@@ -1694,6 +1710,9 @@ h5 {
 .options2 p {
   margin: 0;
   font-size: 14px;
+}
+.options2 i {
+  font-size: 18px;
 }
 .options2:hover {
   background-color: #020580;
@@ -2004,10 +2023,10 @@ h5 {
 
 .modal {
   position: fixed;
-  z-index: 29;
+  z-index: 95;
   inset: 0;
-  background: rgba(5, 2, 53, 0.6);
-  backdrop-filter: blur(5px);
+  background: rgba(9, 15, 30, 0.52);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2024,20 +2043,18 @@ h5 {
 
 /* Caja del modal */
 .modal-content {
-  padding: 40px 50px;
-  border-radius: 20px;
+  padding: 32px 40px;
+  border-radius: 24px;
   text-align: center;
-  background: linear-gradient(100deg, #000135, #001bb1, #00012e);
-  background-size: 600% 600%;
-  animation: mover 4s ease infinite;
-  border: 1px solid #02048077;
-  border-bottom: 8px solid #02048077;
+  background: linear-gradient(145deg, #0f2358, #11327a 55%, #1a4d9d);
+  border: 1px solid rgba(130, 178, 255, 0.4);
+  box-shadow: 0 24px 55px rgba(3, 13, 39, 0.45);
 }
 .backgraud-content {
   transform: scale(0.6);
   opacity: 0;
-  animation: modalIn 0.4s ease forwards;
-  border-radius: 20px;
+  animation: modalIn 0.45s ease forwards;
+  border-radius: 24px;
 }
 /* Animación entrada modal */
 @keyframes modalIn {
@@ -2053,33 +2070,34 @@ h5 {
 
 /* Ícono animado */
 .check-anim {
-  background: linear-gradient(30deg, #a9d2dd, #c3f4fc);
-  width: 100px;
-  height: 100px;
+  background: linear-gradient(35deg, #d7e7ff, #f0f7ff);
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
-  border: 5px solid #7100da;
+  border: 4px solid #8bb5ff;
   position: relative;
   margin: auto;
+  box-shadow: inset 0 -6px 16px rgba(29, 78, 216, 0.15);
 }
 .check-anim.show {
-  animation: pop 0.1s ease forwards 0.1s;
+  animation: pop 0.22s ease forwards;
 }
 
 .check-anim::after {
   content: "";
   position: absolute;
-  width: 25px;
-  height: 50px;
+  width: 21px;
+  height: 40px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border-bottom-left-radius: 9px;
-  border-right: 8px solid #001aff;
-  border-bottom: 8px solid #ae00ff;
+  border-right: 7px solid #1d4ed8;
+  border-bottom: 7px solid #10b981;
   transform: rotate(38deg) translate(8px, -5px);
-  top: 10px;
-  left: 18px;
+  top: 13px;
+  left: 20px;
   opacity: 0;
-  animation: drawCheck 0.4s ease forwards 0.2s;
+  animation: drawCheck 0.35s ease forwards 0.18s;
 }
 
 /* Animación círculo */
@@ -2136,12 +2154,13 @@ h5 {
 }
 
 .titulo-modal {
-  margin-top: 20px;
-  padding: 5px;
+  margin-top: 16px;
+  padding: 4px 8px;
   border-radius: 12px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #00d9ff;
+  font-size: 23px;
+  font-weight: 700;
+  color: #ecf5ff;
+  letter-spacing: 0.2px;
   animation: Titulo-fade 0.8s ease-in-out;
 }
 /*=================================================*/
@@ -2231,21 +2250,6 @@ h5 {
     width: 100%;
   }
 
-  .targetas_info {
-    margin-top: 3px;
-    grid-column: 1 / span 1;
-  }
-  .carousel {
-    margin-left: 10%;
-    width: 240px;
-    height: 400px;
-  }
-
-  /* tarjetas */
-  .card {
-    min-width: 220px;
-    height: 300px;
-  }
   .List_check {
     padding: 0px;
     box-shadow: 0 0 0px rgba(220, 220, 220, 0);
@@ -2258,39 +2262,41 @@ h5 {
     padding: 4px;
     max-height: 600px;
     padding-block-end: 10px;
+    margin-bottom: 30px;
   }
   .task-item {
     display: grid;
-    grid-template-columns: 90% 3%;
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr) 16px;
+    gap: 10px;
+    border-radius: 16px;
+    padding: 12px;
   }
   .CategoriasProridad {
     display: grid;
-    grid-template-columns: 40% auto;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
   .task-pro {
     font-size: 13px;
-    padding: 5px 0;
-    width: 80px;
+    padding: 7px 8px;
+    width: 100%;
   }
   .task-cat {
     font-size: 13px;
-    padding: 5px 0;
-    width: 120px;
+    width: 100%;
   }
   .contentCatPro {
     position: relative;
-    height: 40px;
+    height: 36px;
     display: flex;
-    gap: 5px;
+    gap: 0;
     align-items: center;
   }
 
   .box_tasks_text {
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 2;
     display: grid;
-    grid-template-columns: 7% auto;
+    grid-template-columns: 22px minmax(0, 1fr);
     gap: 8px;
   }
 
@@ -2318,7 +2324,7 @@ h5 {
     border-radius: 0;
     border-top: 1px solid rgb(238, 238, 238);
     box-shadow: none;
-    z-index: 20;
+    z-index: 31;
     position: fixed;
     bottom: 0;
     height: 48px;
@@ -2503,14 +2509,14 @@ h5 {
   }
 
   .check-anim {
-    width: 80px;
-    height: 80px;
+    width: 74px;
+    height: 74px;
   }
   .check-anim::after {
-    width: 20px;
+    width: 18px;
     height: 30px;
     top: 10px;
-    left: 10px;
+    left: 15px;
   }
   /*subir tarea*/
 

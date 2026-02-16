@@ -182,9 +182,13 @@
   border: 1.5px solid #c9ceec;
   background: #f9fbff;
   padding: 16px;
-
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+.progamadaTarea::-webkit-scrollbar {
+  display: none;
 }
 
 /* ===== ESTADO VACÍO ===== */
@@ -724,7 +728,7 @@
   }
   .layaut-InfoTask {
     grid-template-columns: auto;
-    padding: 5px;
+    padding: 0px;
   }
   .opcionesNav_info_tarea {
     justify-content: right;
@@ -743,8 +747,11 @@
   }
   .CardsTareas {
     grid-template-columns: auto;
-    overflow: hidden;
-    height: auto;
+    height: 90vh;
+    padding: 6px;
+  }
+  .CardsTareas::-webkit-scrollbar {
+    display: none;
   }
 
   .progamadaTarea {

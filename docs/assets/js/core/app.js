@@ -77,7 +77,7 @@ export const App = {
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks);
     //UI.renderTasksMainCalendar(this.tasks);
-    UI.initCarousel();
+
     UI.renderCategoria();
     UI.renderPrioridad();
 
@@ -117,8 +117,9 @@ export const App = {
       if (!e.target.classList.contains("btnGuardarCambios")) return;
 
       e.stopPropagation();
-      await App.editeTasks();
+      const ok = await App.editeTasks();
       ScrollBody.enableBodyScroll();
+      if (ok) history.back();
     });
   },
 
@@ -209,7 +210,14 @@ export const App = {
       return false;
     }
 
-    const taskActual = this.tasks.find((t) => t.id === this.currentEditTaskId);
+    const taskActual =
+      this.tasks.find((t) => t.id === this.currentEditTaskId) ||
+      this.currentEditTask;
+
+    if (!taskActual) {
+      Toast.show("No se encontró la tarea a editar", "error");
+      return false;
+    }
 
     const checkboxEditar = modalActivo.querySelector(
       `#MarcarTask-${this.currentEditTaskId}`,
@@ -268,16 +276,41 @@ export const App = {
     UI.renderPerfile(loaderUser);
   },
 
-  async toggleTask(id, done, fromEdit = false) {
-    this.tasks = this.tasks.map((t) => (t.id === id ? { ...t, done } : t));
+  async toggleTask(id, done, options = {}) {
+    let fromEdit = false;
+    let renderTaskList;
+    let renderCards = true;
 
-    if (done && !fromEdit) {
-      mostrarModalCompletado();
+    if (typeof options === "boolean") {
+      fromEdit = options;
+    } else {
+      fromEdit = Boolean(options.fromEdit);
+      renderTaskList = options.renderTaskList;
+      renderCards = options.renderCards ?? true;
     }
 
-    await Storage.updateTask(id, { done });
+    const shouldRenderTaskList =
+      typeof renderTaskList === "boolean" ? renderTaskList : !fromEdit;
 
-    UI.renderTarjetas(this.tasks, true);
+    const applyToggle = async () => {
+      this.tasks = this.tasks.map((t) => (t.id === id ? { ...t, done } : t));
+      await Storage.updateTask(id, { done });
+      if (shouldRenderTaskList) {
+        UI.renderTasks(this.tasks);
+      }
+      if (renderCards) {
+        UI.renderTarjetas(this.tasks, true);
+      }
+    };
+
+    if (done && !fromEdit) {
+      mostrarModalCompletado(() => {
+        void applyToggle();
+      });
+      return;
+    }
+
+    await applyToggle();
   },
 
   async deleteTask(id) {
@@ -359,11 +392,17 @@ export const App = {
 };
 
 //Completado animacion
-function mostrarModalCompletado() {
+function mostrarModalCompletado(onClose = null) {
   const modal = document.getElementById("modalCompletado");
+  if (!modal) {
+    if (typeof onClose === "function") onClose();
+    return;
+  }
+
   const anim = modal.querySelector(".modal-content");
   const backgraud_Content = modal.querySelector(".backgraud-content");
   const tituloModal = modal.querySelector(".titulo-modal");
+  const checkAnim = modal.querySelector(".check-anim");
 
   // Reiniciar animaciones
   anim.style.animation = "none";
@@ -378,9 +417,16 @@ function mostrarModalCompletado() {
   tituloModal.offsetHeight;
   tituloModal.style.animation = "";
 
+  if (checkAnim) {
+    checkAnim.classList.remove("show");
+    void checkAnim.offsetWidth;
+    checkAnim.classList.add("show");
+  }
+
   modal.classList.add("show");
 
   setTimeout(() => {
     modal.classList.remove("show");
+    if (typeof onClose === "function") onClose();
   }, 2200);
 }

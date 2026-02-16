@@ -115,17 +115,39 @@ export function renderTasks(tasks) {
   const ui = this;
   const list = document.getElementById("taskList");
 
+  if (!list) return;
+
   list.innerHTML = "";
 
-  tasks.forEach((task) => {
+  let modalOnlyHost = list.querySelector(".task-modal-host");
+  if (!modalOnlyHost) {
+    modalOnlyHost = document.createElement("div");
+    modalOnlyHost.className = "task-modal-host";
+    modalOnlyHost.setAttribute("aria-hidden", "true");
+    modalOnlyHost.style.position = "absolute";
+    modalOnlyHost.style.left = "-99999px";
+    modalOnlyHost.style.top = "0";
+    modalOnlyHost.style.width = "1px";
+    modalOnlyHost.style.height = "1px";
+    modalOnlyHost.style.overflow = "hidden";
+  } else {
+    modalOnlyHost.innerHTML = "";
+  }
+
+  const pendingTasks = tasks
+    .filter((task) => !task.done)
+    .sort(ordenarPorPrioridadYFecha);
+  const orderedTasks = tasks.slice().sort(ordenarPorPrioridadYFecha);
+
+  if (pendingTasks.length === 0) {
+    list.innerHTML = getEmptyListHtml();
+  }
+
+  orderedTasks.forEach((task) => {
     const li = document.createElement("li");
 
     li.classList.add("task-item");
     li.dataset.id = task.id;
-
-    if (task.done) {
-      li.classList.add("done");
-    }
 
     li.innerHTML = getTaskListItemHtml(task);
 
@@ -137,11 +159,6 @@ export function renderTasks(tasks) {
     const contenidoAviso = li.querySelector(".ContentAvisoDelete");
 
     function openAvisoDelete() {
-      li.querySelector(".btnGuardarCambios").addEventListener("click", (e) => {
-        e.stopPropagation();
-        history.back();
-      });
-
       // abrir
       avisoDelete.classList.add("active");
       avisofondo.classList.add("show");
@@ -187,13 +204,10 @@ export function renderTasks(tasks) {
       }, 400);
     }
 
-    li.querySelector(".opentAviso").addEventListener(
-      "click",
-      openAvisoDelete,
-      (e) => {
-        e.stopPropagation();
-      },
-    );
+    li.querySelector(".opentAviso").addEventListener("click", (e) => {
+      e.stopPropagation();
+      openAvisoDelete();
+    });
 
     // ===== CANCELAR =====
     btnCancelarDelete.onclick = (e) => {
@@ -206,6 +220,13 @@ export function renderTasks(tasks) {
         e.target.closest(".check") ||
         e.target.closest("input") ||
         e.target.closest("label")
+      ) {
+        return;
+      }
+
+      if (
+        e.target.closest(".editar_item") ||
+        e.target.closest(".advertenciaDelete")
       ) {
         return;
       }
@@ -223,6 +244,8 @@ export function renderTasks(tasks) {
     const closeEditar = li.querySelector(".Closeeditar");
 
     function openEditarTasks() {
+      if (contenedorEditar.classList.contains("active")) return;
+
       ScrollBody.disableBodyScroll();
 
       App.currentEditTaskId = task.id;
@@ -265,13 +288,10 @@ export function renderTasks(tasks) {
       modalEditar.classList.remove("active");
     }
 
-    li.querySelector(".openEditar").addEventListener(
-      "click",
-      openEditarTasks,
-      (e) => {
-        e.stopPropagation();
-      },
-    );
+    li.querySelector(".openEditar").addEventListener("click", (e) => {
+      e.stopPropagation();
+      openEditarTasks();
+    });
 
     closeEditar.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -338,9 +358,15 @@ export function renderTasks(tasks) {
       }
     }
 
-    list.appendChild(li);
+    if (task.done) {
+      modalOnlyHost.appendChild(li);
+    } else {
+      list.appendChild(li);
+    }
     initCalendarEditar(li, task);
   });
+
+  list.appendChild(modalOnlyHost);
 }
 
 export function renderPerfile(perfile) {
@@ -593,7 +619,29 @@ export function openEditarDesdeTarjeta(task) {
   const li = document.querySelector(`li[data-id="${task.id}"]`);
   if (!li) return;
 
-  li.querySelector(".openEditar")?.click();
+  const trigger = li.querySelector(".openEditar");
+  if (trigger) {
+    trigger.click();
+    return;
+  }
+
+  const modal = li.querySelector(".editar_item");
+  const target = li.querySelector(".Editar_targeta");
+  if (!modal || !target) return;
+
+  ScrollBody.disableBodyScroll();
+  App.currentEditTaskId = task.id;
+  App.currentEditTask = { ...task };
+  App.selectedDateEditar = task.due_date || null;
+  App.selectedTimeEditar = task.due_time
+    ? String(task.due_time).split(":").slice(0, 2).join(":")
+    : null;
+  App.categoriaSeleccionada = task.categoria;
+  App.prioridadSeleccionada = task.prioridad;
+
+  this.fillEditModal(li, App.currentEditTask);
+  modal.classList.add("active");
+  target.classList.add("active");
 }
 
 export function resetFechaHoraUI() {
@@ -608,115 +656,4 @@ export function resetFechaHoraUI() {
 
   if (datePicker) datePicker.value = "";
   if (timePicker) timePicker.value = "";
-}
-
-export function initCarousel() {
-  this.carousel = document.querySelector(".carousel");
-  this.cards = document.querySelectorAll(".card");
-  this.prev = document.querySelector(".prev");
-  this.next = document.querySelector(".next");
-  this.index = 0;
-
-  this.computeCardSize();
-
-  window.addEventListener("resize", () => {
-    this.computeCardSize();
-    this.carousel.scrollTo({
-      left: this.index * this.cardSize,
-      behavior: "auto",
-    });
-  });
-
-  this.bindCarouselEvents();
-  this.updateCarousel();
-}
-
-export function computeCardSize() {
-  this.cards = document.querySelectorAll(".card");
-  if (!this.cards.length) {
-    this.cardSize = 0;
-    return;
-  }
-
-  const first = this.cards[0].getBoundingClientRect();
-
-  if (this.cards.length > 1) {
-    const second = this.cards[1].getBoundingClientRect();
-
-    this.cardSize = Math.round(second.left - first.left);
-  } else {
-    this.cardSize = Math.round(first.width);
-  }
-
-  if (!this.cardSize || this.cardSize < 1)
-    this.cardSize = Math.round(first.width);
-}
-
-export function bindCarouselEvents() {
-  if (this.next) {
-    this.next.addEventListener("click", () => {
-      this.index = Math.min(this.index + 1, this.cards.length - 1);
-      this.updateCarousel();
-    });
-  }
-  if (this.prev) {
-    this.prev.addEventListener("click", () => {
-      this.index = Math.max(this.index - 1, 0);
-      this.updateCarousel();
-    });
-  }
-
-  if (this.carousel) {
-    let raf = null;
-    this.carousel.addEventListener("scroll", () => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        if (!this.cardSize) return;
-        const newIndex = Math.round(this.carousel.scrollLeft / this.cardSize);
-        if (newIndex !== this.index) {
-          this.index = Math.max(0, Math.min(newIndex, this.cards.length - 1));
-          this.updateCarousel();
-        }
-      });
-    });
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") {
-      this.index = Math.min(this.index + 1, this.cards.length - 1);
-      this.updateCarousel();
-    } else if (e.key === "ArrowLeft") {
-      this.index = Math.max(this.index - 1, 0);
-      this.updateCarousel();
-    }
-  });
-}
-
-export function updateCarousel() {
-  if (!this.cards) return;
-
-  this.cards.forEach((card, i) => {
-    card.classList.remove("active", "inactive-left", "inactive-right");
-
-    if (i === this.index) {
-      card.classList.add("active");
-    } else if (i < this.index) {
-      card.classList.add("inactive-left");
-    } else {
-      card.classList.add("inactive-right");
-    }
-  });
-
-  if (this.cardSize) {
-    this.carousel.scrollTo({
-      left: this.index * this.cardSize,
-      behavior: "smooth",
-    });
-  } else {
-    const w = this.cards[0] ? this.cards[0].offsetWidth : 0;
-    this.carousel.scrollTo({
-      left: this.index * w,
-      behavior: "smooth",
-    });
-  }
 }

@@ -175,72 +175,86 @@
 
 /*Categorias y proridades*/
 .task-pro.styleNinguna {
-  background: linear-gradient(40deg, #f2fdfbff, #dffbffff, #c7effcff);
-  color: #a0a0a0ff;
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #d8e2ef;
 }
 .task-pro.styleBaja {
-  background: #c2ffcfff;
-  color: #01ad35ff;
-  border-bottom: 3px solid rgb(0, 238, 163);
+  background: #ecfdf3;
+  color: #0f766e;
+  border-color: #9fe7c1;
 }
 .task-pro.styleNormal {
-  background: linear-gradient(40deg, #02ebdf2a, #0145ff36);
-  border-bottom: 3px solid rgb(175, 200, 255);
-  color: #0004fdff;
+  background: #eef4ff;
+  border-color: #bfd2ff;
+  color: #1d4ed8;
 }
 .task-pro.styleAlta {
-  background: #fadee3ff;
-  border-bottom: 3px solid rgb(253, 170, 181);
-  color: #ff0000ff;
+  background: #fff1f2;
+  border-color: #ffc7d1;
+  color: #be123c;
 }
 /* --------- CATEGORÍAS --------- */
 
 /* Trabajo */
 .cate-trabajo {
-  color: #ff00b3ff;
-  background: #000;
+  color: #9f1239;
+  background: #ffe4ef;
 }
 
 /* Estudio */
 .cate-estudio {
-  color: #ff0000ff;
-  background: #fff;
+  color: #1d4ed8;
+  background: #eaf2ff;
 }
 
 /* Dieta */
 .cate-dieta {
-  color: #01cc4fff;
-  background: #fff;
+  color: #047857;
+  background: #e9fff6;
 }
 
 /* Marketing */
 .cate-marketing {
-  color: #0bff03ff;
-  background: #31010181;
+  color: #0f766e;
+  background: #defbf6;
 }
 
 /* Rutina diaria */
 .cate-rutina {
-  color: #01cc4fff;
-  background: #fff;
+  color: #b45309;
+  background: #fff4dc;
 }
 
 /* Fitness */
 .cate-fitness {
-  color: #ff9900ff;
-  background: #fff;
+  color: #7c3aed;
+  background: #f4ebff;
 }
 
 /* Festividades */
 .cate-festividades {
-  color: #ff08b5ff;
-  background: #0027a8ff;
+  color: #be185d;
+  background: #ffe4f1;
 }
 
 /* Vacaciones */
 .cate-vacaciones {
-  color: #5900ffff;
-  background: #fedcffff;
+  color: #1e40af;
+  background: #e6f0ff;
+}
+.cate-trabajo,
+.cate-estudio,
+.cate-dieta,
+.cate-marketing,
+.cate-vacaciones,
+.cate-fitness,
+.cate-festividades,
+.cate-rutina,
+.cate-vacaciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*Perfil*/
@@ -2316,4 +2330,10 @@
     object-fit: contain;
   }
   /*==================*/
+
+  /*======================================*/
+  .grafiaca_progreso,
+  .proyects {
+    display: none;
+  }
 }

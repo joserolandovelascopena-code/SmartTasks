@@ -297,36 +297,78 @@ html[data-theme="light"] {
 
 /*Lista tareas*/
 [data-theme="dark"] .task-item {
-  background: #00020f;
-  box-shadow: none;
-  border: 1.5px solid var(--bordes-nav);
+  background: linear-gradient(180deg, #0b132b, #0f1a36);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+  border: 1px solid #243152;
 }
 [data-theme="dark"] .task-item.done {
-  background: #7998ff38;
-  transition: background 0.25s ease;
+  background: #1c2b4f;
+  border-color: #3a548a;
+}
+[data-theme="dark"] .task-item.completing {
+  border-color: #60a5fa;
+  box-shadow: 0 12px 28px rgba(30, 144, 255, 0.2);
 }
 
 [data-theme="dark"] .task-pro.styleBaja {
-  background: rgba(194, 255, 207, 0.205);
-  color: rgb(0, 224, 67);
-  border-bottom: 3px solid rgb(0, 238, 163);
-  border-bottom: 0;
+  background: #113126;
+  color: #7df0b9;
+  border-color: #266f54;
 }
 [data-theme="dark"] .task-pro.styleNormal {
-  background: linear-gradient(40deg, #02ebdf2a, #0145ff36);
-  color: #02b2e7;
-  border-bottom: 0;
+  background: #12274d;
+  color: #7fb0ff;
+  border-color: #294d8f;
 }
 [data-theme="dark"] .task-pro.styleAlta {
-  background: rgba(255, 255, 255, 0.144);
-  color: rgb(252, 147, 147);
-  border-bottom: 0;
+  background: #3b1b2c;
+  color: #ff9db6;
+  border-color: #8a3c5c;
 }
 
 [data-theme="dark"] .task-cat {
-  background: #0b0e22;
-  color: #00c3ff;
-  border-bottom: 0px;
+  background: #111f3f;
+  color: #bcd5ff;
+  border-color: #2c4370;
+}
+
+[data-theme="dark"] .task-text {
+  color: #edf2ff;
+}
+
+[data-theme="dark"] .CateIcons {
+  background: #1d2f57;
+  color: #b9d1ff;
+}
+
+[data-theme="dark"] .check {
+  background: #0b1428;
+  border-color: #3b4f7f;
+}
+
+[data-theme="dark"] .check:hover {
+  border-color: #6d8fe0;
+}
+
+[data-theme="dark"] .task-item .openEditar {
+  color: #9fb5e6;
+}
+
+[data-theme="dark"] .task-item .openEditar:hover {
+  color: #c9dcff;
+}
+
+[data-theme="dark"] .modal {
+  background: rgba(2, 8, 23, 0.62);
+}
+
+[data-theme="dark"] .modal-content {
+  background: linear-gradient(145deg, #0f1f46, #1c3f7f, #1e4a96);
+  border-color: rgba(131, 169, 236, 0.35);
+}
+
+[data-theme="dark"] .titulo-modal {
+  color: #f0f6ff;
 }
 
 /*Perfil*/
@@ -498,9 +540,11 @@ html[data-theme="light"] {
 /*stylo gobal de targetas*/
 
 [data-theme="dark"] .info_tarea {
-  box-shadow: 0 0 0 1.5px rgb(33, 30, 48);
   background: #00020f;
+  box-shadow: none;
+  border: 1px solid var(--bordes-nav);
 }
+
 [data-theme="dark"] .headerInfo_Tarea {
   border-color: var(--bordes-nav);
   background: #00020f;
@@ -539,11 +583,6 @@ html[data-theme="light"] {
 }
 
 /* Panel info_tarea (dark) */
-[data-theme="dark"] .info_tarea {
-  background: #00020f;
-  box-shadow: none;
-  border: 1px solid var(--bordes-nav);
-}
 
 [data-theme="dark"] .headerInfo_Tarea h4 {
   color: var(--text-dark);
@@ -1006,6 +1045,9 @@ html[data-theme="light"] {
   }
 
   /*Editar y perfil*/
+  [data-theme="dark"] .task-item {
+    background: #00020f;
+  }
   [data-theme="dark"] .Closeeditar {
     color: white;
   }
@@ -1024,7 +1066,22 @@ html[data-theme="light"] {
     background: #1d1f4dc9;
   }
 
+  /*Card info tareas*/
+  [data-theme="dark"] .info_tarea {
+    box-shadow: none;
+    border: none;
+  }
+
+  [data-theme="dark"] .headerInfo_Tarea {
+    border-color: transparent;
+  }
+
   /*Calendario*/
+  [data-theme="dark"] .contendorCalendarioTaks {
+    box-shadow: none;
+    border: none;
+  }
+
   [data-theme="dark"] .calendario-interfaz {
     border-top: none;
     border-left: none;

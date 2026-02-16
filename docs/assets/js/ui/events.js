@@ -70,9 +70,28 @@ export function registerUIEvents({ App, UI }) {
     const checkbox = e.target;
     const li = checkbox.closest("li");
     const id = Number(checkbox.dataset.id);
+    if (!li || Number.isNaN(id)) return;
+
+    if (checkbox.checked) {
+      li.classList.add("completing");
+      li.classList.remove("done", "remove-complete");
+      li.classList.add("done");
+      li.querySelector(".task-text")?.classList.add("done");
+      checkbox.disabled = true;
+
+      const editCheckbox = li.querySelector(".check-completada__input");
+      if (editCheckbox) editCheckbox.checked = true;
+
+      Promise.resolve(App.toggleTask(id, true, false)).finally(() => {
+        checkbox.disabled = false;
+      });
+      return;
+    }
 
     li.classList.toggle("done", checkbox.checked);
     li.querySelector(".task-text")?.classList.toggle("done", checkbox.checked);
+    li.classList.remove("completing", "remove-complete");
+    checkbox.disabled = false;
 
     const editCheckbox = li.querySelector(".check-completada__input");
     if (editCheckbox) {
@@ -87,14 +106,17 @@ export function registerUIEvents({ App, UI }) {
 
     const editCheckbox = e.target;
     const li = editCheckbox.closest("li");
+    if (!li) return;
     const listCheckbox = li.querySelector(".check");
     const id = Number(li.dataset.id);
+    if (Number.isNaN(id)) return;
 
     if (listCheckbox) {
       listCheckbox.checked = editCheckbox.checked;
     }
 
     li.classList.toggle("done", editCheckbox.checked);
+    li.classList.remove("completing", "remove-complete");
     li.querySelector(".task-text")?.classList.toggle(
       "done",
       editCheckbox.checked,
@@ -148,19 +170,22 @@ export function registerUIEvents({ App, UI }) {
     UI.openEditarDesdeTarjeta(task);
   });
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", async (e) => {
     const btn = e.target.closest(".btn-accion");
     if (!btn) return;
 
     const id = Number(btn.dataset.id);
+    if (Number.isNaN(id)) return;
 
-    if (btn.classList.contains("completar")) {
-      App.toggleTask(id, true, true);
-    }
+    const isCompletar = btn.classList.contains("completar");
+    const isRemover = btn.classList.contains("removerCompletar");
+    if (!isCompletar && !isRemover) return;
 
-    if (btn.classList.contains("removerCompletar")) {
-      App.toggleTask(id, false, true);
-    }
+    await App.toggleTask(id, isCompletar, {
+      fromEdit: true,
+      renderTaskList: true,
+      renderCards: true,
+    });
 
     const task = App.tasks.find((t) => t.id === id);
     if (task) renderPromandaTarea(task);

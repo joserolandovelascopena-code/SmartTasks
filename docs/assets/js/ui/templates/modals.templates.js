@@ -3,9 +3,9 @@ export function getTaskListItemHtml(task) {
   return `
        <div class="box_tasks_text">
          <input type="checkbox"class="check" data-id="${task.id}" ${task.done ? "checked" : ""} />
-         <span class="task-text ${task.done ? "done" : ""}">
+         <h5 class="task-text ${task.done ? "done" : ""}">
           ${task.text}
-         </span>
+         </h5>
        </div>
 
     

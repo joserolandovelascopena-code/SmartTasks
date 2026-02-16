@@ -10,10 +10,6 @@ import {
   renderPrioridad,
   openEditarDesdeTarjeta,
   resetFechaHoraUI,
-  initCarousel,
-  computeCardSize,
-  bindCarouselEvents,
-  updateCarousel,
 } from "./ui/render.tasks.js";
 
 import { renderCalendar } from "./ui/calendarMain/renderMainCalendar.js";
@@ -33,10 +29,6 @@ export const UI = {
   renderPrioridad,
   openEditarDesdeTarjeta,
   resetFechaHoraUI,
-  initCarousel,
-  computeCardSize,
-  bindCarouselEvents,
-  updateCarousel,
 };
 
 export function initUIEvents(App) {
