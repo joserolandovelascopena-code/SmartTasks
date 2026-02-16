@@ -166,10 +166,15 @@ const Storage = {
         .eq("id", id)
         .eq("user_id", userId)
         .select()
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error("Error actualizando tarea:", error.message);
+        return null;
+      }
+
+      if (!data) {
+        console.warn(`No se actualizó la tarea ${id}.`);
         return null;
       }
 
@@ -191,9 +196,10 @@ const Storage = {
         .eq("id", id)
         .eq("user_id", userId)
         .select()
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
+      if (!data) return null;
       return data;
     } catch (err) {
       console.error("Exception SaveUpdateTask:", err);

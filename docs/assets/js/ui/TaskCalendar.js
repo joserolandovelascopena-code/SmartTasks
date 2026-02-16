@@ -17,6 +17,7 @@ export function initCalendarMain(itemCalendar, options = {}) {
   if (!month_calendar_Year || !daysContainer) return;
 
   let currentDate = new Date();
+  let mainCalendarWheelLocked = false;
   const baseWeekdays = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
   const CATEGORIAS = {
@@ -159,24 +160,57 @@ export function initCalendarMain(itemCalendar, options = {}) {
     if (onMonthChange) onMonthChange({ year, month });
   }
 
+  function changeMainCalendarMonth(step) {
+    setHeaderLoading(true);
+    currentDate.setMonth(currentDate.getMonth() + step);
+    renderMainCalendar();
+    Haptic.vibrateUi("success");
+    window.setTimeout(() => setHeaderLoading(false), 320);
+  }
+
+  function handleMainCalendarLateralScroll(event) {
+    const horizontalIntent =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
+
+    if (!horizontalIntent) return;
+
+    const lateralDelta =
+      Math.abs(event.deltaX) > 0
+        ? event.deltaX
+        : event.shiftKey
+          ? event.deltaY
+          : 0;
+
+    if (Math.abs(lateralDelta) < 12) return;
+
+    event.preventDefault();
+    if (mainCalendarWheelLocked) return;
+
+    mainCalendarWheelLocked = true;
+    changeMainCalendarMonth(lateralDelta > 0 ? 1 : -1);
+
+    window.setTimeout(() => {
+      mainCalendarWheelLocked = false;
+    }, 280);
+  }
+
   if (prevBtn) {
     prevBtn.onclick = () => {
-      setHeaderLoading(true);
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      renderMainCalendar();
-      Haptic.vibrateUi("success");
-      window.setTimeout(() => setHeaderLoading(false), 320);
+      changeMainCalendarMonth(-1);
     };
   }
 
   if (nextBtn) {
     nextBtn.onclick = () => {
-      setHeaderLoading(true);
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      renderMainCalendar();
-      Haptic.vibrateUi("success");
-      window.setTimeout(() => setHeaderLoading(false), 320);
+      changeMainCalendarMonth(1);
     };
+  }
+
+  if (daysContainer.dataset.mainWheelReady !== "1") {
+    daysContainer.addEventListener("wheel", handleMainCalendarLateralScroll, {
+      passive: false,
+    });
+    daysContainer.dataset.mainWheelReady = "1";
   }
 
   renderMainCalendar();
@@ -236,6 +270,7 @@ export function initCalendarEditar(li, task) {
   let currentDate = selectedDate ? new Date(selectedDate) : new Date();
   let tempHour = selectedTime ? selectedTime.split(":")[0] : null;
   let tempMinute = selectedTime ? selectedTime.split(":")[1] : null;
+  let editCalendarWheelLocked = false;
 
   function restaurarFechaOriginal() {
     selectedDate = originalSelectedDate ? new Date(originalSelectedDate) : null;
@@ -404,24 +439,36 @@ export function initCalendarEditar(li, task) {
   li._restoreDate = restaurarFechaOriginal;
   li._restoreTime = restaurarHoraOriginal;
 
-  function renderCalendar() {
+  function renderCalendar(monthDirection = 0) {
     daysContainer.innerHTML = "";
 
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
     monthYear.textContent = `${monthNames[month]} ${year}`;
+    daysContainer.classList.remove("slide-left", "slide-right");
+
+    if (monthDirection === 1) {
+      daysContainer.classList.add("slide-left");
+    } else if (monthDirection === -1) {
+      daysContainer.classList.add("slide-right");
+    }
 
     const firstDay = new Date(year, month, 1).getDay();
     const startDay = firstDay === 0 ? 6 : firstDay - 1;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let dayIndex = 0;
 
     for (let i = 0; i < startDay; i++) {
-      daysContainer.appendChild(document.createElement("div"));
+      const emptyEl = document.createElement("div");
+      emptyEl.className = "calendar-day-emptyEditar";
+      daysContainer.appendChild(emptyEl);
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
       const dayEl = document.createElement("div");
+      dayEl.classList.add("calendar-day-itemEditar");
+      dayEl.style.animationDelay = `${dayIndex * 18}ms`;
       dayEl.textContent = day;
 
       if (selectedDate) {
@@ -459,7 +506,37 @@ export function initCalendarEditar(li, task) {
       };
 
       daysContainer.appendChild(dayEl);
+      dayIndex++;
     }
+  }
+
+  function changeEditarCalendarMonth(step) {
+    currentDate.setMonth(currentDate.getMonth() + step);
+    renderCalendar(step);
+    Haptic.vibrateUi("success");
+  }
+
+  function handleEditarCalendarLateralScroll(event) {
+    if (!calendar?.classList.contains("show")) return;
+
+    const lateralDelta =
+      Math.abs(event.deltaX) > 0
+        ? event.deltaX
+        : event.shiftKey
+          ? event.deltaY
+          : 0;
+
+    if (Math.abs(lateralDelta) < 12) return;
+
+    event.preventDefault();
+    if (editCalendarWheelLocked) return;
+
+    editCalendarWheelLocked = true;
+    changeEditarCalendarMonth(lateralDelta > 0 ? 1 : -1);
+
+    window.setTimeout(() => {
+      editCalendarWheelLocked = false;
+    }, 280);
   }
 
   li.querySelector(".fechaEditar")?.addEventListener("click", (e) => {
@@ -520,16 +597,19 @@ export function initCalendarEditar(li, task) {
   });
 
   li.querySelector(".prevMonthEditar").onclick = () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
-    Haptic.vibrateUi("success");
+    changeEditarCalendarMonth(-1);
   };
 
   li.querySelector(".nextMonthEditar").onclick = () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-    Haptic.vibrateUi("success");
+    changeEditarCalendarMonth(1);
   };
+
+  if (daysContainer.dataset.wheelReady !== "1") {
+    daysContainer.addEventListener("wheel", handleEditarCalendarLateralScroll, {
+      passive: false,
+    });
+    daysContainer.dataset.wheelReady = "1";
+  }
 
   function cerrarCalendarEditar() {
     calendar.classList.remove("show");

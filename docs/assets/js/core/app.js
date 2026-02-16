@@ -277,6 +277,14 @@ export const App = {
   },
 
   async toggleTask(id, done, options = {}) {
+    const task = this.tasks.find((t) => t.id === id);
+    if (!task) {
+      console.warn(`No se encontró la tarea ${id} para toggle.`);
+      return;
+    }
+
+    const nextDone = typeof done === "boolean" ? done : !Boolean(task.done);
+
     let fromEdit = false;
     let renderTaskList;
     let renderCards = true;
@@ -293,8 +301,14 @@ export const App = {
       typeof renderTaskList === "boolean" ? renderTaskList : !fromEdit;
 
     const applyToggle = async () => {
-      this.tasks = this.tasks.map((t) => (t.id === id ? { ...t, done } : t));
-      await Storage.updateTask(id, { done });
+      const previousTasks = this.tasks;
+      this.tasks = this.tasks.map((t) =>
+        t.id === id ? { ...t, done: nextDone } : t,
+      );
+      const updatedTask = await Storage.updateTask(id, { done: nextDone });
+      if (!updatedTask) {
+        this.tasks = previousTasks;
+      }
       if (shouldRenderTaskList) {
         UI.renderTasks(this.tasks);
       }
@@ -303,7 +317,7 @@ export const App = {
       }
     };
 
-    if (done && !fromEdit) {
+    if (nextDone && !fromEdit) {
       mostrarModalCompletado(() => {
         void applyToggle();
       });

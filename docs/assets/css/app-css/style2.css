@@ -1349,6 +1349,10 @@
   text-align: center;
   gap: 4px;
 }
+.calendar-days {
+  position: relative;
+  overflow: hidden;
+}
 .calendar-weekdays {
   margin-top: 20px;
 }
@@ -1369,9 +1373,29 @@
   border-radius: 50%;
   font-family: "Poppins", sans-serif;
 }
+.calendar-days .calendar-day-item {
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  animation: add-task-calendar-day-in 220ms ease forwards;
+}
+.calendar-days.slide-left .calendar-day-item {
+  animation-name: add-task-calendar-day-in-left;
+}
+.calendar-days.slide-right .calendar-day-item {
+  animation-name: add-task-calendar-day-in-right;
+}
+.calendar-days .calendar-day-empty {
+  cursor: default;
+  pointer-events: none;
+  border-color: transparent !important;
+  background: transparent !important;
+}
 
 .calendar-days div:hover {
   border: 2px solid rgb(0, 119, 255);
+}
+.calendar-days .calendar-day-empty:hover {
+  border: 2px solid transparent;
 }
 .calendar-days div:active {
   color: rgb(0, 119, 255);
@@ -1380,6 +1404,13 @@
 .calendar-days .selected {
   background: rgb(0, 119, 255);
   color: rgb(255, 255, 255);
+}
+.calendar-days div.today {
+  border: 2px solid rgb(0, 119, 255);
+  color: rgb(0, 119, 255);
+}
+.calendar-days div.today.selected {
+  color: #fff;
 }
 
 .btnsOpcionesCanlndar {
@@ -1398,6 +1429,38 @@
   color: rgb(0, 89, 255);
   border-radius: 16px;
   cursor: pointer;
+}
+@keyframes add-task-calendar-day-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes add-task-calendar-day-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes add-task-calendar-day-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .contenedorReloj {
@@ -1663,6 +1726,10 @@
   text-align: center;
   gap: 4px;
 }
+.calendar-daysEditar {
+  position: relative;
+  overflow: hidden;
+}
 .calendar-weekdaysEditar {
   margin-top: 20px;
 }
@@ -1684,9 +1751,29 @@
   font-family: "Poppins", sans-serif;
   font-size: 15px;
 }
+.calendar-daysEditar .calendar-day-itemEditar {
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  animation: edit-task-calendar-day-in 220ms ease forwards;
+}
+.calendar-daysEditar.slide-left .calendar-day-itemEditar {
+  animation-name: edit-task-calendar-day-in-left;
+}
+.calendar-daysEditar.slide-right .calendar-day-itemEditar {
+  animation-name: edit-task-calendar-day-in-right;
+}
+.calendar-daysEditar .calendar-day-emptyEditar {
+  cursor: default;
+  pointer-events: none;
+  border-color: transparent !important;
+  background: transparent !important;
+}
 
 .calendar-daysEditar div:hover {
   border: 2px solid rgb(0, 119, 255);
+}
+.calendar-daysEditar .calendar-day-emptyEditar:hover {
+  border: 2px solid transparent;
 }
 .calendar-daysEditar div:active {
   color: rgb(0, 119, 255);
@@ -1708,6 +1795,39 @@
 .calendar-daysEditar div.today.selected {
   background: #4f7cff;
   color: white;
+}
+
+@keyframes edit-task-calendar-day-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes edit-task-calendar-day-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes edit-task-calendar-day-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .btnsOpcionesCanlndarEditar {
