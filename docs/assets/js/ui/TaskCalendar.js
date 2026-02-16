@@ -168,6 +168,16 @@ export function initCalendarMain(itemCalendar, options = {}) {
     window.setTimeout(() => setHeaderLoading(false), 320);
   }
 
+  function triggerMainCalendarMonth(step) {
+    if (mainCalendarWheelLocked) return;
+    mainCalendarWheelLocked = true;
+    changeMainCalendarMonth(step);
+
+    window.setTimeout(() => {
+      mainCalendarWheelLocked = false;
+    }, 280);
+  }
+
   function handleMainCalendarLateralScroll(event) {
     const horizontalIntent =
       Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
@@ -184,14 +194,43 @@ export function initCalendarMain(itemCalendar, options = {}) {
     if (Math.abs(lateralDelta) < 12) return;
 
     event.preventDefault();
-    if (mainCalendarWheelLocked) return;
+    triggerMainCalendarMonth(lateralDelta > 0 ? 1 : -1);
+  }
 
-    mainCalendarWheelLocked = true;
-    changeMainCalendarMonth(lateralDelta > 0 ? 1 : -1);
+  function handleMainCalendarTouchSwipe() {
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-    window.setTimeout(() => {
-      mainCalendarWheelLocked = false;
-    }, 280);
+    daysContainer.addEventListener(
+      "touchstart",
+      (event) => {
+        const touch = event.changedTouches?.[0];
+        if (!touch) return;
+
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      },
+      { passive: true },
+    );
+
+    daysContainer.addEventListener(
+      "touchend",
+      (event) => {
+        const touch = event.changedTouches?.[0];
+        if (!touch) return;
+
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        const isHorizontalSwipe =
+          Math.abs(deltaX) >= 34 && Math.abs(deltaX) > Math.abs(deltaY);
+
+        if (!isHorizontalSwipe) return;
+
+        triggerMainCalendarMonth(deltaX < 0 ? 1 : -1);
+      },
+      { passive: true },
+    );
   }
 
   if (prevBtn) {
@@ -211,6 +250,10 @@ export function initCalendarMain(itemCalendar, options = {}) {
       passive: false,
     });
     daysContainer.dataset.mainWheelReady = "1";
+  }
+  if (daysContainer.dataset.mainTouchReady !== "1") {
+    handleMainCalendarTouchSwipe();
+    daysContainer.dataset.mainTouchReady = "1";
   }
 
   renderMainCalendar();
@@ -516,6 +559,16 @@ export function initCalendarEditar(li, task) {
     Haptic.vibrateUi("success");
   }
 
+  function triggerEditarCalendarMonth(step) {
+    if (editCalendarWheelLocked) return;
+    editCalendarWheelLocked = true;
+    changeEditarCalendarMonth(step);
+
+    window.setTimeout(() => {
+      editCalendarWheelLocked = false;
+    }, 280);
+  }
+
   function handleEditarCalendarLateralScroll(event) {
     if (!calendar?.classList.contains("show")) return;
 
@@ -529,14 +582,47 @@ export function initCalendarEditar(li, task) {
     if (Math.abs(lateralDelta) < 12) return;
 
     event.preventDefault();
-    if (editCalendarWheelLocked) return;
+    triggerEditarCalendarMonth(lateralDelta > 0 ? 1 : -1);
+  }
 
-    editCalendarWheelLocked = true;
-    changeEditarCalendarMonth(lateralDelta > 0 ? 1 : -1);
+  function handleEditarCalendarTouchSwipe() {
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-    window.setTimeout(() => {
-      editCalendarWheelLocked = false;
-    }, 280);
+    daysContainer.addEventListener(
+      "touchstart",
+      (event) => {
+        if (!calendar?.classList.contains("show")) return;
+
+        const touch = event.changedTouches?.[0];
+        if (!touch) return;
+
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      },
+      { passive: true },
+    );
+
+    daysContainer.addEventListener(
+      "touchend",
+      (event) => {
+        if (!calendar?.classList.contains("show")) return;
+
+        const touch = event.changedTouches?.[0];
+        if (!touch) return;
+
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        const isHorizontalSwipe =
+          Math.abs(deltaX) >= 34 && Math.abs(deltaX) > Math.abs(deltaY);
+
+        if (!isHorizontalSwipe) return;
+
+        triggerEditarCalendarMonth(deltaX < 0 ? 1 : -1);
+      },
+      { passive: true },
+    );
   }
 
   li.querySelector(".fechaEditar")?.addEventListener("click", (e) => {
@@ -609,6 +695,10 @@ export function initCalendarEditar(li, task) {
       passive: false,
     });
     daysContainer.dataset.wheelReady = "1";
+  }
+  if (daysContainer.dataset.touchReady !== "1") {
+    handleEditarCalendarTouchSwipe();
+    daysContainer.dataset.touchReady = "1";
   }
 
   function cerrarCalendarEditar() {

@@ -60,9 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
 let currentDate = new Date();
 let selectedDate = null;
 let calendarWheelLocked = false;
+let originalAddCalendarDate = null;
 
 const monthYear = document.getElementById("monthYear");
 const daysContainer = document.getElementById("calendarDays");
+
+function parseLocalDate(dateStr) {
+  if (!dateStr) return null;
+  const clean = dateStr.includes("T") ? dateStr.split("T")[0] : dateStr;
+  const [y, m, d] = clean.split("-").map(Number);
+  if (!y || !m || !d) return null;
+  return new Date(y, m - 1, d);
+}
 
 function renderCalendar(monthDirection = 0) {
   daysContainer.innerHTML = "";
@@ -138,6 +147,16 @@ function changeAddTaskCalendarMonth(step) {
   Haptic.vibrateUi("success");
 }
 
+function triggerAddTaskCalendarMonth(step) {
+  if (calendarWheelLocked) return;
+  calendarWheelLocked = true;
+  changeAddTaskCalendarMonth(step);
+
+  window.setTimeout(() => {
+    calendarWheelLocked = false;
+  }, 280);
+}
+
 function handleCalendarLateralScroll(event) {
   const calendar = document.querySelector(".calendar");
   if (!calendar?.classList.contains("show")) return;
@@ -148,19 +167,63 @@ function handleCalendarLateralScroll(event) {
   if (Math.abs(lateralDelta) < 12) return;
 
   event.preventDefault();
-  if (calendarWheelLocked) return;
+  triggerAddTaskCalendarMonth(lateralDelta > 0 ? 1 : -1);
+}
 
-  calendarWheelLocked = true;
-  changeAddTaskCalendarMonth(lateralDelta > 0 ? 1 : -1);
+function handleCalendarTouchSwipe() {
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-  window.setTimeout(() => {
-    calendarWheelLocked = false;
-  }, 280);
+  daysContainer.addEventListener(
+    "touchstart",
+    (event) => {
+      const calendar = document.querySelector(".calendar");
+      if (!calendar?.classList.contains("show")) return;
+
+      const touch = event.changedTouches?.[0];
+      if (!touch) return;
+
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    },
+    { passive: true },
+  );
+
+  daysContainer.addEventListener(
+    "touchend",
+    (event) => {
+      const calendar = document.querySelector(".calendar");
+      if (!calendar?.classList.contains("show")) return;
+
+      const touch = event.changedTouches?.[0];
+      if (!touch) return;
+
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      const isHorizontalSwipe =
+        Math.abs(deltaX) >= 34 && Math.abs(deltaX) > Math.abs(deltaY);
+
+      if (!isHorizontalSwipe) return;
+
+      triggerAddTaskCalendarMonth(deltaX < 0 ? 1 : -1);
+    },
+    { passive: true },
+  );
 }
 
 document.getElementById("fecha").addEventListener("click", openCalendar);
 
 function openCalendar() {
+  selectedDate = parseLocalDate(App.selectedDate);
+  originalAddCalendarDate = selectedDate ? new Date(selectedDate) : null;
+
+  if (selectedDate) {
+    currentDate = new Date(selectedDate);
+  }
+
+  renderCalendar();
+
   document.querySelector(".contenedorCalendario").classList.add("show");
   document.querySelector(".calendar").classList.add("show");
 
@@ -187,10 +250,9 @@ document.querySelector(".aceptarDate").addEventListener("click", () => {
 });
 
 document.querySelector(".cancelarDate").addEventListener("click", () => {
-  selectedDate = null;
-  document
-    .querySelectorAll(".calendar-days .selected")
-    .forEach((d) => d.classList.remove("selected"));
+  selectedDate = originalAddCalendarDate ? new Date(originalAddCalendarDate) : null;
+  currentDate = selectedDate ? new Date(selectedDate) : new Date();
+  renderCalendar();
   history.back();
 });
 
@@ -212,6 +274,7 @@ document.getElementById("nextMonth").onclick = () => {
 daysContainer.addEventListener("wheel", handleCalendarLateralScroll, {
   passive: false,
 });
+handleCalendarTouchSwipe();
 
 renderCalendar();
 

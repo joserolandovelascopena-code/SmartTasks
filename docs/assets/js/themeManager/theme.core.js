@@ -9,6 +9,38 @@ import {
   setActiveButton,
 } from "./theme.helpers.js";
 
+const THEME_BAR_COLORS = {
+  light: "#ffffff",
+  dark: "#00020f",
+};
+
+function upsertMeta(name, content) {
+  if (!name || !content) return;
+
+  let meta = document.querySelector(`meta[name="${name}"]`);
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute("name", name);
+    document.head.appendChild(meta);
+  }
+
+  meta.setAttribute("content", content);
+}
+
+function applySystemBarColors(theme) {
+  const resolvedTheme =
+    theme === "system" ? (systemPrefersDark() ? "dark" : "light") : theme;
+
+  const barColor =
+    resolvedTheme === "dark" ? THEME_BAR_COLORS.dark : THEME_BAR_COLORS.light;
+
+  upsertMeta("theme-color", barColor);
+  upsertMeta(
+    "apple-mobile-web-app-status-bar-style",
+    resolvedTheme === "dark" ? "black" : "default",
+  );
+}
+
 function resetInlineThemeStyles(elements = []) {
   elements.forEach((el) => {
     if (!el) return;
@@ -24,6 +56,7 @@ function resetNodeListStyles(nodeList = []) {
 
 export function applyTheme(theme) {
   if (!VALID_THEMES.includes(theme)) theme = "system";
+  applySystemBarColors(theme);
 
   const lightBtn = safeEl("Default_light");
   const darkBtn = safeEl("Default_dark");

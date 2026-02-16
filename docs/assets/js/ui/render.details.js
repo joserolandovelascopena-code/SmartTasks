@@ -1,6 +1,7 @@
 // render.details.js
 import { getTaskDetailsHtml } from "./templates/task.details.js";
 import { formatFechaPlano, formatHoraPlano } from "./render.tasks.js";
+import { OverlayManager } from "../overlayManager/overlayManager.js";
 
 function isMobileViewport() {
   return window.matchMedia("(max-width: 700px)").matches;
@@ -25,17 +26,29 @@ function ensureMobileTaskSheet() {
   const closeSheet = () => {
     sheet.classList.remove("show");
     document.body.classList.remove("task-sheet-open");
+    sheet.dataset.overlayOpen = "0";
+  };
+
+  const requestCloseSheet = () => {
+    if (sheet.dataset.overlayOpen === "1") {
+      history.back();
+      return;
+    }
+    closeSheet();
   };
 
   sheet
     .querySelector(".task-sheet-modal__backdrop")
-    ?.addEventListener("click", closeSheet);
+    ?.addEventListener("click", requestCloseSheet);
 
   sheet.addEventListener("click", (e) => {
     if (e.target.closest(".panel-mobile-close")) {
-      closeSheet();
+      requestCloseSheet();
     }
   });
+
+  sheet.dataset.overlayOpen = "0";
+  sheet._closeSheet = closeSheet;
 
   return sheet;
 }
@@ -50,6 +63,16 @@ function renderMobileSheet(detailsHtml) {
   body.innerHTML = detailsHtml;
 
   requestAnimationFrame(() => {
+    const isAlreadyOpen = sheet.classList.contains("show");
+
+    if (!isAlreadyOpen) {
+      history.pushState({ task_sheet_modal: true }, "", "#task-sheet-modal");
+      OverlayManager.push("task-sheet-modal", () => {
+        sheet._closeSheet?.();
+      });
+      sheet.dataset.overlayOpen = "1";
+    }
+
     sheet.classList.add("show");
     document.body.classList.add("task-sheet-open");
   });

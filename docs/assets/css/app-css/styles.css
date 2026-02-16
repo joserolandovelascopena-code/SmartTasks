@@ -642,6 +642,7 @@ h5 {
   text-align: center;
   transition: 0.2s linear;
   border-radius: 5px;
+  padding: 4px;
 }
 .titu {
   padding: 3px;
@@ -752,9 +753,9 @@ h5 {
   display: flex;
   gap: 8px;
 }
-#Calendario span {
+#Calendario i {
   color: rgb(184, 182, 182);
-  font-size: 22px;
+  font-size: 16px;
   margin: 0;
   padding: 0;
 }
@@ -2364,13 +2365,13 @@ h5 {
     padding-bottom: 0;
   }
 
-  #Calendario span {
+  #Calendario i {
     color: rgb(31, 31, 31);
     padding-top: 5px;
     margin-bottom: 0;
     padding-bottom: 0;
 
-    font-size: 28px;
+    font-size: 22px;
     display: flex;
     justify-content: center;
   }
@@ -2416,7 +2417,7 @@ h5 {
   }
   .contenedor_menu {
     grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
+    gap: 10px;
     padding: 0px;
   }
 
