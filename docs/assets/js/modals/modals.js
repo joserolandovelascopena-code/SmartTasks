@@ -162,7 +162,11 @@ function handleCalendarLateralScroll(event) {
   if (!calendar?.classList.contains("show")) return;
 
   const lateralDelta =
-    Math.abs(event.deltaX) > 0 ? event.deltaX : event.shiftKey ? event.deltaY : 0;
+    Math.abs(event.deltaX) > 0
+      ? event.deltaX
+      : event.shiftKey
+        ? event.deltaY
+        : 0;
 
   if (Math.abs(lateralDelta) < 12) return;
 
@@ -212,7 +216,8 @@ function handleCalendarTouchSwipe() {
   );
 }
 
-document.getElementById("fecha").addEventListener("click", openCalendar);
+const btnOpenCalendar = document.getElementById("fecha");
+btnOpenCalendar.addEventListener("click", openCalendar);
 
 function openCalendar() {
   selectedDate = parseLocalDate(App.selectedDate);
@@ -250,10 +255,27 @@ document.querySelector(".aceptarDate").addEventListener("click", () => {
 });
 
 document.querySelector(".cancelarDate").addEventListener("click", () => {
-  selectedDate = originalAddCalendarDate ? new Date(originalAddCalendarDate) : null;
+  selectedDate = originalAddCalendarDate
+    ? new Date(originalAddCalendarDate)
+    : null;
   currentDate = selectedDate ? new Date(selectedDate) : new Date();
   renderCalendar();
   history.back();
+});
+
+document.addEventListener("click", (e) => {
+  const contenedorCalen = document.querySelector(".contenedorCalendario");
+  const caledario = document.querySelector(".calendar");
+
+  if (!btnOpenCalendar || !contenedorCalen || !caledario) return;
+
+  const estaAbierto = contenedorCalen.classList.contains("show");
+  const clickDentroDelCalen = caledario.contains(e.target);
+  const clickEnBoton = btnOpenCalendar.contains(e.target);
+
+  if (estaAbierto && !clickDentroDelCalen && !clickEnBoton) {
+    history.back();
+  }
 });
 
 function cerrarCalendario() {
@@ -379,10 +401,12 @@ function activarSeleccion(contenedor, elemento) {
 /* ABRIR */
 
 document.getElementById("hora").addEventListener("click", openReloj);
+const ContendorReloj = document.querySelector(".contenedorReloj");
+const reloj = document.querySelector(".reloj");
 
 function openReloj() {
-  document.querySelector(".contenedorReloj").classList.add("show");
-  document.querySelector(".reloj").classList.add("show");
+  ContendorReloj.classList.add("show");
+  reloj.classList.add("show");
 
   history.pushState({ openReloj: true }, "", "#reloj-system");
   OverlayManager.push("close-Reloj", cerrarReloj);
@@ -394,6 +418,22 @@ document.querySelector(".cancelarHora").onclick = () => {
   tempMinute = null;
   history.back();
 };
+
+document.addEventListener("click", (e) => {
+  const openReloj = document.getElementById("hora");
+  const contenedorReloj = document.querySelector(".contenedorReloj");
+  const reloj = document.querySelector(".reloj");
+
+  if (!openReloj || !contenedorReloj || !reloj) return;
+
+  const estaAbierto = contenedorReloj.classList.contains("show");
+  const clickDentroDelReloj = reloj.contains(e.target);
+  const clickEnBoton = openReloj.contains(e.target);
+
+  if (estaAbierto && !clickDentroDelReloj && !clickEnBoton) {
+    history.back();
+  }
+});
 
 /* ACEPTAR */
 document.querySelector(".aceptarHora").onclick = () => {

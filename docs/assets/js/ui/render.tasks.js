@@ -157,6 +157,7 @@ export function renderTasks(tasks) {
     const avisoDelete = li.querySelector(".advertenciaDelete");
     const avisofondo = li.querySelector(".backgrundAviso");
     const contenidoAviso = li.querySelector(".ContentAvisoDelete");
+    const overlay = li.querySelector(".backgrauEditar");
 
     function openAvisoDelete() {
       // abrir
@@ -277,6 +278,18 @@ export function renderTasks(tasks) {
       history.pushState({ Editar_Tarea: true }, "", "#editar_tarea");
       OverlayManager.push("editarTask", closeEditarWindow);
     }
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        history.back();
+      }
+    });
+
+    avisofondo.addEventListener("click", (e) => {
+      if (e.target === avisofondo) {
+        history.back();
+      }
+    });
 
     function closeEditarWindow(li) {
       ScrollBody.enableBodyScroll();
