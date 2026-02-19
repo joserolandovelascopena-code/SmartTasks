@@ -1,45 +1,66 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Título -->
+    <title>SmartTasks | Organiza tu día con un gestor inteligente</title>
+
+    <!-- Descripción-->
     <meta
-      name="theme-color"
-      content="#ffffff"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#00020f"
-      media="(prefers-color-scheme: dark)"
+      name="description"
+      content="SmartTasks es tu gestor de tareas personal para organizar, planificar y cumplir tus objetivos diarios con mayor productividad y enfoque."
     />
 
+    <!-- SEO técnico -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Metnover" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- PWA -->
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta
-      name="description"
-      content="Organiza, planifica y ejecuta con el gestor  inteligente más avanzado. La 
-      herramienta definitiva para equipos y profecionales quebuscan eficiencia total."
-    />
-    <meta
-      name="keywords"
-      content="gestor de tareas inteligente, Prueba, Optimatiza, Descubre"
-    />
-    <meta name="author" content="Empresa tecnológica Metnover" />
-    <title>SmartTasks</title>
 
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="SmartTasks - Tu gestor de tareas personal"
+    />
+    <meta
+      property="og:description"
+      content="Organiza tu día y alcanza tus metas con un sistema inteligente y minimalista."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tusitio.com" />
+    <meta property="og:image" content="https://tusitio.com/preview.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SmartTasks - Productividad Personal" />
+    <meta
+      name="twitter:description"
+      content="Planifica mejor, ejecuta mejor, vive con más enfoque."
+    />
+    <meta name="twitter:image" content="https://tusitio.com/preview.jpg" />
+
+    <!-- Favicon -->
     <link rel="icon" href="assets/icons/icon-192.png" type="image/png" />
-    <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" href="assets/css/app-css/styles.css" />
-    <link rel="stylesheet" href="assets/css/app-css/theme.css" />
-    <link rel="stylesheet" href="assets/css/app-css/style2.css" />
-    <link rel="stylesheet" href="assets/css/app-css/styles3.css" />
 
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
@@ -48,17 +69,16 @@
       href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
 
+    <!-- Librerías externas -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -67,7 +87,50 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "system";
+
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+
+        const resolved =
+          savedTheme === "system"
+            ? prefersDark
+              ? "dark"
+              : "light"
+            : savedTheme;
+
+        document.documentElement.setAttribute("data-theme", resolved);
+
+        const themeColor = resolved === "dark" ? "#00020f" : "#ffffff";
+
+        let meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", themeColor);
+      })();
+    </script>
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="assets/css/app-css/styles.css" />
+    <link rel="stylesheet" href="assets/css/app-css/theme.css" />
+    <link rel="stylesheet" href="assets/css/app-css/style2.css" />
+    <link rel="stylesheet" href="assets/css/app-css/styles3.css" />
+
+    <!-- Scripts externos -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "SmartTasks",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web",
+        "description": "Aplicación web para gestión de tareas personales y productividad diaria."
+      }
+    </script>
   </head>
 
   <body>
