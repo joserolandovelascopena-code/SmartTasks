@@ -35,9 +35,10 @@ function applySystemBarColors(theme) {
     resolvedTheme === "dark" ? THEME_BAR_COLORS.dark : THEME_BAR_COLORS.light;
 
   upsertMeta("theme-color", barColor);
+
   upsertMeta(
     "apple-mobile-web-app-status-bar-style",
-    resolvedTheme === "dark" ? "black" : "default",
+    resolvedTheme === "dark" ? "black-translucent" : "default",
   );
 }
 
