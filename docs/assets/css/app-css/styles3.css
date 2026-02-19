@@ -1,3 +1,7 @@
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 /*stylo gobal de targetas*/
 .panel-sinTareas {
   display: grid;

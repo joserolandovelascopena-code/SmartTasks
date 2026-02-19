@@ -3,6 +3,7 @@
 body {
   overflow: hidden;
   font-family: "Inter", sans-serif;
+  min-height: 100vh;
 }
 h1,
 h2,
@@ -305,6 +306,7 @@ h5 {
 }
 /*Barra superior principal*/
 .Barra_Superior_principal {
+  padding-bottom: var(--safe-bottom);
   margin-top: 4px;
   border-radius: 10px;
   box-shadow: 0 0 3px gainsboro;
@@ -323,6 +325,7 @@ h5 {
   font-weight: normal;
 }
 .NavMovil {
+  padding-top: calc(var(--safe-top) + 10px);
   grid-column: 1 / span 2;
   padding: 5px 8px;
   display: none;
@@ -2422,6 +2425,7 @@ h5 {
   }
 
   .Barra_Superior_principal {
+    padding-bottom: var(--safe-bottom);
     grid-template-columns: auto;
     position: relative;
   }
