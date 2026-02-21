@@ -739,9 +739,12 @@
     padding: 8px;
   }
   .headerInfo_Tarea {
+    padding: 8px 16px;
     grid-template-columns: 50% auto;
     gap: 6px;
     background: transparent;
+    border: none;
+    background: #fafafa;
   }
   .btnOptInfo_Tarea {
     display: block;
@@ -767,6 +770,15 @@
   .seccion-tareas {
     display: block;
   }
+  .panel-sinTareas {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+  }
 
   .contenedor-panel-sinTareas {
     width: 100%;
@@ -774,8 +786,8 @@
     border-radius: 8px;
   }
   .contenido-sinTareas svg {
-    width: 150px;
-    height: 150px;
+    width: 190px;
+    height: 190px;
     margin-bottom: 20px;
   }
 }

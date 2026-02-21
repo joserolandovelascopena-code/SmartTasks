@@ -431,7 +431,7 @@ export function getEmptyListHtml() {
             </g>
           </svg>
         </div>
-        <p>Crea y planifica tus actividades con SmartTasks.</p>
+        <p>No hay taras para hoy.</p>
       </article>
     `;
 }

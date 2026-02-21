@@ -718,9 +718,7 @@ html[data-theme="light"] {
 
 /* Empty state cards (info_tarea) */
 [data-theme="dark"] .panel-sinTareas {
-  background: linear-gradient(180deg, #0b1026, #0b102680);
-  border: 1px solid var(--bordes-nav);
-  box-shadow: none;
+  background: transparent;
 }
 
 [data-theme="dark"] .contenedor-panel-sinTareas {
@@ -1040,7 +1038,7 @@ html[data-theme="light"] {
     color: #dadada;
   }
 
-  #Calendario i {
+  [data-theme="dark"] #Calendario i {
     color: #dadada;
   }
 

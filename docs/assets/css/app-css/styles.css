@@ -1485,10 +1485,11 @@ h5 {
   border-radius: 8px;
 
   background-color: #8cc7d41e;
+  margin-bottom: 12px;
 }
 .viso_caja_vacia p {
   transform: translateY(-30px);
-  font-family: "Poppins", sans-serif;
+  font-size: 15px;
 }
 .caja svg {
   width: 300px;
@@ -2310,9 +2311,12 @@ h5 {
   .caja svg {
     width: 260px;
     height: 260px;
+    padding-top: 30px;
   }
-  .viso_caja_vacia {
-    grid-column: 1 / span 3;
+
+  .viso_caja_vacia p {
+    font-size: 14px;
+    transform: translateY(0);
   }
   .nav_menu {
     padding: 4px 6px 6px 6px;
