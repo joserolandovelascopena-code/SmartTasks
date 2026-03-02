@@ -198,16 +198,6 @@ export function applyTheme(theme) {
       navAddTasks.style.color = COLORS.white;
     }
 
-    if (descripcionTasks) {
-      descripcionTasks.style.background = COLORS.blueTransparent;
-      descripcionTasks.style.color = COLORS.white;
-    }
-
-    if (inputAddTasks) {
-      inputAddTasks.style.background = COLORS.blueTransparent;
-      inputAddTasks.style.color = COLORS.white;
-    }
-
     if (plusAdd) {
       plusAdd.style.background = "rgba(0, 13, 255, 0.93)";
     }

@@ -86,17 +86,10 @@ export const App = {
     });
 
     // Lógica de mostrar y ocultar categoría
-    const categoria = document.querySelector(".Categoria");
-    const input = document.getElementById("newTask");
+
     const btnGuardar = document.querySelectorAll(".Guadar-btn");
     const contenAdd = document.querySelector(".subir_tarea");
     const backgraudAnimation = document.querySelector(".backgraud-tasks");
-
-    input.addEventListener("focus", () => {
-      if (!input.value.trim()) {
-        categoria.classList.add("active");
-      }
-    });
 
     btnGuardar.forEach((btnSave) => {
       btnSave.addEventListener("click", async (e) => {

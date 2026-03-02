@@ -243,6 +243,7 @@ export function renderTasks(tasks) {
     const contenedorEditar = li.querySelector(".editar_item");
     const modalEditar = li.querySelector(".Editar_targeta");
     const closeEditar = li.querySelector(".Closeeditar");
+    const input = li.querySelector(".InputEditarTasks");
 
     function openEditarTasks() {
       if (contenedorEditar.classList.contains("active")) return;
@@ -277,6 +278,10 @@ export function renderTasks(tasks) {
 
       history.pushState({ Editar_Tarea: true }, "", "#editar_tarea");
       OverlayManager.push("editarTask", closeEditarWindow);
+
+      setTimeout(() => {
+        input?.focus();
+      }, 50);
     }
 
     overlay.addEventListener("click", (e) => {

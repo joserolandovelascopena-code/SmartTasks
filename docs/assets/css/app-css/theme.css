@@ -266,16 +266,19 @@ html[data-theme="light"] {
   background: #00020f;
   box-shadow: none;
   border: 1.5px solid var(--bordes-nav);
+  height: 56vh;
 }
 
-[data-theme="dark"] #task-input input {
+[data-theme="dark"] #task-input textarea {
   box-shadow: none;
   border: 2px solid #222a3b;
+  background: transparent;
+  color: white;
 }
-[data-theme="dark"] #task-input input::placeholder {
+[data-theme="dark"] #task-input textarea::placeholder {
   color: #999999;
 }
-[data-theme="dark"] #task-input input:focus {
+[data-theme="dark"] #task-input textarea:focus {
   border-color: #007bff;
 }
 [data-theme="dark"] .contenedor_categoria {
@@ -287,6 +290,12 @@ html[data-theme="light"] {
   background: #00020f;
   box-shadow: none;
   border: 1.5px solid var(--bordes-nav);
+}
+[data-theme="dark"] #descripcion {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--bordes-nav);
+  height: 16vh;
 }
 
 [data-theme="dark"] .tiempo {

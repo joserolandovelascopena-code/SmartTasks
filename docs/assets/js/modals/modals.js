@@ -12,6 +12,7 @@ import { monthNames } from "../utils/monthNames.js";
 document.addEventListener("DOMContentLoaded", () => {
   const openAdd = document.querySelectorAll(".openAdd");
   const contenAdd = document.querySelector(".subir_tarea");
+  const inputAdd = document.getElementById("newTask");
 
   const perfilContainer = document.querySelector(".Perfile");
 
@@ -27,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     history.pushState({ addTask: true }, "", "#add-task");
     OverlayManager.push("closeAddTasks", closeAddTask);
+
+    setTimeout(() => {
+      inputAdd?.focus();
+    }, 50);
   }
 
   function closeAddTask() {
