@@ -695,7 +695,7 @@ h5 {
   grid-template-columns: 5% auto;
   gap: 14px;
   padding: 2px 4px;
-  background: #0217da4d;
+  background: rgb(238, 238, 238);
   border-radius: 10px;
 }
 #buscador {
@@ -703,11 +703,11 @@ h5 {
   background: transparent;
   border: none;
   width: 100%;
-  color: rgb(117, 117, 117);
+  color: rgb(51, 51, 51);
   border-radius: 6px;
 }
 #buscador::placeholder {
-  color: white;
+  color: rgb(99, 99, 99);
 }
 #buscador:focus {
   outline: none;
@@ -715,7 +715,7 @@ h5 {
 .formSearc i {
   padding-top: 7px;
   padding-left: 3px;
-  color: rgb(255, 255, 255);
+  color: rgb(51, 51, 51);
 }
 .Root-taks {
   margin-top: 20vh;

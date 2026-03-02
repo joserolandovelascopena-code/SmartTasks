@@ -1050,6 +1050,10 @@ html[data-theme="light"] {
   [data-theme="dark"] #Calendario i {
     color: #dadada;
   }
+  /*Agregar tarea*/
+  [data-theme="dark"] .Categoria {
+    height: auto;
+  }
 
   /*Editar y perfil*/
   [data-theme="dark"] .task-item {
