@@ -85,6 +85,42 @@ function crearSeccion(titulo) {
   return section;
 }
 
+function getTodayLocalDateKey() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function normalizeDateKey(value) {
+  if (!value) return null;
+  if (typeof value === "string") {
+    return value.split("T")[0]?.trim() || null;
+  }
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    const year = value.getFullYear();
+    const month = String(value.getMonth() + 1).padStart(2, "0");
+    const day = String(value.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  return null;
+}
+
+export function renderCantidadTasksHoy(tasks = []) {
+  const cantidadTasksEl = document.getElementById("CantidadTasks");
+  if (!cantidadTasksEl) return;
+
+  const todayKey = getTodayLocalDateKey();
+  const cantidadHoy = tasks.filter((task) => {
+    const taskDateKey = normalizeDateKey(task?.due_date);
+    return taskDateKey === todayKey;
+  }).length;
+
+  cantidadTasksEl.textContent = String(cantidadHoy);
+}
+
 export function setPrioridad(prioridad, container = document) {
   if (!prioridad) return;
 
@@ -113,6 +149,7 @@ export function setPrioridad(prioridad, container = document) {
 
 export function renderTasks(tasks) {
   const ui = this;
+  renderCantidadTasksHoy(tasks);
   const list = document.getElementById("taskList");
 
   if (!list) return;
@@ -496,6 +533,109 @@ export function renderPerfile(perfile) {
   }
 
   UIState.lastCantidadTasks = cantidad;
+}
+
+export function renderResumenPersonal(resumen) {
+  const {
+    streakDays = 0,
+    yesterdayCompleted = 0,
+    todayCompleted = 0,
+    todayAssigned = 0,
+    productivity = 0,
+  } = resumen || {};
+
+  const rachaText = document.getElementById("resumenRachaText");
+  const rachaDias = document.getElementById("resumenRachaDias");
+  const tasksCompletadas = document.getElementById("resumenTasksCompletadas");
+  const productividadEl = document.getElementById("resumenProductividad");
+
+  if (rachaText) {
+    rachaText.textContent =
+      yesterdayCompleted > 0
+        ? `${yesterdayCompleted} tareas completadas ayer`
+        : "Ayer no completaste tareas";
+  }
+
+  if (rachaDias) {
+    rachaDias.textContent = `${streakDays} días`;
+  }
+
+  if (tasksCompletadas) {
+    tasksCompletadas.textContent = `${todayCompleted} de ${todayAssigned} tareas`;
+  }
+
+  if (productividadEl) {
+    productividadEl.textContent = `${Number(productivity || 0).toFixed(2)}%`;
+  }
+}
+
+function getFirstName(fullName = "") {
+  const clean = String(fullName || "").trim();
+  if (!clean) return "Usuario";
+  return clean.split(/\s+/)[0];
+}
+
+function getGreetingByHour(hour) {
+  if (hour >= 5 && hour < 12) return "Buenos días";
+  if (hour >= 12 && hour < 19) return "Buenas tardes";
+  return "Buenas noches";
+}
+
+export function renderSaludoNoticias({ profile, resumen } = {}) {
+  const nameMainUser = document.getElementById("MainNameUser");
+  const estadoSystem = document.getElementById("estadoSystem");
+  const productividadBtn = document.getElementById("saludoProductividadBtn");
+  const metaTexto = document.getElementById("saludoMetaTexto");
+
+  const now = new Date();
+  const hour = now.getHours();
+  const greeting = getGreetingByHour(hour);
+  const firstName = getFirstName(profile?.full_name);
+
+  const todayCompleted = Number(resumen?.todayCompleted) || 0;
+  const todayAssigned = Number(resumen?.todayAssigned) || 0;
+  const productivityRaw = Number(resumen?.productivity) || 0;
+  const productivity = Number(productivityRaw.toFixed(2));
+
+  if (nameMainUser) {
+    nameMainUser.textContent = `${greeting}, ${firstName}`;
+  }
+
+  if (productividadBtn) {
+    productividadBtn.textContent = `${productivity.toFixed(2)}%`;
+    const progress = Math.max(0, Math.min(100, productivity));
+    const ringColor =
+      progress >= 80 ? "#22c55e" : progress >= 40 ? "#f59e0b" : "#ef4444";
+    const textColor =
+      progress >= 80 ? "#166534" : progress >= 40 ? "#9a3412" : "#b91c1c";
+
+    productividadBtn.style.setProperty("--progress", String(progress));
+    productividadBtn.style.setProperty("--ring-color", ringColor);
+    productividadBtn.style.color = textColor;
+  }
+
+  if (metaTexto) {
+    metaTexto.textContent = `${todayCompleted} de ${todayAssigned} actividades completadas`;
+  }
+
+  if (!estadoSystem) return;
+
+  if (todayAssigned === 0) {
+    estadoSystem.textContent = `A esta hora (${hour}:00) aún no tienes tareas programadas para hoy. Agrega una actividad para arrancar tu día.`;
+    return;
+  }
+
+  if (productivity >= 80) {
+    estadoSystem.textContent = `A esta hora (${hour}:00) vas excelente: completaste ${todayCompleted} de ${todayAssigned} tareas. Mantén ese ritmo.`;
+    return;
+  }
+
+  if (productivity >= 40) {
+    estadoSystem.textContent = `A esta hora (${hour}:00) llevas ${todayCompleted} de ${todayAssigned} tareas completadas. Vas bien, puedes cerrar el día más fuerte.`;
+    return;
+  }
+
+  estadoSystem.textContent = `A esta hora (${hour}:00) llevas ${todayCompleted} de ${todayAssigned} tareas. Enfócate en una tarea prioritaria para recuperar productividad hoy.`;
 }
 
 export function fillEditModal(li, task) {

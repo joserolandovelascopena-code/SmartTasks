@@ -285,5 +285,68 @@ const Storage = {
 
     return data;
   },
+
+  async upsertDailyUserActivity({
+    user_id,
+    activity_date,
+    tasks_completed = 0,
+    productivity_percentage = 0,
+  }) {
+    try {
+      if (!user_id || !activity_date) return null;
+
+      const payload = {
+        user_id,
+        activity_date,
+        tasks_completed: Math.max(0, Number(tasks_completed) || 0),
+        productivity_percentage: Math.max(
+          0,
+          Number(productivity_percentage) || 0,
+        ),
+      };
+
+      const { data, error } = await supabaseClient
+        .from("daily_user_activity")
+        .upsert(payload, {
+          onConflict: "user_id,activity_date",
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Error upsert daily_user_activity:", error.message);
+        return null;
+      }
+
+      return data;
+    } catch (err) {
+      console.error("Exception upsertDailyUserActivity:", err);
+      return null;
+    }
+  },
+
+  async getDailyUserActivityHistory(userId, limit = 30) {
+    try {
+      if (!userId) return [];
+
+      const safeLimit = Math.min(Math.max(Number(limit) || 30, 1), 365);
+      const { data, error } = await supabaseClient
+        .from("daily_user_activity")
+        .select("activity_date,tasks_completed,productivity_percentage")
+        .eq("user_id", userId)
+        .order("activity_date", { ascending: false })
+        .limit(safeLimit);
+
+      if (error) {
+        console.error("Error leyendo historial diario:", error.message);
+        return [];
+      }
+
+      return data ?? [];
+    } catch (err) {
+      console.error("Exception getDailyUserActivityHistory:", err);
+      return [];
+    }
+  },
 };
 export { Storage };

@@ -587,12 +587,14 @@
                         </div>
                         <div>
                           <h4 class="tittleCaja">Racha Actual</h4>
-                          <p>10 tareas completadas ayer</p>
+                          <p id="resumenRachaText">0 tareas completadas ayer</p>
                         </div>
                       </div>
                       <div class="contenBtnRacha">
                         <div class="ProgresoRacha">
-                          <h4 class="CantidadRacha">4 días</h4>
+                          <h4 class="CantidadRacha" id="resumenRachaDias">
+                            0 días
+                          </h4>
                         </div>
                       </div>
                     </article>
@@ -605,7 +607,9 @@
                       </div>
                       <div class="contenCompleteTas">
                         <div class="CantidadBtnComplet">
-                          <h4 class="CantidadRacha">210 Tareas</h4>
+                          <h4 class="CantidadRacha" id="resumenTasksCompletadas">
+                            0 de 0 tareas
+                          </h4>
                         </div>
                       </div>
                     </article>
@@ -619,7 +623,9 @@
                       </div>
                       <div class="ProgresoBtnSemal">
                         <div class="Productividad">
-                          <h4 class="CantidadRacha">85%</h4>
+                          <h4 class="CantidadRacha" id="resumenProductividad">
+                            0.00%
+                          </h4>
                         </div>
                       </div>
                     </article>
@@ -871,9 +877,9 @@
             </div>
             <div class="infor_Tareas_estado">
               <div class="CantTasksAdd">
-                <button>80%</button>
+                <button id="saludoProductividadBtn">0%</button>
 
-                <h5>Actividades completadas</h5>
+                <h5 id="saludoMetaTexto">0 de 0 actividades completadas</h5>
               </div>
             </div>
           </div>

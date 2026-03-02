@@ -67,7 +67,7 @@ export const Toast = {
     } else if (type === "deleElement") {
       this.iconSecond.className = "far fa-trash-can iconMsgInf";
     } else if (type === "offline") {
-      this.iconSecond.className = "material-symbols-outlined";
+      this.iconSecond.className = "material-symbols-outlined WifiOff";
       this.iconSecond.textContent = "wifi_off";
       this.renderPage.classList.add("show");
     } else if (type === "recoverWifi") {

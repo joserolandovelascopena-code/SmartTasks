@@ -124,13 +124,14 @@ h5 {
 
 .contentMsgInferior h5 {
   font-size: 13.5px;
+  font-weight: 500;
 }
 .iconMsgInf {
   font-size: 18px;
 }
-.material-symbols-outlined {
+.WifiOff {
   color: white;
-  font-size: 15px;
+  font-size: 20px;
 }
 .btnCargarPagina {
   display: none;
@@ -393,51 +394,90 @@ h5 {
   font-size: 13px;
 }
 .Saludo_noticias {
-  height: 100px;
-  border-radius: 12px;
-  background: linear-gradient(50deg, rgb(133, 131, 255), rgb(62, 59, 252));
-  padding: 15px;
+  min-height: 112px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #5d63f5 0%, #3b46ff 55%, #3a2de2 100%);
+  padding: 16px;
   display: grid;
-  grid-template-columns: 70% auto;
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  overflow: hidden;
 }
 
 .Saludo_noticias h3 {
   margin: 0;
-  color: white;
+  color: #ffffff;
+  font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: 0.2px;
 }
 .Saludo_noticias p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.95rem;
+  line-height: 1.35;
 }
 #estadoSystem {
-  margin-top: 10px;
-  color: rgba(245, 245, 245, 0.815);
-  font-size: 15px;
+  margin-top: 8px;
+  color: rgba(244, 248, 255, 0.92);
+  max-width: 62ch;
 }
 .infor_Tareas_estado {
-  padding: 12px 0;
+  padding: 0;
+  display: grid;
+  align-items: center;
 }
 .CantTasksAdd {
-  display: flex;
-  gap: 5px;
-  border-radius: 15px;
-  background: white;
+  --progress: 0;
+  --ring-color: #1ed760;
+  display: grid;
+  grid-template-columns: 64px minmax(120px, 1fr);
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.95);
   color: #313131;
-  padding: 4px 8px;
+  padding: 8px 10px;
+  min-width: 195px;
+  max-width: 260px;
+  justify-self: end;
+  box-shadow: 0 5px 18px rgba(18, 25, 90, 0.18);
+  backdrop-filter: blur(2px);
 }
 .CantTasksAdd button {
-  background: transparent;
+  border: none;
   border-radius: 50%;
-  border: 2px solid rgb(0, 230, 50);
-  background: #eaeaff;
-  color: #31d100;
-  font-weight: bold;
-  height: 40px;
+  background: conic-gradient(
+    var(--ring-color) calc(var(--progress) * 1%),
+    #d8deff 0
+  );
+  color: #14532d;
+  font-weight: 700;
+  font-size: 0.85rem;
+  width: 56px;
+  height: 56px;
+  cursor: default;
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  line-height: 1;
+}
+.CantTasksAdd button::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #f8faff;
+  z-index: -1;
 }
 .CantTasksAdd h5 {
-  margin: 6px 0 0 0;
-  font-weight: normal;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #2a2f3f;
+  overflow-wrap: anywhere;
 }
 /*==================================*/
 .contanier_settinRigth {
@@ -2470,29 +2510,28 @@ h5 {
 
   .Saludo_noticias {
     margin-top: 52px;
-    grid-template-columns: 64% auto;
+    grid-template-columns: 1fr;
     grid-column: 1 / span 2;
-    height: 180px;
+    min-height: 180px;
+    padding: 14px;
+    gap: 12px;
   }
   .CantTasksAdd {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  .CantTasksAdd {
-    background: linear-gradient(30deg, #a1bdfa, #fffdf8);
-    height: 100%;
-    position: relative;
-    justify-content: center;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    justify-self: stretch;
+    grid-template-columns: 62px minmax(0, 1fr);
+    padding: 8px 10px;
   }
   .CantTasksAdd button {
-    border: 3px solid rgb(0, 204, 255);
-    background: #ffffff;
-    font-size: 15px;
-    color: #01cce7;
-    height: 60px;
-    width: 70px;
-    margin-left: 12px;
+    width: 54px;
+    height: 54px;
+    margin-left: 0;
+    font-size: 0.8rem;
+  }
+  #estadoSystem {
+    font-size: 0.92rem;
   }
   .cantidadTareas p {
     font-size: 12px;

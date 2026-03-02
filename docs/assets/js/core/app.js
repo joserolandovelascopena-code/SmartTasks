@@ -35,9 +35,30 @@ document.addEventListener("warning:confirm", async (e) => {
 
 let isAddingTask = false;
 
+function getLocalDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function shiftDateKey(dateKey, daysOffset) {
+  const [y, m, d] = String(dateKey).split("-").map(Number);
+  const base = new Date(y, (m || 1) - 1, d || 1);
+  base.setDate(base.getDate() + daysOffset);
+  return getLocalDateKey(base);
+}
+
+function normalizeDateKey(value) {
+  if (!value) return null;
+  if (typeof value === "string") return value.split("T")[0]?.trim() || null;
+  return null;
+}
+
 export const App = {
   tasks: [],
   profile: null,
+  currentUserId: null,
   currentEditTaskId: null,
   currentEditTask: null,
 
@@ -68,6 +89,7 @@ export const App = {
 
     const user = await AuthService.getSessionUser();
     if (!user) return;
+    this.currentUserId = user.id;
 
     this.profile = await AuthService.buildProfile(user.id);
 
@@ -76,6 +98,7 @@ export const App = {
 
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks);
+    await this.refreshDailyActivitySummary();
     //UI.renderTasksMainCalendar(this.tasks);
 
     UI.renderCategoria();
@@ -145,6 +168,7 @@ export const App = {
       // 4. UI
       UI.renderTasks(this.tasks);
       UI.renderTarjetas(this.tasks, true);
+      await this.refreshDailyActivitySummary();
 
       // 5. Reset UI
       input.value = "";
@@ -242,6 +266,7 @@ export const App = {
     await this.loadTasks();
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
+    await this.refreshDailyActivitySummary();
 
     Toast.show("Se ha actualizado la tarea", "success", {
       sound: true,
@@ -308,6 +333,7 @@ export const App = {
       if (renderCards) {
         UI.renderTarjetas(this.tasks, true);
       }
+      await this.refreshDailyActivitySummary();
     };
 
     if (nextDone && !fromEdit) {
@@ -338,6 +364,73 @@ export const App = {
     UI.renderTasks(this.tasks);
     UI.renderTarjetas(this.tasks, true);
     UI.renderPerfile(this.profile);
+    await this.refreshDailyActivitySummary();
+  },
+
+  async refreshDailyActivitySummary() {
+    try {
+      const userId = this.currentUserId || (await Storage.getCurrentUserId());
+      if (!userId) return;
+
+      const todayKey = getLocalDateKey();
+      const yesterdayKey = shiftDateKey(todayKey, -1);
+
+      const todayTasks = this.tasks.filter(
+        (t) => normalizeDateKey(t?.due_date) === todayKey,
+      );
+      const todayAssigned = todayTasks.length;
+      const todayCompleted = todayTasks.filter((t) => Boolean(t?.done)).length;
+      const productivity =
+        todayAssigned > 0 ? (todayCompleted / todayAssigned) * 100 : 0;
+
+      await Storage.upsertDailyUserActivity({
+        user_id: userId,
+        activity_date: todayKey,
+        tasks_completed: todayCompleted,
+        productivity_percentage: Number(productivity.toFixed(2)),
+      });
+
+      const history = await Storage.getDailyUserActivityHistory(userId, 90);
+      const byDate = new Map(
+        history.map((row) => [
+          row.activity_date,
+          {
+            tasks_completed: Number(row.tasks_completed) || 0,
+            productivity_percentage: Number(row.productivity_percentage) || 0,
+          },
+        ]),
+      );
+
+      const yesterdayCompleted = byDate.get(yesterdayKey)?.tasks_completed || 0;
+
+      let streakDays = 0;
+      let cursorKey = todayKey;
+      while (true) {
+        const row = byDate.get(cursorKey);
+        if (!row || row.tasks_completed <= 0) break;
+        streakDays += 1;
+        cursorKey = shiftDateKey(cursorKey, -1);
+      }
+
+      UI.renderResumenPersonal({
+        streakDays,
+        yesterdayCompleted,
+        todayCompleted,
+        todayAssigned,
+        productivity,
+      });
+
+      UI.renderSaludoNoticias({
+        profile: this.profile,
+        resumen: {
+          todayCompleted,
+          todayAssigned,
+          productivity,
+        },
+      });
+    } catch (err) {
+      console.error("Error al refrescar resumen diario:", err);
+    }
   },
 
   async executeGlobalAction(action) {
