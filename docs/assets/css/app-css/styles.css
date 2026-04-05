@@ -280,7 +280,7 @@ h5 {
 .container_main {
   position: relative;
   display: grid;
-  grid-template-columns: 16% auto;
+  grid-template-columns: 10% auto;
   height: 100%;
   gap: 10px;
 }

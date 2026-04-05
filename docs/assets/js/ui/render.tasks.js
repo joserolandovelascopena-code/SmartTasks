@@ -565,7 +565,7 @@ export function renderResumenPersonal(resumen) {
   }
 
   if (productividadEl) {
-    productividadEl.textContent = `${Number(productivity || 0).toFixed(2)}%`;
+    productividadEl.textContent = `${Math.round(Number(productivity || 0))}%`;
   }
 }
 
@@ -602,7 +602,7 @@ export function renderSaludoNoticias({ profile, resumen } = {}) {
   }
 
   if (productividadBtn) {
-    productividadBtn.textContent = `${productivity.toFixed(2)}%`;
+    productividadBtn.textContent = `${Math.round(productivity)}%`;
     const progress = Math.max(0, Math.min(100, productivity));
     const ringColor =
       progress >= 80 ? "#22c55e" : progress >= 40 ? "#f59e0b" : "#ef4444";

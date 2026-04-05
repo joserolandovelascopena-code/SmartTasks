@@ -997,9 +997,19 @@ html[data-theme="light"] {
 [data-theme="dark"] .search-no-results {
   border-color: #2a416f;
   color: #a7bce0;
-  background: #08122f;
+  background: #121a32;
 }
 
+/*CardResumen Perfil*/
+[data-theme="dark"] .CantidadBtnComplet {
+  background: rgb(1, 14, 47);
+}
+[data-theme="dark"] .headerTareasComplet i {
+  color: #037edc;
+}
+[data-theme="dark"] .Productividad {
+  background: #00ff7337;
+}
 /*==============*/
 @media (max-width: 700px) {
   [data-theme="dark"] .calendar {
