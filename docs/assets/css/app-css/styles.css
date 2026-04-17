@@ -20,6 +20,10 @@ h5 {
 :root {
   --color-icons: linear-gradient(60deg, #596fee, #f700ff);
 }
+span {
+  margin: 0;
+  padding: 0;
+}
 
 /*Avisos del sistema*/
 .MSGS_SYSTEM_MAIN {
@@ -2416,22 +2420,23 @@ h5 {
     margin-bottom: 0;
     padding-bottom: 0;
   }
-  .funciones_smart i,
-  .GoHome i {
-    font-size: 22px;
+  .funciones_smart span,
+  .GoHome span {
+    font-size: 30px;
     color: rgb(31, 31, 31);
     padding-top: 5px;
     margin-bottom: 0;
     padding-bottom: 0;
+    align-items: center;
   }
 
-  #Calendario i {
+  #Calendario span {
     color: rgb(31, 31, 31);
     padding-top: 5px;
     margin-bottom: 0;
     padding-bottom: 0;
 
-    font-size: 22px;
+    font-size: 28px;
     display: flex;
     justify-content: center;
   }
@@ -2735,6 +2740,18 @@ h5 {
   .titulo-modal {
     margin-top: 10px;
     font-size: 19px;
+  }
+
+  .viso_caja_vacia {
+    position: relative;
+    grid-column: 2 / span 2;
+    height: 50vh;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+
+    background-color: #8cc7d41e;
+    margin-bottom: 12px;
   }
 }
 @media (max-width: 480px) {

@@ -93,7 +93,7 @@ html[data-theme="light"] {
   background: var(--blackfondo);
 }
 
-[data-theme="dark"] .funciones_smart i {
+[data-theme="dark"] .funciones_smart span {
   color: #aaaaaa;
 }
 
@@ -101,8 +101,11 @@ html[data-theme="light"] {
   color: #cacaca;
 }
 
-[data-theme="dark"] .Calendario {
+[data-theme="dark"] .Calendario p {
   color: #cacaca;
+}
+[data-theme="dark"] .Calendario span {
+  color: #aaaaaa;
 }
 
 [data-theme="dark"] #tasksOptions button,
@@ -1048,7 +1051,8 @@ html[data-theme="light"] {
     border-top: 1px solid var(--bordes-nav);
   }
 
-  [data-theme="dark"] .funciones_smart i,
+  [data-theme="dark"] .funciones_smart span,
+  .funciones_smart i,
   .funciones_smart p {
     color: #dadada;
   }
@@ -1057,9 +1061,10 @@ html[data-theme="light"] {
     color: #dadada;
   }
 
-  [data-theme="dark"] #Calendario i {
+  [data-theme="dark"] #Calendario span {
     color: #dadada;
   }
+
   /*Agregar tarea*/
   [data-theme="dark"] .Categoria {
     height: auto;
